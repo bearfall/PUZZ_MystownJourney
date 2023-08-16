@@ -134,6 +134,8 @@ public class PlayerController : MonoBehaviour
 		path.ppp.Clear();   //清空儲存行走範圍的陣列
 		path.mCount.Clear();    //清空儲存 m 值的陣列
 		testCharacter.aaa.Clear(); //清空儲存最短行走路徑的陣列
+
+		path.m = path.CanMove;
 	}
 	
 	

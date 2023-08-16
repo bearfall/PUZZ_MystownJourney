@@ -148,6 +148,9 @@ public class EnemyController : MonoBehaviour
 
 		//moveButton.gameObject.SetActive(true);
 		enemyPath.button = true;//將"移動"Button顯示出來
+
+		enemyPath.m = enemyPath.CanMove;
+		print("刪掉路徑了");
 	}
 
 }

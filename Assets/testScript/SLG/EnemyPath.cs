@@ -35,7 +35,7 @@ public class EnemyPath : MonoBehaviour
 	private bool gridExists = false;
 
 	public int m; //m = 可移動數
-	private int CanMove;  //記錄可移動數,第一輪需要
+	public int CanMove;  //記錄可移動數,第一輪需要
 	public    int index = 0;    //存入陣列用的引數
 	public int blockIndex;
 
@@ -107,7 +107,7 @@ public class EnemyPath : MonoBehaviour
 	}
 	//----------------------------------------------------------------------------------------------
 
-	public List<TestMapBlock> StartEnemypath()
+	public List<TestMapBlock> StartEnemypath(bool show = false)
 	{
 	  //this.GetComponent<EnemyController>().delete();
 
@@ -158,7 +158,7 @@ public class EnemyPath : MonoBehaviour
 				if (monsterCheck == true && gridExists)   //如果是ture,表示接下來要移動的那格沒有怪物
 				{
 					Position = this.transform.position + new Vector3(0, 0, 1);  //那就走,然後由Position記錄新位置
-					PathCount();    //記錄新位置,以及新位置的剩餘 m(行動力) 值
+					PathCount(show);    //記錄新位置,以及新位置的剩餘 m(行動力) 值
 					m = CanMove;    //把 m 回歸最大值
 
 				}
@@ -188,7 +188,7 @@ public class EnemyPath : MonoBehaviour
 				if (monsterCheck == true && gridExists)
 				{
 					Position = this.transform.position + new Vector3(0, 0, -1);
-					PathCount();
+					PathCount(show);
 					m = CanMove;
 
 				}
@@ -216,7 +216,7 @@ public class EnemyPath : MonoBehaviour
 				if (monsterCheck == true && gridExists)
 				{
 					Position = this.transform.position + new Vector3(-1, 0, 0);
-					PathCount();
+					PathCount(show);
 					m = CanMove;
 
 				}
@@ -246,7 +246,7 @@ public class EnemyPath : MonoBehaviour
 				if (monsterCheck == true && gridExists)
 				{
 					Position = this.transform.position + new Vector3(1, 0, 0);
-					PathCount();
+					PathCount(show);
 					m = CanMove;    // 最後一個可以不需要,因為第二輪開始的m,是從剛才陣列裡抓取的
 
 				}
@@ -288,7 +288,7 @@ public class EnemyPath : MonoBehaviour
 				}
 
 				if (check == true && monsterCheck == true && gridExists && (mCount[Count] > 0))   //如果check = true,表示接下來這步還沒走過. monsterCheck = true,表示接下來這格沒怪物
-					PathCount();    //記錄新位置,以及新位置的剩餘 m(行動力) 值
+					PathCount(show);    //記錄新位置,以及新位置的剩餘 m(行動力) 值
 
 				check = true;   //把check回歸初值
 				monsterCheck = true;    //把monsterCheck回歸初值
@@ -320,7 +320,7 @@ public class EnemyPath : MonoBehaviour
 				}
 
 				if (check == true && monsterCheck == true && gridExists && (mCount[Count] > 0))
-					PathCount();
+					PathCount(show);
 
 				check = true;
 				monsterCheck = true;
@@ -353,7 +353,7 @@ public class EnemyPath : MonoBehaviour
 				}
 
 				if (check == true && monsterCheck == true && gridExists  && (mCount[Count] > 0))
-					PathCount();
+					PathCount(show);
 
 				check = true;
 				monsterCheck = true;
@@ -385,7 +385,7 @@ public class EnemyPath : MonoBehaviour
 				}
 
 				if (check == true && monsterCheck == true && gridExists && (mCount[Count] > 0))
-					PathCount();
+					PathCount(show);
 
 				check = true;
 				monsterCheck = true;
@@ -427,7 +427,7 @@ public class EnemyPath : MonoBehaviour
 
 	//--------------------------------------------------------------------------------------
 
-	public void PathCount()    //用來記錄、計算每一格的座標位置，以及每一格的 m(剩餘行動力) 值
+	public void PathCount(bool show)    //用來記錄、計算每一格的座標位置，以及每一格的 m(剩餘行動力) 值
 	{
 		//在新位置上,克隆一個棋盤格
 		//Position.x(新位置的X座標),Position.z(新位置的Z座標)
@@ -438,7 +438,11 @@ public class EnemyPath : MonoBehaviour
 		{
 			if (gameObject.transform.position == hi)
 			{
-				//gameObject.transform.GetChild(0).gameObject.SetActive(true);
+				if (show)
+				{
+					gameObject.transform.GetChild(0).gameObject.SetActive(true);
+					gameObject.SetSelectionMode(TestMapBlock.Highlight.Reachable);
+				}
 				//print(gameObject.transform.GetChild(0).gameObject);
 				results.Add(gameObject);
 			}

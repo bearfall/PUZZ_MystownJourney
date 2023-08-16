@@ -36,7 +36,7 @@ public class Path : MonoBehaviour
 	private bool gridExists = false;
 
 	public int m; //m = 可移動數
-	public static int CanMove;  //記錄可移動數,第一輪需要
+	public  int CanMove;  //記錄可移動數,第一輪需要
 	public  int index = 0;    //存入陣列用的引數
 	public int blockIndex;
 

@@ -187,6 +187,8 @@ namespace bearfall
 						//path.Startpath();
 						reachableBlocks = path.Startpath();
 
+
+						testGuiManager.ShowMoveCancelButton();
 						//print("這是可以移動的格子數量" + reachableBlocks.Count);
 
 						/*
@@ -197,16 +199,46 @@ namespace bearfall
 						*/
 						// 進行モードを進める：移動先選択中
 						ChangePhase(Phase.MyTurn_Moving);
+						print("換到移動了");
+						print(selectingChara.name);
 					}
+
+
+
+                    else if (charaData != null && charaData.isEnemy)
+                    {
+						selectingChara = charaData;
+						testCharacter = selectingChara.GetComponent<TestCharacter>();
+
+						enemyPath = selectingChara.GetComponent<EnemyPath>();
+						//path.Startpath();
+						reachableBlocks = enemyPath.StartEnemypath(true);
+
+
+						testGuiManager.ShowMoveCancelButton();
+
+						ChangePhase(Phase.MyTurn_Moving);
+					}
+
+
 					else
 					{// キャラクターが存在しない
 					 // 選択中のキャラクター情報を初期化する
 						ClearSelectingChara();
+						print("取消選取");
 					}
 					break;
 
 				// 自分のターン：移動先選択中
 				case Phase.MyTurn_Moving:
+					//print(selectingChara.name);
+					if (selectingChara.isEnemy)
+					{
+						CancelMoving();
+						
+						break;
+					}
+
 					if (reachableBlocks.Contains(targetBlock))
 					{
 						//print(targetBlock.name);
@@ -221,6 +253,9 @@ namespace bearfall
 
 						reachableBlocks.Clear();
 						testMapManager.AllselectionModeClear();
+
+						testGuiManager.HideMoveCancelButton();
+
 						testGuiManager.HideStatusWindow();
 						// 指定秒数経過後に処理を実行する(DoTween)
 
@@ -420,6 +455,35 @@ namespace bearfall
 			// 進行モードを進める(敵のターンへ)
 			CheckIsAllActive();
 		}
+
+
+
+		public void CancelMoving()
+		{
+			print(selectingChara.name);
+            if (selectingChara.isEnemy != true)
+            {
+				selectingChara.GetComponent<PlayerController>().AllClear();
+
+			}
+            if (selectingChara.isEnemy)
+            {
+				selectingChara.GetComponent<EnemyController>().delete();
+			}
+			
+			// 全ブロックの選択状態を解除
+			testMapManager.AllselectionModeClear();
+			// 移動可能な場所リストを初期化する
+			reachableBlocks.Clear();
+			// 選択中のキャラクター情報を初期化する
+			ClearSelectingChara();
+			// 移動やめるボタン非表示
+			testGuiManager.HideMoveCancelButton();
+			// フェーズを元に戻す(ロゴを表示しない設定)
+			ChangePhase(Phase.MyTurn_Start);
+		}
+
+
 
 		/// <summary>
 		/// キャラクターが他のキャラクターに攻撃する処理

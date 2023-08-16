@@ -30,11 +30,15 @@ public class TestGUIManager : MonoBehaviour
 	public Image enemyTurnImage; // 敵ターン開始時画像
 	public Image winImage;
 
+	public GameObject moveCancelButton;
+
 	void Start()
 	{
 		// UI初期化
 		HideStatusWindow(); // ステータスウィンドウを隠す
 		HideCommandButtons(); // コマンドボタンを隠す
+
+		HideMoveCancelButton();
 	}
 
 	/// <summary>
@@ -138,5 +142,18 @@ public class TestGUIManager : MonoBehaviour
 				1.0f) // アニメーション時間(秒)
 			.SetEase(Ease.OutCubic) // イージング(変化の度合)を設定
 			.SetLoops(2, LoopType.Yoyo); // ループ回数・方式を指定
+	}
+
+
+	public void ShowMoveCancelButton()
+	{
+		moveCancelButton.SetActive(true);
+	}
+	/// <summary>
+	/// 移動キャンセルボタンを非表示にする
+	/// </summary>
+	public void HideMoveCancelButton()
+	{
+		moveCancelButton.SetActive(false);
 	}
 }
