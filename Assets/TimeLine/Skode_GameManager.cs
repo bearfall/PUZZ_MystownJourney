@@ -26,6 +26,8 @@ public class Skode_GameManager : MonoBehaviour
     }
     public void Start()
     {
+        flowerSys.SetupDialog();
+        flowerSys.ReadTextFromResource("Hide");
         myName = "Bearfall";
         flowerSys.SetVariable("MyName", myName);
 
@@ -33,7 +35,7 @@ public class Skode_GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             
             // Continue the messages, stoping by [w] or [lr] keywords.
@@ -43,18 +45,53 @@ public class Skode_GameManager : MonoBehaviour
         }
     }
 
+    /*
+    public void MissionStart()
+    {
+
+
+        isMissionStart = true;
+
+
+        if (flowerSys.isCompleted && isMissionStart && !isEnemyDie)
+        {
+            flowerSys.SetupDialog();
+            flowerSys.ReadTextFromResource("startMission 1");
+            //flowerSys.RemoveDialog();
+
+            print("任務開始");
+
+
+
+
+
+        }
+        if (flowerSys.isCompleted && isMissionStart && isEnemyDie)
+        {
+            //flowerSys.SetupDialog();
+            flowerSys.ReadTextFromResource("Mission1_TakeBox");
+            // flowerSys.RemoveDialog();
+
+        }
+
+
+    }
+    */
+
     //设置UI文字
     public void SetDialogue(string lineOfDialogue = null)
     {
-        flowerSys.SetupDialog();
+        
         flowerSys.ReadTextFromResource(lineOfDialogue.ToString());
         
+        /*
         try
         {
             dialogueLineText.gameObject.SetActive(true);
         }
 
         catch (NullReferenceException) { };
+        */
     }
 
     //暂停TimeLine

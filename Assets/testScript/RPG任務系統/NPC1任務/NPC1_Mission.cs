@@ -24,6 +24,7 @@ public class NPC1_Mission : MonoBehaviour
     {
         if (other.CompareTag("玩家"))
         {
+            print("可對話");
             canvas.enabled = true;
         }
     }
