@@ -498,8 +498,9 @@ namespace bearfall
 			Camera.main.GetComponent<BattleCameraController>().StartCameraMovement(attackChara.transform, defenseChara.transform);
 			yield return new WaitForSeconds(1.5f);
 			Camera.main.GetComponent<BattleCameraController>().StopCameraMovement();
+			
 			attackChara.GetComponent<Animator>().SetBool("isBattle", true);
-
+			yield return new WaitForSeconds(1.5f);
 			rollDice.canCharge = true;
 
 			yield return new WaitUntil(() => rollDice.diceStop == true);
@@ -593,12 +594,9 @@ namespace bearfall
 				
 				CheckIsEnemyAlive();
 			}
-			DOVirtual.DelayedCall(
-					2.0f, // 遅延時間(秒)
-					() =>
-					{// 遅延実行する内容
-					 // ウィンドウを非表示化
-
+			// 遅延実行する内容
+			// ウィンドウを非表示化
+			yield return new WaitForSeconds(2f);
 						attackChara.hasActed = true;
 
 						testGuiManager.testBattleWindowUI.HideWindow();
@@ -606,10 +604,14 @@ namespace bearfall
 						// ターンを切り替える
 						if (nowPhase == Phase.MyTurn_Result)
 						{ // 敵のターンへ
-							Camera.main.GetComponent<BattleCameraController>().ReplaceCamera();
-							print("相機返回");
-                            //testCharacter.hasActed = true;
-                            if (isNowActionCharactorAlive)
+							 Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
+				print("相機返回");
+				yield return new WaitForSeconds(1.5f);
+				Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
+
+
+				//testCharacter.hasActed = true;
+				if (isNowActionCharactorAlive)
                             {
 								attackChara.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
 								attackChara.GetComponent<Animator>().SetBool("isBattle", false);
@@ -629,8 +631,8 @@ namespace bearfall
 							HideDice();
 							ChangePhase(Phase.EnemyTurn_Start);
 						}
-					}
-				);
+					
+				
 
 		}
 

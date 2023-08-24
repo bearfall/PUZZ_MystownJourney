@@ -9,6 +9,7 @@ public class BattleCameraController : MonoBehaviour
     public float smoothSpeed = 5f; // 鏡頭移動的平滑速度
     public float minDistance = 5f; // 鏡頭與角色的最小距離
     public bool needToMoveCamera = false;
+    public bool needToReplaceCamera = false;
     private Transform target; // 目標位置
     public float additionalRotationY = 90f;
     public Vector3 tempCameraPosition;
@@ -29,6 +30,11 @@ public class BattleCameraController : MonoBehaviour
             
             MoveCameraToTarget();
         }
+        if (needToReplaceCamera)
+        {
+            ReplaceCamera();
+        }
+        
     }
 
     // 初始化目標位置的方法
@@ -96,7 +102,7 @@ public class BattleCameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, tempCameraPosition, smoothSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, tempCameraRotation, smoothSpeed * Time.deltaTime);
 
-
+        
        // Camera.main.transform.position = tempCameraPosition;
         //Camera.main.transform.rotation = tempCameraRotation;
         //Camera.main.transform.rotation = tempCameraTransform.rotation;

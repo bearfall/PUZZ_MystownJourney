@@ -22838,6 +22838,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3218766566823608558, guid: addf2719c73276b43a4cd0922e305610,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3218766567238943269, guid: addf2719c73276b43a4cd0922e305610,
         type: 3}
       propertyPath: m_RootOrder
@@ -25118,6 +25123,7 @@ MonoBehaviour:
   smoothSpeed: 5
   minDistance: 2
   needToMoveCamera: 0
+  needToReplaceCamera: 0
   additionalRotationY: 90
   tempCameraPosition: {x: 0, y: 0, z: 0}
   tempCameraRotation: {x: 0, y: 0, z: 0, w: 0}
