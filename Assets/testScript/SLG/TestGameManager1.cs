@@ -4,6 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
+using Cinemachine;
+
 namespace bearfall
 {
 
@@ -492,6 +494,7 @@ namespace bearfall
 		/// <param name="defenseChara">防御側キャラデータ</param>
 		private IEnumerator CharaAttack(TestCharacter attackChara, TestCharacter defenseChara)
 		{
+			Camera.main.GetComponent<CinemachineBrain>().enabled = false;
 			testGuiManager.testBattleWindowUI.ShowWindow();
 			Camera.main.GetComponent<BattleCameraController>().SetTempCameraTransform();
 			print(Camera.main.GetComponent<BattleCameraController>().tempCameraPosition);
@@ -604,7 +607,8 @@ namespace bearfall
 						// ターンを切り替える
 						if (nowPhase == Phase.MyTurn_Result)
 						{ // 敵のターンへ
-							 Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
+				Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+				Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
 				print("相機返回");
 				yield return new WaitForSeconds(1.5f);
 				Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
@@ -642,6 +646,8 @@ namespace bearfall
 		private IEnumerator EnemyCharaAttack(TestCharacter attackChara, TestCharacter defenseChara)
 		{
 			yield return new WaitForSeconds(1f);
+			Camera.main.GetComponent<CinemachineBrain>().enabled = false;
+
 			Camera.main.GetComponent<BattleCameraController>().StartCameraMovement(defenseChara.transform, attackChara.transform);
 			defenseChara.GetComponent<Animator>().SetBool("isBattle", true);
 			yield return new WaitForSeconds(3f);
@@ -692,23 +698,22 @@ namespace bearfall
 					defenseChara.GetComponent<SpriteBillBoard>().isBillBoard = true;
 				}
 				// ターン切り替え処理(遅延実行)
-				DOVirtual.DelayedCall(
-					1.0f, // 遅延時間(秒)
-					() =>
-					{// 遅延実行する内容
-					 // ウィンドウを非表示化
+				// 遅延実行する内容
+				// ウィンドウを非表示化
+				yield return new WaitForSeconds(1.5f);
+				Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+				Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
+				yield return new WaitForSeconds(1.5f);
+				Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
 
+				// 自分のターンへ
 
-
-						
-							// 自分のターンへ
-
-							print("攻擊成功");
+				print("攻擊成功");
 							//attackChara.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
 						HideDice();
 
-					}
-				);
+					
+				
 			}
 			else
 			{

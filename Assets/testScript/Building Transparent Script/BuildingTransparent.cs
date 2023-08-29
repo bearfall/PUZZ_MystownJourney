@@ -63,6 +63,10 @@ public class BuildingTransparent : MonoBehaviour
                 buildingManager.ClearBuilding();
             }
         }
+        else
+        {
+            buildingManager.ClearBuilding();
+        }
 
         
         

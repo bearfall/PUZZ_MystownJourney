@@ -52,7 +52,7 @@ namespace bearfall
                 this.GetComponent<Collider>().enabled = false;
                 testGameManager1.currentArea = TestGameManager1.AreaType.TurnBasedCombat;
                 healthBar.SetActive(true);
-                testGUIManager.ShowLogo_PlayerTurn();
+                
 
                 print("進入戰鬥區域");
             }
