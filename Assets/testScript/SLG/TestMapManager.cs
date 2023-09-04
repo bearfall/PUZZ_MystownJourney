@@ -9,6 +9,8 @@ public class TestMapManager : MonoBehaviour
     private TestMapBlock testMapBlock;
     private TestCharactersManager testCharactersManager;
 
+    public bool isEnhancedAttack;
+
     public const int MAP_WIDTH = 100; // マップの横幅
     public const int MAP_HEIGHT = 100; // マップの縦(奥行)の幅
     // Start is called before the first frame update
@@ -52,6 +54,8 @@ public class TestMapManager : MonoBehaviour
 
     public List<TestMapBlock> SearchAttackableBlocks(int xPos, int zPos)
     {
+        isEnhancedAttack = false;
+
         bool ischaraData;
         var Charas = new List<TestCharacter>(); // 敵キャラクターリスト
         for (int i = 0; i < testCharactersManager.testCharacters.Count; i++)

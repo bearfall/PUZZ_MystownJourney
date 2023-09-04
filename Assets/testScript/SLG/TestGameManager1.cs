@@ -54,6 +54,8 @@ namespace bearfall
 		public bool isNowActionCharactorAlive = true;
 		public LayerMask playerLayerMask;
 
+		public int twoCharDistance;
+
 		private RollDice rollDice;
 		private enum Phase
 		{
@@ -494,6 +496,8 @@ namespace bearfall
 		/// <param name="defenseChara">防御側キャラデータ</param>
 		private IEnumerator CharaAttack(TestCharacter attackChara, TestCharacter defenseChara)
 		{
+			twoCharDistance = Mathf.RoundToInt(Vector3.Distance(attackChara.transform.position, defenseChara.transform.position));
+
 			Camera.main.GetComponent<CinemachineBrain>().enabled = false;
 			testGuiManager.testBattleWindowUI.ShowWindow();
 			Camera.main.GetComponent<BattleCameraController>().SetTempCameraTransform();
@@ -540,11 +544,14 @@ namespace bearfall
 			if (damageValue < 0)
 				damageValue = 0;
 			// キャラクター攻撃アニメーション
-			attackChara.AttackAnimation(defenseChara);
-				// バトル結果表示ウィンドウの表示設定
-				// (HPの変更前に行う)
-				//testGuiManager.testBattleWindowUI.ShowWindow(defenseChara, damageValue);
-				// ダメージ量分防御側のHPを減少
+			attackChara.AttackAnimation(defenseChara, twoCharDistance);
+
+			yield return new WaitUntil(() => attackChara.attackEnd == true);
+
+			// バトル結果表示ウィンドウの表示設定
+			// (HPの変更前に行う)
+			//testGuiManager.testBattleWindowUI.ShowWindow(defenseChara, damageValue);
+			// ダメージ量分防御側のHPを減少
 			defenseChara.TakeDamage(damageValue);
 				//defenseChara.nowHP -= damageValue;
 				// HPが0～最大値の範囲に収まるよう補正
@@ -580,7 +587,8 @@ namespace bearfall
 			if (damageValue < 0)
 				damageValue = 0;
 
-			defenseChara.AttackAnimation(attackChara);
+			defenseChara.AttackAnimation(attackChara, twoCharDistance);
+			yield return new WaitUntil(() => defenseChara.attackEnd == true);
 			attackChara.TakeDamage(damageValue);
 
 			DamagePopUpGenerator.current.CreatePopUp(attackChara.transform.position, damageValue.ToString(), Color.yellow);
@@ -652,6 +660,8 @@ namespace bearfall
 
 		private IEnumerator EnemyCharaAttack(TestCharacter attackChara, TestCharacter defenseChara)
 		{
+			twoCharDistance = Mathf.RoundToInt(Vector3.Distance(attackChara.transform.position, defenseChara.transform.position));
+
 			yield return new WaitForSeconds(1f);
 			Camera.main.GetComponent<CinemachineBrain>().enabled = false;
 
@@ -675,7 +685,7 @@ namespace bearfall
 
 				Camera.main.GetComponent<BattleCameraController>().StopCameraMovement();
 				// キャラクター攻撃アニメーション
-				attackChara.AttackAnimation(defenseChara);
+				attackChara.AttackAnimation(defenseChara, twoCharDistance);
 
 
 				// バトル結果表示ウィンドウの表示設定
@@ -863,11 +873,8 @@ namespace bearfall
 
 		public int IncreaseAttackByDistance(float attackAmount, TestCharacter transform1, TestCharacter transform2)
         {
-			float distance = Vector3.Distance(transform1.transform.position, transform2.transform.position);
-			distance = Mathf.RoundToInt(distance);
-			// 將距離輸出到控制台
-			Debug.Log("兩個物體相差" + distance);
-            switch (distance)
+			
+            switch (twoCharDistance)
             {
 				case 1 :
 					attackAmount = Mathf.RoundToInt(attackAmount);

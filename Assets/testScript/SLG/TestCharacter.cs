@@ -244,19 +244,60 @@ public class TestCharacter : MonoBehaviour
 	/// キャラクターの近接攻撃アニメーション	
 	/// </summary>
 	/// <param name="targetChara">相手キャラクター</param>
-	public void AttackAnimation(TestCharacter targetChara)
+	public void AttackAnimation(TestCharacter targetChara, int twoCharDistance)
 	{
 		attackEnd = false;
+        switch (twoCharDistance)
+        {
+			case 1:
+				transform.DOMove(targetChara.transform.position, // 指定座標までジャンプしながら移動する
+					// 跳躍次數
+					0.5f) // 動畫時間（秒）
+				.SetEase(Ease.Linear) // イージング(変化の度合)を設定
+				.SetLoops(2, LoopType.Yoyo).OnComplete(() => { attackEnd = true; }); // ループ回数・方式を指定
+				break;
+				
+			case 2:
+				transform.DOJump(targetChara.transform.position, // 指定座標までジャンプしながら移動する
+					1.0f, // 跳躍高度
+					2, // 跳躍次數
+					1f) // 動畫時間（秒）
+				.SetEase(Ease.Linear) // イージング(変化の度合)を設定
+				.SetLoops(2, LoopType.Yoyo).OnComplete(() => { attackEnd = true; }); // ループ回数・方式を指定
+				break;
+			case 3:
+				transform.DOJump(targetChara.transform.position, // 指定座標までジャンプしながら移動する
+					1.0f, // 跳躍高度
+					3, // 跳躍次數
+					1.5f) // 動畫時間（秒）
+				.SetEase(Ease.Linear) // イージング(変化の度合)を設定
+				.SetLoops(2, LoopType.Yoyo).OnComplete(() => { attackEnd = true; }); // ループ回数・方式を指定
+				break;
+			case 4:
+				transform.DOJump(targetChara.transform.position, // 指定座標までジャンプしながら移動する
+					1.0f, // 跳躍高度
+					4, // 跳躍次數
+					2f) // 動畫時間（秒）
+				.SetEase(Ease.Linear) // イージング(変化の度合)を設定
+				.SetLoops(2, LoopType.Yoyo).OnComplete(() => { attackEnd = true; }); // ループ回数・方式を指定
+				break;
 
-		// 攻撃アニメーション(DoTween)
-		// 相手キャラクターの位置へジャンプで近づき、同じ動きで元の場所に戻る
-		transform.DOJump(targetChara.transform.position, // 指定座標までジャンプしながら移動する
-				1.0f, // ジャンプの高さ
-				1, // ジャンプ回数
-				0.5f) // アニメーション時間(秒)
-			.SetEase(Ease.Linear) // イージング(変化の度合)を設定
-			.SetLoops(2, LoopType.Yoyo).OnComplete(() => { attackEnd = true; }); // ループ回数・方式を指定
-
+			default:
+                break;
+        }
+        
+		/*
+		
+			// 攻撃アニメーション(DoTween)
+			// 相手キャラクターの位置へジャンプで近づき、同じ動きで元の場所に戻る
+			transform.DOJump(targetChara.transform.position, // 指定座標までジャンプしながら移動する
+					1.0f, // 跳躍高度
+					1, // 跳躍次數
+					0.5f) // 動畫時間（秒）
+				.SetEase(Ease.Linear) // イージング(変化の度合)を設定
+				.SetLoops(2, LoopType.Yoyo).OnComplete(() => { attackEnd = true; }); // ループ回数・方式を指定
+		
+		*/
         
 
 
