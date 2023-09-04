@@ -43,7 +43,10 @@ namespace bearfall
                 SetCursorTexture();
                 MouseControl();
             }
-            
+            if (testGameManager1.currentArea == TestGameManager1.AreaType.TurnBasedCombat)
+            {
+                
+            }
         }
 
 

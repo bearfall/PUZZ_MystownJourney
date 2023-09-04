@@ -521,13 +521,20 @@ namespace bearfall
 			
 			if (playerNumber > enemyNumber)
 			{
+				
 				attackPoint = Mathf.RoundToInt(attackPoint*1.3f);
+				print("傷害變成" + attackPoint);
 			}
 
 			if (playerNumber < enemyNumber)
 			{
 				attackPoint = Mathf.RoundToInt(attackPoint * 0.7f);
+				print("傷害變成" + attackPoint);
+
 			}
+
+			attackPoint = IncreaseAttackByDistance(attackPoint, attackChara, defenseChara);
+			print("傷害變成" + attackPoint);
 
 			damageValue = attackPoint - defencePoint;
 			if (damageValue < 0)
@@ -852,6 +859,40 @@ namespace bearfall
 
 
 		}
+
+
+		public int IncreaseAttackByDistance(float attackAmount, TestCharacter transform1, TestCharacter transform2)
+        {
+			float distance = Vector3.Distance(transform1.transform.position, transform2.transform.position);
+			distance = Mathf.RoundToInt(distance);
+			// 將距離輸出到控制台
+			Debug.Log("兩個物體相差" + distance);
+            switch (distance)
+            {
+				case 1 :
+					attackAmount = Mathf.RoundToInt(attackAmount);
+					return (int)attackAmount;
+				case 2:
+					attackAmount *= 2f;
+					attackAmount = Mathf.RoundToInt(attackAmount);
+					return (int)attackAmount;
+				case 3:
+					attackAmount *= 3f;
+					attackAmount = Mathf.RoundToInt(attackAmount);
+					return (int)attackAmount;
+				case 4:
+					attackAmount *= 4f;
+					attackAmount = Mathf.RoundToInt(attackAmount);
+					return (int)attackAmount;
+				default:
+					return (int)attackAmount;
+
+			}
+
+
+
+
+        }
 
 
 		public void CheckIsAllActive()
