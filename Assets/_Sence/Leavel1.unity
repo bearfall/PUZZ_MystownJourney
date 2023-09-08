@@ -11091,6 +11091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1462707355697177391}
+  isEnhancedAttack: 0
 --- !u!114 &761092885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11158,6 +11159,7 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 512
+  twoCharDistance: 0
   currentArea: 0
 --- !u!114 &761092888
 MonoBehaviour:
@@ -36509,8 +36511,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 55d9d57e7e17ed94daeb4c6411ffaef1, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 5c445a56b0efdff45a95b076225a2279, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -36565,7 +36567,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 360, y: -128}
-  m_SizeDelta: {x: 220, y: 108}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4111523437479418377
 GameObject:

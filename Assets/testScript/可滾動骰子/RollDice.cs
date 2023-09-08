@@ -68,7 +68,7 @@ public class RollDice : MonoBehaviour
        
 
        
-        float z = Random.Range(5, 10);
+        float z = Random.Range(3, 5);
         force = new Vector3(0, 0, z);
 
        
