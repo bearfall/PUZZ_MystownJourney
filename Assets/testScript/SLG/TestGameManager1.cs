@@ -182,7 +182,7 @@ namespace bearfall
 					 // 選択中のキャラクター情報に記憶
 						
 						selectingChara = charaData;
-						selectingChara.gameObject.GetComponent<Animator>().SetBool("Idle_Click", true);
+						selectingChara.gameObject.transform.GetChild(0).GetComponent<Animator>().SetBool("Idle_Click", true);
 						testGuiManager.ShowStatusWindow(selectingChara);
 
 						testCharacter = selectingChara.GetComponent<TestCharacter>();
@@ -250,7 +250,7 @@ namespace bearfall
 						//print(targetBlock.zPos);
 						selectingChara.MovePosition(targetBlock.xPos, targetBlock.zPos);
 
-						selectingChara.gameObject.GetComponent<Animator>().SetBool("Idle_Click", false);
+						selectingChara.transform.GetChild(0).gameObject.GetComponent<Animator>().SetBool("Idle_Click", false);
 
 
 
@@ -505,8 +505,9 @@ namespace bearfall
 			Camera.main.GetComponent<BattleCameraController>().StartCameraMovement(attackChara.transform, defenseChara.transform);
 			yield return new WaitForSeconds(1.5f);
 			Camera.main.GetComponent<BattleCameraController>().StopCameraMovement();
-			
-			attackChara.GetComponent<Animator>().SetBool("isBattle", true);
+
+			attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", true);
+
 			yield return new WaitForSeconds(1.5f);
 			rollDice.canCharge = true;
 
@@ -544,14 +545,15 @@ namespace bearfall
 			if (damageValue < 0)
 				damageValue = 0;
 			// キャラクター攻撃アニメーション
-			attackChara.AttackAnimation(defenseChara, twoCharDistance);
+			StartCoroutine( attackChara.AttackAnimation(defenseChara, twoCharDistance, damageValue));
 
 			yield return new WaitUntil(() => attackChara.attackEnd == true);
-
+			print("攻擊結束");
 			// バトル結果表示ウィンドウの表示設定
 			// (HPの変更前に行う)
 			//testGuiManager.testBattleWindowUI.ShowWindow(defenseChara, damageValue);
 			// ダメージ量分防御側のHPを減少
+			/*
 			defenseChara.TakeDamage(damageValue);
 				//defenseChara.nowHP -= damageValue;
 				// HPが0～最大値の範囲に収まるよう補正
@@ -566,6 +568,7 @@ namespace bearfall
 					testCharactersManager.reFreshCharactorList();
 					CheckIsEnemyAlive();
 				}
+			*/
 			// ターン切り替え処理(遅延実行)
 			yield return new WaitForSeconds(2f);
 
@@ -587,7 +590,7 @@ namespace bearfall
 			if (damageValue < 0)
 				damageValue = 0;
 
-			defenseChara.AttackAnimation(attackChara, twoCharDistance);
+			StartCoroutine( defenseChara.AttackAnimation(attackChara, twoCharDistance, damageValue));
 			yield return new WaitUntil(() => defenseChara.attackEnd == true);
 			attackChara.TakeDamage(damageValue);
 
@@ -632,8 +635,8 @@ namespace bearfall
 				//testCharacter.hasActed = true;
 				if (isNowActionCharactorAlive)
                             {
-								attackChara.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
-								attackChara.GetComponent<Animator>().SetBool("isBattle", false);
+								attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+								attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", false);
 							}
 							
 							HideDice();
@@ -685,7 +688,7 @@ namespace bearfall
 
 				Camera.main.GetComponent<BattleCameraController>().StopCameraMovement();
 				// キャラクター攻撃アニメーション
-				attackChara.AttackAnimation(defenseChara, twoCharDistance);
+				attackChara.AttackAnimation(defenseChara, twoCharDistance, damageValue);
 
 
 				// バトル結果表示ウィンドウの表示設定

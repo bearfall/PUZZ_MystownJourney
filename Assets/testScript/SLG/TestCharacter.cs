@@ -244,17 +244,50 @@ public class TestCharacter : MonoBehaviour
 	/// キャラクターの近接攻撃アニメーション	
 	/// </summary>
 	/// <param name="targetChara">相手キャラクター</param>
-	public void AttackAnimation(TestCharacter targetChara, int twoCharDistance)
+	public IEnumerator AttackAnimation(TestCharacter targetChara, int twoCharDistance, int damageValue)
 	{
 		attackEnd = false;
         switch (twoCharDistance)
         {
 			case 1:
-				transform.DOMove(targetChara.transform.position, // 指定座標までジャンプしながら移動する
-					// 跳躍次數
+				Tweener tweener;
+				
+				Transform tempTransform;
+
+				tempTransform = gameObject.transform;
+
+				print(tempTransform.position);
+
+				tweener = transform.DOMove(targetChara.transform.position, // 指定座標までジャンプしながら移動する
+																		   // 跳躍次數
 					0.5f) // 動畫時間（秒）
-				.SetEase(Ease.Linear) // イージング(変化の度合)を設定
-				.SetLoops(2, LoopType.Yoyo).OnComplete(() => { attackEnd = true; }); // ループ回数・方式を指定
+				.SetEase(Ease.Linear); // イージング(変化の度合)を設定
+
+				tweener.SetAutoKill(false);
+
+				tweener.PlayForward();
+
+				tweener.OnComplete(() => { gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("attack"); });
+
+				yield return new WaitForSeconds(0.5f);
+
+				targetChara.TakeDamage(damageValue);
+				//defenseChara.nowHP -= damageValue;
+				// HPが0～最大値の範囲に収まるよう補正
+				//defenseChara.nowHP = Mathf.Clamp(defenseChara.nowHP, 0, defenseChara.maxHP);
+				DamagePopUpGenerator.current.CreatePopUp(targetChara.transform.position, damageValue.ToString(), Color.yellow);
+
+				print("回來");
+				print(tempTransform.position);
+
+				tweener.PlayBackwards();
+
+				yield return new WaitForSeconds(0.7f);
+
+				attackEnd = true;
+
+				tweener.SetAutoKill(true);
+
 				break;
 				
 			case 2:

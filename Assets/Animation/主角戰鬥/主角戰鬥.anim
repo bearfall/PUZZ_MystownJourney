@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 7df41a4e61057394083916120a8adcf6, type: 3}
+      value: {fileID: 21300000, guid: ac1418073374ddf429bff48cfcb2b4d2, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 86b01c9266ce1784fa1cb2414a03fcc7, type: 3}
+      value: {fileID: 21300000, guid: ac1418073374ddf429bff48cfcb2b4d2, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 7df41a4e61057394083916120a8adcf6, type: 3}
-    - {fileID: 21300000, guid: 86b01c9266ce1784fa1cb2414a03fcc7, type: 3}
+    - {fileID: 21300000, guid: ac1418073374ddf429bff48cfcb2b4d2, type: 3}
+    - {fileID: 21300000, guid: ac1418073374ddf429bff48cfcb2b4d2, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -68,4 +68,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: ChangeToAttackImage
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

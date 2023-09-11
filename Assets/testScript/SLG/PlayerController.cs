@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 		//characterStats = GetComponent<CharacterStats>();
 		testCharacter = gameObject.GetComponent<TestCharacter>();
 		path = gameObject.GetComponent<Path>();
-		playerAni = gameObject.GetComponent<Animator>();
+		playerAni = gameObject.transform.GetChild(0).GetComponent<Animator>();
 	}
 
     private void Start()
