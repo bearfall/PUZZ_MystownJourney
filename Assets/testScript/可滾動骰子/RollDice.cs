@@ -16,7 +16,7 @@ public class RollDice : MonoBehaviour
     public bool diceStop = false;
     private int energyAmount;
     public bool canCharge = false;
-
+    public GameObject nowCharacter;
     public int playerDiceNumber;
     // Start is called before the first frame update
     void Start()
@@ -79,6 +79,8 @@ public class RollDice : MonoBehaviour
 
     public void RollTheDice()
     {
+        nowCharacter.GetComponent<Animator>().SetBool("isPrepare", true);
+
         //this.transform.rotation = Quaternion.Euler(18, 0, 0);
         isThrowDice = true;
 
@@ -190,6 +192,17 @@ public class RollDice : MonoBehaviour
             
 
         }
+
+
+
+    }
+
+
+
+    public void SetNowCharater(TestCharacter character)
+    {
+        nowCharacter = character.gameObject.transform.GetChild(0).gameObject;
+
 
 
 

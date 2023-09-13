@@ -99,7 +99,7 @@ public class TestCharacter : MonoBehaviour
 		// 初期位置に対応する座標へオブジェクトを移動させる
 		Vector3 pos = new Vector3();
 		pos.x = initPos_X; // x座標：1ブロックのサイズが1(1.0f)なのでそのまま代入
-		pos.y = 0.36f; // y座標（固定）
+		pos.y = 0.565f; // y座標（固定）
 		pos.z = initPos_Z; // z座標
 		transform.position = pos; // オブジェクトの座標を変更
 
@@ -246,10 +246,14 @@ public class TestCharacter : MonoBehaviour
 	/// <param name="targetChara">相手キャラクター</param>
 	public IEnumerator AttackAnimation(TestCharacter targetChara, int twoCharDistance, int damageValue)
 	{
+		
+
 		attackEnd = false;
         switch (twoCharDistance)
         {
 			case 1:
+				gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+
 				Tweener tweener;
 				
 				Transform tempTransform;
@@ -265,11 +269,12 @@ public class TestCharacter : MonoBehaviour
 
 				tweener.SetAutoKill(false);
 
+				gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("attack");
 				tweener.PlayForward();
 
-				tweener.OnComplete(() => { gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("attack"); });
+				//tweener.OnComplete(() => { gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("attack"); });
 
-				yield return new WaitForSeconds(0.5f);
+				yield return new WaitForSeconds(1f);
 
 				targetChara.TakeDamage(damageValue);
 				//defenseChara.nowHP -= damageValue;
@@ -288,6 +293,7 @@ public class TestCharacter : MonoBehaviour
 
 				tweener.SetAutoKill(true);
 
+				gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
 				break;
 				
 			case 2:

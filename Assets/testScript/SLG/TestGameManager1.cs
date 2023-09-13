@@ -507,8 +507,9 @@ namespace bearfall
 			Camera.main.GetComponent<BattleCameraController>().StopCameraMovement();
 
 			attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", true);
-
+			rollDice.SetNowCharater(attackChara);
 			yield return new WaitForSeconds(1.5f);
+			
 			rollDice.canCharge = true;
 
 			yield return new WaitUntil(() => rollDice.diceStop == true);
