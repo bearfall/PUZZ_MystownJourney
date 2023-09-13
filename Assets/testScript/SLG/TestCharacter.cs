@@ -261,6 +261,7 @@ public class TestCharacter : MonoBehaviour
 				tempTransform = gameObject.transform;
 
 				print(tempTransform.position);
+				/*
 
 				tweener = transform.DOMove(targetChara.transform.position, // 指定座標までジャンプしながら移動する
 																		   // 跳躍次數
@@ -268,9 +269,10 @@ public class TestCharacter : MonoBehaviour
 				.SetEase(Ease.Linear); // イージング(変化の度合)を設定
 
 				tweener.SetAutoKill(false);
-
+				*/
 				gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("attack");
-				tweener.PlayForward();
+
+				//tweener.PlayForward();
 
 				//tweener.OnComplete(() => { gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("attack"); });
 
@@ -285,13 +287,13 @@ public class TestCharacter : MonoBehaviour
 				print("回來");
 				print(tempTransform.position);
 
-				tweener.PlayBackwards();
+				//tweener.PlayBackwards();
 
 				yield return new WaitForSeconds(0.7f);
 
 				attackEnd = true;
 
-				tweener.SetAutoKill(true);
+				//tweener.SetAutoKill(true);
 
 				gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
 				break;
