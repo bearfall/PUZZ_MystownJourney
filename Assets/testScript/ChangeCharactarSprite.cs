@@ -11,7 +11,9 @@ public class ChangeCharactarSprite : MonoBehaviour
     public Sprite Breathe;
     public Sprite prepare;
 
-    public VisualEffect attackVFX;
+    public List<ParticleSystem> attackParticleSystem = new List<ParticleSystem>();
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -45,13 +47,11 @@ public class ChangeCharactarSprite : MonoBehaviour
         GetComponent<Animator>().SetBool("isPrepare", false);
     }
 
-    public void PlayVfx()
+    public void PlayAttackParticleSystem()
     {
-
-        attackVFX.Play();
-
-
-
-
+        foreach (var ParticleSystem in attackParticleSystem)
+        {
+            ParticleSystem.Play();
+        }
     }
 }

@@ -13,6 +13,9 @@ public class TestMapManager : MonoBehaviour
 
     public const int MAP_WIDTH = 100; // マップの横幅
     public const int MAP_HEIGHT = 100; // マップの縦(奥行)の幅
+
+    public List<TestCharacter> beJumpCharater;
+
     // Start is called before the first frame update
     void Start()
     {

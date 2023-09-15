@@ -269,6 +269,7 @@ namespace bearfall
 							() =>
 							{// 遅延実行する内容
 								testGuiManager.ShowCommandButtons();
+								selectingChara.SetHealAmountText();
 								ChangePhase(Phase.MyTurn_Command);
 							}
 						);
@@ -454,13 +455,40 @@ namespace bearfall
 		{
 			// コマンドボタンを非表示にする
 			testCharacter.hasActed = true;
-			testCharacter.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+			testCharacter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
 			testGuiManager.HideCommandButtons();
 			// 進行モードを進める(敵のターンへ)
 			CheckIsAllActive();
 		}
 
 
+		public void HealCommand()
+        {
+			StartCoroutine(Heal());
+        }
+
+
+		public IEnumerator Heal()
+        {
+            if (testCharacter.healAmount > 0)
+            {
+				testCharacter.healAmount -= 1;
+				testCharacter.hasActed = true;
+				testCharacter.nowHP += 50;
+				DamagePopUpGenerator.current.CreatePopUp(testCharacter.transform.position,"50", Color.green);
+				yield return new WaitForSeconds(1f);
+				testCharacter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+				testGuiManager.HideCommandButtons();
+				print("回血~~");
+				CheckIsAllActive();
+			}
+            else
+            {
+				print("沒有回血次數了");
+            }
+			
+
+		}
 
 		public void CancelMoving()
 		{

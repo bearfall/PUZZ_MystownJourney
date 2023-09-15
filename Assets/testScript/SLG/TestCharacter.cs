@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class TestCharacter : MonoBehaviour
 {
@@ -65,8 +66,12 @@ public class TestCharacter : MonoBehaviour
 	public int def; // 防御力
 	[Header("属性")]
 	public Attribute attribute; // 属性
+	[Header("回血次數")]
+	public int healAmount;
 
-								// ゲーム中に変化するキャラクターデー						
+	public Text healAmountText;
+
+	// ゲーム中に変化するキャラクターデー						
 	public int xPos; // 現在のx座標
 					 //[HideInInspector]
 	public int zPos; // 現在のz座標
@@ -544,6 +549,13 @@ public void LookAtTarget(GameObject target)
 		// 以 x 軸為軸心，將物體朝向目標物體
 		transform.LookAt(transform.position + new Vector3(directionToTarget.x, 0, 0), Vector3.up);
 
+
+	}
+
+
+	public void SetHealAmountText()
+    {
+		healAmountText.text = healAmount.ToString();
 
 	}
 }
