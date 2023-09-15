@@ -541,6 +541,20 @@ public class TestCharacter : MonoBehaviour
 	}
 	*/
 
+	public void HealCharacter()
+    {
+		healAmount -= 1;
+		
+		nowHP += 50;
+        if (nowHP >= maxHP)
+        {
+			nowHP = maxHP;
+
+		}
+		this.healthBar.SetHealth(nowHP);
+		DamagePopUpGenerator.current.CreatePopUp(transform.position, "50", Color.green);
+
+	}
 
 public void LookAtTarget(GameObject target)
     {

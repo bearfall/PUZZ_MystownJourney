@@ -472,11 +472,9 @@ namespace bearfall
         {
             if (testCharacter.healAmount > 0)
             {
-				testCharacter.healAmount -= 1;
-				testCharacter.hasActed = true;
-				testCharacter.nowHP += 50;
-				DamagePopUpGenerator.current.CreatePopUp(testCharacter.transform.position,"50", Color.green);
+				testCharacter.HealCharacter();
 				yield return new WaitForSeconds(1f);
+				testCharacter.hasActed = true;
 				testCharacter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
 				testGuiManager.HideCommandButtons();
 				print("回血~~");
