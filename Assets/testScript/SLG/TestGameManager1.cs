@@ -619,9 +619,9 @@ namespace bearfall
 
 			StartCoroutine( defenseChara.AttackAnimation(attackChara, twoCharDistance, damageValue));
 			yield return new WaitUntil(() => defenseChara.attackEnd == true);
-			attackChara.TakeDamage(damageValue);
+			//attackChara.TakeDamage(damageValue);
 
-			DamagePopUpGenerator.current.CreatePopUp(attackChara.transform.position, damageValue.ToString(), Color.yellow);
+			//DamagePopUpGenerator.current.CreatePopUp(attackChara.transform.position, damageValue.ToString(), Color.yellow);
 
 			if (attackChara.nowHP <= 0)
 			{
@@ -723,13 +723,13 @@ namespace bearfall
 				//testGuiManager.testBattleWindowUI.ShowWindow(defenseChara, damageValue);
 
 				// ダメージ量分防御側のHPを減少
-				defenseChara.TakeDamage(damageValue);
+				//defenseChara.TakeDamage(damageValue);
 				//defenseChara.nowHP -= damageValue;
 				// HPが0～最大値の範囲に収まるよう補正
 				//defenseChara.nowHP = Mathf.Clamp(defenseChara.nowHP, 0, defenseChara.maxHP);
 
 
-				DamagePopUpGenerator.current.CreatePopUp(defenseChara.transform.position, damageValue.ToString(), Color.yellow);
+				//DamagePopUpGenerator.current.CreatePopUp(defenseChara.transform.position, damageValue.ToString(), Color.yellow);
 
 
 				// HP0になったキャラクターを削除する

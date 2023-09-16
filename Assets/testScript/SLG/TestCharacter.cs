@@ -87,6 +87,7 @@ public class TestCharacter : MonoBehaviour
 
 	public GameObject playerDice;
 	public Transform playerDiceSpawnPoint;
+	public TestCharacter targetCharacter;
 
 	public enum Attribute
 	{
@@ -257,6 +258,8 @@ public class TestCharacter : MonoBehaviour
         switch (twoCharDistance)
         {
 			case 1:
+				targetCharacter = targetChara;
+
 				gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
 
 				Tweener tweener;
@@ -301,6 +304,9 @@ public class TestCharacter : MonoBehaviour
 				//tweener.SetAutoKill(true);
 
 				gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+				targetCharacter = null;
+
 				break;
 				
 			case 2:
@@ -571,5 +577,12 @@ public void LookAtTarget(GameObject target)
     {
 		healAmountText.text = healAmount.ToString();
 
+	}
+
+	public void Shake(int x, int y, int z)
+    {
+		print(targetCharacter.gameObject.transform.GetChild(0).name);
+
+		targetCharacter.gameObject.transform.GetChild(0).transform.DOShakePosition(0.3f, 0.5f);
 	}
 }
