@@ -12,6 +12,8 @@ namespace bearfall
 
 	public class TestGameManager1 : MonoBehaviour
 	{
+		public MousePlayerController backToFreeMoveCharacter;
+
 		public TestCharacter nowActionPlayer;
 
 
@@ -60,7 +62,7 @@ namespace bearfall
 		public GameObject nowBattleArea;
 
 		private RollDice rollDice;
-		private enum Phase
+		public enum Phase
 		{
 			MyTurn_Start,       // 我的回合：開始時
 			MyTurn_Moving,      // 我的回合：移動先選択中
@@ -69,9 +71,10 @@ namespace bearfall
 			MyTurn_ThrowDice,
 			MyTurn_Result,      // 我的回合：行動結果表示中
 			EnemyTurn_Start,    // 敵方的回合：開始時
-			EnemyTurn_Result    // 敵方的回合：行動結果表示中
+			EnemyTurn_Result,
+			MyTurn_Free// 敵方的回合：行動結果表示中
 		}
-		private Phase nowPhase; // 現在の進行モード
+		public Phase nowPhase; // 現在の進行モード
 
 
 		public enum AreaType
@@ -382,7 +385,7 @@ namespace bearfall
 		}
 
 
-		private void ChangePhase(Phase newPhase)
+		public void ChangePhase(Phase newPhase)
 		{
 			nowPhase = newPhase;
 			// 特定のモードに切り替わったタイミングで行う処理
@@ -627,6 +630,7 @@ namespace bearfall
 					CheckIsAllActive();
 					isNowActionCharactorAlive = true;
 					//ChangePhase(Phase.EnemyTurn_Start);
+					yield break;
 
 				}
 
@@ -1174,6 +1178,10 @@ namespace bearfall
 													testGuiManager.ShowLogo_Win();
 												DestroyBatttlaArea(nowBattleArea);
 												currentArea = TestGameManager1.AreaType.FreeExplore;
+												ChangePhase(Phase.MyTurn_Free);
+												backToFreeMoveCharacter.BackToFreeMove();
+
+
 											}
 										);
 			}
@@ -1193,8 +1201,14 @@ namespace bearfall
 
 		}
 
+		public void ChangeMyTurnStart()
+		{
+
+
+			ChangePhase(Phase.MyTurn_Start);
+		}
 	}
-
-
 	
+	
+
 }
