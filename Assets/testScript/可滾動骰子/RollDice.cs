@@ -121,6 +121,8 @@ public class RollDice : MonoBehaviour
                 //isThrowDice = false;
                 return true;
 
+
+
             }
             else
             {

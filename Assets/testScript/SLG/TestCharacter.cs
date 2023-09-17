@@ -306,7 +306,7 @@ public class TestCharacter : MonoBehaviour
 				gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
 
 				targetCharacter = null;
-
+				print("攻擊成功");
 				break;
 				
 			case 2:

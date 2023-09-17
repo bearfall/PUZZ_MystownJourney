@@ -48,6 +48,8 @@ namespace bearfall
         {
             if (other.CompareTag("BattleArea"))
             {
+                testGameManager1.nowBattleArea = other.gameObject;
+
                 this.GetComponent<NavMeshAgent>().enabled = false;
                 this.GetComponent<Collider>().enabled = false;
                 testGameManager1.currentArea = TestGameManager1.AreaType.TurnBasedCombat;

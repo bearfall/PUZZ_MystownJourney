@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour
 		//characterStats.MaxHealth = 30;
 		testCharacter =gameObject.GetComponent<TestCharacter>();
 		enemyPath = gameObject.GetComponent<EnemyPath>();
-		enemyAni = gameObject.GetComponent<Animator>();
+		enemyAni = gameObject.transform.GetChild(0).GetComponent<Animator>();
 	}
 
 
