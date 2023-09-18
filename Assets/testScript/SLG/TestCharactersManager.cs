@@ -32,7 +32,7 @@ public class TestCharactersManager : MonoBehaviour
     {
         testCharacters = new List<TestCharacter>();
         charactersParent.GetComponentsInChildren(testCharacters);
-
+        print(testCharacters.Count);
         
     }
 

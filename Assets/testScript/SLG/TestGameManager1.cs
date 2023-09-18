@@ -595,14 +595,104 @@ namespace bearfall
 				//defenseChara.nowHP = Mathf.Clamp(defenseChara.nowHP, 0, defenseChara.maxHP);
 			DamagePopUpGenerator.current.CreatePopUp(defenseChara.transform.position, damageValue.ToString(), Color.yellow);
 			*/
-				// HP0になったキャラクターを削除する
-				if (defenseChara.nowHP <= 0)
+			// HP0になったキャラクターを削除する
+			if (defenseChara.nowHP <= 0)
+			{
+				testCharactersManager.DeleteCharaData(defenseChara);
+				enemyCount--;
+				testCharactersManager.reFreshCharactorList();
+				
+
+				attackChara.hasActed = true;
+
+				testGuiManager.testBattleWindowUI.HideWindow();
+				testGuiManager.HideStatusWindow();
+				// ターンを切り替える
+				if (nowPhase == Phase.MyTurn_Result)
+				{ // 敵のターンへ
+					Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
+					print("相機返回");
+					yield return new WaitForSeconds(1.5f);
+					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
+
+
+					//testCharacter.hasActed = true;
+					if (isNowActionCharactorAlive)
+					{
+						attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+						attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", false);
+					}
+
+					HideDice();
+
+
+
+					CheckIsEnemyAlive();
+					if (enemyCount > 0)
+					{
+						CheckIsAllActive();
+						isNowActionCharactorAlive = true;
+					}
+
+					//ChangePhase(Phase.EnemyTurn_Start);
+
+
+				}
+
+			}
+			else
+			{
+
+				// ターン切り替え処理(遅延実行)
+				yield return new WaitForSeconds(2f);
+
+				// ダメージ量
+				attackPoint = defenseChara.atk; // 攻撃側の攻撃力
+				defencePoint = attackChara.def; // 防御側の防御力
+
+				if (playerNumber > enemyNumber)
 				{
-					testCharactersManager.DeleteCharaData(defenseChara);
+					attackPoint = Mathf.RoundToInt(attackPoint * 0.7f);
+				}
+
+				if (playerNumber < enemyNumber)
+				{
+					attackPoint = Mathf.RoundToInt(attackPoint * 1.3f);
+				}
+
+				damageValue = attackPoint - defencePoint;
+				if (damageValue < 0)
+					damageValue = 0;
+
+				StartCoroutine(defenseChara.AttackAnimation(attackChara, twoCharDistance, damageValue));
+				yield return new WaitUntil(() => defenseChara.attackEnd == true);
+				//attackChara.TakeDamage(damageValue);
+
+				//DamagePopUpGenerator.current.CreatePopUp(attackChara.transform.position, damageValue.ToString(), Color.yellow);
+
+				if (attackChara.nowHP <= 0)
+				{
+					isNowActionCharactorAlive = false;
+					attackChara.GetComponent<Animator>().SetBool("die", true);
+					yield return new WaitForSeconds(2f);
+					testCharactersManager.DeleteCharaData(attackChara);
+					yield return new WaitForSeconds(1f);
 					enemyCount--;
 					testCharactersManager.reFreshCharactorList();
-					CheckIsEnemyAlive();
 
+
+
+					foreach (var item in testCharactersManager.testCharacters)
+					{
+						print(item.name);
+					}
+
+					CheckIsEnemyAlive();
+				}
+				// 遅延実行する内容
+				// ウィンドウを非表示化
+				yield return new WaitForSeconds(2f);
 				attackChara.hasActed = true;
 
 				testGuiManager.testBattleWindowUI.HideWindow();
@@ -630,96 +720,15 @@ namespace bearfall
 					CheckIsAllActive();
 					isNowActionCharactorAlive = true;
 					//ChangePhase(Phase.EnemyTurn_Start);
-					yield break;
 
 				}
-
-			}
-			
-			// ターン切り替え処理(遅延実行)
-			yield return new WaitForSeconds(2f);
-
-			 // ダメージ量
-			attackPoint = defenseChara.atk; // 攻撃側の攻撃力
-			defencePoint = attackChara.def; // 防御側の防御力
-
-			if (playerNumber > enemyNumber)
-			{
-				attackPoint = Mathf.RoundToInt(attackPoint * 0.7f);
-			}
-
-			if (playerNumber < enemyNumber)
-			{
-				attackPoint = Mathf.RoundToInt(attackPoint * 1.3f);
-			}
-
-			damageValue = attackPoint - defencePoint;
-			if (damageValue < 0)
-				damageValue = 0;
-
-			StartCoroutine( defenseChara.AttackAnimation(attackChara, twoCharDistance, damageValue));
-			yield return new WaitUntil(() => defenseChara.attackEnd == true);
-			//attackChara.TakeDamage(damageValue);
-
-			//DamagePopUpGenerator.current.CreatePopUp(attackChara.transform.position, damageValue.ToString(), Color.yellow);
-
-			if (attackChara.nowHP <= 0)
-			{
-				isNowActionCharactorAlive = false;
-				attackChara.GetComponent<Animator>().SetBool("die", true);
-				yield return new WaitForSeconds(2f);
-				testCharactersManager.DeleteCharaData(attackChara);
-				yield return new WaitForSeconds(1f);
-				enemyCount--;
-				testCharactersManager.reFreshCharactorList();
-				
-
-
-				foreach (var item in testCharactersManager.testCharacters)
-                {
-					print(item.name);
+				else if (nowPhase == Phase.EnemyTurn_Result)
+				{
+					// 自分のターンへ
+					HideDice();
+					ChangePhase(Phase.EnemyTurn_Start);
 				}
-				
-				CheckIsEnemyAlive();
 			}
-			// 遅延実行する内容
-			// ウィンドウを非表示化
-			yield return new WaitForSeconds(2f);
-						attackChara.hasActed = true;
-
-						testGuiManager.testBattleWindowUI.HideWindow();
-						testGuiManager.HideStatusWindow();
-						// ターンを切り替える
-						if (nowPhase == Phase.MyTurn_Result)
-						{ // 敵のターンへ
-				Camera.main.GetComponent<CinemachineBrain>().enabled = true;
-				Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
-				print("相機返回");
-				yield return new WaitForSeconds(1.5f);
-				Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
-
-
-				//testCharacter.hasActed = true;
-				if (isNowActionCharactorAlive)
-                            {
-								attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
-								attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", false);
-							}
-							
-							HideDice();
-
-							
-							CheckIsAllActive();
-							isNowActionCharactorAlive = true;
-							//ChangePhase(Phase.EnemyTurn_Start);
-
-						}
-						else if (nowPhase == Phase.EnemyTurn_Result)
-						{
-							// 自分のターンへ
-							HideDice();
-							ChangePhase(Phase.EnemyTurn_Start);
-						}
 					
 				
 
@@ -1166,24 +1175,26 @@ namespace bearfall
 
 		public void CheckIsEnemyAlive()
         {
-
+			print("確認是否有敵人生還");
 
 
 			if (enemyCount == 0)
 			{
-				DOVirtual.DelayedCall(
-											1.0f, // 遅延時間(秒)
-											() =>
-											{// 遅延実行する内容
-													testGuiManager.ShowLogo_Win();
+				print("沒敵人生還");
+				testCharactersManager.reFreshCharactorList();
+				foreach (var item in testCharactersManager.testCharacters)
+                 {
+													item.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+
+												}
+												testGuiManager.ShowLogo_Win();
 												DestroyBatttlaArea(nowBattleArea);
 												currentArea = TestGameManager1.AreaType.FreeExplore;
 												ChangePhase(Phase.MyTurn_Free);
 												backToFreeMoveCharacter.BackToFreeMove();
 
 
-											}
-										);
+											
 			}
 
 
@@ -1198,7 +1209,7 @@ namespace bearfall
         {
 
 			Destroy(nowBattleArea);
-
+			print("刪除了戰鬥區域");
 		}
 
 		public void ChangeMyTurnStart()

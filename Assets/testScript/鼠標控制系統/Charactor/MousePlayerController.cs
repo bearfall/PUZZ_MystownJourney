@@ -11,16 +11,18 @@ namespace bearfall
         private TestGameManager1 testGameManager1;
         private TestGUIManager testGUIManager;
         public GameObject healthBar;
-
+        public MusicManager musicManager;
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             testGameManager1 = GameObject.Find("Manager").GetComponent<TestGameManager1>();
             testGUIManager = GameObject.Find("Manager").GetComponent<TestGUIManager>();
+            musicManager = GameObject.Find("Manager").GetComponent<MusicManager>();
             healthBar.SetActive(false);
         }
         private void Start()
         {
+            musicManager.PlayBackgroundMusic(MusicManager.SoundType.explore);
             MouseManager.Instance.OnMouseClicked += MoveToTarget;
         }
         public void MoveToTarget(Vector3Int target)
@@ -53,6 +55,7 @@ namespace bearfall
                 this.GetComponent<NavMeshAgent>().enabled = false;
                 this.GetComponent<Collider>().enabled = false;
                 testGameManager1.ChangeMyTurnStart();
+                musicManager.PlayBackgroundMusic(MusicManager.SoundType.battle);
                 testGameManager1.currentArea = TestGameManager1.AreaType.TurnBasedCombat;
                 healthBar.SetActive(true);
                 
@@ -64,6 +67,7 @@ namespace bearfall
         public void BackToFreeMove()
         {
             this.GetComponent<NavMeshAgent>().enabled = true;
+            print("腳色能自由移動了");
 
         }
     }
