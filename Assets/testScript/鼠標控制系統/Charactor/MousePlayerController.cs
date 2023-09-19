@@ -46,11 +46,15 @@ namespace bearfall
         }
 
 
-        private void OnTriggerEnter(Collider other)
+        private IEnumerator OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("BattleArea"))
             {
                 testGameManager1.nowBattleArea = other.gameObject;
+                StartCoroutine( other.gameObject.GetComponent<AreaCharacterInfo>().SetCharacterToChracters(other.gameObject.GetComponent<AreaCharacterInfo>().areaCharacters));
+                testGameManager1.enemyCount = other.gameObject.GetComponent<AreaCharacterInfo>().enemyCount;
+                yield return new WaitUntil(() => other.gameObject.GetComponent<AreaCharacterInfo>().areaSetDone == true);
+
                 other.gameObject.SetActive(false);
                 this.GetComponent<NavMeshAgent>().enabled = false;
                 this.GetComponent<Collider>().enabled = false;
