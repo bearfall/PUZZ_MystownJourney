@@ -110,6 +110,7 @@ namespace bearfall
 		//	enemyDiceLeave = GameObject.Find("EnemyDice").GetComponent<DiceLeave>();
 
 			HideDice();
+			testGuiManager.HideHeadWindow();
 
 
 			currentArea = AreaType.FreeExplore;

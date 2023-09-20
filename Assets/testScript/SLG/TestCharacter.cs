@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class TestCharacter : MonoBehaviour
 {
+	[Header("頭像)")]
+	public Sprite headSprite; // 初期X位置
+
+
 	public int MoveSpeed;
 	//private int u = 2;
 

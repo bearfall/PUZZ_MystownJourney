@@ -32,6 +32,9 @@ public class TestGUIManager : MonoBehaviour
 
 	public GameObject moveCancelButton;
 
+	public GameObject headWindow;
+
+
 	void Start()
 	{
 		// UI初期化
@@ -155,5 +158,15 @@ public class TestGUIManager : MonoBehaviour
 	public void HideMoveCancelButton()
 	{
 		moveCancelButton.SetActive(false);
+	}
+
+	public void ShowHeadWindow()
+    {
+		headWindow.SetActive(true);
+	}
+
+	public void HideHeadWindow()
+	{
+		headWindow.SetActive(false);
 	}
 }
