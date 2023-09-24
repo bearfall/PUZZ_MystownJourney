@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +12,12 @@ namespace bearfall
         private TestGUIManager testGUIManager;
         public GameObject healthBar;
         public MusicManager musicManager;
+
+        public float horizontalinput;//水平参数
+        public float Verticalinput;//垂直参数
+        float speed = 5f;//声明一个参数，没有规定
+
+
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -33,14 +39,35 @@ namespace bearfall
 
         private void Update()
         {
+            if (testGameManager1.currentArea == TestGameManager1.AreaType.FreeExplore)
+            {
+
+
+                horizontalinput = Input.GetAxis("Horizontal");
+                //AD方向控制
+                Verticalinput = Input.GetAxis("Vertical");
+
+                if (horizontalinput != 0 && Verticalinput != 0)
+                {
+                    horizontalinput = horizontalinput * 0.6f;
+                    Verticalinput = Verticalinput * 0.6f;
+                }
+                //WS方向控制
+                this.transform.Translate(Vector3.right * horizontalinput * Time.deltaTime * speed);
+
+                this.transform.Translate(Vector3.forward * Verticalinput * Time.deltaTime * speed);
+                //控制该物体向前后移动
+            }
+
+
             if (agent.velocity.magnitude == 0)
             {
-                // ����b���ʤ�
+                // 角色在移動中
                 GetComponent<Collider>().enabled = true;
             }
             else
             {
-                // ���⥼�b����
+                // 角色未在移動
                 GetComponent<Collider>().enabled = false;
             }
         }
@@ -58,20 +85,27 @@ namespace bearfall
                 other.gameObject.SetActive(false);
                 this.GetComponent<NavMeshAgent>().enabled = false;
                 this.GetComponent<Collider>().enabled = false;
+
+                TestCharacter testCharacter = this.GetComponent<TestCharacter>();
+
+                testGameManager1.currentArea = TestGameManager1.AreaType.TurnBasedCombat;
+
+                Vector3 newPosition = new Vector3(Mathf.RoundToInt(transform.position.x), transform.position.y, Mathf.RoundToInt(transform.position.z));
+                transform.position = newPosition;
                 testGameManager1.ChangeMyTurnStart();
                 musicManager.PlayBackgroundMusic(MusicManager.SoundType.battle);
-                testGameManager1.currentArea = TestGameManager1.AreaType.TurnBasedCombat;
+                
                 healthBar.SetActive(true);
                 
 
-                print("�i�J�԰��ϰ�");
+                print("進入戰鬥區域");
             }
         }
         
         public void BackToFreeMove()
         {
             this.GetComponent<NavMeshAgent>().enabled = true;
-            print("�}���ۥѲ��ʤF");
+            print("腳色能自由移動了");
 
         }
     }

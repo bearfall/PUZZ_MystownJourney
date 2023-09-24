@@ -20,6 +20,8 @@ namespace bearfall
 
         public LayerMask raycastLayerMask;
 
+
+
         public event Action<Vector3Int> OnMouseClicked;
 
         private void Awake()
@@ -38,11 +40,13 @@ namespace bearfall
 
         private void Update()
         {
+            /*
             if (testGameManager1.currentArea == TestGameManager1.AreaType.FreeExplore)
             {
                 SetCursorTexture();
                 MouseControl();
             }
+            */
             if (testGameManager1.currentArea == TestGameManager1.AreaType.TurnBasedCombat)
             {
                 
@@ -71,6 +75,7 @@ namespace bearfall
 
         void MouseControl()
         {
+
             if (Input.GetMouseButtonDown(1))
             {
                 // 建立一條從滑鼠位置發射的射線
@@ -78,7 +83,7 @@ namespace bearfall
                 RaycastHit hitInfo;
 
                 // 使用LayerMask進行射線檢測，忽略指定的層
-                if (Physics.Raycast(ray, out hitInfo, raycastLayerMask) && hitInfo.collider != null &&
+                if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, LayerMask.NameToLayer("Ground")) && hitInfo.collider != null &&
                     !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 {
                     print(hitInfo.collider.name);

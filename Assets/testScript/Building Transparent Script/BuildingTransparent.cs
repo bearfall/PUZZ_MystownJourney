@@ -32,12 +32,12 @@ public class BuildingTransparent : MonoBehaviour
 
                 buildingManager.ClearBuilding();
                 Debug.DrawLine(ray.origin, hitInfo.point);
-                //print("被擋住了");
+                print("被擋住了");
 
 
                 foreach (var hit in hits)
                 {
-
+                    print(hit.collider.name);
 
                     // 获取建筑物的渲染器组件
                     Material stoneMaterial; // 半透明材质
