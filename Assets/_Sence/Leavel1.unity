@@ -2405,7 +2405,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 38
+  m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 48.319, y: 0, z: 0}
 --- !u!1001 &86712552
 PrefabInstance:
@@ -10263,7 +10263,7 @@ Transform:
   - {fileID: 817871207}
   - {fileID: 892086423}
   m_Father: {fileID: 0}
-  m_RootOrder: 35
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &426292249
 PrefabInstance:
@@ -12499,7 +12499,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &521825408
 PrefabInstance:
@@ -17814,51 +17814,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 527917642}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &528208620
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 528208622}
-  - component: {fileID: 528208621}
-  m_Layer: 2
-  m_Name: BattleArea (1)
-  m_TagString: BattleArea
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &528208621
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 528208620}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1105478, y: 1, z: 0.85986745}
-  m_Center: {x: 0.1107502, y: 0, z: 0.0022601062}
---- !u!4 &528208622
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 528208620}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.5, y: 2.5, z: -5.5}
-  m_LocalScale: {x: 9, y: 5, z: 7}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 33
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &528517226 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 404599708552815478, guid: 2827b16b3f8240641be3ef3c65fdc461,
@@ -26324,7 +26279,7 @@ Transform:
   - {fileID: 655031041}
   - {fileID: 1658959596}
   m_Father: {fileID: 0}
-  m_RootOrder: 39
+  m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &838402462
 PrefabInstance:
@@ -34653,6 +34608,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1375620765}
   musicManager: {fileID: 0}
+  horizontalinput: 0
+  Verticalinput: 0
 --- !u!195 &1125159816
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -35341,7 +35298,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -36213,7 +36170,7 @@ MonoBehaviour:
   charactersParent: {fileID: 431051707}
   testCharactersManager: {fileID: 0}
   testGUIManager: {fileID: 0}
-  headCanva: {fileID: 0}
+  headCanva: {fileID: 1312282613}
   enemyCount: 0
   playerCount: 0
   areaSetDone: 0
@@ -37991,7 +37948,7 @@ Transform:
   - {fileID: 461411422}
   - {fileID: 1328567058}
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1224569314
 PrefabInstance:
@@ -63534,7 +63491,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b726c9e16763f94459c695d4fcce1eef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 40
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b726c9e16763f94459c695d4fcce1eef,
         type: 3}

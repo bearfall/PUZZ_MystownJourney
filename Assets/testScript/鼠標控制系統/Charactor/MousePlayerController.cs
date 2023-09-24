@@ -78,6 +78,7 @@ namespace bearfall
             if (other.CompareTag("BattleArea"))
             {
                 testGameManager1.nowBattleArea = other.gameObject;
+                print(other.gameObject.name);
                 StartCoroutine( other.gameObject.GetComponent<AreaCharacterInfo>().SetCharacterToChracters(other.gameObject.GetComponent<AreaCharacterInfo>().areaCharacters));
                 testGameManager1.enemyCount = other.gameObject.GetComponent<AreaCharacterInfo>().enemyCount;
                 yield return new WaitUntil(() => other.gameObject.GetComponent<AreaCharacterInfo>().areaSetDone == true);
