@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class AreaCharacterInfo : MonoBehaviour
 {
-
-    public List<GameObject> areaCharacters = new List<GameObject>();
+    public List<GameObject> playerAreaCharacters = new List<GameObject>();
+    public List<GameObject> enemyAreaCharacters = new List<GameObject>();
 
     public List<GameObject> deleteGameObjects = new List<GameObject>();
 
@@ -27,7 +27,7 @@ public class AreaCharacterInfo : MonoBehaviour
     {
         testCharactersManager = GameObject.Find("Manager").GetComponent<TestCharactersManager>();
         testGUIManager = GameObject.Find("Manager").GetComponent<TestGUIManager>();
-        enemyCount = areaCharacters.Count;
+        enemyCount = enemyAreaCharacters.Count;
     }
 
     // Update is called once per frame
@@ -35,14 +35,22 @@ public class AreaCharacterInfo : MonoBehaviour
     {
         
     }
-    public IEnumerator SetCharacterToChracters(List<GameObject> areaCharacters)
+    public IEnumerator SetCharacterToChracters(List<GameObject> playerAreaCharacters, List<GameObject> enemyAreaCharacters)
     {
-        for (int i = 0; i < areaCharacters.Count; i++)
+        for (int i = 0; i < playerAreaCharacters.Count; i++)
         {
-            Vector3 position = new Vector3(areaCharacters[i].GetComponent<TestCharacter>().initPos_X, 0.36f, areaCharacters[i].GetComponent<TestCharacter>().initPos_Z);
-            Instantiate(areaCharacters[i], position, Quaternion.identity, charactersParent);
+            Vector3 position = new Vector3(playerAreaCharacters[i].GetComponent<TestCharacter>().initPos_X, 0.36f, playerAreaCharacters[i].GetComponent<TestCharacter>().initPos_Z);
+            Instantiate(playerAreaCharacters[i], position, Quaternion.identity, charactersParent);
             yield return new WaitForSeconds(0.2f);
         }
+
+        for (int i = 0; i < enemyAreaCharacters.Count; i++)
+        {
+            Vector3 position = new Vector3(enemyAreaCharacters[i].GetComponent<TestCharacter>().initPos_X, 0.36f, enemyAreaCharacters[i].GetComponent<TestCharacter>().initPos_Z);
+            Instantiate(enemyAreaCharacters[i], position, Quaternion.identity, charactersParent);
+            yield return new WaitForSeconds(0.2f);
+        }
+
 
         testCharactersManager.reFreshCharactorList();
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0dff5292716afed49b3b54c0427fd2e7
+guid: c74d78b3d9e5c8247a2b4fc083daf759
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,18 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 9c18bdadd2e2929419a7c1813ea8f1b6, type: 2}
+      name: "\u6728\u6876"
+    second: {fileID: 2100000, guid: b989d1d0de266fa429438d5132bd794a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: texture_1 (1)
-    second: {fileID: 2100000, guid: 22fe235c2dc83dd4f9a74486d1a356e4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u8DEF\u71C8.001"
-    second: {fileID: 2100000, guid: 7b28d6c41dacf964eb9fb098b4317c42, type: 2}
+      name: "\u6728\u6876.001"
+    second: {fileID: 2100000, guid: f41bdace02e0231439548e32534c5405, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -50,7 +45,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -103,7 +98,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.5
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

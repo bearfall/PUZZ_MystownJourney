@@ -10,6 +10,8 @@ public class ChangeCharactarSprite : MonoBehaviour
     public Sprite attack;
     public Sprite Breathe;
     public Sprite prepare;
+    public Sprite jump;
+    public Sprite down;
 
     public List<ParticleSystem> attackParticleSystem = new List<ParticleSystem>();
 
@@ -38,6 +40,17 @@ public class ChangeCharactarSprite : MonoBehaviour
     public void ChangeToPrepareImage()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = prepare;
+
+    }
+
+    public void ChangeToJumpImage()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = jump;
+
+    }
+    public void ChangeToDownImage()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = down;
 
     }
 

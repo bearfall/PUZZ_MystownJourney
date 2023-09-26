@@ -266,13 +266,7 @@ public class TestCharacter : MonoBehaviour
 
 				gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
 
-				Tweener tweener;
 				
-				Transform tempTransform;
-
-				tempTransform = gameObject.transform;
-
-				print(tempTransform.position);
 				/*
 
 				tweener = transform.DOMove(targetChara.transform.position, // 指定座標までジャンプしながら移動する
@@ -297,7 +291,7 @@ public class TestCharacter : MonoBehaviour
 				DamagePopUpGenerator.current.CreatePopUp(targetChara.transform.position, damageValue.ToString(), Color.yellow);
 
 				print("回來");
-				print(tempTransform.position);
+				
 
 				//tweener.PlayBackwards();
 
@@ -314,12 +308,30 @@ public class TestCharacter : MonoBehaviour
 				break;
 				
 			case 2:
-				transform.DOJump(targetChara.transform.position, // 指定座標までジャンプしながら移動する
-					1.0f, // 跳躍高度
-					2, // 跳躍次數
-					1f) // 動畫時間（秒）
-				.SetEase(Ease.Linear) // イージング(変化の度合)を設定
-				.SetLoops(2, LoopType.Yoyo).OnComplete(() => { attackEnd = true; }); // ループ回数・方式を指定
+				targetCharacter = targetChara;
+
+				gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+
+				
+
+				gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("attack1");
+
+				yield return new WaitForSeconds(1.3f);
+
+				targetChara.TakeDamage(damageValue);
+
+				DamagePopUpGenerator.current.CreatePopUp(targetChara.transform.position, damageValue.ToString(), Color.yellow);
+
+				yield return new WaitForSeconds(0.7f);
+
+				attackEnd = true;
+
+				gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+				targetCharacter = null;
+
+				print("攻擊成功");
+
 				break;
 			case 3:
 				transform.DOJump(targetChara.transform.position, // 指定座標までジャンプしながら移動する

@@ -79,7 +79,7 @@ namespace bearfall
             {
                 testGameManager1.nowBattleArea = other.gameObject;
                 print(other.gameObject.name);
-                StartCoroutine( other.gameObject.GetComponent<AreaCharacterInfo>().SetCharacterToChracters(other.gameObject.GetComponent<AreaCharacterInfo>().areaCharacters));
+                StartCoroutine( other.gameObject.GetComponent<AreaCharacterInfo>().SetCharacterToChracters(other.gameObject.GetComponent<AreaCharacterInfo>().playerAreaCharacters, other.gameObject.GetComponent<AreaCharacterInfo>().enemyAreaCharacters));
                 testGameManager1.enemyCount = other.gameObject.GetComponent<AreaCharacterInfo>().enemyCount;
                 yield return new WaitUntil(() => other.gameObject.GetComponent<AreaCharacterInfo>().areaSetDone == true);
 

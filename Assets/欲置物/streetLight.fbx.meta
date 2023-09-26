@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0dff5292716afed49b3b54c0427fd2e7
+guid: b8e953c7441ca2f4db64dd7cad236a69
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,18 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 9c18bdadd2e2929419a7c1813ea8f1b6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: texture_1 (1)
-    second: {fileID: 2100000, guid: 22fe235c2dc83dd4f9a74486d1a356e4, type: 2}
+    second: {fileID: 2100000, guid: 9d7b34dc7ecce1a48803edfa30f4cbcc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: "\u8DEF\u71C8.001"
-    second: {fileID: 2100000, guid: 7b28d6c41dacf964eb9fb098b4317c42, type: 2}
+      name: "\u8DEF\u71C8"
+    second: {fileID: 2100000, guid: 3258e31f037ea7a48b843b1b3957b9f2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
