@@ -54,7 +54,7 @@ namespace bearfall
 		public bool isJudgmentDiceNumber;
 
 		public bool isNowActionCharactorAlive = true;
-		public LayerMask playerLayerMask;
+		
 
 		public int twoCharDistance;
 
@@ -144,12 +144,14 @@ namespace bearfall
 		}
 		private void GetMapBlockByTapPos()
 		{
-			GameObject targetObject = null; // タップ対象のオブジェクト
+		 int playerLayerMask = LayerMask.GetMask("Chess");
+
+		GameObject targetObject = null; // タップ対象のオブジェクト
 
 			// 從相機向點擊的方向投射光線
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit();
-			if (Physics.Raycast(ray, out hit, playerLayerMask))
+			if (Physics.Raycast(ray, out hit, Mathf.Infinity, playerLayerMask, QueryTriggerInteraction.Ignore))
 			{// Rayに当たる位置に存在するオブジェクトを取得(対象にColliderが付いている必要がある)
 				targetObject = hit.collider.gameObject;
 				print(targetObject.name);

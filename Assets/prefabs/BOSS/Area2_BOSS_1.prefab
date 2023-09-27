@@ -198,8 +198,11 @@ MonoBehaviour:
   attack: {fileID: 21300000, guid: 520218f60f32a1849820bf41562f5e74, type: 3}
   Breathe: {fileID: 21300000, guid: 61cf3bace011bd74e9c006bf7229694b, type: 3}
   prepare: {fileID: 21300000, guid: 61cf3bace011bd74e9c006bf7229694b, type: 3}
+  jump: {fileID: 0}
+  down: {fileID: 0}
   attackParticleSystem:
   - {fileID: 5447644478154791486}
+  attack1ParticleSystem: []
 --- !u!114 &5447644477325640668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,9 +232,10 @@ GameObject:
   - component: {fileID: 5447644477790456453}
   - component: {fileID: 5447644477790456450}
   - component: {fileID: 5447644477790456451}
-  m_Layer: 0
+  - component: {fileID: -4670982678308082600}
+  m_Layer: 9
   m_Name: Area2_BOSS_1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,6 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447b41742623895458808b11bf006b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headSprite: {fileID: 0}
   MoveSpeed: 5
   path: {fileID: 0}
   enemyPath: {fileID: 0}
@@ -350,6 +355,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBillBoard: 1
+--- !u!65 &-4670982678308082600
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447644477790456449}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5447644478070580695
 GameObject:
   m_ObjectHideFlags: 0

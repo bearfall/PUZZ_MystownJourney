@@ -85,6 +85,7 @@ public class TestCharacter : MonoBehaviour
 
 	public bool attackEnd = false;
 	public bool attackFalse = false;
+	public bool isBlock = false;
 	public Tween currentTween;
 	// キャラクター属性定義(列挙型)
 
