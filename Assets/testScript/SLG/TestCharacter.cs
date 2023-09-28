@@ -93,6 +93,7 @@ public class TestCharacter : MonoBehaviour
 	public GameObject playerDice;
 	public Transform playerDiceSpawnPoint;
 	public TestCharacter targetCharacter;
+	public AttackEffectGrass attackEffectGrass;
 
 	public enum Attribute
 	{
@@ -104,6 +105,7 @@ public class TestCharacter : MonoBehaviour
 
 	void Start()
 	{
+		attackEffectGrass = gameObject.transform.GetChild(0).GetComponent<AttackEffectGrass>();
 		// メインカメラの参照を取得
 		mainCamera = Camera.main;
 
@@ -284,6 +286,7 @@ public class TestCharacter : MonoBehaviour
 				//tweener.OnComplete(() => { gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("attack"); });
 
 				yield return new WaitForSeconds(1f);
+				attackEffectGrass.StopShakeGrass();
 
 				targetChara.TakeDamage(damageValue);
 				//defenseChara.nowHP -= damageValue;
@@ -318,6 +321,8 @@ public class TestCharacter : MonoBehaviour
 				gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("attack1");
 
 				yield return new WaitForSeconds(1.3f);
+
+				attackEffectGrass.StopShakeGrass();
 
 				targetChara.TakeDamage(damageValue);
 

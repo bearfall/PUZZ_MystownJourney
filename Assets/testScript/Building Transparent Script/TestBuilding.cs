@@ -33,6 +33,14 @@ public class TestBuilding : MonoBehaviour
         characters = testCharactersManager.testCharacters;
         foreach (var character in characters)
         {
+            if (character == null)
+            {
+
+                return;
+
+            }
+
+
             Ray ray = new Ray(Camera.main.transform.position, character.gameObject.transform.position - Camera.main.transform.position);
             //Vector3 Direction = player.position - transform.position;//射线方向为摄像头指向人物
 
@@ -48,7 +56,7 @@ public class TestBuilding : MonoBehaviour
                     character.isBlock = true;
                     print("被擋住了");
                     hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore);//只检测Default图层的物体，其它图层检测不到
-                    ClearTransparentObjects();
+                    //ClearTransparentObjects();
                     print(hits.Length);
                     for (int i = 0; i < hits.Length; i++)
                     {
