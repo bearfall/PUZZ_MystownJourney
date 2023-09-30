@@ -39,7 +39,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _GrassShake: 1
-    - _WindPower: 0.59
+    - _GrassShake: 0.28
+    - _WindPower: 0.25
     m_Colors: []
   m_BuildTextureStacks: []
