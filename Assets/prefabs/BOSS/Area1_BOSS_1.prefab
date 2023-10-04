@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 5447644477325640670}
   - component: {fileID: 5447644477325640671}
   - component: {fileID: 5447644477325640668}
+  - component: {fileID: 7133009589777901845}
   m_Layer: 0
   m_Name: "BOSS1\u52D5\u756B"
   m_TagString: Untagged
@@ -200,6 +201,7 @@ MonoBehaviour:
   prepare: {fileID: 21300000, guid: 61cf3bace011bd74e9c006bf7229694b, type: 3}
   jump: {fileID: 0}
   down: {fileID: 0}
+  prepareParticleSystem: []
   attackParticleSystem:
   - {fileID: 5447644478154791486}
   attack1ParticleSystem: []
@@ -219,6 +221,21 @@ MonoBehaviour:
   x: -1
   y: 0
   z: 0
+--- !u!114 &7133009589777901845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447644477325640666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dadca0472688bfd479f7ad5db22faa40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrassParent: {fileID: 0}
+  character: {fileID: 5447644477790456449}
+  Grasses: []
 --- !u!1 &5447644477790456449
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,9 +317,11 @@ MonoBehaviour:
   nowHP: 0
   attackEnd: 0
   attackFalse: 0
+  isBlock: 0
   playerDice: {fileID: 0}
   playerDiceSpawnPoint: {fileID: 0}
   targetCharacter: {fileID: 0}
+  attackEffectGrass: {fileID: 0}
 --- !u!114 &5447644477790456453
 MonoBehaviour:
   m_ObjectHideFlags: 0

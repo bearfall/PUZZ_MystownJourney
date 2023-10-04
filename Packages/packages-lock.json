@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.cyanilux.shadergraph-customlighting": {
+      "version": "https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "4262886c09bb374db39944322999289f64110980"
+    },
     "com.unity.2d.pixel-perfect": {
       "version": "5.0.3",
       "depth": 0,
@@ -104,6 +111,15 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.polybrush": {
+      "version": "1.1.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.settings-manager": "2.0.1"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.render-pipelines.core": {
       "version": "12.1.7",
       "depth": 1,
@@ -141,6 +157,13 @@
         "com.unity.nuget.newtonsoft-json": "3.0.2",
         "com.unity.modules.androidjni": "1.0.0"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.settings-manager": {
+      "version": "2.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.shadergraph": {
@@ -211,6 +234,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "me.ameye.prefab-painter": {
+      "version": "https://github.com/alexanderameye/prefab-painter.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f78b6b205ab54296ca4fd27c509a665367f84347"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

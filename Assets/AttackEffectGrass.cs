@@ -10,6 +10,7 @@ public class AttackEffectGrass : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GrassParent = GameObject.Find("¯ó¶°¦X").GetComponent<Transform>();
         Grasses = new List<SpriteRenderer>();
         GrassParent.GetComponentsInChildren(Grasses);
     }

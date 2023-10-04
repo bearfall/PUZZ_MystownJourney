@@ -22,7 +22,7 @@ public class NPC1_Mission : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("玩家"))
+        if (other.CompareTag("Player"))
         {
             print("可對話");
             canvas.enabled = true;
@@ -31,7 +31,7 @@ public class NPC1_Mission : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("玩家"))
+        if (other.CompareTag("Player"))
         {
             canvas.enabled = false;
         }

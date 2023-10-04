@@ -21,7 +21,7 @@ namespace bearfall
 
 		private bool isShowPlayerTurnLogo = true;
 
-
+		public ScreenChange screenChange;
 		private TestMapManager testMapManager;
 		private TestCharactersManager testCharactersManager;
 		private TestGUIManager testGuiManager; // GUIマネージャ
@@ -36,6 +36,7 @@ namespace bearfall
 		private TestCharacter testCharacter;
 		private DiceLeave diceLeave;
 		private DiceLeave enemyDiceLeave;
+
 
 		private int playerNumber;
 		private int enemyNumber = 6;
@@ -87,7 +88,7 @@ namespace bearfall
 
 		void Start()
 		{
-
+			screenChange = GameObject.Find("CM vcam1").GetComponent<ScreenChange>();
 			rollDice = GameObject.Find("玩家滾動骰子").GetComponent<RollDice>();
 			testMapManager = GetComponent<TestMapManager>();
 			testCharactersManager = GetComponent<TestCharactersManager>();
@@ -816,72 +817,102 @@ namespace bearfall
 					testGuiManager.HideStatusWindow();
 
 					// ターンを切り替える
-					 // 敵のターンへ
-						Camera.main.GetComponent<CinemachineBrain>().enabled = true;
-						Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
-						print("相機返回");
-						yield return new WaitForSeconds(1.5f);
-						Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
+					// 敵のターンへ
+					Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
+					print("相機返回");
+					yield return new WaitForSeconds(1.5f);
+					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
 
 
-						//testCharacter.hasActed = true;
-						if (isNowActionCharactorAlive)
-						{
-							attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
-							attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", false);
-						}
+					//testCharacter.hasActed = true;
+					if (isNowActionCharactorAlive)
+					{
+						attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+						attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", false);
+					}
 
-						HideDice();
+					HideDice();
 
 
-						
-						isNowActionCharactorAlive = true;
+
+					isNowActionCharactorAlive = true;
 					//ChangePhase(Phase.EnemyTurn_Start);
 					yield break;
-					
+
 				}
 
+
+				else
+				{
 					attackPoint = defenseChara.atk; // 攻撃側の攻撃力
-				defencePoint = attackChara.def; // 防御側の防御力
+					defencePoint = attackChara.def; // 防御側の防御力
 
-				if (playerNumber > enemyNumber)
-				{
-					attackPoint = Mathf.RoundToInt(attackPoint * 0.7f);
+					if (playerNumber > enemyNumber)
+					{
+						attackPoint = Mathf.RoundToInt(attackPoint * 0.7f);
+					}
+
+					if (playerNumber < enemyNumber)
+					{
+						attackPoint = Mathf.RoundToInt(attackPoint * 1.3f);
+					}
+
+					damageValue = attackPoint - defencePoint;
+					if (damageValue < 0)
+						damageValue = 0;
+
+					StartCoroutine(defenseChara.AttackAnimation(attackChara, twoCharDistance, damageValue));
+
+					yield return new WaitUntil(() => defenseChara.attackEnd == true);
+
+					if (attackChara.nowHP <= 0)
+					{
+						isNowActionCharactorAlive = false;
+						attackChara.gameObject.transform.GetChild(0).GetComponent<Animator>().SetBool("die", true);
+						yield return new WaitForSeconds(2f);
+						testCharactersManager.DeleteCharaData(attackChara);
+						yield return new WaitForSeconds(1f);
+						enemyCount--;
+						testCharactersManager.reFreshCharactorList();
+
+
+
+						foreach (var item in testCharactersManager.testCharacters)
+						{
+							print(item.name);
+						}
+
+						CheckIsEnemyAlive();
+					}
+
+
+					// ターン切り替え処理(遅延実行)
+					// 遅延実行する内容
+					// ウィンドウを非表示化
+					yield return new WaitForSeconds(1.5f);
+					Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
+					yield return new WaitForSeconds(1.5f);
+					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
+
+					// 自分のターンへ
+
+
+					//attackChara.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+					HideDice();
+
+
+
 				}
-
-				if (playerNumber < enemyNumber)
-				{
-					attackPoint = Mathf.RoundToInt(attackPoint * 1.3f);
-				}
-
-				damageValue = attackPoint - defencePoint;
-				if (damageValue < 0)
-					damageValue = 0;
-
-				StartCoroutine(defenseChara.AttackAnimation(attackChara, twoCharDistance, damageValue));
-
-				yield return new WaitUntil(() => defenseChara.attackEnd == true);
-
-
-
-				// ターン切り替え処理(遅延実行)
-				// 遅延実行する内容
-				// ウィンドウを非表示化
-				yield return new WaitForSeconds(1.5f);
-				Camera.main.GetComponent<CinemachineBrain>().enabled = true;
-				Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
-				yield return new WaitForSeconds(1.5f);
-				Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
-
-				// 自分のターンへ
-
-				
-							//attackChara.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
-						HideDice();
-
-					
-				
 			}
+
+
+
+
+
+
+
 			else
 			{
 				DOVirtual.DelayedCall(
@@ -891,9 +922,9 @@ namespace bearfall
 						print("無法攻擊");
 						HideDice();
 						attackChara.hasActed = true;
-				attackChara.attackFalse = true;
+						attackChara.attackFalse = true;
 
-				//attackChara.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+						//attackChara.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
 					}
 				);
 			}
@@ -945,6 +976,7 @@ namespace bearfall
 					// 組み合わせのデータが存在すれば攻撃開始
 					if (actionPlan != null)
 					{
+						screenChange.ChangesScreenToCharacter(enemyCharas[i].gameObject);
 						enemyCharas[i].EnemyMovePosition(actionPlan.toMoveBlock.xPos, actionPlan.toMoveBlock.zPos);
 
 						enemyCharas[i].hasActed = true;
@@ -973,7 +1005,7 @@ namespace bearfall
 
 
 
-
+						screenChange.ChangesScreenToCharacter(enemyCharas[i].gameObject);
 						reachableBlocks = enemyCharas[i].GetComponent<EnemyPath>().results;
 						print(reachableBlocks.Count);
 

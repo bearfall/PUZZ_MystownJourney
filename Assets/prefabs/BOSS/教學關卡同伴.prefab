@@ -308,7 +308,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 51985b420544b0a4ea868b79bc72fc20, type: 2}
+  - {fileID: 2100000, guid: 5b62cd449388b8e42b96b39deb027098, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1000,9 +1000,11 @@ MonoBehaviour:
   nowHP: 0
   attackEnd: 0
   attackFalse: 0
+  isBlock: 0
   playerDice: {fileID: 6534183868397042865}
   playerDiceSpawnPoint: {fileID: 6534183868999826756}
   targetCharacter: {fileID: 0}
+  attackEffectGrass: {fileID: 0}
 --- !u!114 &6534183867995873655
 MonoBehaviour:
   m_ObjectHideFlags: 0
