@@ -118,6 +118,7 @@ public class RollDice : MonoBehaviour
                 rb.angularVelocity == Vector3.zero)
             {
                 diceStop = true;
+                nowCharacter.GetComponent<Animator>().SetBool("isPrepare", false);
                 //isThrowDice = false;
                 return true;
 

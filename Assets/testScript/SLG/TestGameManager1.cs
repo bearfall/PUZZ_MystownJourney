@@ -938,6 +938,7 @@ namespace bearfall
 
 		private IEnumerator EnemyCommand()
 		{
+			testCharactersManager.reFreshCharactorList();
 
 			yield return new WaitForSeconds(2f);
 			//StartCoroutine(EnemySpawnBase.SpawnEnemy());

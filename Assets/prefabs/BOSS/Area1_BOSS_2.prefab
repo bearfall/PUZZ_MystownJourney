@@ -235,8 +235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GrassParent: {fileID: 0}
+  VFXGrassParent: {fileID: 0}
   character: {fileID: 5447644477790456449}
   Grasses: []
+  VFXGrasses: []
 --- !u!114 &3251637160976350241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,8 +252,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GrassParent: {fileID: 0}
+  VFXGrassParent: {fileID: 0}
   character: {fileID: 5447644477790456449}
   Grasses: []
+  VFXGrasses: []
 --- !u!1 &5447644477790456449
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +325,7 @@ MonoBehaviour:
   initPos_Z: 3
   isEnemy: 1
   charaName: "\u898B\u7FD2\u5B88\u885B\u9A0E\u58EB"
-  maxHP: 5
+  maxHP: 15
   healthBar: {fileID: 5447644478070580681}
   atk: 10
   def: 0
