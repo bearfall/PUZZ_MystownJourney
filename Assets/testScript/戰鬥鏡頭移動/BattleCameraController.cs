@@ -14,6 +14,11 @@ public class BattleCameraController : MonoBehaviour
     public float additionalRotationY = 90f;
     public Vector3 tempCameraPosition;
     public Quaternion tempCameraRotation;
+
+    public AudioSource audioSource;
+    public AudioClip CameraSoundEffect;
+
+
     private void Start()
     {
         // 初始化目標位置
@@ -109,5 +114,10 @@ public class BattleCameraController : MonoBehaviour
 
 
 
+    }
+
+    public void PlayCameraSound()
+    {
+        audioSource.PlayOneShot(CameraSoundEffect);
     }
 }

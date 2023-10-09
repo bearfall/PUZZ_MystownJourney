@@ -951,7 +951,7 @@ MonoBehaviour:
   chessBoard: {fileID: 0}
   moveButton: {fileID: 0}
   results: []
-  m: 5
+  m: 8
   CanMove: 0
   index: 0
   blockIndex: 0

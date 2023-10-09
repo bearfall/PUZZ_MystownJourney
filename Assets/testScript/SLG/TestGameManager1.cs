@@ -538,9 +538,20 @@ namespace bearfall
 			testGuiManager.testBattleWindowUI.ShowWindow();
 			Camera.main.GetComponent<BattleCameraController>().SetTempCameraTransform();
 			print(Camera.main.GetComponent<BattleCameraController>().tempCameraPosition);
+
+			Camera.main.GetComponent<BattleCameraController>().PlayCameraSound();
+
 			Camera.main.GetComponent<BattleCameraController>().StartCameraMovement(attackChara.transform, defenseChara.transform);
+			
+
+			attackChara.gameObject.GetComponent<BattleDepthOfField>().StartGlobalVolume();
+
 			yield return new WaitForSeconds(1.5f);
 			Camera.main.GetComponent<BattleCameraController>().StopCameraMovement();
+
+
+
+
 
 			attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", true);
 			rollDice.SetNowCharater(attackChara);
@@ -617,6 +628,7 @@ namespace bearfall
 					Camera.main.GetComponent<CinemachineBrain>().enabled = true;
 					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
 					print("相機返回");
+					attackChara.gameObject.GetComponent<BattleDepthOfField>().StopGlobalVolume();
 					yield return new WaitForSeconds(1.5f);
 					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
 
@@ -680,6 +692,7 @@ namespace bearfall
 					isNowActionCharactorAlive = false;
 					attackChara.GetComponent<Animator>().SetBool("die", true);
 					yield return new WaitForSeconds(2f);
+					attackChara.gameObject.GetComponent<BattleDepthOfField>().StopGlobalVolume();
 					testCharactersManager.DeleteCharaData(attackChara);
 					yield return new WaitForSeconds(1f);
 					enemyCount--;
@@ -706,6 +719,7 @@ namespace bearfall
 				{ // 敵のターンへ
 					Camera.main.GetComponent<CinemachineBrain>().enabled = true;
 					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
+					attackChara.gameObject.GetComponent<BattleDepthOfField>().StopGlobalVolume();
 					print("相機返回");
 					yield return new WaitForSeconds(1.5f);
 					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
