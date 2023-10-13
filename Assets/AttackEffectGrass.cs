@@ -68,4 +68,16 @@ public class AttackEffectGrass : MonoBehaviour
         }
 
     }
+
+    public void StopShakeVFXGrass()
+    {
+        foreach (var VFXgrass in VFXGrasses)
+        {
+
+            VFXgrass.SetFloat("GrassShake", 1);
+
+
+        }
+
+    }
 }

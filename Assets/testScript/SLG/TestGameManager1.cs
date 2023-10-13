@@ -465,7 +465,7 @@ namespace bearfall
 		{
 			// コマンドボタンを非表示にする
 			testCharacter.hasActed = true;
-			testCharacter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+			testCharacter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
 			testGuiManager.HideCommandButtons();
 			// 進行モードを進める(敵のターンへ)
 			CheckIsAllActive();
@@ -485,7 +485,7 @@ namespace bearfall
 				testCharacter.HealCharacter();
 				yield return new WaitForSeconds(1f);
 				testCharacter.hasActed = true;
-				testCharacter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+				testCharacter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
 				testGuiManager.HideCommandButtons();
 				print("回血~~");
 				CheckIsAllActive();
@@ -552,8 +552,9 @@ namespace bearfall
 
 
 
-
+			print(defenseChara.gameObject.name);
 			attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", true);
+			defenseChara.gameObject.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", true);
 			rollDice.SetNowCharater(attackChara);
 			yield return new WaitForSeconds(1.5f);
 			
@@ -613,6 +614,9 @@ namespace bearfall
 			// HP0になったキャラクターを削除する
 			if (defenseChara.nowHP <= 0)
 			{
+				defenseChara.gameObject.transform.GetChild(0).GetComponent<Animator>().SetBool("die", true);
+				//Mathf.Lerp(defenseChara.gameObject.transform.GetChild(0).GetComponent<Material>().SetFloat("_Transparent", 1), 0, );
+				yield return new WaitForSeconds(2f);
 				testCharactersManager.DeleteCharaData(defenseChara);
 				enemyCount--;
 				testCharactersManager.reFreshCharactorList();
@@ -636,7 +640,7 @@ namespace bearfall
 					//testCharacter.hasActed = true;
 					if (isNowActionCharactorAlive)
 					{
-						attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+						attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
 						attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", false);
 					}
 
@@ -728,7 +732,7 @@ namespace bearfall
 					//testCharacter.hasActed = true;
 					if (isNowActionCharactorAlive)
 					{
-						attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+						attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
 						attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", false);
 					}
 
@@ -766,6 +770,8 @@ namespace bearfall
 			Camera.main.GetComponent<BattleCameraController>().StartCameraMovement(defenseChara.transform, attackChara.transform);
 			attackChara.gameObject.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", true);
 			defenseChara.gameObject.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", true);
+
+			Camera.main.GetComponent<BattleCameraController>().PlayCameraSound();
 			yield return new WaitForSeconds(2f);
 			rollDice.SetNowCharater(attackChara);
 			yield return new WaitForSeconds(1.5f);
@@ -795,7 +801,7 @@ namespace bearfall
 				// キャラクター攻撃アニメーション
 				StartCoroutine(attackChara.AttackAnimation(defenseChara, twoCharDistance, damageValue));
 
-
+				yield return new WaitUntil(() => attackChara.attackEnd == true);
 				// バトル結果表示ウィンドウの表示設定
 				// (HPの変更前に行う)
 				//testGuiManager.testBattleWindowUI.ShowWindow(defenseChara, damageValue);
@@ -842,7 +848,7 @@ namespace bearfall
 					//testCharacter.hasActed = true;
 					if (isNowActionCharactorAlive)
 					{
-						attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+						attackChara.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
 						attackChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", false);
 					}
 
@@ -1049,10 +1055,9 @@ namespace bearfall
 							enemyCharas[i].EnemyMovePosition(targetBlock.xPos, targetBlock.zPos);
 							enemyCharas[i].hasActed = true;
 							print(enemyCharas[i] + "行動過了");
-
-							enemyCharas[i].gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
-
-							yield return new WaitForSeconds(2f);
+							yield return new WaitForSeconds(1.5f);
+							enemyCharas[i].gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1);
+							
 							StartCoroutine( CheckIsAllEnemyActive());
 
 
