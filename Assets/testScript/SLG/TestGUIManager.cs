@@ -12,7 +12,8 @@ public class TestGUIManager : MonoBehaviour
 	public Image hpGageImage; // HPゲージImage
 	public Text hpText; // HPText
 	public Text atkText; // 攻撃力Text
-	public Text defText; // 防御力Text
+	public Text defText;
+	public Image characterImage;// 防御力Text
 						 // 属性アイコン画像
 	public Sprite attr_Water; // 水属性アイコン画像
 	public Sprite attr_Fire;  // 火属性アイコン画像
@@ -55,7 +56,7 @@ public class TestGUIManager : MonoBehaviour
 
 		// 名前Text表示
 		nameText.text = charaData.charaName;
-
+		/*
 		// 属性Image表示
 		switch (charaData.attribute)
 		{
@@ -72,6 +73,7 @@ public class TestGUIManager : MonoBehaviour
 				attributeIcon.sprite = attr_Soil;
 				break;
 		}
+		*/
 
 		// HPゲージ表示
 		// 最大値に対する現在HPの割合をゲージImageのfillAmountにセットする
@@ -84,6 +86,8 @@ public class TestGUIManager : MonoBehaviour
 		atkText.text = charaData.atk.ToString();
 		// 防御力Text表示(intからstringに変換)
 		defText.text = charaData.def.ToString();
+
+		characterImage.sprite = charaData.headSprite;
 	}
 	/// <summary>
 	/// ステータスウィンドウを隠す

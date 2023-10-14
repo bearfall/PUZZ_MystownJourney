@@ -340,14 +340,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0
-    functionName: StopPrepareParticleSystem
+    functionName: StopShakeVFXGrass
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0
-    functionName: StopShakeVFXGrass
+  - time: 0.016666668
+    functionName: StopPrepareParticleSystem
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -362,6 +362,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.41666666
     functionName: PlayAttack1ParticleSystem
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.41666666
+    functionName: PlayAttackSoundEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

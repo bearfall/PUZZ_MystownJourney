@@ -19,6 +19,7 @@ public class ChangeCharactarSprite : MonoBehaviour
 
     public List<ParticleSystem> landingParticleSystem = new List<ParticleSystem>();
 
+    public List<ParticleSystem> healParticleSystem = new List<ParticleSystem>();
 
     // Start is called before the first frame update
     void Start()
@@ -103,6 +104,15 @@ public class ChangeCharactarSprite : MonoBehaviour
     public void PlayLandingParticleSystem()
     {
         foreach (var ParticleSystem in landingParticleSystem)
+        {
+            ParticleSystem.Play();
+        }
+    }
+
+
+    public void PlayHealParticleSystem()
+    {
+        foreach (var ParticleSystem in healParticleSystem)
         {
             ParticleSystem.Play();
         }

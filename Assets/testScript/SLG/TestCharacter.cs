@@ -571,6 +571,8 @@ public class TestCharacter : MonoBehaviour
 
 	public void HealCharacter()
     {
+		gameObject.transform.GetChild(0).GetComponent<ChangeCharactarSprite>().PlayHealParticleSystem();
+
 		healAmount -= 1;
 		
 		nowHP += 50;

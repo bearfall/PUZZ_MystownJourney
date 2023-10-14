@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class NPC1_Mission : MonoBehaviour
 {
-    private Canvas canvas;
+    public GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
     {
-        canvas = GameObject.Find("任務1對話按鈕畫布").GetComponent<Canvas>();
-        canvas.enabled = false;
+        
+        canvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class NPC1_Mission : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             print("可對話");
-            canvas.enabled = true;
+            canvas.SetActive(true);
         }
     }
 
@@ -33,7 +33,7 @@ public class NPC1_Mission : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            canvas.enabled = false;
+            canvas.SetActive(false);
         }
     }
 }
