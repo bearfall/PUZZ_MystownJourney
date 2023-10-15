@@ -37,6 +37,12 @@ public class AreaCharacterInfo : MonoBehaviour
     }
     public IEnumerator SetCharacterToChracters(List<GameObject> playerAreaCharacters, List<GameObject> enemyAreaCharacters)
     {
+        for (int i = 0; i < deleteGameObjects.Count; i++)
+        {
+            Destroy(deleteGameObjects[i]);
+        }
+
+
         for (int i = 0; i < playerAreaCharacters.Count; i++)
         {
             Vector3 position = new Vector3(playerAreaCharacters[i].GetComponent<TestCharacter>().initPos_X, 0.36f, playerAreaCharacters[i].GetComponent<TestCharacter>().initPos_Z);
@@ -69,10 +75,7 @@ public class AreaCharacterInfo : MonoBehaviour
             headCanva.transform.GetChild(i).GetComponent<InfoByImage>().SetInfo(testCharactersManager.testCharacters[i].gameObject);
         }
 
-        for (int i = 0; i < deleteGameObjects.Count; i++)
-        {
-            Destroy(deleteGameObjects[i]);
-        }
+        
 
         areaSetDone = true;
 

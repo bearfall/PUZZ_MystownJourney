@@ -614,6 +614,8 @@ namespace bearfall
 			// HP0になったキャラクターを削除する
 			if (defenseChara.nowHP <= 0)
 			{
+
+
 				defenseChara.gameObject.transform.GetChild(0).GetComponent<Animator>().SetBool("die", true);
 				//Mathf.Lerp(defenseChara.gameObject.transform.GetChild(0).GetComponent<Material>().SetFloat("_Transparent", 1), 0, );
 				yield return new WaitForSeconds(2f);
@@ -891,6 +893,7 @@ namespace bearfall
 						isNowActionCharactorAlive = false;
 						attackChara.gameObject.transform.GetChild(0).GetComponent<Animator>().SetBool("die", true);
 						yield return new WaitForSeconds(2f);
+						defenseChara.transform.GetChild(0).GetComponent<Animator>().SetBool("isBattle", false);
 						testCharactersManager.DeleteCharaData(attackChara);
 						yield return new WaitForSeconds(1f);
 						enemyCount--;
@@ -1238,15 +1241,18 @@ namespace bearfall
 				print("沒敵人生還");
 				testCharactersManager.reFreshCharactorList();
 				foreach (var item in testCharactersManager.testCharacters)
-                 {
-													item.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+                {
+					item.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
 
-												}
-												testGuiManager.ShowLogo_Win();
-												DestroyBatttlaArea(nowBattleArea);
-												currentArea = TestGameManager1.AreaType.FreeExplore;
-												ChangePhase(Phase.MyTurn_Free);
-												backToFreeMoveCharacter.BackToFreeMove();
+				}
+				testGuiManager.ShowLogo_Win();
+				DestroyBatttlaArea(nowBattleArea);
+
+
+
+				currentArea = TestGameManager1.AreaType.FreeExplore;
+				ChangePhase(Phase.MyTurn_Free);
+				backToFreeMoveCharacter.BackToFreeMove();
 
 
 											
