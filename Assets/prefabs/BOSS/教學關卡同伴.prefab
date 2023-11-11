@@ -987,7 +987,7 @@ MonoBehaviour:
   initPos_X: -3
   initPos_Z: 2
   isEnemy: 0
-  charaName: "\u51F1\u6069"
+  charaName: "\u591A\u7433"
   maxHP: 60
   healthBar: {fileID: 6534183868520605872}
   atk: 10

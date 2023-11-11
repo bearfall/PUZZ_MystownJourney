@@ -634,7 +634,7 @@ namespace bearfall
 					Camera.main.GetComponent<CinemachineBrain>().enabled = true;
 					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
 					print("相機返回");
-					attackChara.gameObject.GetComponent<BattleDepthOfField>().StopGlobalVolume();
+					//attackChara.gameObject.GetComponent<BattleDepthOfField>().StopGlobalVolume();
 					yield return new WaitForSeconds(1.5f);
 					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
 
@@ -725,7 +725,7 @@ namespace bearfall
 				{ // 敵のターンへ
 					Camera.main.GetComponent<CinemachineBrain>().enabled = true;
 					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = true;
-					attackChara.gameObject.GetComponent<BattleDepthOfField>().StopGlobalVolume();
+					//attackChara.gameObject.GetComponent<BattleDepthOfField>().StopGlobalVolume();
 					print("相機返回");
 					yield return new WaitForSeconds(1.5f);
 					Camera.main.GetComponent<BattleCameraController>().needToReplaceCamera = false;
@@ -887,6 +887,8 @@ namespace bearfall
 					StartCoroutine(defenseChara.AttackAnimation(attackChara, twoCharDistance, damageValue));
 
 					yield return new WaitUntil(() => defenseChara.attackEnd == true);
+					defenseChara.attackEnd = false;
+					print(defenseChara.name + "反擊完成");
 
 					if (attackChara.nowHP <= 0)
 					{
@@ -1000,6 +1002,7 @@ namespace bearfall
 					// 組み合わせのデータが存在すれば攻撃開始
 					if (actionPlan != null)
 					{
+						enemyCharas[i].attackEnd = false;
 						screenChange.ChangesScreenToCharacter(enemyCharas[i].gameObject);
 						enemyCharas[i].EnemyMovePosition(actionPlan.toMoveBlock.xPos, actionPlan.toMoveBlock.zPos);
 
@@ -1011,6 +1014,7 @@ namespace bearfall
 						yield return new WaitForSeconds(1.5f);
 						StartCoroutine( EnemyCharaAttack(enemyCharas[i], actionPlan.toAttackChara));
 						yield return new WaitForSeconds(2f);
+
 						yield return new WaitUntil(() => enemyCharas[i].CheckAttackEnd() == true || enemyCharas[i].attackFalse == true);
 						//	yield return new WaitUntil(() => enemyCharas[i].CheckAttackEnd() == true);
 						

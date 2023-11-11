@@ -30,6 +30,7 @@ public class BattleDepthOfField : MonoBehaviour
     
     public void StopGlobalVolume()
     {
+        print("Ãö³¬¤F¼Ò½k");
         globalVolume.SetActive(false);
       
 

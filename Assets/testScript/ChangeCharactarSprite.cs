@@ -16,6 +16,7 @@ public class ChangeCharactarSprite : MonoBehaviour
     public List<ParticleSystem> prepareParticleSystem = new List<ParticleSystem>();
     public List<ParticleSystem> attackParticleSystem = new List<ParticleSystem>();
     public List<ParticleSystem> attack1ParticleSystem = new List<ParticleSystem>();
+    public List<ParticleSystem> attack1effectParticleSystem = new List<ParticleSystem>();
 
     public List<ParticleSystem> landingParticleSystem = new List<ParticleSystem>();
 
@@ -76,6 +77,14 @@ public class ChangeCharactarSprite : MonoBehaviour
     public void PlayAttack1ParticleSystem()
     {
         foreach (var ParticleSystem in attack1ParticleSystem)
+        {
+            ParticleSystem.Play();
+        }
+    }
+
+    public void PlayAttack1EffectParticleSystem()
+    {
+        foreach (var ParticleSystem in attack1effectParticleSystem)
         {
             ParticleSystem.Play();
         }

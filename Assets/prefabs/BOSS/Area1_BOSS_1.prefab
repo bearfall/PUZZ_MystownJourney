@@ -309,7 +309,7 @@ MonoBehaviour:
   initPos_Z: -4
   isEnemy: 1
   charaName: "\u898B\u7FD2\u5B88\u885B\u9A0E\u58EB"
-  maxHP: 15
+  maxHP: 25
   healthBar: {fileID: 5447644478070580681}
   atk: 10
   def: 0

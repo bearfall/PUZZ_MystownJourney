@@ -206,6 +206,7 @@ MonoBehaviour:
   - {fileID: 5447644478154791486}
   attack1ParticleSystem: []
   landingParticleSystem: []
+  healParticleSystem: []
 --- !u!114 &5447644477325640668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +309,7 @@ MonoBehaviour:
   initPos_Z: 3
   isEnemy: 1
   charaName: "\u898B\u7FD2\u5B88\u885B\u9A0E\u58EB"
-  maxHP: 15
+  maxHP: 25
   healthBar: {fileID: 5447644478070580681}
   atk: 10
   def: 0
