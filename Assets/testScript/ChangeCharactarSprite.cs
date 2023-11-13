@@ -126,4 +126,12 @@ public class ChangeCharactarSprite : MonoBehaviour
             ParticleSystem.Play();
         }
     }
+
+
+    public void PlayParticleSystem(GameObject particleSystem)
+    {
+
+        particleSystem.GetComponent<ParticleSystem>().Play();
+        
+    }
 }

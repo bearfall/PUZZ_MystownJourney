@@ -243,13 +243,6 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.016666668
-    functionName: PlayAttackParticleSystem
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.016666668
     functionName: ShakeCharacter
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -260,6 +253,14 @@ AnimationClip:
     functionName: PlayAttackSoundEffect
     data: 
     objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.016666668
+    functionName: PlayAttackParticleSystem
+    data: 
+    objectReferenceParameter: {fileID: 5736954687135025792, guid: 5718285565c2b2e4198fe8928cef113d,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
