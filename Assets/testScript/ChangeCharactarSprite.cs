@@ -16,6 +16,7 @@ public class ChangeCharactarSprite : MonoBehaviour
     public List<ParticleSystem> prepareParticleSystem = new List<ParticleSystem>();
     public List<ParticleSystem> attackParticleSystem = new List<ParticleSystem>();
     public List<ParticleSystem> attack1ParticleSystem = new List<ParticleSystem>();
+    public List<ParticleSystem> attack1UpParticleSystem = new List<ParticleSystem>();
     public List<ParticleSystem> attack1effectParticleSystem = new List<ParticleSystem>();
 
     public List<ParticleSystem> landingParticleSystem = new List<ParticleSystem>();
@@ -66,6 +67,25 @@ public class ChangeCharactarSprite : MonoBehaviour
         GetComponent<Animator>().SetBool("isPrepare", false);
     }
 
+
+    public void PlayPrepareParticleSystem()
+    {
+        foreach (var ParticleSystem in prepareParticleSystem)
+        {
+            ParticleSystem.Play();
+        }
+    }
+
+    public void StopPrepareParticleSystem()
+    {
+        foreach (var ParticleSystem in prepareParticleSystem)
+        {
+            ParticleSystem.Stop();
+        }
+    }
+
+
+
     public void PlayAttackParticleSystem()
     {
         foreach (var ParticleSystem in attackParticleSystem)
@@ -73,6 +93,19 @@ public class ChangeCharactarSprite : MonoBehaviour
             ParticleSystem.Play();
         }
     }
+
+
+
+
+    public void PlayAttack1UpParticleSystem()
+    {
+        foreach (var ParticleSystem in attack1UpParticleSystem)
+        {
+            ParticleSystem.Play();
+        }
+    }
+
+
 
     public void PlayAttack1ParticleSystem()
     {
@@ -90,24 +123,12 @@ public class ChangeCharactarSprite : MonoBehaviour
         }
     }
 
-    public void PlayPrepareParticleSystem()
-    {
-        foreach (var ParticleSystem in prepareParticleSystem)
-        {
-            ParticleSystem.Play();
-        }
-    }
+    
 
 
    
 
-    public void StopPrepareParticleSystem()
-    {
-        foreach (var ParticleSystem in prepareParticleSystem)
-        {
-            ParticleSystem.Stop();
-        }
-    }
+    
 
 
     public void PlayLandingParticleSystem()
@@ -133,5 +154,15 @@ public class ChangeCharactarSprite : MonoBehaviour
 
         particleSystem.GetComponent<ParticleSystem>().Play();
         
+    }
+
+
+    public void PlayerLighting()
+    {
+        print(gameObject.GetComponent<SpriteRenderer>().material.name);
+        gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 1);
+
+
+
     }
 }

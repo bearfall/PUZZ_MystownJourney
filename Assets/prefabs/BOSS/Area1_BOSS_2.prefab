@@ -132,7 +132,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 05e597f6d0871a441bfc1413559c6489, type: 2}
+  - {fileID: 2100000, guid: 5b84275c0eb3b164498e8e88e8c0a483, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -205,6 +205,8 @@ MonoBehaviour:
   attackParticleSystem:
   - {fileID: 5447644478154791486}
   attack1ParticleSystem: []
+  attack1UpParticleSystem: []
+  attack1effectParticleSystem: []
   landingParticleSystem: []
   healParticleSystem: []
 --- !u!114 &5447644477325640668

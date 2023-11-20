@@ -47,10 +47,28 @@ namespace bearfall
                 //AD方向控制
                 Verticalinput = Input.GetAxis("Vertical");
 
-                if (horizontalinput != 0 && Verticalinput != 0)
+
+                if (Input.GetKey(KeyCode.A))
                 {
+                    gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else if(Input.GetKey(KeyCode.D))
+                {
+                    gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+                }
+
+
+                if (horizontalinput != 0 || Verticalinput != 0)
+                {
+
+                    gameObject.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 1);
+
                     horizontalinput = horizontalinput * 0.6f;
                     Verticalinput = Verticalinput * 0.6f;
+                }
+                else
+                {
+                    gameObject.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 0);
                 }
                 //WS方向控制
                 this.transform.Translate(Vector3.right * horizontalinput * Time.deltaTime * speed);
