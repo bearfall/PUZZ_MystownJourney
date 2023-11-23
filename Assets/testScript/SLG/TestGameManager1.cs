@@ -59,6 +59,12 @@ namespace bearfall
 
 		public int twoCharDistance;
 
+
+		public Vector2Int pointA;
+		public Vector2Int pointB;
+
+		public List<TestCharacter> charactersBetween = new List<TestCharacter>();
+
 		[Header("現在戰鬥區域")]
 		public GameObject nowBattleArea;
 
@@ -88,6 +94,8 @@ namespace bearfall
 
 		void Start()
 		{
+
+
 			screenChange = GameObject.Find("CM vcam1").GetComponent<ScreenChange>();
 			rollDice = GameObject.Find("玩家滾動骰子").GetComponent<RollDice>();
 			testMapManager = GetComponent<TestMapManager>();
@@ -532,6 +540,22 @@ namespace bearfall
 		/// <param name="defenseChara">防御側キャラデータ</param>
 		private IEnumerator CharaAttack(TestCharacter attackChara, TestCharacter defenseChara)
 		{
+			Vector2Int attackCharaVector2Int = new Vector2Int(attackChara.xPos, attackChara.zPos);
+			Vector2Int defenseCharaCharaVector2Int = new Vector2Int(defenseChara.xPos, defenseChara.zPos);
+			List<Vector2Int> pointsBetween = GetAllPointsBetween(attackCharaVector2Int, defenseCharaCharaVector2Int);
+			pointsBetween.Remove(attackCharaVector2Int);
+			pointsBetween.Remove(defenseCharaCharaVector2Int);
+
+            for (int i = 0; i < pointsBetween.Count; i++)
+            {
+				charactersBetween.Add(testCharactersManager.GetCharacterDataByPos(pointsBetween[i].x, pointsBetween[i].y));
+			}
+
+			// 顯示所有點
+		
+
+
+
 			twoCharDistance = Mathf.RoundToInt(Vector3.Distance(attackChara.transform.position, defenseChara.transform.position));
 
 			Camera.main.GetComponent<CinemachineBrain>().enabled = false;
@@ -1283,6 +1307,49 @@ namespace bearfall
 
 			ChangePhase(Phase.MyTurn_Start);
 		}
+
+
+		List<Vector2Int> GetAllPointsBetween(Vector2Int start, Vector2Int end)
+		{
+			List<Vector2Int> points = new List<Vector2Int>();
+
+			int dx = Mathf.Abs(end.x - start.x);
+			int dy = Mathf.Abs(end.y - start.y);
+			int sx = (start.x < end.x) ? 1 : -1;
+			int sy = (start.y < end.y) ? 1 : -1;
+			int err = dx - dy;
+
+			while (true)
+			{
+				points.Add(new Vector2Int(start.x, start.y));
+
+				if (start.x == end.x && start.y == end.y)
+					break;
+
+				int e2 = 2 * err;
+				if (e2 > -dy)
+				{
+					err -= dy;
+					start.x += sx;
+				}
+				if (e2 < dx)
+				{
+					err += dx;
+					start.y += sy;
+				}
+
+
+			}
+			
+			
+			return points;
+		}
+
+		
+
+
+
+
 	}
 	
 	

@@ -1,3 +1,4 @@
+using bearfall;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.VFX;
 
 public class ChangeCharactarSprite : MonoBehaviour
 {
+    public TestGameManager1 testGameManager1;
+
     public Sprite attack;
     public Sprite Breathe;
     public Sprite prepare;
@@ -26,7 +29,7 @@ public class ChangeCharactarSprite : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        testGameManager1 = GameObject.Find("Manager").GetComponent<TestGameManager1>();
     }
 
     // Update is called once per frame
@@ -161,8 +164,12 @@ public class ChangeCharactarSprite : MonoBehaviour
     {
         print(gameObject.GetComponent<SpriteRenderer>().material.name);
         gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 1);
+    }
 
 
+    public void TeamStrengthenEffect(int number)
+    {
+        testGameManager1.charactersBetween[number].gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("embrave");
 
     }
 }
