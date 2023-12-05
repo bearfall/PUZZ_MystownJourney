@@ -12,6 +12,9 @@ namespace bearfall
 
 	public class TestGameManager1 : MonoBehaviour
 	{
+		TestMapBlock tempTargetBlock = null;
+		GameObject tempImage = null;
+
 		public MousePlayerController backToFreeMoveCharacter;
 
 		public TestCharacter nowActionPlayer;
@@ -72,6 +75,7 @@ namespace bearfall
 		public enum Phase
 		{
 			MyTurn_Start,       // 我的回合：開始時
+			MyTurn_Choose,
 			MyTurn_Moving,      // 我的回合：移動先選択中
 			MyTurn_Command,     // 我的回合：移動後のコマンド選択中
 			MyTurn_Targeting,   // 我的回合：攻撃の対象を選択中
@@ -120,7 +124,7 @@ namespace bearfall
 
 			HideDice();
 			testGuiManager.HideHeadWindow();
-
+			testGuiManager.HideMoveButton();
 
 			currentArea = AreaType.FreeExplore;
 			//EnemySpawnBase.SpawnEnemy();
@@ -220,8 +224,11 @@ namespace bearfall
 						}
 						*/
 						// 進行モードを進める：移動先選択中
-						ChangePhase(Phase.MyTurn_Moving);
-						print("換到移動了");
+						testGuiManager.ShowMoveButton();
+						ChangePhase(Phase.MyTurn_Choose);
+
+						//ChangePhase(Phase.MyTurn_Moving);
+						print("換到選擇格子了");
 						print(selectingChara.name);
 					}
 
@@ -250,6 +257,27 @@ namespace bearfall
 						print("取消選取");
 					}
 					break;
+
+
+				case Phase.MyTurn_Choose:
+					print("選擇");
+					
+					if (reachableBlocks.Contains(targetBlock))
+					{
+						tempTargetBlock = targetBlock;
+						if (selectingChara.istempImage)
+						{
+							print(tempImage.name);
+							Destroy(tempImage);
+						}
+						Vector3 tempImagePosition = new Vector3(targetBlock.xPos, 0.6f, targetBlock.zPos);
+
+						GameObject newtempImage = Instantiate(selectingChara.tempImage, tempImagePosition, Quaternion.identity);
+						selectingChara.istempImage = true;
+						tempImage = newtempImage;
+					}
+						break;
+
 
 				// 自分のターン：移動先選択中
 				case Phase.MyTurn_Moving:
@@ -286,6 +314,7 @@ namespace bearfall
 							1.0f, // 遅延時間(秒)
 							() =>
 							{// 遅延実行する内容
+								tempTargetBlock = null;
 								testGuiManager.ShowCommandButtons();
 								selectingChara.SetHealAmountText();
 								ChangePhase(Phase.MyTurn_Command);
@@ -346,6 +375,14 @@ namespace bearfall
 
 
 		}
+
+		public void GoMove()
+        {
+			ChangePhase(Phase.MyTurn_Moving);
+			SelectBlock(tempTargetBlock);
+			testGuiManager.HideMoveButton();
+		}
+
 		/// <summary>
 		/// 選択中のキャラクター情報を初期化する
 		/// </summary>

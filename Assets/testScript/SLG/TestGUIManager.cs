@@ -35,6 +35,7 @@ public class TestGUIManager : MonoBehaviour
 
 	public GameObject headWindow;
 
+	public GameObject moveButtom;
 
 	void Start()
 	{
@@ -114,7 +115,14 @@ public class TestGUIManager : MonoBehaviour
 		commandButtons.SetActive(false);
 	}
 
-
+	public void ShowMoveButton()
+	{
+		moveButtom.SetActive(true);
+	}
+	public void HideMoveButton()
+	{
+		moveButtom.SetActive(false);
+	}
 
 
 	/// <summary>

@@ -9,6 +9,8 @@ public class TestCharacter : MonoBehaviour
 	[Header("頭像)")]
 	public Sprite headSprite; // 初期X位置
 
+	public GameObject tempImage;
+	public bool istempImage = false;
 
 	public int MoveSpeed;
 	//private int u = 2;
