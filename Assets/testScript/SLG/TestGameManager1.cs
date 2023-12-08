@@ -273,6 +273,7 @@ namespace bearfall
 						Vector3 tempImagePosition = new Vector3(targetBlock.xPos, 0.6f, targetBlock.zPos);
 
 						GameObject newtempImage = Instantiate(selectingChara.tempImage, tempImagePosition, Quaternion.identity);
+						
 						selectingChara.istempImage = true;
 						tempImage = newtempImage;
 					}
@@ -379,6 +380,8 @@ namespace bearfall
 		public void GoMove()
         {
 			ChangePhase(Phase.MyTurn_Moving);
+			Destroy(tempImage);
+
 			SelectBlock(tempTargetBlock);
 			testGuiManager.HideMoveButton();
 		}
