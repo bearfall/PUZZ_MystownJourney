@@ -10,17 +10,15 @@ Material:
   m_Name: "\u80FD\u91CF\u7DDA\u689D"
   m_Shader: {fileID: -6465566751694194690, guid: 7c18a92a424c3bb4fb4ab53203218826,
     type: 3}
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Transparent
-  disabledShaderPasses:
-  - DepthOnly
+  stringTagMap: {}
+  disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -58,7 +56,7 @@ Material:
     m_Colors:
     - _Color: {r: 1.4980392, g: 0, b: 0, a: 0}
     - _MAinTexSpeed: {r: 0, g: -1, b: 0, a: 0}
-    - _MAinTexTilling: {r: 1, g: 0.95, b: 0, a: 0}
+    - _MAinTexTilling: {r: -2.99, g: 0.95, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5515517536014208155
 MonoBehaviour:
