@@ -580,6 +580,7 @@ namespace bearfall
 		/// <param name="defenseChara">防御側キャラデータ</param>
 		private IEnumerator CharaAttack(TestCharacter attackChara, TestCharacter defenseChara)
 		{
+			nowActionPlayer = attackChara;
 			Vector2Int attackCharaVector2Int = new Vector2Int(attackChara.xPos, attackChara.zPos);
 			Vector2Int defenseCharaCharaVector2Int = new Vector2Int(defenseChara.xPos, defenseChara.zPos);
 			List<Vector2Int> pointsBetween = GetAllPointsBetween(attackCharaVector2Int, defenseCharaCharaVector2Int);

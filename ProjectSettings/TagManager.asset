@@ -12,6 +12,7 @@ TagManager:
   - Hit
   - Building
   - 666
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Chess
   - Player
   - GlobalVolume
-  - 
+  - Enemy
   - 
   - 
   - 

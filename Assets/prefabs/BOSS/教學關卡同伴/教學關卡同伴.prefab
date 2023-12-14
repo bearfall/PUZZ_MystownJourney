@@ -971,6 +971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headSprite: {fileID: 21300000, guid: e416c03eaf02d314aaa6f651e9263471, type: 3}
+  tempImage: {fileID: 6534183867475014220}
+  istempImage: 0
   MoveSpeed: 5
   path: {fileID: 0}
   enemyPath: {fileID: 0}

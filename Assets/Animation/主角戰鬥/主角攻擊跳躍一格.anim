@@ -382,6 +382,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: TeamStrengthenEffect
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.016666668
     functionName: StopPrepareParticleSystem
     data: 
@@ -391,13 +398,6 @@ AnimationClip:
     messageOptions: 0
   - time: 0.13333334
     functionName: PlayAttack1UpParticleSystem
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.41666666
-    functionName: TeamStrengthenEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

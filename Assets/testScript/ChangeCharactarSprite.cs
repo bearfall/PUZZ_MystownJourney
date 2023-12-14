@@ -172,4 +172,20 @@ public class ChangeCharactarSprite : MonoBehaviour
         testGameManager1.charactersBetween[number].gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("embrave");
 
     }
+
+
+
+    public void PlayEffect(string effectName)
+    {
+        GameObject particleObject = GameObject.Find(effectName);
+        ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
+        particleSystem.Play();
+
+    }
+
+    public void SetActionPlayerLight()
+    {
+        print("強化特效出現");
+        testGameManager1.nowActionPlayer.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 1);
+    }
 }
