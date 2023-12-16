@@ -27,15 +27,21 @@ namespace RPGbearfall
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && nowRPGCharacter.canNormalAttack)
             {
-                nowRPGCharacter.NormalAttack();
+                StartCoroutine(nowRPGCharacter.NormalAttack());
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (Input.GetKeyDown(KeyCode.Mouse1) && nowRPGCharacter.canHeavyAttack)
             {
-                nowRPGCharacter.HeavyAttack();
+                StartCoroutine(nowRPGCharacter.HeavyAttack());
             }
+        }
+
+
+        public void SetPlayer(RPGCharacter RPGCharacter)
+        {
+            nowRPGCharacter = RPGCharacter;
         }
     }
 }

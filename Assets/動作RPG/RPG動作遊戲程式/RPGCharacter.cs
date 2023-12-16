@@ -5,12 +5,22 @@ namespace RPGbearfall
 {
     public class RPGCharacter : MonoBehaviour
     {
+        [Header("普功冷卻時間")]
+        public float normalAttackCollDown;
+        public bool canNormalAttack;
+
+        [Header("重攻擊冷卻時間")]
+        public float heavyAttackCollDown;
+        public bool canHeavyAttack;
+
         [Header("攻撃力")]
         public int atk; // 攻撃力
         [Header("防御力")]
         public int def; // 防御力
         [Header("最大HP(初期HP)")]
         public int maxHP; // 最大HP
+
+        public bool isDead;
 
         public Animator anim;
         public RPGCharacter beAttackEnemy;
@@ -27,7 +37,11 @@ namespace RPGbearfall
         // Update is called once per frame
         void Update()
         {
-            
+            if (nowHP ==0 )
+            {
+                isDead = true;
+                anim.SetBool("Die", true);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -40,15 +54,21 @@ namespace RPGbearfall
             }
         }
 
-        public void NormalAttack()
+        public IEnumerator NormalAttack()
         {
             anim.SetTrigger("NormalAttack");
+            canNormalAttack = false;
+            yield return new WaitForSeconds(normalAttackCollDown);
+            canNormalAttack = true;
         }
 
 
-        public void HeavyAttack()
+        public IEnumerator HeavyAttack()
         {
             anim.SetTrigger("HeavyAttack");
+            canHeavyAttack = false;
+            yield return new WaitForSeconds(heavyAttackCollDown);
+            canHeavyAttack = true;
         }
 
         public void Attack(RPGCharacter targetChara,int damageValue)
@@ -60,8 +80,13 @@ namespace RPGbearfall
         public void TakeDamage(int damage)
         {
             nowHP -= damage;
-
+            if (nowHP <= 0)
+            {
+                nowHP = 0;
+            }
             healthBar.SetHealth(nowHP);
+
+            anim.SetTrigger("Hurt");
         }
     }
 }
