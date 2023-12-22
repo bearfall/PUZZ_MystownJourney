@@ -6,6 +6,8 @@ using UnityEngine;
 public class RPGCharacterEffect : MonoBehaviour
 {
     public RPGPlayerController rPGPlayerController;
+
+    public EnemyCounter enemyCounter;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +37,16 @@ public class RPGCharacterEffect : MonoBehaviour
     public void CantMove()
     {
         rPGPlayerController.isMovement = false;
+    }
+
+    public void ReduceEnemy()
+    {
+        enemyCounter.enemyAmount--;
+
+    }
+
+    public void PlaySound(string effectName)
+    {
+
     }
 }

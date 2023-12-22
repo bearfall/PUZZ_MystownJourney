@@ -25,6 +25,8 @@ namespace RPGbearfall
         public Animator anim;
         public RPGCharacter beAttackEnemy;
 
+        public bool canBeAttack = true;
+
         public int nowHP;
         public HealthBar healthBar;
         // Start is called before the first frame update
@@ -74,19 +76,29 @@ namespace RPGbearfall
         public void Attack(RPGCharacter targetChara,int damageValue)
         {
             var damage = damageValue - beAttackEnemy.def;
-            targetChara.TakeDamage(damage);
+           StartCoroutine( targetChara. TakeDamage(damage,0.5f));
         }
 
-        public void TakeDamage(int damage)
+        public IEnumerator TakeDamage(int damage, float canBeAttackCoolDown)
         {
-            nowHP -= damage;
-            if (nowHP <= 0)
+            if (canBeAttack)
             {
-                nowHP = 0;
-            }
-            healthBar.SetHealth(nowHP);
+                canBeAttack = false;
+                print("受傷了!");
+                nowHP -= damage;
+                if (nowHP <= 0)
+                {
+                    nowHP = 0;
+                }
+                healthBar.SetHealth(nowHP);
 
-            anim.SetTrigger("Hurt");
+                anim.SetTrigger("Hurt");
+
+                yield return new WaitForSeconds(canBeAttackCoolDown);
+                canBeAttack = true;
+
+
+            }
         }
     }
 }

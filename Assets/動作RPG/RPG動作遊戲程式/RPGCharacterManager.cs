@@ -47,10 +47,13 @@ namespace RPGbearfall
             {
                 // 關閉當前角色的控制
                 //characters[currentCharacterIndex].transform.GetChild(0).GetComponent<Animator>().SetTrigger("outSide");
-                
+
+                characters[currentCharacterIndex].GetComponent<RPGPlayerController>().healthBar.SetActive(false);
                 characters[currentCharacterIndex].GetComponent<RPGPlayerController>().enabled = false;
                 characters[currentCharacterIndex].GetComponent<NavMeshAgent>().enabled = false;
                 characters[currentCharacterIndex].transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+                characters[currentCharacterIndex].transform.GetChild(2).GetComponent<SpriteRenderer>().enabled = false;
+
                 characters[currentCharacterIndex].GetComponent<Collider>().enabled = false;
 
 
@@ -66,7 +69,9 @@ namespace RPGbearfall
                 vrCamera.GetComponent<CinemachineVirtualCamera>().Follow = characters[currentCharacterIndex].transform;
 
                 characters[currentCharacterIndex].GetComponent<RPGPlayerController>().enabled = true;
+                characters[currentCharacterIndex].GetComponent<RPGPlayerController>().healthBar.SetActive(true);
                 characters[currentCharacterIndex].transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+                characters[currentCharacterIndex].transform.GetChild(2).GetComponent<SpriteRenderer>().enabled = true;
                 //characters[currentCharacterIndex].transform.GetChild(0).GetComponent<Animator>().SetTrigger("inSide");
                 rPGGameManager.nowRPGCharacter = characters[currentCharacterIndex].transform.GetChild(0).GetComponent<RPGCharacter>();
                 // 可根據需要添加視覺效果的邏輯

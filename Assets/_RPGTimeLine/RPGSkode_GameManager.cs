@@ -6,19 +6,23 @@ using System;
 using Flower;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
-public class Skode_GameManager : MonoBehaviour
+public class RPGSkode_GameManager : MonoBehaviour
 {
     FlowerSystem flowerSys;
     private string myName;
-    public static Skode_GameManager ins;
+    private string characterName;
+    public static RPGSkode_GameManager ins;
 
     public TextMeshProUGUI dialogueLineText;
 
     PlayableDirector activeDirector;
 
+    public Canvas canvas;
 
+    public Image image;
+    public Image image2;
 
-
+    public List<Sprite> charactersImage;
     private void Awake()
     {
         flowerSys = FlowerManager.Instance.CreateFlowerSystem("FlowerSample", false);
@@ -29,9 +33,18 @@ public class Skode_GameManager : MonoBehaviour
         flowerSys.SetupDialog();
         flowerSys.ReadTextFromResource("Hide");
         myName = "Bearfall";
+        characterName = "666";
         flowerSys.SetVariable("MyName", myName);
+        flowerSys.SetVariable("CharacterName", characterName);
 
         flowerSys.RegisterCommand("ResumeTimeline", ResumeTimeline);
+        flowerSys.RegisterCommand("ChangeName", ChangeName);
+        flowerSys.RegisterCommand("ShowImage", ShowImage);
+        flowerSys.RegisterCommand("ShowImage2", ShowImage2);
+        flowerSys.RegisterCommand("HideImage", HideImage);
+        flowerSys.RegisterCommand("HideImage2", HideImage2);
+
+
     }
     private void Update()
     {
@@ -107,4 +120,42 @@ public class Skode_GameManager : MonoBehaviour
     {
         activeDirector.Resume();
     }
+
+
+    public void ChangeName(List<string> _params)
+    {
+        characterName = _params[0].ToString();
+        flowerSys.SetVariable("CharacterName", characterName);
+        print(characterName);
+    }
+
+    public void ShowImage(List<string> _params)
+    {
+        
+        image.enabled = true;
+        image.sprite = charactersImage[int.Parse(_params[0])];
+    }
+
+    public void ShowImage2(List<string> _params)
+    {
+        image2.enabled = true;
+        image2.sprite = charactersImage[int.Parse(_params[0])];
+    }
+
+
+    public void HideImage(List<string> _params = null)
+    {
+        image.enabled = false;
+        //image.sprite = charactersImage[int.Parse(_params[0])];
+    }
+
+    public void HideImage2(List<string> _params = null)
+    {
+        image2.enabled = false;
+        //image.sprite = charactersImage[int.Parse(_params[0])];
+    }
+
+
+
+
 }

@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shader Graphs_BuidingTransparent 3
-  m_Shader: {fileID: -6465566751694194690, guid: 5fe53f54ec6e16a4da87bac2c1cc91da, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 5fe53f54ec6e16a4da87bac2c1cc91da,
+    type: 3}
   m_ValidKeywords:
   - _ALPHATEST_ON
   - _SURFACE_TYPE_TRANSPARENT

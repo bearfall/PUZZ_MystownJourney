@@ -46,6 +46,8 @@ namespace RPGbearfall
 
         public bool isDead;
 
+        public EnemyCounter enemyCounter;
+
         private void Awake()
         {
             //rPGEnemyState = GetComponent<RPGEnemyState>();
@@ -59,7 +61,7 @@ namespace RPGbearfall
         // Start is called before the first frame update
         void Start()
         {
-            targetPlayer = rPGGameManager.nowRPGCharacter.transform;
+            
             if (isGuard)
             {
                 rPGEnemyStates = RPGEnemyStates.GUARD;
@@ -74,6 +76,7 @@ namespace RPGbearfall
         // Update is called once per frame
         void Update()
         {
+            targetPlayer = rPGGameManager.nowRPGCharacter.transform;
             if (rPGCharacter.nowHP == 0)
             {
                 isDead = true;
@@ -85,6 +88,7 @@ namespace RPGbearfall
         {
             if (isDead)
             {
+                
                 rPGEnemyStates = RPGEnemyStates.DEAD;
             }
 
@@ -172,6 +176,8 @@ namespace RPGbearfall
                 case RPGEnemyStates.DEAD:
 
                     agent.enabled = false;
+
+                    
 
                     Destroy(gameObject, 2f);
                     break;
