@@ -96,7 +96,7 @@ namespace RPGbearfall
             print("即將受到傷害");
             if (player.CompareTag("Player"))
             {
-                print("受到傷害");
+                print(player.name + "受到傷害");
                StartCoroutine( player.transform.GetChild(0).GetComponent<RPGCharacter>().TakeDamage(5,0.5f));
             }
         }

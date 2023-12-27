@@ -7,10 +7,15 @@ namespace RPGbearfall
 
     public class RandomMoveBall : MonoBehaviour
     {
+
+        public Collider effectCollider;
+        public int damageAmount;
+        public float waitTime;
+
         // Start is called before the first frame update
         void Start()
         {
-            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            effectCollider.enabled = false;
             StartCoroutine(WaitTime());
         }
 
@@ -25,14 +30,14 @@ namespace RPGbearfall
             if (player.CompareTag("Player"))
             {
                 print("¨ü¨ì¶Ë®`");
-                StartCoroutine( player.transform.GetChild(0).GetComponent<RPGCharacter>().TakeDamage(2,0.2f));
+                StartCoroutine( player.transform.GetChild(0).GetComponent<RPGCharacter>().TakeDamage(damageAmount, 0.2f));
             }
         }
 
         public IEnumerator WaitTime()
         {
-           yield return new WaitForSeconds(10f);
-            gameObject.GetComponent<CapsuleCollider>().enabled = true;
+            yield return new WaitForSeconds(waitTime);
+            effectCollider.enabled = true;
             yield break;
         }
     }

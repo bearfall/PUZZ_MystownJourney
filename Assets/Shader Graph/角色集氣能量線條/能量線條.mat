@@ -42,7 +42,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
-    - _Blur: 0.77
+    - _Blur: 1.51
     - _CastShadows: 1
     - _Cull: 0
     - _DstBlend: 10
@@ -54,7 +54,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 9.734288, g: 0, b: 0, a: 0}
+    - _Color: {r: 11.181761, g: 0, b: 0, a: 0}
     - _MAinTexSpeed: {r: 0, g: -1, b: 0, a: 0}
     - _MAinTexTilling: {r: -5.03, g: 0.44, b: 0, a: 0}
   m_BuildTextureStacks: []

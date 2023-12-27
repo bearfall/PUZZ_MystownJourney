@@ -11,7 +11,7 @@ namespace RPGbearfall
 
         public GameObject objectsToMovePrefeb;
 
-        public GameObject[] objectsToMove; // 要移動的物體
+        public List<GameObject> objectsToMove; // 要移動的物體
         public float waitTime = 5f; // 每次停留的時間
         public float amount;
         public bool canMove = true;
@@ -24,6 +24,7 @@ namespace RPGbearfall
 
         public IEnumerator MoveObjects()
         {
+            CanMove();
             while (canMove)
             {
                 canMove = false;
@@ -48,9 +49,13 @@ namespace RPGbearfall
                 {
 
                     var temp = Instantiate(objectsToMovePrefeb, transform.position, transform.rotation);
+                    objectsToMove.Add(temp);
+                    /*
                     System.Array.Resize(ref objectsToMove, objectsToMove.Length + 1);
                     objectsToMove[objectsToMove.Length - 1] = temp;
+                    */
                     objectsToMove[i].transform.position = selectedPoints[i].position;
+                    
                 }
 
                 // 等待一段時間
@@ -78,6 +83,8 @@ namespace RPGbearfall
 
                 // 等待一段時間
                 yield return new WaitForSeconds(waitTime);
+                objectsToMove.Clear();
+
             }
         }
 
@@ -101,6 +108,12 @@ namespace RPGbearfall
         public void StartMove()
         {
             StartCoroutine(MoveObjects());
+        }
+
+
+        public void CanMove()
+        {
+            canMove = true;
         }
     }
 }
