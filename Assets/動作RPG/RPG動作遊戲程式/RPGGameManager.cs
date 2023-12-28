@@ -36,6 +36,11 @@ namespace RPGbearfall
             {
                 StartCoroutine(nowRPGCharacter.HeavyAttack());
             }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+               StartCoroutine( nowRPGCharacter.HealPlayer(50));
+            }
         }
 
 
@@ -43,5 +48,7 @@ namespace RPGbearfall
         {
             nowRPGCharacter = RPGCharacter;
         }
+
+        
     }
 }

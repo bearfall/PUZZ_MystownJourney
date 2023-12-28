@@ -12,6 +12,9 @@ namespace RPGbearfall
         public GameObject objectsToMovePrefeb;
 
         public List<GameObject> objectsToMove; // 要移動的物體
+
+
+        public CharacterMusicEffect characterMusicEffect;
         public float waitTime = 5f; // 每次停留的時間
         public float amount;
         public bool canMove = true;
@@ -83,6 +86,8 @@ namespace RPGbearfall
 
                 // 等待一段時間
                 yield return new WaitForSeconds(waitTime);
+                CameraShake.Shake(5f, 1.5f);
+                characterMusicEffect.PlayAttackSoundEffect();
                 objectsToMove.Clear();
 
             }

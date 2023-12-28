@@ -47,7 +47,7 @@ namespace RPGbearfall
             {
                 // 關閉當前角色的控制
                 //characters[currentCharacterIndex].transform.GetChild(0).GetComponent<Animator>().SetTrigger("outSide");
-
+                characters[currentCharacterIndex].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                 characters[currentCharacterIndex].GetComponent<RPGPlayerController>().healthBar.SetActive(false);
                 characters[currentCharacterIndex].GetComponent<RPGPlayerController>().enabled = false;
                 characters[currentCharacterIndex].GetComponent<NavMeshAgent>().enabled = false;
@@ -62,6 +62,7 @@ namespace RPGbearfall
                 currentCharacterIndex = newIndex;
 
                 // 開啟新角色的控制
+                //nowRPGCharacter = characters[currentCharacterIndex].GetComponent<RPGCharacter>();
                 characters[currentCharacterIndex].GetComponent<Collider>().enabled = true;
                 characters[currentCharacterIndex].GetComponent<NavMeshAgent>().enabled = true;
                 characters[currentCharacterIndex].gameObject.transform.position = characters[lastCharacterIndex].gameObject.transform.position;

@@ -100,5 +100,24 @@ namespace RPGbearfall
 
             }
         }
+
+        public IEnumerator HealPlayer(int healAmount)
+        {
+            nowHP += healAmount;
+
+            if (nowHP >= maxHP)
+            {
+                nowHP = maxHP;
+            }
+            healthBar.SetHealth(nowHP);
+            gameObject.GetComponent<RPGCharacterEffect>().PlayhealEffect();
+            GetComponent<SpriteRenderer>().material.SetFloat("_LerpAmount", 1);
+            GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 1);
+            yield return new WaitForSeconds(3f);
+            GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 0);
+            GetComponent<SpriteRenderer>().material.SetFloat("_LerpAmount", 0);
+            
+
+        }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5674767244541778995}
   - component: {fileID: 5674767244541778992}
   - component: {fileID: 5674767244541778993}
+  - component: {fileID: 1739425901}
   m_Layer: 0
   m_Name: blackhole
   m_TagString: Untagged
@@ -4818,6 +4819,25 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1739425901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5674767244541779006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbef4846d77c4fb428e0addfc767749f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackHoleCenter: {fileID: 5674767244541778995}
+  playerRigidbody: {fileID: 0}
+  attractionSpeed: 3.5
+  rPGGameManager: {fileID: 0}
+  attractDuration: 5
+  isTrack: 1
+  isEnhance: 0
 --- !u!1 &5674767244672859294
 GameObject:
   m_ObjectHideFlags: 0
@@ -9846,7 +9866,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -9903,7 +9923,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5674767244752405840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24846,7 +24866,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4.5
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2

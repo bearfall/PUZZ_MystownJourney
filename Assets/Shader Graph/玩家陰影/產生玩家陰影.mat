@@ -53,13 +53,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Outline_Thickness: 1
+    - _LerpAmount: 0
+    - _Outline_Thickness: 3.96
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Transparent: 1
     - _isAttack: 0
     m_Colors:
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
+    - _EnhanceColor: {r: 47.937256, g: 13.050981, b: 4.7686276, a: 0}
+    - _EnhanceColor2: {r: 47.937256, g: 3.5137255, b: 3.5137255, a: 0}
+    - _HealColor: {r: 1.254902, g: 47.937256, b: 0.2509804, a: 0}
+    - _HealColor2: {r: 6.7764707, g: 47.937256, b: 12.54902, a: 0}
     - _Outline_Color: {r: 84.44851, g: 68.22115, b: 29.143015, a: 0}
     - _Outline_Color2: {r: 135.58704, g: 16.327234, b: 16.327234, a: 0}
   m_BuildTextureStacks: []

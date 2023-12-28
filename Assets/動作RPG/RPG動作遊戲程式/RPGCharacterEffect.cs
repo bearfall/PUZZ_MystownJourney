@@ -8,6 +8,8 @@ public class RPGCharacterEffect : MonoBehaviour
     public RPGPlayerController rPGPlayerController;
 
     public EnemyCounter enemyCounter;
+
+    public ParticleSystem healEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,15 @@ public class RPGCharacterEffect : MonoBehaviour
 
     }
 
-    
+    public void PlayhealEffect()
+    {
+        healEffect.Play();
+
+    }
+
+
+
+
 
     public void CanMove()
     {
