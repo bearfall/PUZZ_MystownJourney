@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 827100c7e670cb445a2280b3067ddcc2, type: 3}
+  m_Name: Kyan
+  m_EditorClassIdentifier: 
+  Name: 
+  image: {fileID: 21300000, guid: 7b604e9be4977574397d5b2db9e97e22, type: 3}
+  hp: 100
+  def: 5
+  originATK: 20
+  Attack: 20
+  normalAttack: {fileID: 7831768346548232607, guid: 507ebc7e1ba771b4d9b2be07e81d81ea,
+    type: 3}
+  normalAttackCD: 1
+  heavyAttack: {fileID: 8559997841412301367, guid: 9c8e476266e1dca409989d07e5b4344e,
+    type: 3}
+  heavyAttackCD: 1
+  animatorController: {fileID: 9100000, guid: 1e5df15ac2735d544829ed8fbe506370, type: 2}

@@ -32,7 +32,7 @@ namespace RPGbearfall
 
             if (isTrack)
             {
-                playerRigidbody = rPGGameManager.nowRPGCharacter.transform.parent.GetComponent<Rigidbody>();
+                playerRigidbody = rPGGameManager.nowRPGCharacter.transform.GetComponent<Rigidbody>();
 
                 trackingTimer += Time.deltaTime;
 
@@ -55,10 +55,9 @@ namespace RPGbearfall
             }
             else
             {
-                foreach (var character in rpGCharacterManager.characters)
-                {
-                    character.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                }
+
+                rPGGameManager.nowRPGCharacter.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                
 
                 
                 Destroy(gameObject);

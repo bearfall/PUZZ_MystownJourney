@@ -5,16 +5,47 @@ namespace RPGbearfall
 {
     public class RPGCharacter : MonoBehaviour
     {
-        [Header("普功冷卻時間")]
+        public PlayerInfo playetInfo;
+        public List<PlayerInfo> playerInfos = new List<PlayerInfo>();
+        [Header("角色名稱")]
+        public string characterName;
+        [Header("角色圖片")]
+        public SpriteRenderer characterSpriteRenderer;
+
+        [Header("技能生成點")]
+        public Transform effectSpawnPoint;
+        [Header("普功")]
+        public GameObject characterNormalAttack;
         public float normalAttackCollDown;
         public bool canNormalAttack;
 
-        [Header("重攻擊冷卻時間")]
+        [Header("重攻擊")]
+        public GameObject characterHeavyAttack;
         public float heavyAttackCollDown;
         public bool canHeavyAttack;
 
         [Header("攻撃力")]
-        public int atk; // 攻撃力
+        public int playerAtk;
+
+        private float enhanceTimer;
+        public bool isEnhance;
+
+
+        /*
+        private void OnEnable()
+        {
+            // 訂閱Scriptable Object的事件
+            if (playetInfo != null)
+            {
+                playetInfo.OnAttackChange += UpdatePlayerAtk;
+            }
+        }
+        private void UpdatePlayerAtk(int newAtk)
+        {
+            playerAtk = newAtk;
+            Debug.Log($"Player atk updated: {playerAtk}");
+        }
+        */
         [Header("防御力")]
         public int def; // 防御力
         [Header("最大HP(初期HP)")]
@@ -22,6 +53,7 @@ namespace RPGbearfall
 
         public bool isDead;
 
+        
         public Animator anim;
         public RPGCharacter beAttackEnemy;
 
@@ -32,6 +64,7 @@ namespace RPGbearfall
         // Start is called before the first frame update
         void Start()
         {
+            SetPlayer();
             nowHP = maxHP;
             healthBar.SetMaxHealth(maxHP);
         }
@@ -39,13 +72,31 @@ namespace RPGbearfall
         // Update is called once per frame
         void Update()
         {
+            
             if (nowHP ==0 )
             {
                 isDead = true;
                 anim.SetBool("Die", true);
             }
-        }
 
+            if (isEnhance)
+            {
+                enhanceTimer += Time.deltaTime;
+                if (enhanceTimer > 3)
+                {
+                    isEnhance = false;
+                    enhanceTimer = 0f;
+
+                    foreach (var playerInfo in playerInfos)
+                    {
+                        playerInfo.Attack = playerInfo.originATK;
+                    }
+                    SetPlayer();
+
+                }
+            }
+        }
+        /*
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Enemy"))
@@ -55,11 +106,13 @@ namespace RPGbearfall
                 this.Attack(beAttackEnemy, atk);
             }
         }
+        */
 
         public IEnumerator NormalAttack()
         {
             anim.SetTrigger("NormalAttack");
             canNormalAttack = false;
+            //Instantiate(characterNormalAttack, effectSpawnPoint);
             yield return new WaitForSeconds(normalAttackCollDown);
             canNormalAttack = true;
         }
@@ -69,6 +122,7 @@ namespace RPGbearfall
         {
             anim.SetTrigger("HeavyAttack");
             canHeavyAttack = false;
+            // Instantiate(characterHeavyAttack, effectSpawnPoint);
             yield return new WaitForSeconds(heavyAttackCollDown);
             canHeavyAttack = true;
         }
@@ -117,6 +171,25 @@ namespace RPGbearfall
             GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 0);
             GetComponent<SpriteRenderer>().material.SetFloat("_LerpAmount", 0);
             
+
+        }
+
+
+        
+
+        public void SetPlayer()
+        {
+            characterName = playetInfo.Name;
+            // characterSpriteRenderer.sprite = playetInfo.image;
+            nowHP = playetInfo.hp;
+            def = playetInfo.def;
+            playerAtk = playetInfo.Attack;
+            characterNormalAttack = playetInfo.normalAttack;
+            normalAttackCollDown = playetInfo.normalAttackCD;
+            characterHeavyAttack = playetInfo.heavyAttack;
+            heavyAttackCollDown = playetInfo.heavyAttackCD;
+            anim.runtimeAnimatorController = playetInfo.animatorController;
+
 
         }
     }

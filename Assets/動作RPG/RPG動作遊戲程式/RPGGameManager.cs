@@ -27,6 +27,7 @@ namespace RPGbearfall
         // Update is called once per frame
         void Update()
         {
+            /*
             if (Input.GetKeyDown(KeyCode.Mouse0) && nowRPGCharacter.canNormalAttack)
             {
                 StartCoroutine(nowRPGCharacter.NormalAttack());
@@ -41,6 +42,7 @@ namespace RPGbearfall
             {
                StartCoroutine( nowRPGCharacter.HealPlayer(50));
             }
+            */
         }
 
 

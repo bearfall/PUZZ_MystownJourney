@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class RPGCharacterEffect : MonoBehaviour
 {
+    public List<PlayerInfo> playerInfos = new List<PlayerInfo>(); 
+
+    [Header("技能生成點")]
+    public Transform effectSpawnPoint;
+
+    public RPGCharacter rPGCharacter;
+
     public RPGPlayerController rPGPlayerController;
 
     public EnemyCounter enemyCounter;
 
     public ParticleSystem healEffect;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +31,32 @@ public class RPGCharacterEffect : MonoBehaviour
         
     }
 
-    public void PlayEffect(string effectName)
+    public void PlayNormalEffect()
     {
-        GameObject particleObject = GameObject.Find(effectName);
-        ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
-        particleSystem.Play();
 
+        Instantiate(rPGCharacter.characterNormalAttack, effectSpawnPoint);
+
+    }
+    public void PlayHeavyEffect()
+    {
+        
+       // ParticleSystem particleSystem = rPGCharacter.characterHeavyAttack.GetComponent<ParticleSystem>();
+        Instantiate(rPGCharacter.characterHeavyAttack, effectSpawnPoint);
+        //particleSystem.Play();
+
+    }
+
+    public void EnhancePlayer()
+    {
+
+        foreach (var playerInfo in playerInfos)
+        {
+
+            playerInfo.Attack += 1;
+        }
+        //rPGCharacter.playetInfo.Attack += 1;
+        rPGCharacter.isEnhance = true;
+        rPGCharacter.SetPlayer();
     }
 
     public void PlayhealEffect()

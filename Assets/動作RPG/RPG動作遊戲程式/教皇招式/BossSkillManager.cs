@@ -7,6 +7,7 @@ public class BossSkillManager : MonoBehaviour
 {
     public CircleSpawner circleSpawner;
     public RandomMovement randomMovement;
+    public RandomStrike randomStrike;
 
     public Transform blackHoleTransform;
     public GameObject blackHolePrefeb;
@@ -36,5 +37,9 @@ public class BossSkillManager : MonoBehaviour
     public void BlackHoleSkill()
     {
         Instantiate(blackHolePrefeb, blackHoleTransform);
+    }
+    public void RandomStrikeSkill()
+    {
+       StartCoroutine( randomStrike.GenerateObjects());
     }
 }

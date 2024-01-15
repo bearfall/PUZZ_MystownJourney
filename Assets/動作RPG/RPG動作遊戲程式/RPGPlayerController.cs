@@ -7,6 +7,9 @@ namespace RPGbearfall
 {
     public class RPGPlayerController : MonoBehaviour
     {
+        public RPGCharacter nowRPGCharacter;
+
+
         public bool isMovement = true;
         private NavMeshAgent agent;
         private RPGGameManager rPGGameManager;
@@ -49,17 +52,17 @@ namespace RPGbearfall
                 Verticalinput = Input.GetAxis("Vertical");
 
 
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A) && isMovement)
                 {
                     //gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
-                    gameObject.transform.GetChild(0).transform.localScale = new Vector3(-1, 1, 1);
-                    gameObject.transform.GetChild(0).GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
+                    gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
+                    //gameObject.transform.GetChild(0).GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
                 }
-                else if (Input.GetKey(KeyCode.D))
+                else if (Input.GetKey(KeyCode.D)&& isMovement)
                 {
                     //gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
-                    gameObject.transform.GetChild(0).transform.localScale = new Vector3(1, 1, 1);
-                    gameObject.transform.GetChild(0).GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
+                    gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
+                    //gameObject.transform.GetChild(0).GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
                 }
 
 
@@ -80,6 +83,24 @@ namespace RPGbearfall
 
                 this.transform.Translate(Vector3.forward * Verticalinput * Time.deltaTime * speed);
                 //控制该物体向前后移动
+
+
+                if (Input.GetKeyDown(KeyCode.Mouse0) && nowRPGCharacter.canNormalAttack)
+                {
+                    StartCoroutine(nowRPGCharacter.NormalAttack());
+                }
+
+                if (Input.GetKeyDown(KeyCode.Mouse1) && nowRPGCharacter.canHeavyAttack)
+                {
+                    StartCoroutine(nowRPGCharacter.HeavyAttack());
+                }
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    StartCoroutine(nowRPGCharacter.HealPlayer(50));
+                }
+
+
             }
 
 

@@ -16,13 +16,17 @@ namespace RPGbearfall
         public RPGGameManager rPGGameManager;
 
         public List<GameObject> characters; // 所有可用的角色
+
+        public List<PlayerInfo> playerInfos;
+        
+
         private int currentCharacterIndex = 0; // 當前控制的角色索引
         private int lastCharacterIndex;
 
         void Start()
         {
             // 初始時設置第一個角色為玩家控制的角色
-            SwitchCharacter(currentCharacterIndex);
+            //SwitchCharacter(currentCharacterIndex);
             rPGGameManager = GetComponent<RPGGameManager>();
         }
 
@@ -31,11 +35,13 @@ namespace RPGbearfall
             // 監聽玩家按鍵輸入，進行角色切換
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                SwitchCharacter(0);
+                //SwitchCharacter(0);
+                SwitchCharacterInfo(0);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2) && characters.Count > 1)
             {
-                SwitchCharacter(1);
+                //SwitchCharacter(1);
+                SwitchCharacterInfo(1);
             }
             // 可根據需要添加更多按鍵和相應的切換邏輯
         }
@@ -76,6 +82,25 @@ namespace RPGbearfall
                 //characters[currentCharacterIndex].transform.GetChild(0).GetComponent<Animator>().SetTrigger("inSide");
                 rPGGameManager.nowRPGCharacter = characters[currentCharacterIndex].transform.GetChild(0).GetComponent<RPGCharacter>();
                 // 可根據需要添加視覺效果的邏輯
+            }
+        }
+
+
+        void SwitchCharacterInfo(int newIndex)
+        {
+            // 檢查索引是否有效
+            if (newIndex >= 0 && newIndex < characters.Count)
+            {
+                print("切換角色");
+
+
+                lastCharacterIndex = currentCharacterIndex;
+                // 切換到新的角色
+                currentCharacterIndex = newIndex;
+                nowRPGCharacter.playetInfo = playerInfos[currentCharacterIndex];
+                nowRPGCharacter.SetPlayer();
+
+
             }
         }
     }
