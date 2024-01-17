@@ -38,6 +38,7 @@ public class BossSkillManager : MonoBehaviour
     {
         Instantiate(blackHolePrefeb, blackHoleTransform);
     }
+
     public void RandomStrikeSkill()
     {
        StartCoroutine( randomStrike.GenerateObjects());

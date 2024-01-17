@@ -30,7 +30,7 @@ namespace RPGbearfall
             if (player.CompareTag("Player"))
             {
                 print("¨ü¨ì¶Ë®`");
-                StartCoroutine( player.transform.GetChild(0).GetComponent<RPGCharacter>().TakeDamage(damageAmount, 0.2f));
+                StartCoroutine( player.transform.GetComponent<RPGCharacter>().TakeDamage(damageAmount, 0.2f));
             }
         }
 

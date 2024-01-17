@@ -13,7 +13,8 @@ public class PlayerInfo : ScriptableObject
     */
     public string Name;
     public Sprite image;
-    public int hp;
+    public int maxHP;
+    public int nowHP;
     public int def;
 
     public UnityAction<int> OnAttackChange;

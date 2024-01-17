@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 917979181893803138}
   - component: {fileID: 917979181893803137}
   - component: {fileID: 5191610385666019258}
+  - component: {fileID: 3183300440760029518}
+  - component: {fileID: 6893448835511948683}
   m_Layer: 0
   m_Name: Lightningstrike
   m_TagString: Strike
@@ -124,3 +126,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destiryTime: 1
+--- !u!136 &3183300440760029518
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917979181893803136}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.98491096
+  m_Height: 5.7337623
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.8268812, z: 0.0042362213}
+--- !u!114 &6893448835511948683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917979181893803136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847caa66df0b89c43b3906aee6a433af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 20

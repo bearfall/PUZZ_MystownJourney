@@ -27,7 +27,7 @@ public class SetPlayerInfo : MonoBehaviour
     {
         characterName = playetInfo.Name;
         characterSpriteRenderer.sprite = playetInfo.image;
-        characterHp = playetInfo.hp;
+        characterHp = playetInfo.nowHP;
         characterDef = playetInfo.def;
         characterAtk = playetInfo.Attack;
         characterNormalAttack = playetInfo.normalAttack;

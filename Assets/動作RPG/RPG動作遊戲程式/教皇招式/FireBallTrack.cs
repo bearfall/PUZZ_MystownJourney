@@ -97,7 +97,7 @@ namespace RPGbearfall
             if (player.CompareTag("Player"))
             {
                 print(player.name + "¨ü¨ì¶Ë®`");
-               StartCoroutine( player.transform.GetChild(0).GetComponent<RPGCharacter>().TakeDamage(5,0.5f));
+               StartCoroutine( player.transform.GetComponent<RPGCharacter>().TakeDamage(5,0.5f));
             }
         }
     }

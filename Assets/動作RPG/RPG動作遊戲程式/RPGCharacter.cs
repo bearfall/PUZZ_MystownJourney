@@ -64,6 +64,8 @@ namespace RPGbearfall
         // Start is called before the first frame update
         void Start()
         {
+            maxHP = playetInfo.maxHP;
+            
             SetPlayer();
             nowHP = maxHP;
             healthBar.SetMaxHealth(maxHP);
@@ -139,6 +141,9 @@ namespace RPGbearfall
             {
                 canBeAttack = false;
                 print("受傷了!");
+
+
+                playetInfo.nowHP -= damage;
                 nowHP -= damage;
                 if (nowHP <= 0)
                 {
@@ -181,7 +186,13 @@ namespace RPGbearfall
         {
             characterName = playetInfo.Name;
             // characterSpriteRenderer.sprite = playetInfo.image;
-            nowHP = playetInfo.hp;
+            maxHP = playetInfo.maxHP;
+            nowHP = playetInfo.nowHP;
+
+            healthBar.SetMaxHealth(maxHP);
+
+            healthBar.SetHealth(nowHP);
+
             def = playetInfo.def;
             playerAtk = playetInfo.Attack;
             characterNormalAttack = playetInfo.normalAttack;
