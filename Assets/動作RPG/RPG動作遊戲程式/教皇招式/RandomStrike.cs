@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class RandomStrike : MonoBehaviour
 {
+    public Light directionalLight;
+
+    public AudioSource audioSource;
+
     public GameObject rainGameObject;
-    public GameObject blendSkyObj;
+    public GameObject pointLight;
 
     public GameObject objectToGenerate; // 要生成的物體
 
@@ -22,7 +26,7 @@ public class RandomStrike : MonoBehaviour
     [Header("閃電間隔時間")]
     public float waitStrikesTime = 4;
 
-
+    public bool start = false;
 
     public List<Vector3> strikesTransform;
 
@@ -32,12 +36,29 @@ public class RandomStrike : MonoBehaviour
         //GenerateObjects();
     }
 
+    private void Update()
+    {
+        if (start)
+        {
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.0f, Time.deltaTime);
+
+            
+        }
+        else
+        {
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 1.5f, Time.deltaTime);
+        }
+
+        
+    }
+
     public IEnumerator GenerateObjects()
     {
 
-        
+        start = true;
+
         rainGameObject.SetActive(true);
-        blendSkyObj.SetActive(true);
+        pointLight.SetActive(true);
         for (int j = 0; j < strikesAmount; j++)
         {
 
@@ -64,13 +85,15 @@ public class RandomStrike : MonoBehaviour
                 Instantiate(objectToGenerate, strikeTransform, Quaternion.identity);
                 
             }
+            audioSource.Play();
             strikesTransform.Clear();
         }
 
         yield return new WaitForSeconds(1f);
 
         rainGameObject.SetActive(false);
-        blendSkyObj.SetActive(false);
+        pointLight.SetActive(false);
+        start = false;
 
     }
 
