@@ -26,7 +26,7 @@ namespace RPGbearfall
             if (other.CompareTag("Enemy"))
             {
                 
-                attackCharacter.beAttackEnemy = other.transform.GetChild(0).GetComponent<RPGCharacter>();
+                attackCharacter.beAttackEnemy = other.gameObject.GetComponent<RPGEnemyCharacter>();
                 attackCharacter.Attack(attackCharacter.beAttackEnemy, attackCharacter.playerAtk);
             }
         }

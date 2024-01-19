@@ -60,7 +60,7 @@ Material:
     - _Transparent: 1
     - _isAttack: 0
     m_Colors:
-    - _Emission: {r: 0, g: 0, b: 0, a: 0}
+    - _Emission: {r: 3.6781244, g: 1.8217125, b: 1.8217125, a: 0}
     - _EnhanceColor: {r: 47.937256, g: 13.050981, b: 4.7686276, a: 0}
     - _EnhanceColor2: {r: 47.937256, g: 3.5137255, b: 3.5137255, a: 0}
     - _HealColor: {r: 1.254902, g: 47.937256, b: 0.2509804, a: 0}

@@ -9,7 +9,7 @@ namespace RPGbearfall
     public enum RPGEnemyStates {GUARD, PATROL, CHASE,DEAD };
     public class RPGEnemyController : MonoBehaviour
     {
-        public RPGCharacter rPGCharacter;
+        public RPGEnemyCharacter rpgEnemyCharacter;
 
         public bool isGuard;
 
@@ -77,7 +77,7 @@ namespace RPGbearfall
         void Update()
         {
             targetPlayer = rPGGameManager.nowRPGCharacter.transform;
-            if (rPGCharacter.nowHP == 0)
+            if (rpgEnemyCharacter.nowHP == 0)
             {
                 isDead = true;
             }

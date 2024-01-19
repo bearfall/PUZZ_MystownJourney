@@ -18,7 +18,9 @@ public class RPGCharacterEffect : MonoBehaviour
 
     public ParticleSystem healEffect;
 
-    
+
+    public List<GameObject> effects = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,12 @@ public class RPGCharacterEffect : MonoBehaviour
     {
         
     }
+
+    public void PlayEffect(int effectNum)
+    {
+        Instantiate(effects[effectNum], effectSpawnPoint);
+    }
+
 
     public void PlayNormalEffect()
     {

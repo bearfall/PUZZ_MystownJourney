@@ -55,7 +55,7 @@ namespace RPGbearfall
 
         
         public Animator anim;
-        public RPGCharacter beAttackEnemy;
+        public RPGEnemyCharacter beAttackEnemy;
 
         public bool canBeAttack = true;
 
@@ -129,10 +129,10 @@ namespace RPGbearfall
             canHeavyAttack = true;
         }
 
-        public void Attack(RPGCharacter targetChara,int damageValue)
+        public void Attack(RPGEnemyCharacter targetEnemy,int damageValue)
         {
             var damage = damageValue - beAttackEnemy.def;
-           StartCoroutine( targetChara. TakeDamage(damage,0.5f));
+           StartCoroutine(targetEnemy.TakeDamage(damage,0.5f));
         }
 
         public IEnumerator TakeDamage(int damage, float canBeAttackCoolDown)
