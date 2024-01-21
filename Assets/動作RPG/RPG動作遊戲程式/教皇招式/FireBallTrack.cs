@@ -7,6 +7,8 @@ namespace RPGbearfall
 
     public class FireBallTrack : MonoBehaviour
     {
+        public int damageAmount;
+
         public Transform targetPlayer; // 玩家的 Transform
         public RPGGameManager rPGGameManager;
         public float trackingSpeed = 5f; // 追蹤速度
@@ -21,12 +23,14 @@ namespace RPGbearfall
         private float rotateAroundTimer;
         private float trackingTimer;
         public CircleSpawner circleSpawner;
+        public BossSkillManager bossSkillManager;
 
 
         private void Start()
         {
             rPGGameManager = GameObject.Find("RPGGameManager").GetComponent<RPGGameManager>();
             circleSpawner = GameObject.Find("教皇").GetComponent<CircleSpawner>();
+            bossSkillManager = GameObject.Find("教皇").GetComponent<BossSkillManager>();
             Destroy(gameObject, 7f);
         }
         void Update()
@@ -87,7 +91,7 @@ namespace RPGbearfall
                 isTracking = true;
                 rotateAroundTimer = 0f;
             }
-            transform.RotateAround(circleSpawner.center, Vector3.up, rotationSpeed * Time.deltaTime);
+            transform.RotateAround(bossSkillManager.center, Vector3.up, rotationSpeed * Time.deltaTime);
         }
 
 
@@ -96,8 +100,12 @@ namespace RPGbearfall
             print("即將受到傷害");
             if (player.CompareTag("Player"))
             {
-                print(player.name + "受到傷害");
-               StartCoroutine( player.transform.GetComponent<RPGCharacter>().TakeDamage(5,0.5f));
+               int damage = damageAmount;
+
+               print(player.name + "受到傷害");
+
+               damage -= player.transform.GetComponent<RPGCharacter>().def;
+               StartCoroutine( player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0.5f));
             }
         }
     }

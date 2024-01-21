@@ -140,10 +140,13 @@ namespace RPGbearfall
             if (canBeAttack)
             {
                 canBeAttack = false;
-                print("受傷了!");
+                
 
 
                 playetInfo.nowHP -= damage;
+
+                print("受到"+ damage + "傷害!");
+
                 nowHP -= damage;
                 if (nowHP <= 0)
                 {

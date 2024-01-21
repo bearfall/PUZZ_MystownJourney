@@ -25,10 +25,13 @@ namespace RPGbearfall
         private void OnTriggerEnter(Collider player)
         {
             print("即將受到傷害");
+
             if (player.CompareTag("Player"))
             {
+                int damage = damageAmount;
                 print(player.name + "受到傷害");
-                StartCoroutine(player.transform.GetComponent<RPGCharacter>().TakeDamage(damageAmount, 0.5f));
+                damage -= player.transform.GetComponent<RPGCharacter>().def;
+                StartCoroutine(player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0.5f));
             }
         }
     }

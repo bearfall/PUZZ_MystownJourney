@@ -33,7 +33,7 @@ namespace RPGbearfall
             if (isTrack)
             {
                 playerRigidbody = rPGGameManager.nowRPGCharacter.transform.GetComponent<Rigidbody>();
-
+                playerRigidbody.isKinematic = false;
                 trackingTimer += Time.deltaTime;
 
                 if (trackingTimer >= attractDuration && isEnhance == false)
@@ -47,7 +47,7 @@ namespace RPGbearfall
                     isTrack = false;
                 }
 
-                print("拉扯中");
+                //print("拉扯中");
                 // 計算黑洞到玩家的向量
                 Vector3 attractionDirection = blackHoleCenter.position - playerRigidbody.transform.position;
 
@@ -57,9 +57,9 @@ namespace RPGbearfall
             {
 
                 rPGGameManager.nowRPGCharacter.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                
+                playerRigidbody.isKinematic = true;
 
-                
+
                 Destroy(gameObject);
             }
             
