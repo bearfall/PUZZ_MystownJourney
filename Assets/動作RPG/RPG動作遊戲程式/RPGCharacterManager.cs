@@ -38,10 +38,16 @@ namespace RPGbearfall
                 //SwitchCharacter(0);
                 SwitchCharacterInfo(0);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2) && characters.Count > 1)
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && characters.Count > 0)
             {
                 //SwitchCharacter(1);
                 SwitchCharacterInfo(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && characters.Count > 0)
+            {
+                print("第三隻腳色");
+                //SwitchCharacter(1);
+                SwitchCharacterInfo(2);
             }
             // 可根據需要添加更多按鍵和相應的切換邏輯
         }
@@ -89,7 +95,7 @@ namespace RPGbearfall
         void SwitchCharacterInfo(int newIndex)
         {
             // 檢查索引是否有效
-            if (newIndex >= 0 && newIndex < characters.Count)
+            if (newIndex >= 0)
             {
                 print("切換角色");
 

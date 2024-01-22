@@ -34,6 +34,8 @@ public class Boss : MonoBehaviour
 
     public bool canUseSkill = true;
 
+
+    public bool stop;
     private void Awake()
     {
        // UseRandomSkill();
@@ -47,11 +49,17 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        IntervalTime += Time.deltaTime;
-        if (IntervalTime > skillTime+1)
+
+        if (!stop)
         {
-            UseRandomSkill();
-            IntervalTime = 0;
+
+
+            IntervalTime += Time.deltaTime;
+            if (IntervalTime > skillTime - 3)
+            {
+                UseRandomSkill();
+                IntervalTime = 0;
+            }
         }
     }
     // Boss 使用技能的函數
