@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6433624947536687053}
   - component: {fileID: 6433624947536687054}
   - component: {fileID: 1286487366647169062}
+  - component: {fileID: 7828355503843105692}
+  - component: {fileID: 874556558989069271}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -27,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6433624947536687055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 0.15, z: 0}
+  m_LocalPosition: {x: -0.27, y: 0.48, z: 0}
   m_LocalScale: {x: 2.6918519, y: 2.4707263, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4884,3 +4886,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destiryTime: 1
+--- !u!65 &7828355503843105692
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433624947536687055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5151569, y: 0.545972, z: 0.9177909}
+  m_Center: {x: 0.5270467, y: -0.15244669, z: -0.03348025}
+--- !u!114 &874556558989069271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433624947536687055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e0ef0fc07c2e44698338da1831a17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCharacter: {fileID: 0}
+  playerInfo: {fileID: 11400000, guid: b008403e556c5f041a09207ed726c0e2, type: 2}
+  normalDamageAmount: 0
+  heavyDamageAmount: 0
+  isNormal: 1

@@ -132,7 +132,7 @@ namespace RPGbearfall
         public void Attack(RPGEnemyCharacter targetEnemy,int damageValue)
         {
             var damage = damageValue - beAttackEnemy.def;
-           StartCoroutine(targetEnemy.TakeDamage(damage,0.5f));
+           StartCoroutine(targetEnemy.TakeDamage(damage,0.3f));
         }
 
         public IEnumerator TakeDamage(int damage, float canBeAttackCoolDown)
@@ -163,7 +163,7 @@ namespace RPGbearfall
             }
         }
 
-        public IEnumerator HealPlayer(int healAmount)
+        public void HealPlayer(int healAmount)
         {
             nowHP += healAmount;
 
@@ -172,12 +172,14 @@ namespace RPGbearfall
                 nowHP = maxHP;
             }
             healthBar.SetHealth(nowHP);
-            gameObject.GetComponent<RPGCharacterEffect>().PlayhealEffect();
+            gameObject.transform.GetChild(0).GetComponent<RPGCharacterEffect>().PlayhealEffect();
+            /*
             GetComponent<SpriteRenderer>().material.SetFloat("_LerpAmount", 1);
             GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 1);
             yield return new WaitForSeconds(3f);
             GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 0);
             GetComponent<SpriteRenderer>().material.SetFloat("_LerpAmount", 0);
+            */
             
 
         }

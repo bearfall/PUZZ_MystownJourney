@@ -1,10 +1,24 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using UnityEngine.Rendering.Universal;
+
 namespace RPGbearfall
 {
     public class RPGGameManager : MonoBehaviour
     {
+
+        public UnityEngine.Rendering.Volume postProcessVolume;
+        public UnityEngine.Rendering.Universal.DepthOfField dof;
+
+        public GameObject CMvcam1;
+
+        //public GameObject GlobalVolume;
+        [Header("³õ´º­­¨î½d³ò")]
+        public GameObject menuConfiner;
+
         public RPGCharacter nowRPGCharacter;
 
         public int enemyCount = 4;
@@ -14,6 +28,7 @@ namespace RPGbearfall
 
         public enum AreaType
         {
+            GameMenu,
             FreeExplore,
             TurnBasedCombat
         }
@@ -21,7 +36,16 @@ namespace RPGbearfall
         // Start is called before the first frame update
         void Start()
         {
+            postProcessVolume.profile.TryGet<UnityEngine.Rendering.Universal.DepthOfField>(out dof);
+            currentArea = AreaType.GameMenu;
+        }
+
+
+        public void StartGame()
+        {
             currentArea = AreaType.FreeExplore;
+            dof.focusDistance.value = 257f;
+            CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = menuConfiner.GetComponent<BoxCollider>();
         }
 
         // Update is called once per frame

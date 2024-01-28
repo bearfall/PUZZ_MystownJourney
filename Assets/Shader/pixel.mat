@@ -43,20 +43,22 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _Bit: 16
+    - _Bit: 8
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _SrcBlend: 5
     - _Surface: 1
+    - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 9.734288, g: 2.7521024, b: 0, a: 0}
+    - _Color: {r: 25.992073, g: 25.992073, b: 25.992073, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4545440725021410372
 MonoBehaviour:

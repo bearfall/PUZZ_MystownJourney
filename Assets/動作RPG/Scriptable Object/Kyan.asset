@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: 
   image: {fileID: 21300000, guid: 7b604e9be4977574397d5b2db9e97e22, type: 3}
   maxHP: 100
-  nowHP: 262
-  def: 20
+  nowHP: 100
+  def: 0
   originATK: 20
   Attack: 20
   normalAttack: {fileID: 7831768346548232607, guid: 507ebc7e1ba771b4d9b2be07e81d81ea,

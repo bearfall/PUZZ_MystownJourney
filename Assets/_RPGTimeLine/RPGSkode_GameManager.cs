@@ -48,7 +48,7 @@ public class RPGSkode_GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             
             // Continue the messages, stoping by [w] or [lr] keywords.

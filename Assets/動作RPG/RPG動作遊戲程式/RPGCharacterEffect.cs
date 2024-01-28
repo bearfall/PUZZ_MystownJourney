@@ -26,7 +26,7 @@ public class RPGCharacterEffect : MonoBehaviour
 
     public EnemyCounter enemyCounter;
 
-    public ParticleSystem healEffect;
+    public GameObject healEffect;
 
 
     public List<GameObject> effects = new List<GameObject>();
@@ -105,7 +105,7 @@ public class RPGCharacterEffect : MonoBehaviour
 
     public void PlayhealEffect()
     {
-        healEffect.Play();
+        Instantiate(healEffect, effectSpawnPoint);
 
     }
 

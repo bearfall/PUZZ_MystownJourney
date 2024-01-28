@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6433624947536687053}
   - component: {fileID: 6433624947536687054}
   - component: {fileID: 8335101729347549724}
+  - component: {fileID: 3615963697470279278}
+  - component: {fileID: 854504103477581906}
   m_Layer: 0
   m_Name: "\u55AC\u4F0A\u653B\u64CA\u7B2C\u4E09\u6BB5\u7279\u65482"
   m_TagString: Untagged
@@ -4884,3 +4886,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destiryTime: 1
+--- !u!114 &3615963697470279278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433624947536687055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e0ef0fc07c2e44698338da1831a17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCharacter: {fileID: 0}
+  playerInfo: {fileID: 11400000, guid: b008403e556c5f041a09207ed726c0e2, type: 2}
+  normalDamageAmount: 0
+  heavyDamageAmount: 0
+  isNormal: 1
+--- !u!65 &854504103477581906
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433624947536687055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.42331612, y: 0.99436665, z: 0.7686844}
+  m_Center: {x: 0.52968585, y: -0.08603247, z: 0.01775233}

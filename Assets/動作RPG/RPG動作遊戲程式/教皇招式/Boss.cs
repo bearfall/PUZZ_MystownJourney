@@ -109,10 +109,11 @@ public class Boss : MonoBehaviour
         {
             OnSkillUsed?.Invoke(randomSkill);
         }
+
         else if(!canUseSkill)
         {
             print("無法使用" + randomSkill + "技能");
-            
+            IntervalTime = skillTime - 1;
         }
         
         /*
