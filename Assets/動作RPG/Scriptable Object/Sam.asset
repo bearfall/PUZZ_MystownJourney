@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 827100c7e670cb445a2280b3067ddcc2, type: 3}
+  m_Name: Sam
+  m_EditorClassIdentifier: 
+  Name: Sam
+  image: {fileID: 21300000, guid: 122f1bff04b9d3e4199f192413d812da, type: 3}
+  maxHP: 100
+  nowHP: 100
+  def: 10
+  originATK: 10
+  Attack: 10
+  normalAttack: {fileID: 0}
+  normalAttackCD: 0
+  heavyAttack: {fileID: 0}
+  heavyAttackCD: 0
+  animatorController: {fileID: 9100000, guid: a521ec6a564d04e409b0d289582f8210, type: 2}

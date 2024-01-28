@@ -49,6 +49,12 @@ namespace RPGbearfall
                 //SwitchCharacter(1);
                 SwitchCharacterInfo(2);
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && characters.Count > 0)
+            {
+                print("第四隻腳色");
+                //SwitchCharacter(1);
+                SwitchCharacterInfo(3);
+            }
             // 可根據需要添加更多按鍵和相應的切換邏輯
         }
 

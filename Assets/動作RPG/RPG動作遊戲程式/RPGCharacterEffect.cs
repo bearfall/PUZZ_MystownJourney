@@ -7,6 +7,16 @@ public class RPGCharacterEffect : MonoBehaviour
 {
     public List<PlayerInfo> playerInfos = new List<PlayerInfo>(); 
 
+    [Header("凱恩技能欲置物")]
+    public List<GameObject> kyanEffects = new List<GameObject>();
+    [Header("桑技能欲置物")]
+    public List<GameObject> samEffects = new List<GameObject>();
+    [Header("喬伊技能欲置物")]
+    public List<GameObject> joeyEffects = new List<GameObject>();
+    [Header("希瓦納技能欲置物")]
+    public List<GameObject> evannaEffects = new List<GameObject>();
+
+
     [Header("技能生成點")]
     public Transform effectSpawnPoint;
 
@@ -32,6 +42,32 @@ public class RPGCharacterEffect : MonoBehaviour
     {
         
     }
+
+
+    public void PlayKyanEffect(int effectNum)
+    {
+        Instantiate(kyanEffects[effectNum], effectSpawnPoint);
+    }
+
+    public void PlaySamEffect(int effectNum)
+    {
+        Instantiate(samEffects[effectNum], effectSpawnPoint);
+    }
+
+    public void PlayJoryEffect(int effectNum)
+    {
+        Instantiate(joeyEffects[effectNum], effectSpawnPoint);
+    }
+
+    public void PlayEvannaEffect(int effectNum)
+    {
+        Instantiate(evannaEffects[effectNum], effectSpawnPoint);
+    }
+
+
+
+
+
 
     public void PlayEffect(int effectNum)
     {
