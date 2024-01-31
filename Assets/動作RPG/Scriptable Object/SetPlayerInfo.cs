@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+
 using UnityEngine;
 using UnityEngine.UI;
 public class SetPlayerInfo : MonoBehaviour
@@ -16,7 +16,7 @@ public class SetPlayerInfo : MonoBehaviour
     public int characterNormalAttackCD;
     public GameObject characterHeavyAttack;
     public int characterHeavyAttackCD;
-    public Animator characterAnimator;
+    public RuntimeAnimatorController characterAnimator;
 
     private void Start()
     {
@@ -34,7 +34,7 @@ public class SetPlayerInfo : MonoBehaviour
         characterNormalAttackCD = playetInfo.normalAttackCD;
         characterHeavyAttack = playetInfo.heavyAttack;
         characterHeavyAttackCD = playetInfo.heavyAttackCD;
-        characterAnimator.runtimeAnimatorController = playetInfo.animatorController;
+        characterAnimator = playetInfo.animatorController;
 
 
     }

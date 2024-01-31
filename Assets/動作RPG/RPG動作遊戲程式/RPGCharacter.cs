@@ -51,7 +51,7 @@ namespace RPGbearfall
         [Header("最大HP(初期HP)")]
         public int maxHP; // 最大HP
 
-        public bool isDead;
+        
 
         
         public Animator anim;
@@ -77,8 +77,9 @@ namespace RPGbearfall
             
             if (nowHP ==0 )
             {
-                isDead = true;
-                anim.SetBool("Die", true);
+                playetInfo.isdie = true;
+                anim.SetInteger("die", 1);
+                StartCoroutine(AutoChangeCharacter());
             }
 
             if (isEnhance)
@@ -207,6 +208,22 @@ namespace RPGbearfall
             anim.runtimeAnimatorController = playetInfo.animatorController;
 
 
+        }
+
+
+        public IEnumerator AutoChangeCharacter()
+        {
+            yield return new WaitForSeconds(3f);
+
+            foreach (var player in playerInfos)
+            {
+                if (!player.isdie)
+                {
+                    playetInfo = player;
+                    SetPlayer();
+                    break;
+                }
+            }
         }
     }
 }

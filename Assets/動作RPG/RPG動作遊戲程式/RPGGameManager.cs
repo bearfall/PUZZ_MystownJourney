@@ -13,8 +13,11 @@ namespace RPGbearfall
         public UnityEngine.Rendering.Volume postProcessVolume;
         public UnityEngine.Rendering.Universal.DepthOfField dof;
 
-        public GameObject CMvcam1;
+        public Vector3 targetRotation = new Vector3(50f, 0f, 0f);
+        public float rotationSpeed = 1f;
 
+        public GameObject CMvcam1;
+        public bool rotationCM;
         //public GameObject GlobalVolume;
         [Header("場景限制範圍")]
         public GameObject menuConfiner;
@@ -40,9 +43,10 @@ namespace RPGbearfall
             currentArea = AreaType.GameMenu;
         }
 
-
+        
         public void StartGame()
         {
+            StartCoroutine(RotateObject());
             currentArea = AreaType.FreeExplore;
             dof.focusDistance.value = 257f;
             CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = menuConfiner.GetComponent<BoxCollider>();
@@ -51,24 +55,31 @@ namespace RPGbearfall
         // Update is called once per frame
         void Update()
         {
-            /*
-            if (Input.GetKeyDown(KeyCode.Mouse0) && nowRPGCharacter.canNormalAttack)
-            {
-                StartCoroutine(nowRPGCharacter.NormalAttack());
-            }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1) && nowRPGCharacter.canHeavyAttack)
-            {
-                StartCoroutine(nowRPGCharacter.HeavyAttack());
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-               StartCoroutine( nowRPGCharacter.HealPlayer(50));
-            }
-            */
+           
         }
 
+        IEnumerator RotateObject()
+        {
+            // 當前旋轉角度
+        
+            Vector3 currentRotation = CMvcam1.transform.eulerAngles;
+
+            // 循環進行旋轉直到達到目標旋轉角度
+            while (currentRotation != targetRotation)
+            {
+                // 使用 Quaternion.Slerp 進行插值旋轉，使旋轉更加平滑
+                Quaternion targetQuaternion = Quaternion.Euler(targetRotation);
+                Quaternion currentQuaternion = Quaternion.Euler(currentRotation);
+                CMvcam1.transform.rotation = Quaternion.Slerp(currentQuaternion, targetQuaternion, Time.deltaTime * rotationSpeed);
+
+                // 更新當前旋轉角度
+                currentRotation = CMvcam1.transform.eulerAngles;
+
+                // 等待一幀
+                yield return null;
+            }
+        }
 
         public void SetPlayer(RPGCharacter RPGCharacter)
         {

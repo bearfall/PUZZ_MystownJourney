@@ -29,7 +29,7 @@ namespace RPGbearfall
             rPGGameManager = GameObject.Find("RPGGameManager").GetComponent<RPGGameManager>();
             //testGUIManager = GameObject.Find("Manager").GetComponent<TestGUIManager>();
             musicManager = GameObject.Find("RPGGameManager").GetComponent<MusicManager>();
-            healthBar.SetActive(false);
+            //healthBar.SetActive(false);
         }
         private void Start()
         {
@@ -44,7 +44,7 @@ namespace RPGbearfall
 
         private void Update()
         {
-            if (rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && isMovement == true)
+            if (rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && isMovement == true && !nowRPGCharacter.playetInfo.isdie)
             {
 
 
@@ -86,17 +86,17 @@ namespace RPGbearfall
                 this.transform.Translate(Vector3.forward * Verticalinput * Time.deltaTime * speed);
                 //控制该物体向前后移动
             }
-            if (Input.GetKeyDown(KeyCode.Mouse0) && nowRPGCharacter.canNormalAttack && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && nowRPGCharacter.canNormalAttack && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie)
             {
                 StartCoroutine(nowRPGCharacter.NormalAttack());
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1) && nowRPGCharacter.canHeavyAttack && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore)
+            if (Input.GetKeyDown(KeyCode.Mouse1) && nowRPGCharacter.canHeavyAttack && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie)
             {
                 StartCoroutine(nowRPGCharacter.HeavyAttack());
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore)
+            if (Input.GetKeyDown(KeyCode.E) && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie)
             {
                 nowRPGCharacter.HealPlayer(50);
             }

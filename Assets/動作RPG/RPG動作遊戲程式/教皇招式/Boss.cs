@@ -141,6 +141,14 @@ public class Boss : MonoBehaviour
         }
         */
     }
+
+
+
+    public void StartBossAction()
+    {
+        stop = !stop;
+
+    }
     public IEnumerator SkillCanUse(int skillNum)
     {
         switch (skillNum)
