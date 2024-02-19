@@ -55,7 +55,7 @@ public class Boss : MonoBehaviour
 
 
             IntervalTime += Time.deltaTime;
-            if (IntervalTime > skillTime - 3)
+            if (IntervalTime > skillTime+1)
             {
                 UseRandomSkill();
                 IntervalTime = 0;

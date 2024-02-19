@@ -16,7 +16,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 2150d8a6e7c2bf140ababcf5b3e74f45, type: 3}
   originMaxHP: 50
   maxHP: 50
-  nowHP: 34
+  nowHP: -76
   originDef: 2
   def: 2
   originATK: 10
@@ -26,4 +26,4 @@ MonoBehaviour:
   heavyAttack: {fileID: 0}
   heavyAttackCD: 0
   animatorController: {fileID: 9100000, guid: 3b6258bb922a8594393e8753961412c3, type: 2}
-  isdie: 0
+  isdie: 1

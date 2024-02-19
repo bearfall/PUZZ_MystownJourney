@@ -223,6 +223,7 @@ namespace RPGbearfall
 
         public IEnumerator AutoChangeCharacter()
         {
+            canBeAttack = false;
             yield return new WaitForSeconds(3f);
 
             foreach (var player in playerInfos)

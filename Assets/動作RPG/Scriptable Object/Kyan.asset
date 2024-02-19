@@ -16,7 +16,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 7b604e9be4977574397d5b2db9e97e22, type: 3}
   originMaxHP: 50
   maxHP: 50
-  nowHP: -54
+  nowHP: -4
   originDef: 2
   def: 2
   originATK: 20
