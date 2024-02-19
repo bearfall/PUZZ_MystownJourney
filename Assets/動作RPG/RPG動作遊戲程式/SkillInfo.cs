@@ -13,7 +13,8 @@ namespace RPGbearfall
 
         public int normalDamageAmount;
         public int heavyDamageAmount;
-
+        public float canBenormalAttackCoolDown;
+        public float canBeHeavyAttackCoolDown;
         public bool isNormal;
         // Start is called before the first frame update
         void Start()
@@ -30,22 +31,27 @@ namespace RPGbearfall
         {
 
         }
+
         private void OnTriggerEnter(Collider other)
         {
             print(other.name);
-            if (other.CompareTag("Enemy"))
+            if (other.CompareTag("Enemy") && isNormal)
+            {
+                attackCharacter.beAttackEnemy = other.gameObject.GetComponent<RPGEnemyCharacter>();
+                attackCharacter.Attack(attackCharacter.beAttackEnemy, normalDamageAmount, canBenormalAttackCoolDown);
+
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            print(other.name);
+            if (other.CompareTag("Enemy") && !isNormal)
             {
 
                 attackCharacter.beAttackEnemy = other.gameObject.GetComponent<RPGEnemyCharacter>();
-
-                if (isNormal)
-                {
-                    attackCharacter.Attack(attackCharacter.beAttackEnemy, normalDamageAmount);
-                }
-                else
-                {
-                    attackCharacter.Attack(attackCharacter.beAttackEnemy, heavyDamageAmount);
-                }
+                attackCharacter.Attack(attackCharacter.beAttackEnemy, heavyDamageAmount, canBeHeavyAttackCoolDown);
+                
 
                 
             }

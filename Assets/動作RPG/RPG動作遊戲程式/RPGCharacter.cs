@@ -7,6 +7,10 @@ namespace RPGbearfall
     {
         public PlayerInfo playetInfo;
         public List<PlayerInfo> playerInfos = new List<PlayerInfo>();
+
+        public AudioSource audioSource;
+        public AudioClip levelUPSound;
+    
         [Header("角色名稱")]
         public string characterName;
         [Header("角色圖片")]
@@ -29,7 +33,7 @@ namespace RPGbearfall
 
         private float enhanceTimer;
         public bool isEnhance;
-
+        public bool triggerNormalAttackCD = false;
 
         /*
         private void OnEnable()
@@ -78,7 +82,7 @@ namespace RPGbearfall
             if (nowHP ==0 )
             {
                 playetInfo.isdie = true;
-                anim.SetInteger("die", 1);
+                anim.SetBool("die", true);
                 StartCoroutine(AutoChangeCharacter());
             }
 
@@ -98,6 +102,12 @@ namespace RPGbearfall
 
                 }
             }
+
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                ResetPlayer();
+            }
         }
         /*
         private void OnTriggerEnter(Collider other)
@@ -114,10 +124,10 @@ namespace RPGbearfall
         public IEnumerator NormalAttack()
         {
             anim.SetTrigger("NormalAttack");
-            canNormalAttack = false;
+            //canNormalAttack = false;
             //Instantiate(characterNormalAttack, effectSpawnPoint);
-            yield return new WaitForSeconds(normalAttackCollDown);
-            canNormalAttack = true;
+            yield return new WaitForSeconds(0);
+            //canNormalAttack = true;
         }
 
 
@@ -130,10 +140,10 @@ namespace RPGbearfall
             canHeavyAttack = true;
         }
 
-        public void Attack(RPGEnemyCharacter targetEnemy,int damageValue)
+        public void Attack(RPGEnemyCharacter targetEnemy,int damageValue,float canBeAttackCoolDown = 0)
         {
             var damage = damageValue - beAttackEnemy.def;
-           StartCoroutine(targetEnemy.TakeDamage(damage,0.3f));
+           StartCoroutine(targetEnemy.TakeDamage(damage,canBeAttackCoolDown));
         }
 
         public IEnumerator TakeDamage(int damage, float canBeAttackCoolDown)
@@ -224,6 +234,56 @@ namespace RPGbearfall
                     break;
                 }
             }
+            yield return new WaitForSeconds(4f);
+            canBeAttack = true;
         }
+
+        public IEnumerator SetPlayerNormalAttackCD(float CD)
+        {
+            if (triggerNormalAttackCD == false)
+            {
+                canNormalAttack = false;
+                CD = normalAttackCollDown;
+                yield return new WaitForSeconds(CD);
+                canNormalAttack = true;
+                triggerNormalAttackCD = false;
+            }
+        }
+
+        public void NormalAttackCD()
+        {
+            StartCoroutine(SetPlayerNormalAttackCD(normalAttackCollDown));
+        }
+
+
+        public void ResetPlayer()
+        {
+            foreach (var playerInfo in playerInfos)
+            {
+                playerInfo.maxHP = playerInfo.originMaxHP;
+                playerInfo.nowHP = playerInfo.originMaxHP;
+                playerInfo.def = playerInfo.originDef;
+                playerInfo.Attack = playerInfo.originATK;
+            }
+        }
+
+
+        public void PlayerLevelUP()
+        {
+            foreach (var playerInfo in playerInfos)
+            {
+                playerInfo.maxHP += 5;
+                playerInfo.def += 1;
+                playerInfo.Attack += 1;
+
+                playerInfo.nowHP = playerInfo.maxHP;
+            }
+            audioSource.PlayOneShot(levelUPSound);
+            SetPlayer();
+
+
+        }
+
+
     }
 }

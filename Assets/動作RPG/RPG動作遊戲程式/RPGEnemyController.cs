@@ -9,13 +9,18 @@ namespace RPGbearfall
     public enum RPGEnemyStates {GUARD, PATROL, CHASE,DEAD };
     public class RPGEnemyController : MonoBehaviour
     {
+        public int atk;
+
+
         public RPGEnemyCharacter rpgEnemyCharacter;
 
         public bool isGuard;
 
         private NavMeshAgent agent;
+        [Header("敵人角色動畫控制器")]
+        public Animator anim;
 
-        private RPGEnemyStates rPGEnemyStates;
+        public RPGEnemyStates rPGEnemyStates;
         public Transform targetPlayer;
         public RPGGameManager rPGGameManager;
 
@@ -32,11 +37,19 @@ namespace RPGbearfall
         public Vector3 wayPoint;
 
         private Vector3 guardPos;
+        [Header("搜索到玩家進行攻擊")]
+        public GameObject attakTarget;
 
-        private GameObject attakTarget;
+        [Header("攻擊距離")]
+        public float attackRange;
+
+        [Header("攻擊冷卻時間")]
+        public float atkCD;
 
         public float lookAtTime;
         private float remainLookAtTime;
+
+        public float lastAttackTime;
 
         public bool isWalk;
 
@@ -52,6 +65,7 @@ namespace RPGbearfall
         {
             //rPGEnemyState = GetComponent<RPGEnemyState>();
             agent = GetComponent<NavMeshAgent>();
+
             speed = agent.speed;
             guardPos = transform.position;
             guardRotation = transform.rotation;
@@ -82,7 +96,20 @@ namespace RPGbearfall
                 isDead = true;
             }
             SwitchState();
+            SwitchAnimation();
+            RotateEnemy();
+            lastAttackTime -= Time.deltaTime;
         }
+
+
+        public void SwitchAnimation()
+        {
+            anim.SetBool("Walk", isWalk);
+            anim.SetBool("Chase", isChase);
+            anim.SetBool("Follow", isFollow);
+            anim.SetBool("Death", isDead);
+        }
+
 
         void SwitchState()
         {
@@ -96,7 +123,7 @@ namespace RPGbearfall
             else if (FoundPlayer())
             {
                 rPGEnemyStates = RPGEnemyStates.CHASE;
-                print("找到玩家");
+                //print("找到玩家");
             }
             
 
@@ -152,6 +179,7 @@ namespace RPGbearfall
                     if (!FoundPlayer())
                     {
                         isFollow = false;
+                        agent.isStopped = false;
                         if (remainLookAtTime > 0)
                         {
                             agent.destination = transform.position;
@@ -172,13 +200,28 @@ namespace RPGbearfall
                         agent.destination = attakTarget.transform.position;
                     }
 
+                    if (TargetInAttackRange())
+                    {
+                        isFollow = false;
+                        agent.isStopped = true;
+
+                        if (lastAttackTime < 0)
+                        {
+                            lastAttackTime = atkCD;
+
+
+                            Attack();
+                        }
+
+                    }
+
+
+
+
                     break;
                 case RPGEnemyStates.DEAD:
 
                     agent.enabled = false;
-
-                    
-
                     Destroy(gameObject, 2f);
                     break;
                     
@@ -186,6 +229,26 @@ namespace RPGbearfall
                     break;
             }
         }
+
+        public void Attack()
+        {
+            anim.SetTrigger("Attack");
+            
+        }
+
+        public void RotateEnemy()
+        {
+
+            if (attakTarget != null && attakTarget.transform.position.x > gameObject.transform.position.x)
+            {
+                gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+            if (attakTarget != null && attakTarget.transform.position.x < gameObject.transform.position.x)
+            {
+                gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
+            }
+        }
+
 
         bool FoundPlayer()
         {
@@ -203,7 +266,20 @@ namespace RPGbearfall
             return false;
         }
 
-        
+        public bool TargetInAttackRange()
+        {
+            if (attakTarget != null)
+            {
+                return Vector3.Distance(attakTarget.transform.position, transform.position) <= attackRange;
+            }
+            else return false;
+        }
+        /*
+        public bool TargetInSkillRange()
+        {
+
+        }
+        */
 
         void GetNewWayPoint()
         {
@@ -224,5 +300,7 @@ namespace RPGbearfall
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, sightRadius);
         }
+
+        
     }
 }

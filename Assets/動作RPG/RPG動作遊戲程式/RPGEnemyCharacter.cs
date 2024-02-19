@@ -5,6 +5,10 @@ namespace RPGbearfall
 {
     public class RPGEnemyCharacter : MonoBehaviour
     {
+        
+
+
+
         [Header("角色名稱")]
         public string characterName;
 
@@ -17,7 +21,7 @@ namespace RPGbearfall
         [Header("普功")]
         public GameObject characterNormalAttack;
         public float normalAttackCollDown;
-        public bool canNormalAttack;
+        public bool canAttack;
 
         [Header("攻撃力")]
         public int playerAtk;
@@ -33,6 +37,7 @@ namespace RPGbearfall
 
         public bool isDead;
 
+        public bool triggerAttackCD;
 
         public Animator anim;
         public RPGCharacter beAttackEnemy;
@@ -57,6 +62,7 @@ namespace RPGbearfall
             {
                 isDead = true;
                 anim.SetBool("Die", true);
+                
             }
 
             
@@ -72,23 +78,36 @@ namespace RPGbearfall
             }
         }
         */
+        public IEnumerator SetEnemyAttackCD(float CD)
+        {
+            if (triggerAttackCD == false)
+            {
+                canAttack = false;
+                CD = normalAttackCollDown;
+                yield return new WaitForSeconds(CD);
+                canAttack = true;
+                triggerAttackCD = false;
+            }
+        }
+
+        public void NormalAttackCD()
+        {
+            StartCoroutine(SetEnemyAttackCD(normalAttackCollDown));
+        }
 
         public IEnumerator NormalAttack()
         {
             anim.SetTrigger("NormalAttack");
-            canNormalAttack = false;
-            //Instantiate(characterNormalAttack, effectSpawnPoint);
-            yield return new WaitForSeconds(normalAttackCollDown);
-            canNormalAttack = true;
+            yield return new WaitForSeconds(0);
         }
 
 
        
 
-        public void Attack(RPGCharacter targetChara, int damageValue)
+        public void Attack(RPGCharacter targetChara, int damageValue, float canBeAttackCoolDown = 0)
         {
-            var damage = damageValue - beAttackEnemy.def;
-            StartCoroutine(targetChara.TakeDamage(damage, 0.5f));
+            var damage = damageValue - targetChara.def;
+            StartCoroutine(targetChara.TakeDamage(damage,canBeAttackCoolDown));
         }
 
         public IEnumerator TakeDamage(int damage, float canBeAttackCoolDown)

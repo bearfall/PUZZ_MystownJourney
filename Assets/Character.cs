@@ -6,6 +6,10 @@ using UnityEngine.AI;
 
 public class Character : StateMachineBehaviour
 {
+
+
+
+    
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -22,6 +26,8 @@ public class Character : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.transform.parent.GetComponent<RPGPlayerController>().isMovement = true;
+        RPGCharacter character = GameObject.Find("´ú¸Õ¨¤¦â").GetComponent<RPGCharacter>();
+        character.NormalAttackCD();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -13,8 +13,10 @@ public class PlayerInfo : ScriptableObject
     */
     public string Name;
     public Sprite image;
+    public int originMaxHP;
     public int maxHP;
     public int nowHP;
+    public int originDef;
     public int def;
 
     public UnityAction<int> OnAttackChange;
@@ -23,7 +25,7 @@ public class PlayerInfo : ScriptableObject
     
 
     public GameObject normalAttack; 
-    public int normalAttackCD;
+    public float normalAttackCD;
     public GameObject heavyAttack;
     public int heavyAttackCD;
     public RuntimeAnimatorController animatorController;

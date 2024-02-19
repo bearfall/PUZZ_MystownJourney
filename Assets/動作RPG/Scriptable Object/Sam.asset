@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sam
   image: {fileID: 21300000, guid: 122f1bff04b9d3e4199f192413d812da, type: 3}
-  maxHP: 100
-  nowHP: 100
-  def: 10
+  originMaxHP: 50
+  maxHP: 50
+  nowHP: 42
+  originDef: 2
+  def: 2
   originATK: 10
   Attack: 10
   normalAttack: {fileID: 0}
@@ -24,3 +26,4 @@ MonoBehaviour:
   heavyAttack: {fileID: 0}
   heavyAttackCD: 0
   animatorController: {fileID: 9100000, guid: a521ec6a564d04e409b0d289582f8210, type: 2}
+  isdie: 0

@@ -13,7 +13,7 @@ public class SetPlayerInfo : MonoBehaviour
     public int characterDef;
     public int characterAtk;
     public GameObject characterNormalAttack;
-    public int characterNormalAttackCD;
+    public float characterNormalAttackCD;
     public GameObject characterHeavyAttack;
     public int characterHeavyAttackCD;
     public RuntimeAnimatorController characterAnimator;

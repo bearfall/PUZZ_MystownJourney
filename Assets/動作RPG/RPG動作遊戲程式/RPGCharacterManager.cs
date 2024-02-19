@@ -33,23 +33,23 @@ namespace RPGbearfall
         void Update()
         {
             // 監聽玩家按鍵輸入，進行角色切換
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !nowRPGCharacter.playetInfo.isdie)
             {
                 //SwitchCharacter(0);
                 SwitchCharacterInfo(0);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2) && characters.Count > 0)
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie)
             {
                 //SwitchCharacter(1);
                 SwitchCharacterInfo(1);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3) && characters.Count > 0)
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie)
             {
                 print("第三隻腳色");
                 //SwitchCharacter(1);
                 SwitchCharacterInfo(2);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha4) && characters.Count > 0)
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie)
             {
                 print("第四隻腳色");
                 //SwitchCharacter(1);
@@ -101,7 +101,7 @@ namespace RPGbearfall
         void SwitchCharacterInfo(int newIndex)
         {
             // 檢查索引是否有效
-            if (newIndex >= 0)
+            if (newIndex >= 0 && !nowRPGCharacter.playerInfos[newIndex].isdie)
             {
                 print("切換角色");
 

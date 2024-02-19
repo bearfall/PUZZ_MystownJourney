@@ -1,3 +1,4 @@
+using RPGbearfall;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.Playables;
 
 public class EnemyCounter : MonoBehaviour
 {
+    public RPGCharacter rPGCharacter;
     public int enemyAmount = 3;
     public PlayableDirector playableDirector;
     // Start is called before the first frame update
@@ -18,8 +20,21 @@ public class EnemyCounter : MonoBehaviour
     {
         if (enemyAmount <= 0)
         {
-            playableDirector.Play();
+            rPGCharacter.PlayerLevelUP();
+
+            if (playableDirector != null)
+            {
+                playableDirector.Play();
+            }
+            
             enemyAmount = 3;
+
         }
     }
+
+    
+
+
+    
+
 }
