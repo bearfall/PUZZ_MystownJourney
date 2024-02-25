@@ -147,6 +147,8 @@ public class Boss : MonoBehaviour
     public void StartBossAction()
     {
         stop = !stop;
+        IntervalTime = 0;
+        skillTime = 0;
 
     }
     public IEnumerator SkillCanUse(int skillNum)

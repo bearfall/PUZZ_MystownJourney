@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 namespace RPGbearfall
 {
     public class RPGEnemyCharacter : MonoBehaviour
@@ -35,6 +37,7 @@ namespace RPGbearfall
         [Header("目前HP")]
         public int nowHP;
 
+        
         public bool isDead;
 
         public bool triggerAttackCD;
@@ -61,8 +64,6 @@ namespace RPGbearfall
             if (nowHP == 0)
             {
                 isDead = true;
-                anim.SetBool("Die", true);
-                
             }
 
             

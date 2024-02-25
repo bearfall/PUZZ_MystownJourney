@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Evana
   image: {fileID: 21300000, guid: da7a19c32ab271a40b7c52cb55d12f73, type: 3}
-  originMaxHP: 50
-  maxHP: 50
-  nowHP: -4
+  originMaxHP: 100
+  maxHP: 100
+  nowHP: 100
   originDef: 2
   def: 2
   originATK: 20
@@ -28,4 +28,4 @@ MonoBehaviour:
     type: 3}
   heavyAttackCD: 1
   animatorController: {fileID: 9100000, guid: 866bdec477eac6c4ab06cee3a87e947a, type: 2}
-  isdie: 1
+  isdie: 0

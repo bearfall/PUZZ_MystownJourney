@@ -15,7 +15,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3026
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -36,17 +36,17 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0.05
-    - _CloudAlpha: 1.4
-    - _CloudPower: 1.5
-    - _ClouldScale: 120
-    - _DistortScale: 60
+    - _CloudAlpha: 0.9
+    - _CloudPower: 2.7
+    - _ClouldScale: 39.64
+    - _DistortScale: 59.4
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: 26
     - _VertexOffset: 0.05
     m_Colors:
-    - _Clolor: {r: 8.607292, g: 12.955306, b: 19.876633, a: 1}
-    - _ClouldSpeed: {r: 0, g: 0.005, b: 0, a: 0}
-    - _DistortSpeed: {r: 0, g: 0.005, b: 0, a: 0}
+    - _Clolor: {r: 7.1565185, g: 10.734778, b: 16.373247, a: 1}
+    - _ClouldSpeed: {r: 0, g: 0.01, b: 0, a: 0}
+    - _DistortSpeed: {r: 0, g: 0.01, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &278726917758880043
 MonoBehaviour:

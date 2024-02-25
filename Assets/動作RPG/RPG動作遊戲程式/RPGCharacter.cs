@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 namespace RPGbearfall
 {
     public class RPGCharacter : MonoBehaviour
     {
+        //public RPGCharacterEffect rpgCharacterEffect;
         public PlayerInfo playetInfo;
         public List<PlayerInfo> playerInfos = new List<PlayerInfo>();
+
+        [Header("復活點")]
+        public Transform resurrectionPoint;
+        public int playerAmount = 4;
+        public GameObject gameOverCanva;
 
         public AudioSource audioSource;
         public AudioClip levelUPSound;
@@ -24,8 +32,9 @@ namespace RPGbearfall
         public bool canNormalAttack;
 
         [Header("重攻擊")]
+        public Slider heavyAttackCollDownSlider;
         public GameObject characterHeavyAttack;
-        public float heavyAttackCollDown;
+        //public float heavyAttackCollDown;
         public bool canHeavyAttack;
 
         [Header("攻撃力")]
@@ -62,6 +71,10 @@ namespace RPGbearfall
         public RPGEnemyCharacter beAttackEnemy;
 
         public bool canBeAttack = true;
+        /*
+        public float canBeAttackTimer;
+        public bool isCanBeAttackTimer;
+        */
 
         public int nowHP;
         public HealthBar healthBar;
@@ -85,6 +98,33 @@ namespace RPGbearfall
                 anim.SetBool("die", true);
                 StartCoroutine(AutoChangeCharacter());
             }
+
+            if (playerAmount == 0)
+            {
+                gameOverCanva.SetActive(true);
+                playerAmount--;
+            }
+            /*
+            if (canBeAttack)
+            {
+                isCanBeAttackTimer = false;
+                
+            }
+            if (!canBeAttack)
+            {
+                isCanBeAttackTimer = true;
+            }
+            if (isCanBeAttackTimer)
+            {
+                canBeAttackTimer += Time.deltaTime;
+            }
+            if (canBeAttackTimer >= 1)
+            {
+                canBeAttack = true;
+                canBeAttackTimer = 0;
+            }
+            */
+
 
             if (isEnhance)
             {
@@ -133,11 +173,17 @@ namespace RPGbearfall
 
         public IEnumerator HeavyAttack()
         {
-            anim.SetTrigger("HeavyAttack");
-            canHeavyAttack = false;
-            // Instantiate(characterHeavyAttack, effectSpawnPoint);
-            yield return new WaitForSeconds(heavyAttackCollDown);
-            canHeavyAttack = true;
+            if (heavyAttackCollDownSlider.value <= 0)
+            {
+                anim.SetTrigger("HeavyAttack");
+                //canHeavyAttack = false;
+                // Instantiate(characterHeavyAttack, effectSpawnPoint);
+                //yield return new WaitForSeconds(heavyAttackCollDown);
+                yield return new WaitForSeconds(0);
+                heavyAttackCollDownSlider.value = 100;
+                //canHeavyAttack = true;
+            }
+            
         }
 
         public void Attack(RPGEnemyCharacter targetEnemy,int damageValue,float canBeAttackCoolDown = 0)
@@ -165,12 +211,15 @@ namespace RPGbearfall
                 }
                 healthBar.SetHealth(nowHP);
 
-                anim.SetTrigger("Hurt");
+                //anim.SetTrigger("Hurt");
 
                 yield return new WaitForSeconds(canBeAttackCoolDown);
+                print("能被攻擊");
                 canBeAttack = true;
-
-
+            }
+            else
+            {
+                yield break;
             }
         }
 
@@ -214,7 +263,7 @@ namespace RPGbearfall
             characterNormalAttack = playetInfo.normalAttack;
             normalAttackCollDown = playetInfo.normalAttackCD;
             characterHeavyAttack = playetInfo.heavyAttack;
-            heavyAttackCollDown = playetInfo.heavyAttackCD;
+            //heavyAttackCollDown = playetInfo.heavyAttackCD;
             anim.runtimeAnimatorController = playetInfo.animatorController;
 
 
@@ -265,8 +314,22 @@ namespace RPGbearfall
                 playerInfo.nowHP = playerInfo.originMaxHP;
                 playerInfo.def = playerInfo.originDef;
                 playerInfo.Attack = playerInfo.originATK;
+                playerInfo.isdie = false;
             }
         }
+
+        public void GameOverResetPlayer()
+        {
+            foreach (var playerInfo in playerInfos)
+            {
+                playerInfo.nowHP = playerInfo.maxHP;
+                playerInfo.isdie = false;
+            }
+            playerAmount = 4;
+            gameObject.transform.position = resurrectionPoint.position;
+            //rpgCharacterEffect.ResetImageColor();
+        }
+
 
 
         public void PlayerLevelUP()

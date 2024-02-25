@@ -5067,10 +5067,10 @@ MonoBehaviour:
   damageAmount: 20
   targetPlayer: {fileID: 0}
   rPGGameManager: {fileID: 0}
-  trackingSpeed: 2
+  trackingSpeed: 3.5
   trackingDuration: 2
   flyingSpeed: 2
-  rotationSpeed: 100
+  rotationSpeed: 200
   circleSpawner: {fileID: 0}
   bossSkillManager: {fileID: 0}
 --- !u!135 &6182302379052946361

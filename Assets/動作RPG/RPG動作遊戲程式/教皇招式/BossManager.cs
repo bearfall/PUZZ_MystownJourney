@@ -51,10 +51,10 @@ public class BossManager : MonoBehaviour
                 break;
             case Boss.BossSkill.Skill4:
                 // 處理技能2的效果
-                Instantiate(bossSkillManager.blackHolePrefeb, bossSkillManager.blackHoleTransform);
+                StartCoroutine(bossSkillManager.LaserSkill());
                 StartCoroutine(boss.SkillCanUse(4));
                 boss.skillTime = boss.skill4Interval;
-                Debug.Log("Boss 使用技能[黑洞]");
+                Debug.Log("Boss 使用技能[雷射]");
                 // 執行相應的處理邏輯
                 break;
             

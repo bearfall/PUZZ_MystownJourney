@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace RPGbearfall
 {
@@ -46,6 +47,12 @@ namespace RPGbearfall
         [Header("攻擊冷卻時間")]
         public float atkCD;
 
+        [Header("玩家重攻擊冷卻")]
+        public Slider slider;
+        public int sliderValue;
+
+        [Header("敵人碰撞器")]
+        public Collider enemyCollider;
         public float lookAtTime;
         private float remainLookAtTime;
 
@@ -91,9 +98,13 @@ namespace RPGbearfall
         void Update()
         {
             targetPlayer = rPGGameManager.nowRPGCharacter.transform;
+
             if (rpgEnemyCharacter.nowHP == 0)
             {
                 isDead = true;
+                enemyCollider.enabled = false;
+                slider.value -= sliderValue;
+                rpgEnemyCharacter.nowHP -= 1;
             }
             SwitchState();
             SwitchAnimation();

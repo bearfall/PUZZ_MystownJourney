@@ -41,6 +41,8 @@ public class BossSkillManager : MonoBehaviour
 
 
     [Header("閃電技能")]
+    [Header("閃電技能變難機率")]
+    public int strikeGetHarderChance;
     [Header("閃電技能預製物")]
     public GameObject objectToGenerate; // 要生成的物體
     [Header("閃電位置(無須設定)")]
@@ -71,6 +73,20 @@ public class BossSkillManager : MonoBehaviour
     public GameObject pointLight;
     [Header("關燈")]
     public bool start = false;
+
+    [Header("雷射技能")]
+    [Header("雷射技能預製物")]
+    public GameObject laserPrefab;
+    [Header("雷射生成點")]
+    public Transform[] spawnPoints; // 生成點
+    [Header("雷射速度")]
+    public float laserSpeed = 10f; // 雷射速度
+    [Header("技能持續時間")]
+    public float duration = 3f; // 技能持續時間
+    [Header("生成範圍半徑")]
+    public float laserSpawnRadius = 5f; // 生成範圍半徑
+
+
 
 
 
@@ -106,24 +122,6 @@ public class BossSkillManager : MonoBehaviour
 
     }
     
-    /*
-    public void RandomMovementBallSkill()
-    {
-        randomMovement.StartMove();
-    }
-    
-
-    public void BlackHoleSkill()
-    {
-        Instantiate(blackHolePrefeb, blackHoleTransform);
-    }
-    
-
-    public void RandomStrikeSkill()
-    {
-       StartCoroutine( randomStrike.GenerateObjects());
-    }
-    */
 
     #region 追蹤彈技能
     public void SpawnObjects()
@@ -255,7 +253,10 @@ public class BossSkillManager : MonoBehaviour
         {
 
             yield return new WaitForSeconds(waitStrikesTime);
-
+            if (GetHarder(strikeGetHarderChance))
+            {
+                SpawnObjects();
+            }
             for (int i = 0; i < numberOfStrikes; i++)
             {
                 Vector2 randomPos = centerPoint + Random.insideUnitCircle * spawnRadius;
@@ -307,6 +308,41 @@ public class BossSkillManager : MonoBehaviour
         return false; // 與其他物體足夠遠
     }
     #endregion
+
+    #region 雷射技能
+
+    public void StartLaserSkill()
+    {
+        StartCoroutine(LaserSkill());
+    }
+
+    public IEnumerator LaserSkill()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            foreach (Transform spawnPoint in spawnPoints)
+            {
+                // 在指定的範圍內隨機生成一個點
+                Vector3 randomDirection = Random.onUnitSphere;
+                Vector3 randomPoint = new Vector3(Random.Range(-laserSpawnRadius, laserSpawnRadius) + spawnPoint.position.x, spawnPoint.position.y, Random.Range(-laserSpawnRadius, laserSpawnRadius) + spawnPoint.position.z);
+
+                //float randomx = Random.Range(0.0f, 360f);
+
+                //GameObject laser = Instantiate(laserPrefab, randomPoint, new Quaternion(randomx, 0, 0, 0));
+                GameObject laser = Instantiate(laserPrefab, randomPoint, Quaternion.identity);
+                Destroy(laser, duration); // 在指定時間後銷毀雷射
+            }
+            yield return new WaitForSeconds(3f);
+        }
+    }
+    #endregion
+
+    public bool GetHarder(int chance)
+    {
+        int num = Random.Range(1, 100);
+        return num <= chance;
+    }
+
 }
 
 

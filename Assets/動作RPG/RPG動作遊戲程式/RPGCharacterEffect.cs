@@ -1,7 +1,9 @@
 using RPGbearfall;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RPGCharacterEffect : MonoBehaviour
 {
@@ -35,6 +37,9 @@ public class RPGCharacterEffect : MonoBehaviour
     [Header("技能生成點")]
     public Transform effectSpawnPoint;
 
+    [Header("頭像圖片")]
+    public List<Image> playerHeadImage = new List<Image>();
+
 
     public RPGCharacter rPGCharacter;
     public RPGEnemyCharacter rpGEnemyCharacter;
@@ -67,7 +72,8 @@ public class RPGCharacterEffect : MonoBehaviour
 
     public void PlayKyanEffect(int effectNum)
     {
-        Instantiate(kyanEffects[effectNum], effectSpawnPoint);
+        GameObject childObject = Instantiate(kyanEffects[effectNum], effectSpawnPoint);
+        DetachAndPreserveRotation(childObject);
     }
     public void PlayKyanSound(int musicNum)
     { 
@@ -76,7 +82,8 @@ public class RPGCharacterEffect : MonoBehaviour
 
     public void PlaySamEffect(int effectNum)
     {
-        Instantiate(samEffects[effectNum], effectSpawnPoint);
+       GameObject childObject = Instantiate(samEffects[effectNum], effectSpawnPoint);
+       DetachAndPreserveRotation(childObject);
     }
     public void PlaySamSound(int musicNum)
     {
@@ -85,7 +92,8 @@ public class RPGCharacterEffect : MonoBehaviour
 
     public void PlayJoryEffect(int effectNum)
     {
-        Instantiate(joeyEffects[effectNum], effectSpawnPoint);
+        GameObject childObject = Instantiate(joeyEffects[effectNum], effectSpawnPoint);
+        DetachAndPreserveRotation(childObject);
     }
     public void PlayJoeySound(int musicNum)
     {
@@ -94,7 +102,8 @@ public class RPGCharacterEffect : MonoBehaviour
 
     public void PlayEvannaEffect(int effectNum)
     {
-        Instantiate(evannaEffects[effectNum], effectSpawnPoint);
+        GameObject childObject = Instantiate(evannaEffects[effectNum], effectSpawnPoint);
+        DetachAndPreserveRotation(childObject);
     }
     public void PlayEvannaSound(int musicNum)
     {
@@ -106,9 +115,33 @@ public class RPGCharacterEffect : MonoBehaviour
         Instantiate(enemyEffects[effectNum], effectSpawnPoint);
     }
 
+    void DetachAndPreserveRotation(GameObject child)
+    {
+        // 取得子物件的世界空間座標和旋轉
+        Vector3 worldPosition = child.transform.position;
+        Quaternion worldRotation = child.transform.rotation;
 
+        // 解除子物件與父物件的父子關係
+        child.transform.SetParent(null);
 
+        // 將子物件置於世界空間中
+        child.transform.position = worldPosition;
+        child.transform.rotation = worldRotation;
+    }
 
+    public void SetImageRed(int imageNum)
+    {
+        playerHeadImage[imageNum].color = Color.red;
+        rPGCharacter.playerAmount--;
+    }
+
+    public void ResetImageColor()
+    {
+        foreach (var image in playerHeadImage)
+        {
+            image.color = Color.white;
+        }
+    }
 
 
     public void PlayEffect(int effectNum)

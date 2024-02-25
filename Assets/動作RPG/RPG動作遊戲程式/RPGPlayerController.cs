@@ -10,6 +10,8 @@ namespace RPGbearfall
         [Header("nowRPGCharacter")]
         public RPGCharacter nowRPGCharacter;
 
+        [Header("殘影效果")]
+        public GhostEffect ghostEffect;
 
         public bool isMovement = true;
         private NavMeshAgent agent;
@@ -20,8 +22,9 @@ namespace RPGbearfall
 
         public float horizontalinput;//水平参数
         public float Verticalinput;//垂直参数
-        float speed = 5f;//声明一个参数，没有规定
-
+        public float speed = 5f;//声明一个参数，没有规定
+        public bool isFlip;
+        public bool canFlash = true;
 
         private void Awake()
         {
@@ -58,12 +61,14 @@ namespace RPGbearfall
                     //print("轉身");
                     //gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
                     gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
+                    isFlip = true;
                     //gameObject.transform.GetChild(0).GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
                 }
                 else if (Input.GetKey(KeyCode.D)&& isMovement)
                 {
                     //gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
                     gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
+                    isFlip = false;
                     //gameObject.transform.GetChild(0).GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
                 }
 
@@ -91,7 +96,7 @@ namespace RPGbearfall
                 StartCoroutine(nowRPGCharacter.NormalAttack());
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1) && nowRPGCharacter.canHeavyAttack && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie)
+            if (Input.GetKeyDown(KeyCode.Mouse1) && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie)
             {
                 StartCoroutine(nowRPGCharacter.HeavyAttack());
             }
@@ -101,7 +106,7 @@ namespace RPGbearfall
                 nowRPGCharacter.HealPlayer(50);
             }
 
-
+            /*
             if (agent.velocity.magnitude == 0)
             {
                 // 角色在移動中
@@ -112,8 +117,30 @@ namespace RPGbearfall
                 // 角色未在移動
                 GetComponent<Collider>().enabled = false;
             }
+            */
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canFlash)
+            {
+                StartCoroutine(Flash());
+            }
+
+
         }
 
+
+        public IEnumerator Flash()
+        {
+            canFlash = false;
+            ghostEffect.ghostList.Clear();
+            ghostEffect.openGhoseEffect = true;
+            speed = 10f;
+            nowRPGCharacter.canBeAttack = false;
+            yield return new WaitForSeconds(0.5f);
+            ghostEffect.openGhoseEffect = false;
+            speed = 5f;
+            nowRPGCharacter.canBeAttack = true;
+            yield return new WaitForSeconds(5f);
+            canFlash = true;
+        }
 
         private IEnumerator OnTriggerEnter(Collider other)
         {
