@@ -1,4 +1,4 @@
-using RPGbearfall;
+ï»¿using RPGbearfall;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -10,34 +10,35 @@ public class RPGCharacterEffect : MonoBehaviour
     public List<PlayerInfo> playerInfos = new List<PlayerInfo>();
     public AudioSource audioSource;
 
-    [Header("³Í®¦§Ş¯à±ı¸mª«")]
+    [Header("å‡±æ©æŠ€èƒ½æ¬²ç½®ç‰©")]
     public List<GameObject> kyanEffects = new List<GameObject>();
-    [Header("³Í®¦§Ş¯à­µ®Ä")]
+    [Header("å‡±æ©æŠ€èƒ½éŸ³æ•ˆ")]
     public List<AudioClip> kyanMusics = new List<AudioClip>();
 
-    [Header("®á§Ş¯à±ı¸mª«")]
+    [Header("æ¡‘æŠ€èƒ½æ¬²ç½®ç‰©")]
     public List<GameObject> samEffects = new List<GameObject>();
-    [Header("®á§Ş¯à­µ®Ä")]
+    [Header("æ¡‘æŠ€èƒ½éŸ³æ•ˆ")]
     public List<AudioClip> samMusics = new List<AudioClip>();
 
-    [Header("³ì¥ì§Ş¯à±ı¸mª«")]
+    [Header("å–¬ä¼ŠæŠ€èƒ½æ¬²ç½®ç‰©")]
     public List<GameObject> joeyEffects = new List<GameObject>();
-    [Header("³ì¥ì§Ş¯à­µ®Ä")]
+    [Header("å–¬ä¼ŠæŠ€èƒ½éŸ³æ•ˆ")]
     public List<AudioClip> joeyMusics = new List<AudioClip>();
 
-    [Header("§Æ¥Ë¯Ç§Ş¯à±ı¸mª«")]
+    [Header("å¸Œç“¦ç´æŠ€èƒ½æ¬²ç½®ç‰©")]
     public List<GameObject> evannaEffects = new List<GameObject>();
-    [Header("§Æ¥Ë¯Ç§Ş¯à­µ®Ä")]
+    [Header("å¸Œç“¦ç´æŠ€èƒ½éŸ³æ•ˆ")]
     public List<AudioClip> evannaMusics = new List<AudioClip>();
 
-    [Header("¤h§L§Ş¯à±ı¸mª«")]
+    [Header("å£«å…µæŠ€èƒ½æ¬²ç½®ç‰©")]
     public List<GameObject> enemyEffects = new List<GameObject>();
+    [Header("æ“Šä¸­å£«å…µå¢åŠ èƒ½é‡æ•¸é‡")]
+    public int IncreaseHeavyAttackEnergyValue;
 
-
-    [Header("§Ş¯à¥Í¦¨ÂI")]
+    [Header("æŠ€èƒ½ç”Ÿæˆé»")]
     public Transform effectSpawnPoint;
 
-    [Header("ÀY¹³¹Ï¤ù")]
+    [Header("é ­åƒåœ–ç‰‡")]
     public List<Image> playerHeadImage = new List<Image>();
 
 
@@ -115,16 +116,32 @@ public class RPGCharacterEffect : MonoBehaviour
         Instantiate(enemyEffects[effectNum], effectSpawnPoint);
     }
 
+    public void StartEnemyAttackWorning()
+    {
+        gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 1);
+    }
+
+    public void StopEnemyAttackWorning()
+    {
+        gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 0);
+    }
+
+    public void IncreaseHeavyAttackEnergy()
+    {
+        rPGCharacter.heavyAttackCollDownSlider.value -= IncreaseHeavyAttackEnergyValue;
+    }
+
+
     void DetachAndPreserveRotation(GameObject child)
     {
-        // ¨ú±o¤lª«¥óªº¥@¬ÉªÅ¶¡®y¼Ğ©M±ÛÂà
+        // å–å¾—å­ç‰©ä»¶çš„ä¸–ç•Œç©ºé–“åº§æ¨™å’Œæ—‹è½‰
         Vector3 worldPosition = child.transform.position;
         Quaternion worldRotation = child.transform.rotation;
 
-        // ¸Ñ°£¤lª«¥ó»P¤÷ª«¥óªº¤÷¤lÃö«Y
+        // è§£é™¤å­ç‰©ä»¶èˆ‡çˆ¶ç‰©ä»¶çš„çˆ¶å­é—œä¿‚
         child.transform.SetParent(null);
 
-        // ±N¤lª«¥ó¸m©ó¥@¬ÉªÅ¶¡¤¤
+        // å°‡å­ç‰©ä»¶ç½®æ–¼ä¸–ç•Œç©ºé–“ä¸­
         child.transform.position = worldPosition;
         child.transform.rotation = worldRotation;
     }
