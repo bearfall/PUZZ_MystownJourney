@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 
 public class EnemyCounter : MonoBehaviour
 {
+    public RPGGameManager rpgGameManager;
     public RPGCharacter rPGCharacter;
     public int enemyAmount = 3;
     public PlayableDirector playableDirector;
@@ -26,7 +27,7 @@ public class EnemyCounter : MonoBehaviour
             {
                 playableDirector.Play();
             }
-            
+            rpgGameManager.currentArea = RPGGameManager.AreaType.Dialogue;
             enemyAmount = 3;
 
         }

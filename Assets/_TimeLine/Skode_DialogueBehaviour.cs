@@ -28,7 +28,7 @@ public class Skode_DialogueBehaviour : PlayableBehaviour
     /// <summary>
     /// 得到当前 PlayableDirector
     /// </summary>
-    PlayableDirector director;
+    public PlayableDirector director;
 
     public override void OnPlayableCreate(Playable playable)
     {

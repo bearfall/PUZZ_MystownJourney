@@ -2,21 +2,46 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraShake : MonoBehaviour
 {
-    public static CameraShake Instance;
+    
+    public CinemachineVirtualCamera cinemachineVirtualCamera;
+    private float shakeTimer;
+    
 
-    private void Awake() => Instance = this;
-
-
-    private void OnShake(float duration, float strength)
+    private void Awake()
     {
-        print("¬Û¾÷®Ì°Ê");
-        transform.DOShakePosition(duration, strength);
-        transform.DOShakeRotation(duration, strength);
+        
+        cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
     }
 
-    public static void Shake(float duration, float strength) => Instance.OnShake(duration, strength);
-    
+    public void ShakeCamera(float strength, float duration)
+    {
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
+            cinemachineVirtualCamera.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
+
+        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = strength;
+        shakeTimer = duration;
+    }
+
+
+    private void Update()
+    {
+        if (shakeTimer > 0)
+        {
+            shakeTimer -= Time.deltaTime;
+            if (shakeTimer <= 0f)
+            {
+                CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
+                   cinemachineVirtualCamera.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
+
+                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0f;
+            }
+        }
+    }
+
+
+
 }

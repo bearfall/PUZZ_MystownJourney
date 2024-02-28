@@ -33,6 +33,7 @@ namespace RPGbearfall
         {
             GameMenu,
             FreeExplore,
+            Dialogue,
             TurnBasedCombat
         }
         public AreaType currentArea;
@@ -86,6 +87,10 @@ namespace RPGbearfall
             nowRPGCharacter = RPGCharacter;
         }
 
-        
+        public void ChangeAreaToDialogue()
+        {
+            currentArea = RPGGameManager.AreaType.Dialogue;
+        }
+
     }
 }

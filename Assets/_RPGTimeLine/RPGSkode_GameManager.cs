@@ -6,6 +6,8 @@ using System;
 using Flower;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using RPGbearfall;
+
 public class RPGSkode_GameManager : MonoBehaviour
 {
     FlowerSystem flowerSys;
@@ -23,6 +25,15 @@ public class RPGSkode_GameManager : MonoBehaviour
     public Image image2;
 
     public List<Sprite> charactersImage;
+
+    [Header("對話系統相關")]
+    public RPGGameManager rpgGameManager;
+    public CMConfinerManager cmConfinerManager;
+    public CameraShake cameraShake;
+    public MainMissionManager mainMissionManager;
+
+    [Header("Boss相關系統")]
+    public Boss boss;
     private void Awake()
     {
         flowerSys = FlowerManager.Instance.CreateFlowerSystem("FlowerSample", false);
@@ -43,7 +54,12 @@ public class RPGSkode_GameManager : MonoBehaviour
         flowerSys.RegisterCommand("ShowImage2", ShowImage2);
         flowerSys.RegisterCommand("HideImage", HideImage);
         flowerSys.RegisterCommand("HideImage2", HideImage2);
-
+        flowerSys.RegisterCommand("StartBossFight", StartBossFight);
+        flowerSys.RegisterCommand("DoingDialogue", DoingDialogue);
+        flowerSys.RegisterCommand("StopDialogue", StopDialogue);
+        flowerSys.RegisterCommand("SwitchCMConfinerObj", SwitchCMConfinerObj);
+        flowerSys.RegisterCommand("ShakeCamera", ShakeCamera);
+        flowerSys.RegisterCommand("UnlockMission", UnlockMission);
 
     }
     private void Update()
@@ -156,6 +172,33 @@ public class RPGSkode_GameManager : MonoBehaviour
     }
 
 
+    public void StartBossFight(List<string> _params = null)
+    {
+        boss.StartBossAction();
+    }
 
+    public void DoingDialogue(List<string> _params = null)
+    {
+        rpgGameManager.currentArea = RPGGameManager.AreaType.Dialogue;
+    }
 
+    public void StopDialogue(List<string> _params = null)
+    {
+        rpgGameManager.currentArea = RPGGameManager.AreaType.FreeExplore;
+    }
+
+    public void SwitchCMConfinerObj(List<string> _params = null)
+    {
+        cmConfinerManager.SwitchCMConfinerObj(int.Parse(_params[0]));
+    }
+
+    public void ShakeCamera(List<string> _params = null)
+    {
+        cameraShake.ShakeCamera(float.Parse(_params[0]), float.Parse(_params[1]));
+    }
+
+    public void UnlockMission(List<string> _params = null)
+    {
+        mainMissionManager.UnlockMission(int.Parse(_params[0]));
+    }
 }

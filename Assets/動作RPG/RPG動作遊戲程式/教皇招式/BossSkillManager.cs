@@ -88,7 +88,7 @@ public class BossSkillManager : MonoBehaviour
 
 
 
-
+    public CameraShake cameraShake;
 
     public CircleSpawner circleSpawner;
 
@@ -205,7 +205,7 @@ public class BossSkillManager : MonoBehaviour
 
             // 等待一段時間
             yield return new WaitForSeconds(waitTime);
-            CameraShake.Shake(5f, 1.5f);
+            cameraShake.ShakeCamera(1.5f, 5f);
             characterMusicEffect.PlayAttackSoundEffect();
             objectsToMove.Clear();
 
