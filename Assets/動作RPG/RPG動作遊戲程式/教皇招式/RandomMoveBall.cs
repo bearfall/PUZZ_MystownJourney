@@ -9,13 +9,14 @@ namespace RPGbearfall
     {
 
         public Collider effectCollider;
+        public Collider effectCollider2;
         public int damageAmount;
         public float waitTime;
 
         // Start is called before the first frame update
         void Start()
         {
-            effectCollider.enabled = false;
+            //effectCollider.enabled = false;
             StartCoroutine(WaitTime());
         }
 
@@ -26,21 +27,23 @@ namespace RPGbearfall
         }
         private void OnTriggerStay(Collider player)
         {
-            print("即將受到傷害");
-            if (player.CompareTag("Player"))
+            
+            if (player.CompareTag("Player") && player.gameObject.GetComponent<RPGCharacter>().canBeAttack)
             {
+                
                 int damage = damageAmount;
 
                 print("受到傷害");
                 damage -= player.transform.GetComponent<RPGCharacter>().def;
-                StartCoroutine( player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0.2f));
+                StartCoroutine( player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0.5f));
             }
         }
 
         public IEnumerator WaitTime()
         {
             yield return new WaitForSeconds(waitTime);
-            effectCollider.enabled = true;
+            effectCollider.enabled = false;
+            effectCollider2.enabled = true;
             yield break;
         }
     }

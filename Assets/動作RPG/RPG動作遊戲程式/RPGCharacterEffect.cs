@@ -41,15 +41,13 @@ public class RPGCharacterEffect : MonoBehaviour
     [Header("頭像圖片")]
     public List<Image> playerHeadImage = new List<Image>();
 
-
+    [Header("獲取程式區域")]
     public RPGCharacter rPGCharacter;
     public RPGEnemyCharacter rpGEnemyCharacter;
-
     public RPGPlayerController rPGPlayerController;
-
     public EnemyCounter enemyCounter;
-
     public GameObject healEffect;
+    public CameraShake cameraShake;
 
 
     public List<GameObject> effects = new List<GameObject>();
@@ -223,5 +221,12 @@ public class RPGCharacterEffect : MonoBehaviour
     public void PlaySound(string effectName)
     {
 
+    }
+
+    
+
+    public void CameraShake(float dur)
+    {
+        cameraShake.ShakeCamera(1.5f,dur);
     }
 }

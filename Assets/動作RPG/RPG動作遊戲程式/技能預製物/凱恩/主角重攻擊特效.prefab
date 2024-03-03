@@ -14672,6 +14672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918ab44bb2f94844083bf0d52e97036c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMoveTime: 0
+  startMoveTimer: 0
+  duration: 5
 --- !u!1 &8559997842398633405
 GameObject:
   m_ObjectHideFlags: 0
@@ -19556,6 +19559,7 @@ GameObject:
   - component: {fileID: 1062884523}
   - component: {fileID: 3726185954577052581}
   - component: {fileID: 1062884525}
+  - component: {fileID: 4114996507184161639}
   m_Layer: 9
   m_Name: "\u4E3B\u89D2\u780D\u528D\u6C23"
   m_TagString: Untagged
@@ -24428,6 +24432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918ab44bb2f94844083bf0d52e97036c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMoveTime: 0
+  startMoveTimer: 0
+  duration: 5
 --- !u!65 &3726185954577052581
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24460,6 +24467,22 @@ MonoBehaviour:
   canBenormalAttackCoolDown: 0
   canBeHeavyAttackCoolDown: 0.5
   isNormal: 0
+--- !u!54 &4114996507184161639
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559997842522074357}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8559997842967577187
 GameObject:
   m_ObjectHideFlags: 0
@@ -29343,3 +29366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918ab44bb2f94844083bf0d52e97036c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMoveTime: 0
+  startMoveTimer: 0
+  duration: 5

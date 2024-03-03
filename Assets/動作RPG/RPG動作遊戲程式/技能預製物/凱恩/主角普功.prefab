@@ -4232,7 +4232,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   CustomDataModule:
-    enabled: 1
+    enabled: 0
     mode0: 1
     vectorComponentCount0: 1
     color0:
@@ -4898,6 +4898,8 @@ MonoBehaviour:
   playerInfo: {fileID: 11400000, guid: b957876321f1e904cb088d77e0b8f813, type: 2}
   normalDamageAmount: 0
   heavyDamageAmount: 0
+  canBenormalAttackCoolDown: 0
+  canBeHeavyAttackCoolDown: 0
   isNormal: 1
 --- !u!114 &4711039311068708785
 MonoBehaviour:

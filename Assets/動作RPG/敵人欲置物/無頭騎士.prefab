@@ -515,9 +515,7 @@ MonoBehaviour:
   evannaEffects: []
   evannaMusics: []
   enemyEffects:
-  - {fileID: 1488461224044720771, guid: df63c654de9264d4083706052ef5065a, type: 3}
-  - {fileID: 1488461224044720771, guid: df63c654de9264d4083706052ef5065a, type: 3}
-  - {fileID: 1488461224044720771, guid: df63c654de9264d4083706052ef5065a, type: 3}
+  - {fileID: 7867222987906313654, guid: 94995cedad6277447a0626278505834b, type: 3}
   IncreaseHeavyAttackEnergyValue: 50
   effectSpawnPoint: {fileID: 4542444814123670570}
   playerHeadImage: []
@@ -526,6 +524,7 @@ MonoBehaviour:
   rPGPlayerController: {fileID: 0}
   enemyCounter: {fileID: 0}
   healEffect: {fileID: 0}
+  cameraShake: {fileID: 0}
   effects: []
 --- !u!114 &2094172210081244606
 MonoBehaviour:
@@ -770,6 +769,7 @@ MonoBehaviour:
   beAttackEnemy: {fileID: 0}
   canBeAttack: 1
   healthBar: {fileID: 3209067855331420913}
+  wizlow: {fileID: 0}
 --- !u!114 &3209067856152958378
 MonoBehaviour:
   m_ObjectHideFlags: 0

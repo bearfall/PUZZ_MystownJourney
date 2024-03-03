@@ -94,11 +94,17 @@ namespace RPGbearfall
         // Update is called once per frame
         void Update()
         {
-            
+            if (heavyAttackCollDownSlider.value != 0)
+            {
+                heavyAttackCollDownSlider.value -= Time.deltaTime * 10;
+            }
+
             if (nowHP ==0 )
             {
                 playetInfo.isdie = true;
                 anim.SetBool("die", true);
+                nowHP--;
+                print("沒血了，換角");
                 StartCoroutine(AutoChangeCharacter());
             }
 
@@ -218,7 +224,11 @@ namespace RPGbearfall
 
                 yield return new WaitForSeconds(canBeAttackCoolDown);
                 print("能被攻擊");
-                canBeAttack = true;
+                if (nowHP > 0)
+                {
+                    canBeAttack = true;
+                }
+                
             }
             else
             {
@@ -287,7 +297,9 @@ namespace RPGbearfall
                     break;
                 }
             }
+            print("選完腳色，在四秒能被攻擊");
             yield return new WaitForSeconds(4f);
+            print("換角完成，能被攻擊");
             canBeAttack = true;
         }
 

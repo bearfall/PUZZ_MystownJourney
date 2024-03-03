@@ -99,7 +99,7 @@ namespace RPGbearfall
         {
             targetPlayer = rPGGameManager.nowRPGCharacter.transform;
 
-            if (rpgEnemyCharacter.nowHP == 0)
+            if (rpgEnemyCharacter.nowHP == -1)
             {
                 isDead = true;
                 enemyCollider.enabled = false;

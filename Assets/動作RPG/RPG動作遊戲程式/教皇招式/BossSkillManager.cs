@@ -87,7 +87,7 @@ public class BossSkillManager : MonoBehaviour
     public float laserSpawnRadius = 5f; // 生成範圍半徑
 
 
-
+    public Boss boss;
     public CameraShake cameraShake;
 
     public CircleSpawner circleSpawner;
@@ -251,35 +251,39 @@ public class BossSkillManager : MonoBehaviour
         pointLight.SetActive(true);
         for (int j = 0; j < strikesAmount; j++)
         {
-
-            yield return new WaitForSeconds(waitStrikesTime);
-            if (GetHarder(strikeGetHarderChance))
+            if (!boss.stop)
             {
-                SpawnObjects();
-            }
-            for (int i = 0; i < numberOfStrikes; i++)
-            {
-                Vector2 randomPos = centerPoint + Random.insideUnitCircle * spawnRadius;
+                
 
-                // 檢查與其他物體的距離
-                while (IsTooCloseToOthers(randomPos))
+                yield return new WaitForSeconds(waitStrikesTime);
+                if (GetHarder(strikeGetHarderChance))
                 {
-                    randomPos = centerPoint + Random.insideUnitCircle * spawnRadius;
+                    SpawnObjects();
+                }
+                for (int i = 0; i < numberOfStrikes; i++)
+                {
+                    Vector2 randomPos = centerPoint + Random.insideUnitCircle * spawnRadius;
+
+                    // 檢查與其他物體的距離
+                    while (IsTooCloseToOthers(randomPos))
+                    {
+                        randomPos = centerPoint + Random.insideUnitCircle * spawnRadius;
+                    }
+
+                    strikesTransform.Add(new Vector3(randomPos.x, 0f, randomPos.y));
+                    // 實例化物體
+                    Instantiate(warningRangeObject, new Vector3(randomPos.x, 0.3f, randomPos.y), Quaternion.identity);
                 }
 
-                strikesTransform.Add(new Vector3(randomPos.x, 0f, randomPos.y));
-                // 實例化物體
-                Instantiate(warningRangeObject, new Vector3(randomPos.x, 0.3f, randomPos.y), Quaternion.identity);
-            }
+                yield return new WaitForSeconds(2f);
+                foreach (var strikeTransform in strikesTransform)
+                {
+                    Instantiate(objectToGenerate, strikeTransform, Quaternion.identity);
 
-            yield return new WaitForSeconds(2f);
-            foreach (var strikeTransform in strikesTransform)
-            {
-                Instantiate(objectToGenerate, strikeTransform, Quaternion.identity);
-
+                }
+                audioSource.Play();
+                strikesTransform.Clear();
             }
-            audioSource.Play();
-            strikesTransform.Clear();
         }
 
         yield return new WaitForSeconds(1f);

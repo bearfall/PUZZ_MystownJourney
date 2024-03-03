@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 8127580013462663764}
   - component: {fileID: 1700790550312895445}
   - component: {fileID: 7637518727106081857}
-  - component: {fileID: 2312164983688657816}
-  - component: {fileID: 2804657662493483009}
   m_Layer: 0
   m_Name: "\u79FB\u52D5\u7403\u706B\u67F1"
   m_TagString: Untagged
@@ -4872,35 +4870,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!136 &2312164983688657816
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078392458243616841}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1.0081253
-  m_Height: 3.180697
-  m_Direction: 1
-  m_Center: {x: -0.014820862, y: 0.5865189, z: 0}
---- !u!114 &2804657662493483009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078392458243616841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 399aac529da513b47a2e2bc2ee29efc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectCollider: {fileID: 2312164983688657816}
-  damageAmount: 20
-  waitTime: 10
 --- !u!1 &2006371301524063516
 GameObject:
   m_ObjectHideFlags: 0
@@ -4913,6 +4882,7 @@ GameObject:
   - component: {fileID: 2006371301524063519}
   - component: {fileID: 2006371301524063518}
   - component: {fileID: 3855901601117557327}
+  - component: {fileID: 6017887723942078347}
   - component: {fileID: 6144681186199228579}
   - component: {fileID: 4325748441591566536}
   m_Layer: 0
@@ -9983,6 +9953,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &6017887723942078347
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006371301524063516}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Radius: 3.4443135
+  m_Height: 15.923647
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.909669, z: 0}
 --- !u!114 &6144681186199228579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10009,8 +9993,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectCollider: {fileID: 3855901601117557327}
+  effectCollider2: {fileID: 6017887723942078347}
   damageAmount: 20
-  waitTime: 0
+  waitTime: 9
 --- !u!1 &8739417035844333764
 GameObject:
   m_ObjectHideFlags: 0
@@ -10022,7 +10007,6 @@ GameObject:
   - component: {fileID: 7180703145825769770}
   - component: {fileID: 3079519511102724167}
   - component: {fileID: 8942635993232475271}
-  - component: {fileID: 8224854705509809239}
   m_Layer: 0
   m_Name: "\u79FB\u52D5\u7403\u5149\u67F1"
   m_TagString: Untagged
@@ -14882,17 +14866,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!136 &8224854705509809239
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8739417035844333764}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1.0081253
-  m_Height: 3.180697
-  m_Direction: 1
-  m_Center: {x: -0.014820862, y: 0.5865189, z: 0}

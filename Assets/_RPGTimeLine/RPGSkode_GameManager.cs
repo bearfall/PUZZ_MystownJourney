@@ -34,6 +34,7 @@ public class RPGSkode_GameManager : MonoBehaviour
 
     [Header("Boss相關系統")]
     public Boss boss;
+    public Wizlow wizlow;
     private void Awake()
     {
         flowerSys = FlowerManager.Instance.CreateFlowerSystem("FlowerSample", false);
@@ -60,6 +61,8 @@ public class RPGSkode_GameManager : MonoBehaviour
         flowerSys.RegisterCommand("SwitchCMConfinerObj", SwitchCMConfinerObj);
         flowerSys.RegisterCommand("ShakeCamera", ShakeCamera);
         flowerSys.RegisterCommand("UnlockMission", UnlockMission);
+        flowerSys.RegisterCommand("StartWizlowFight", StartWizlowFight);
+
 
     }
     private void Update()
@@ -175,6 +178,11 @@ public class RPGSkode_GameManager : MonoBehaviour
     public void StartBossFight(List<string> _params = null)
     {
         boss.StartBossAction();
+    }
+
+    public void StartWizlowFight(List<string> _params = null)
+    {
+        wizlow.StartwizlowAction();
     }
 
     public void DoingDialogue(List<string> _params = null)

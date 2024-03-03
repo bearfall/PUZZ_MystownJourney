@@ -7,10 +7,6 @@ namespace RPGbearfall
 {
     public class RPGEnemyCharacter : MonoBehaviour
     {
-        
-
-
-
         [Header("角色名稱")]
         public string characterName;
 
@@ -49,6 +45,10 @@ namespace RPGbearfall
 
         [Header("血條")]
         public HealthBar healthBar;
+
+
+        [Header("Boss相關")]
+        public Wizlow wizlow;
         // Start is called before the first frame update
         void Start()
         {
@@ -60,10 +60,17 @@ namespace RPGbearfall
         // Update is called once per frame
         void Update()
         {
+            
 
             if (nowHP == 0)
             {
                 isDead = true;
+                anim.SetBool("die", isDead);
+                if (wizlow != null)
+                {
+                    wizlow.StartwizlowAction();
+                }
+                nowHP--;
             }
 
             

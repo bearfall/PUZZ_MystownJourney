@@ -34,9 +34,10 @@ namespace RPGbearfall
 
         private void OnTriggerEnter(Collider other)
         {
-            print(other.name);
+            
             if (other.CompareTag("Enemy") && isNormal)
             {
+                print(other.name);
                 attackCharacter.beAttackEnemy = other.gameObject.GetComponent<RPGEnemyCharacter>();
                 attackCharacter.Attack(attackCharacter.beAttackEnemy, normalDamageAmount, canBenormalAttackCoolDown);
 
