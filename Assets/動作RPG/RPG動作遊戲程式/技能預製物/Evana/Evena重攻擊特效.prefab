@@ -4843,7 +4843,8 @@ MonoBehaviour:
   attackCharacter: {fileID: 0}
   playerInfo: {fileID: 11400000, guid: 2a93ebe445a25e1489007e3b4668b9e8, type: 2}
   normalDamageAmount: 0
-  heavyDamageAmount: 0
+  heavyDamageAmount: 100
+  heavyMultiple: 0
   canBenormalAttackCoolDown: 0
   canBeHeavyAttackCoolDown: 0.5
   isNormal: 0

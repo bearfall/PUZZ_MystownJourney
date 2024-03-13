@@ -28,7 +28,7 @@ namespace bearfall
         }
         private void Start()
         {
-            musicManager.PlayBackgroundMusic(MusicManager.SoundType.explore);
+            musicManager.PlayBackgroundMusic(0);
             MouseManager.Instance.OnMouseClicked += MoveToTarget;
         }
         public void MoveToTarget(Vector3Int target)
@@ -113,7 +113,7 @@ namespace bearfall
                 Vector3 newPosition = new Vector3(Mathf.RoundToInt(transform.position.x), transform.position.y, Mathf.RoundToInt(transform.position.z));
                 transform.position = newPosition;
                 testGameManager1.ChangeMyTurnStart();
-                musicManager.PlayBackgroundMusic(MusicManager.SoundType.battle);
+                //musicManager.PlayBackgroundMusic(MusicManager.SoundType.battle);
                 
                 healthBar.SetActive(true);
                 

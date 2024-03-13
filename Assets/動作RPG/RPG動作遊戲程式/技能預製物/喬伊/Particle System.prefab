@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6433624947536687055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.27, y: 0.48, z: 0}
-  m_LocalScale: {x: 2.6918519, y: 2.4707263, z: 1.5}
+  m_LocalPosition: {x: -0.27, y: 0.58, z: 0}
+  m_LocalScale: {x: 2, y: 1.74, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -288,7 +288,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4897,8 +4897,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5151569, y: 0.545972, z: 0.9177909}
-  m_Center: {x: 0.5270467, y: -0.15244669, z: -0.03348025}
+  m_Size: {x: 0.97392344, y: 0.545972, z: 1.6275142}
+  m_Center: {x: 0.29766333, y: -0.15244669, z: -0.00011078517}
 --- !u!114 &874556558989069271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4915,4 +4915,7 @@ MonoBehaviour:
   playerInfo: {fileID: 11400000, guid: b008403e556c5f041a09207ed726c0e2, type: 2}
   normalDamageAmount: 0
   heavyDamageAmount: 0
+  heavyMultiple: 0
+  canBenormalAttackCoolDown: 0
+  canBeHeavyAttackCoolDown: 0
   isNormal: 1

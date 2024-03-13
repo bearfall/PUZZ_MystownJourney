@@ -36,7 +36,7 @@ namespace RPGbearfall
         }
         private void Start()
         {
-            musicManager.PlayBackgroundMusic(MusicManager.SoundType.explore);
+            musicManager.PlayBackgroundMusic(0);
             //MouseManager.Instance.OnMouseClicked += MoveToTarget;
         }
         public void MoveToTarget(Vector3Int target)
@@ -138,7 +138,7 @@ namespace RPGbearfall
             ghostEffect.openGhoseEffect = false;
             speed = 5f;
             nowRPGCharacter.canBeAttack = true;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
             canFlash = true;
         }
 
@@ -164,7 +164,7 @@ namespace RPGbearfall
                 Vector3 newPosition = new Vector3(Mathf.RoundToInt(transform.position.x), transform.position.y, Mathf.RoundToInt(transform.position.z));
                 transform.position = newPosition;
                 //rPGGameManager.ChangeMyTurnStart();
-                musicManager.PlayBackgroundMusic(MusicManager.SoundType.battle);
+                musicManager.PlayBackgroundMusic(0);
 
                 healthBar.SetActive(true);
 

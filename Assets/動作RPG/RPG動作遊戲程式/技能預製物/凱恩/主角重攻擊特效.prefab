@@ -285,7 +285,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.61
+      scalar: 0.8
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10075,7 +10075,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -19834,7 +19834,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -24463,7 +24463,8 @@ MonoBehaviour:
   attackCharacter: {fileID: 0}
   playerInfo: {fileID: 11400000, guid: b957876321f1e904cb088d77e0b8f813, type: 2}
   normalDamageAmount: 0
-  heavyDamageAmount: 0
+  heavyDamageAmount: 750
+  heavyMultiple: 0
   canBenormalAttackCoolDown: 0
   canBeHeavyAttackCoolDown: 0.5
   isNormal: 0
@@ -24769,7 +24770,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2

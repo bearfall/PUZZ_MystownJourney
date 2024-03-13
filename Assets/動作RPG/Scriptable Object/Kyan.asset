@@ -19,8 +19,8 @@ MonoBehaviour:
   nowHP: 100
   originDef: 2
   def: 2
-  originATK: 20
-  Attack: 20
+  originATK: 300
+  Attack: 300
   normalAttack: {fileID: 7831768346548232607, guid: 507ebc7e1ba771b4d9b2be07e81d81ea,
     type: 3}
   normalAttackCD: 1

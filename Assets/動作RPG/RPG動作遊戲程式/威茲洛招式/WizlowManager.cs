@@ -24,7 +24,7 @@ public class WizlowManager : MonoBehaviour
         {
             case Wizlow.WizlowSkill.Skill1:
                 // 處理技能1的效果
-                wizlowSkillManager.ShockWave();
+                StartCoroutine(wizlowSkillManager.ShockWave());
                 StartCoroutine(wizlow.SkillCanUse(1));
                 wizlow.skillTime = wizlow.skill1Interval;
                 Debug.Log("Boss 使用技能[衝擊波]");
@@ -32,27 +32,27 @@ public class WizlowManager : MonoBehaviour
                 break;
             case Wizlow.WizlowSkill.Skill2:
                 // 處理技能2的效果
-                wizlowSkillManager.StartRockSkill();
+                wizlowSkillManager.StartRush();
                 StartCoroutine(wizlow.SkillCanUse(2));
                 wizlow.skillTime = wizlow.skill2Interval;
-                Debug.Log("Boss 使用技能[岩石]");
+                Debug.Log("Boss 使用技能[衝鋒]");
                 // 執行相應的處理邏輯
                 break;
             // 添加其他技能的 case 分支
             case Wizlow.WizlowSkill.Skill3:
                 // 處理技能2的效果
-                wizlowSkillManager.ShockWave();
+                StartCoroutine(wizlowSkillManager.GP());
                 StartCoroutine(wizlow.SkillCanUse(3));
                 wizlow.skillTime = wizlow.skill3Interval;
-                Debug.Log("Boss 使用技能[衝擊波]");
+                Debug.Log("Boss 使用技能[GP]");
                 // 執行相應的處理邏輯
                 break;
             case Wizlow.WizlowSkill.Skill4:
                 // 處理技能2的效果
-                wizlowSkillManager.StartRockSkill();
+                StartCoroutine(wizlowSkillManager.ThrowingWeapon());
                 StartCoroutine(wizlow.SkillCanUse(4));
                 wizlow.skillTime = wizlow.skill4Interval;
-                Debug.Log("Boss 使用技能[岩石]");
+                Debug.Log("Boss 使用技能[丟長槍]");
                 // 執行相應的處理邏輯
                 break;
 

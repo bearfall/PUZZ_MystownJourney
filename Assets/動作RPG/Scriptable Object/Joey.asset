@@ -19,8 +19,8 @@ MonoBehaviour:
   nowHP: 100
   originDef: 2
   def: 2
-  originATK: 10
-  Attack: 10
+  originATK: 70
+  Attack: 70
   normalAttack: {fileID: 0}
   normalAttackCD: 0
   heavyAttack: {fileID: 0}

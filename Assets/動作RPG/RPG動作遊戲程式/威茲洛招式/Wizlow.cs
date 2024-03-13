@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Wizlow : MonoBehaviour
 {
+    public Transform attakTarget;
+
     public enum WizlowSkill
     {
         Skill1,
@@ -49,6 +51,7 @@ public class Wizlow : MonoBehaviour
 
     private void Update()
     {
+        RotateEnemy();
 
         if (!stop)
         {
@@ -113,33 +116,10 @@ public class Wizlow : MonoBehaviour
         else if (!canUseSkill)
         {
             print("無法使用" + randomSkill + "技能");
-            IntervalTime = skillTime - 1;
+            skillTime = 1;
+            //IntervalTime = skillTime - 1;
         }
 
-        /*
-        switch (randomSkill)
-        {
-            
-            case BossSkill.Skill1:
-                CancelInvoke("UseRandomSkill"); // 取消之前的 InvokeRepeating
-                InvokeRepeating("UseRandomSkill", skill1Interval, skill1Interval);
-                break;
-            case BossSkill.Skill2:
-                CancelInvoke("UseRandomSkill");
-                InvokeRepeating("UseRandomSkill", skill2Interval, skill2Interval);
-                break;
-            case BossSkill.Skill3:
-                CancelInvoke("UseRandomSkill");
-                InvokeRepeating("UseRandomSkill", skill3Interval, skill3Interval);
-                break;
-            case BossSkill.Skill4:
-                CancelInvoke("UseRandomSkill");
-                InvokeRepeating("UseRandomSkill", skill4Interval, skill4Interval);
-                break;
-            
-
-        }
-        */
     }
 
 
@@ -177,5 +157,19 @@ public class Wizlow : MonoBehaviour
                 break;
         }
     }
+    
+    public void RotateEnemy()
+    {
+
+        if (attakTarget != null && attakTarget.transform.position.x > gameObject.transform.position.x)
+        {
+            gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        if (attakTarget != null && attakTarget.transform.position.x < gameObject.transform.position.x)
+        {
+            gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+    }
+    
 }
 

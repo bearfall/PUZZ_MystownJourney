@@ -44,7 +44,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8536113230836398030}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -119,7 +119,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -288,7 +288,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4888,9 +4888,10 @@ MonoBehaviour:
   attackCharacter: {fileID: 0}
   playerInfo: {fileID: 11400000, guid: b008403e556c5f041a09207ed726c0e2, type: 2}
   normalDamageAmount: 0
-  heavyDamageAmount: 0
+  heavyDamageAmount: 40
+  heavyMultiple: 0
   canBenormalAttackCoolDown: 0
-  canBeHeavyAttackCoolDown: 0.3
+  canBeHeavyAttackCoolDown: 0.25
   isNormal: 0
 --- !u!65 &1408042730754572545
 BoxCollider:
@@ -4903,8 +4904,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.93, y: 3.2227201, z: 3.2227201}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5.6443753, y: 5.550407, z: 3.2227201}
+  m_Center: {x: -0.04551601, y: 0.03890489, z: -1.5023744e-16}
 --- !u!114 &3772703369922391687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4917,4 +4918,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destiryTime: 2
+  destiryTime: 4

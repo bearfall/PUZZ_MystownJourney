@@ -19,11 +19,11 @@ MonoBehaviour:
   nowHP: 100
   originDef: 2
   def: 2
-  originATK: 10
-  Attack: 10
+  originATK: 150
+  Attack: 150
   normalAttack: {fileID: 0}
   normalAttackCD: 1
   heavyAttack: {fileID: 0}
   heavyAttackCD: 3
   animatorController: {fileID: 9100000, guid: a521ec6a564d04e409b0d289582f8210, type: 2}
-  isdie: 1
+  isdie: 0

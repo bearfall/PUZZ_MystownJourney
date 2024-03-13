@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 namespace RPGbearfall
 {
@@ -12,6 +13,7 @@ namespace RPGbearfall
         public List<PlayerInfo> playerInfos = new List<PlayerInfo>();
 
         [Header("復活點")]
+        public RPGGameManager rpgGameManager;
         public Transform resurrectionPoint;
         public int playerAmount = 4;
         public GameObject gameOverCanva;
@@ -44,6 +46,10 @@ namespace RPGbearfall
         public bool isEnhance;
         public bool triggerNormalAttackCD = false;
 
+        [Header("回血次數")]
+        public int healNum = 3;
+        public Text healText;
+
         /*
         private void OnEnable()
         {
@@ -69,6 +75,8 @@ namespace RPGbearfall
         
         public Animator anim;
         public RPGEnemyCharacter beAttackEnemy;
+
+        public RPGCharacterEffect rpgCharacterEffect;
 
         public bool canBeAttack = true;
         /*
@@ -210,7 +218,7 @@ namespace RPGbearfall
 
 
                 playetInfo.nowHP -= damage;
-
+                anim.SetTrigger("hurt");
                 print("受到"+ damage + "傷害!");
 
                 nowHP -= damage;
@@ -238,14 +246,25 @@ namespace RPGbearfall
 
         public void HealPlayer(int healAmount)
         {
-            nowHP += healAmount;
-
-            if (nowHP >= maxHP)
+            if (healNum > 0)
             {
-                nowHP = maxHP;
+                playetInfo.nowHP += healAmount;
+                nowHP += healAmount;
+
+                if (nowHP >= maxHP)
+                {
+                    nowHP = maxHP;
+                }
+                healthBar.SetHealth(nowHP);
+                gameObject.transform.GetChild(0).GetComponent<RPGCharacterEffect>().PlayhealEffect();
+                healNum--;
+                healText.text = healNum.ToString();
             }
-            healthBar.SetHealth(nowHP);
-            gameObject.transform.GetChild(0).GetComponent<RPGCharacterEffect>().PlayhealEffect();
+            else
+            {
+                healText.text = "0";
+                return;
+            }
             /*
             GetComponent<SpriteRenderer>().material.SetFloat("_LerpAmount", 1);
             GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 1);
@@ -253,7 +272,7 @@ namespace RPGbearfall
             GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 0);
             GetComponent<SpriteRenderer>().material.SetFloat("_LerpAmount", 0);
             */
-            
+
 
         }
 
@@ -341,8 +360,11 @@ namespace RPGbearfall
                 playerInfo.isdie = false;
             }
             playerAmount = 4;
-            gameObject.transform.position = resurrectionPoint.position;
-            //rpgCharacterEffect.ResetImageColor();
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            gameObject.transform.position = rpgGameManager.nowRespawnPoint.position;
+            gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            rpgCharacterEffect.ResetImageColor();
+            SetPlayer();
         }
 
 
@@ -354,9 +376,10 @@ namespace RPGbearfall
                 playerInfo.maxHP += 5;
                 playerInfo.def += 1;
                 playerInfo.Attack += 1;
-
+                playerInfo.isdie = false;
                 playerInfo.nowHP = playerInfo.maxHP;
             }
+            rpgCharacterEffect.ResetImageColor();
             audioSource.PlayOneShot(levelUPSound);
             SetPlayer();
 

@@ -1,11 +1,18 @@
+using RPGbearfall;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class NPC1_Mission : MonoBehaviour
 {
+    public RPGGameManager rpgGameManager;
+
     public GameObject canvas;
 
+    public bool canTalk = true;
+
+    public PlayableDirector playableDirector;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +25,7 @@ public class NPC1_Mission : MonoBehaviour
         
     }
 
-
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -33,6 +40,22 @@ public class NPC1_Mission : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             canvas.SetActive(false);
+        }
+    }
+    */
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && canTalk)
+        {
+            print("¥i¹ï¸Ü");
+            canvas.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                playableDirector.Play();
+                rpgGameManager.ChangeAreaToDialogue();
+                canTalk = false;
+                canvas.SetActive(false);
+            }
         }
     }
 }

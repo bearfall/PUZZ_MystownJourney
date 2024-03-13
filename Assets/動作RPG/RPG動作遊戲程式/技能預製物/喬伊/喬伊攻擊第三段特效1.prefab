@@ -31,7 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.289, y: 0.401, z: 0.166}
   m_LocalScale: {x: 1.5, y: 2.4598308, z: 1.5}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -288,7 +288,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4897,8 +4897,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8327513, y: 0.54262316, z: 0.94105804}
-  m_Center: {x: 0.32123455, y: -0.10919474, z: -0.010295789}
+  m_Size: {x: 1.4121917, y: 0.545972, z: 1.6275142}
+  m_Center: {x: 0.51679724, y: -0.1524467, z: -0.00011078517}
 --- !u!114 &560071607659719965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4915,4 +4915,7 @@ MonoBehaviour:
   playerInfo: {fileID: 11400000, guid: b008403e556c5f041a09207ed726c0e2, type: 2}
   normalDamageAmount: 10
   heavyDamageAmount: 0
+  heavyMultiple: 0
+  canBenormalAttackCoolDown: 0
+  canBeHeavyAttackCoolDown: 0
   isNormal: 1

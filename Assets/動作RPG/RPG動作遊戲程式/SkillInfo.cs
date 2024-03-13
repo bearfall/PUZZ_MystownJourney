@@ -13,6 +13,9 @@ namespace RPGbearfall
 
         public int normalDamageAmount;
         public int heavyDamageAmount;
+
+        public int heavyMultiple;
+
         public float canBenormalAttackCoolDown;
         public float canBeHeavyAttackCoolDown;
         public bool isNormal;
@@ -22,7 +25,7 @@ namespace RPGbearfall
             attackCharacter = GameObject.Find("´ú¸Õ¨¤¦â").GetComponent<RPGCharacter>();
 
             normalDamageAmount = playerInfo.Attack;
-            heavyDamageAmount = playerInfo.Attack * 2;
+            //heavyDamageAmount = playerInfo.Attack * heavyMultiple;
         }
 
 

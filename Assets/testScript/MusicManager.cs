@@ -5,26 +5,21 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    public TestGameManager1 testGameManager1;
+    
 
     public AudioSource audioSource;
 
-    public AudioClip exploreMusic;
-    public AudioClip battleMusic;
+    public List<AudioClip> Music;
+    
 
-    public enum SoundType
-    {
-        explore,
-        battle,
-        
-    }
+    
 
    
 
     // Start is called before the first frame update
     void Start()
     {
-        testGameManager1 = GetComponent<TestGameManager1>();
+        
     }
 
     // Update is called once per frame
@@ -33,22 +28,11 @@ public class MusicManager : MonoBehaviour
 
     }
 
-    public void PlayBackgroundMusic(SoundType selectedSound)
+    public void PlayBackgroundMusic(int musicNum)
     {
-        switch (selectedSound)
-        {
-            case SoundType.explore:
-                audioSource.clip =  exploreMusic;
-                audioSource.Play();
-                break;
+        
+        audioSource.clip = Music[musicNum];
+        audioSource.Play();
 
-            case SoundType.battle:
-                audioSource.clip = battleMusic;
-                audioSource.Play();
-                break;
-
-            default:
-                break;
-        }
     }
 }

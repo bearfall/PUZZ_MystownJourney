@@ -2,7 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;
 
 namespace RPGbearfall
@@ -21,11 +21,22 @@ namespace RPGbearfall
         //public GameObject GlobalVolume;
         [Header("場景限制範圍")]
         public GameObject menuConfiner;
+        public GameObject bossConfiner;
+
+        [Header("切換到Boss相關")]
+        public GameObject player;
+        public Transform bossTransform;
 
         public RPGCharacter nowRPGCharacter;
 
         public int enemyCount = 4;
 
+        [Header("威茲洛重生點")]
+        public Transform respawnPoint1;
+        [Header("教皇重生點")]
+        public Transform respawnPoint2;
+        [Header("目前重生點")]
+        public Transform nowRespawnPoint;
         [Header("現在戰鬥區域")]
         public GameObject nowBattleArea;
 
@@ -51,6 +62,18 @@ namespace RPGbearfall
             currentArea = AreaType.FreeExplore;
             dof.focusDistance.value = 257f;
             CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = menuConfiner.GetComponent<BoxCollider>();
+        }
+
+        public void StartBossGame()
+        {
+            player.GetComponent<NavMeshAgent>().enabled = false;
+            player.transform.position = bossTransform.position;
+            player.GetComponent<NavMeshAgent>().enabled = true;
+            StartCoroutine(RotateObject());
+            currentArea = AreaType.FreeExplore;
+            dof.focusDistance.value = 257f;
+            CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = bossConfiner.GetComponent<BoxCollider>();
+            
         }
 
         // Update is called once per frame
@@ -90,6 +113,16 @@ namespace RPGbearfall
         public void ChangeAreaToDialogue()
         {
             currentArea = RPGGameManager.AreaType.Dialogue;
+        }
+
+        public void SetResetPoint1()
+        {
+            nowRespawnPoint = respawnPoint1;
+        }
+
+        public void SetResetPoint2()
+        {
+            nowRespawnPoint = respawnPoint2;
         }
 
     }

@@ -8,7 +8,7 @@ public class Character : StateMachineBehaviour
 {
 
 
-
+    public bool canMove;
     
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,7 +19,10 @@ public class Character : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.transform.parent.GetComponent<RPGPlayerController>().isMovement = false;
+        if (!canMove)
+        {
+            animator.transform.parent.GetComponent<RPGPlayerController>().isMovement = false;
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

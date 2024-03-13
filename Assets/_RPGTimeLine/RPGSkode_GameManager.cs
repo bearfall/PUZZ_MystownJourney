@@ -26,6 +26,9 @@ public class RPGSkode_GameManager : MonoBehaviour
 
     public List<Sprite> charactersImage;
 
+    [Header("碰撞器(全)")]
+    public List<Collider> colliders;
+
     [Header("對話系統相關")]
     public RPGGameManager rpgGameManager;
     public CMConfinerManager cmConfinerManager;
@@ -35,6 +38,7 @@ public class RPGSkode_GameManager : MonoBehaviour
     [Header("Boss相關系統")]
     public Boss boss;
     public Wizlow wizlow;
+    public RPGCharacter rpgCharacter;
     private void Awake()
     {
         flowerSys = FlowerManager.Instance.CreateFlowerSystem("FlowerSample", false);
@@ -62,6 +66,7 @@ public class RPGSkode_GameManager : MonoBehaviour
         flowerSys.RegisterCommand("ShakeCamera", ShakeCamera);
         flowerSys.RegisterCommand("UnlockMission", UnlockMission);
         flowerSys.RegisterCommand("StartWizlowFight", StartWizlowFight);
+        flowerSys.RegisterCommand("TurnOffCollider", TurnOffCollider);
 
 
     }
@@ -208,5 +213,10 @@ public class RPGSkode_GameManager : MonoBehaviour
     public void UnlockMission(List<string> _params = null)
     {
         mainMissionManager.UnlockMission(int.Parse(_params[0]));
+    }
+
+    public void TurnOffCollider(List<string> _params = null)
+    {
+        colliders[int.Parse(_params[0])].enabled = false;
     }
 }

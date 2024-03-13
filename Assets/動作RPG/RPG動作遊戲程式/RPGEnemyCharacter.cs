@@ -49,6 +49,7 @@ namespace RPGbearfall
 
         [Header("Boss相關")]
         public Wizlow wizlow;
+        public Boss boss;
         // Start is called before the first frame update
         void Start()
         {
@@ -66,10 +67,12 @@ namespace RPGbearfall
             {
                 isDead = true;
                 anim.SetBool("die", isDead);
+                /*
                 if (wizlow != null)
                 {
                     wizlow.StartwizlowAction();
                 }
+                */
                 nowHP--;
             }
 

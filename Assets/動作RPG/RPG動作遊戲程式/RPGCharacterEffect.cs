@@ -32,6 +32,8 @@ public class RPGCharacterEffect : MonoBehaviour
 
     [Header("士兵技能欲置物")]
     public List<GameObject> enemyEffects = new List<GameObject>();
+    [Header("士兵音效")]
+    public List<AudioClip> enemyMusicEffects = new List<AudioClip>();
     [Header("擊中士兵增加能量數量")]
     public int IncreaseHeavyAttackEnergyValue;
 
@@ -113,7 +115,10 @@ public class RPGCharacterEffect : MonoBehaviour
     {
         Instantiate(enemyEffects[effectNum], effectSpawnPoint);
     }
-
+    public void PlayEnemySound(int musicNum)
+    {
+        audioSource.PlayOneShot(enemyMusicEffects[musicNum]);
+    }
     public void StartEnemyAttackWorning()
     {
         gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 1);
@@ -215,6 +220,7 @@ public class RPGCharacterEffect : MonoBehaviour
     public void ReduceEnemy()
     {
         enemyCounter.enemyAmount--;
+        print(enemyCounter.name + "減少1人");
 
     }
 

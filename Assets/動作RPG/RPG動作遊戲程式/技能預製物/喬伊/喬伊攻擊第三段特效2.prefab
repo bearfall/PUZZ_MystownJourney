@@ -288,7 +288,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4902,6 +4902,9 @@ MonoBehaviour:
   playerInfo: {fileID: 11400000, guid: b008403e556c5f041a09207ed726c0e2, type: 2}
   normalDamageAmount: 0
   heavyDamageAmount: 0
+  heavyMultiple: 0
+  canBenormalAttackCoolDown: 0
+  canBeHeavyAttackCoolDown: 0
   isNormal: 1
 --- !u!65 &854504103477581906
 BoxCollider:
@@ -4914,5 +4917,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.42331612, y: 0.99436665, z: 0.7686844}
-  m_Center: {x: 0.52968585, y: -0.08603247, z: 0.01775233}
+  m_Size: {x: 1.1272457, y: 0.545972, z: 1.6275142}
+  m_Center: {x: 0.37432462, y: -0.15244669, z: -0.00011078517}

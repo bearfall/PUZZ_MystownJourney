@@ -7,6 +7,8 @@ namespace RPGbearfall
 
     public class FireBallTrack : MonoBehaviour
     {
+        public GameObject trailGameObject;
+
         public int damageAmount;
 
         public Transform targetPlayer; // ª±®aªº Transform
@@ -89,6 +91,7 @@ namespace RPGbearfall
             {
                 isRotateAround = false;
                 isTracking = true;
+                trailGameObject.SetActive(true);
                 rotateAroundTimer = 0f;
             }
             transform.RotateAround(bossSkillManager.center, Vector3.up, rotationSpeed * Time.deltaTime);

@@ -9995,7 +9995,7 @@ MonoBehaviour:
   effectCollider: {fileID: 3855901601117557327}
   effectCollider2: {fileID: 6017887723942078347}
   damageAmount: 20
-  waitTime: 9
+  waitTime: 10
 --- !u!1 &8739417035844333764
 GameObject:
   m_ObjectHideFlags: 0

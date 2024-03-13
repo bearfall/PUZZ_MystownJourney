@@ -4,6 +4,8 @@ using RPGbearfall;
 
 public class GhostEffect : MonoBehaviour
 {
+    public AudioSource audioSource;
+
     [Header("是否开启残影效果")]
     public bool openGhoseEffect;
 
@@ -52,6 +54,8 @@ public class GhostEffect : MonoBehaviour
     {
         if (spawnTimer >= spawnTimeval)
         {
+            audioSource.PlayOneShot(audioSource.clip);
+
             spawnTimer = 0;
 
             GameObject _ghost = new GameObject();

@@ -4880,8 +4880,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.51204944, y: 0.49105757, z: 0.6048012}
-  m_Center: {x: -0.3841366, y: -0.18599755, z: 0.009951952}
+  m_Size: {x: 0.6903746, y: 0.49105757, z: 0.9201499}
+  m_Center: {x: -0.18044981, y: -0.18599755, z: 0.014388046}
 --- !u!114 &4774982171491757278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4898,6 +4898,7 @@ MonoBehaviour:
   playerInfo: {fileID: 11400000, guid: b957876321f1e904cb088d77e0b8f813, type: 2}
   normalDamageAmount: 20
   heavyDamageAmount: 0
+  heavyMultiple: 0
   canBenormalAttackCoolDown: 0
   canBeHeavyAttackCoolDown: 0
   isNormal: 1

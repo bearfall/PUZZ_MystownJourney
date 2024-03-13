@@ -5866,8 +5866,8 @@ ParticleSystem:
     curve:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 7
-      minScalar: 7
+      scalar: 12
+      minScalar: 12
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9766,7 +9766,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -14902,7 +14902,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -19501,7 +19501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMoveTime: 2
   startMoveTimer: 0
-  duration: 25
+  duration: 35
 --- !u!1 &8559997842522074357
 GameObject:
   m_ObjectHideFlags: 0
@@ -19516,6 +19516,7 @@ GameObject:
   - component: {fileID: 2295997081672893229}
   - component: {fileID: 1791764398337470461}
   - component: {fileID: 1936171781950272234}
+  - component: {fileID: 795613934}
   m_Layer: 11
   m_Name: "\u4E3B\u89D2\u780D\u528D\u6C23"
   m_TagString: Untagged
@@ -19791,7 +19792,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -24391,7 +24392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMoveTime: 2
   startMoveTimer: 0
-  duration: 25
+  duration: 35
 --- !u!114 &1791764398337470461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24421,6 +24422,102 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.98, y: 0.92, z: 0.16}
   m_Center: {x: 0.55, y: 0, z: 0}
+--- !u!82 &795613934
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559997842522074357}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6d4aa99d83211b743bae9d02030799ab, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8559997842967577187
 GameObject:
   m_ObjectHideFlags: 0
@@ -24707,7 +24804,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -29306,4 +29403,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMoveTime: 2
   startMoveTimer: 0
-  duration: 25
+  duration: 35
