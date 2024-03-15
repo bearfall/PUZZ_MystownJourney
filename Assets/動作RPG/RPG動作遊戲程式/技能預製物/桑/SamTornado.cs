@@ -6,7 +6,6 @@ public class SamTornado : MonoBehaviour
 {
     public float duration;
     public Material material;
-
     public float targetValue = 1f; // 目標值
     public float fadeDuration = 2f; // 變化持續時間
     // Start is called before the first frame update

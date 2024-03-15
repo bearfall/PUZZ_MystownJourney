@@ -79,6 +79,9 @@ namespace RPGbearfall
         public RPGCharacterEffect rpgCharacterEffect;
 
         public bool canBeAttack = true;
+        public float canBeAttackTime = 3;
+        public float canBeAttackTimer;
+
         /*
         public float canBeAttackTimer;
         public bool isCanBeAttackTimer;
@@ -102,6 +105,21 @@ namespace RPGbearfall
         // Update is called once per frame
         void Update()
         {
+
+            if (!canBeAttack && playetInfo.isdie == false)
+            {
+                canBeAttackTimer += Time.deltaTime;
+            }
+            else if (canBeAttack)
+            {
+                canBeAttackTimer = 0;
+            }
+
+            if (canBeAttackTimer >= canBeAttackTime)
+            {
+                canBeAttack = true;
+            }
+
             if (heavyAttackCollDownSlider.value != 0)
             {
                 heavyAttackCollDownSlider.value -= Time.deltaTime * 10;
@@ -119,6 +137,7 @@ namespace RPGbearfall
             if (playerAmount == 0)
             {
                 gameOverCanva.SetActive(true);
+                rpgGameManager.ResetBoss();
                 playerAmount--;
             }
             /*

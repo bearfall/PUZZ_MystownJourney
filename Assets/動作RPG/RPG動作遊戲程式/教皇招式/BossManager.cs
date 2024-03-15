@@ -26,7 +26,7 @@ public class BossManager : MonoBehaviour
         {
             case Boss.BossSkill.Skill1:
                 // 處理技能1的效果
-                bossSkillManager.SpawnObjects();
+                StartCoroutine( bossSkillManager.ShotDarkBall());
                 StartCoroutine(boss.SkillCanUse(1));
                 boss.skillTime = boss.skill1Interval;
                 Debug.Log("Boss 使用技能[追蹤彈]");

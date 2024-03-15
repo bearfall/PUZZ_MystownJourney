@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8809575293903725673}
   m_Layer: 0
   m_Name: "Evanna\u666E\u901A\u653B\u64CA\u7279\u6548"
-  m_TagString: Untagged
+  m_TagString: skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

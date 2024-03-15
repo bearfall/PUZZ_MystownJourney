@@ -124,6 +124,38 @@ namespace RPGbearfall
         {
             nowRespawnPoint = respawnPoint2;
         }
+        [Header("Boss清單")]
+        public List<GameObject> bossList;
+        [Header("目前打的boss號碼")]
+        public int bossNum;
+
+        public void SetBossNum(int num)
+        {
+            bossNum = num;
+        }
+        public void ResetBoss()
+        {
+
+            switch (bossNum)
+            {
+                case 0:
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    break;
+                case 3:
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
+                    bossList[bossNum].GetComponent<Wizlow>().stop = true;
+                    break;
+                case 6:
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
+                    bossList[bossNum].GetComponent<Siao>().stop = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
     }
 }

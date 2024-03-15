@@ -1,90 +1,83 @@
-using RPGbearfall;
+ï»¿using RPGbearfall;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BossSkillManager : MonoBehaviour
 {
 
-    [Header("°lÂÜ¼u§Ş¯à")]
-    [Header("°lÂÜ¼u¹w»sª«")]
-    public GameObject prefab; // »İ­n¥Í¦¨ªºª«¥ó
-    [Header("°lÂÜ¼u¹w»sª«¼Æ¶q")]
-    public int numberOfObjects = 6; // ª«¥óªº¼Æ¶q
-    [Header("°lÂÜ¼u¶ê°éªº¥b®|")]
-    public float radius = 5f; // ¶ê°éªº¥b®|
-    [Header("°lÂÜ¼u¶ê°é¤¤¤ß®y¼Ğ")]
-    public Vector3 center;// ¶ê°éªº¤¤¤ß¦ì¸m®y¼Ğ
 
 
-    [Header("ÀH¾÷²¾°ÊÃz¬µ§Ş¯à")]
-    [Header("ÀH¾÷²¾°ÊÃz¬µ©Ò¦³¥i¯àªºÂI")]
-    public Transform[] allPoints; // ©Ò¦³¥i¯àªºÂI
-    [Header("ÀH¾÷²¾°ÊÃz¬µ¹w»sª«")]
+
+    [Header("éš¨æ©Ÿç§»å‹•çˆ†ç‚¸æŠ€èƒ½")]
+    [Header("éš¨æ©Ÿç§»å‹•çˆ†ç‚¸æ‰€æœ‰å¯èƒ½çš„é»")]
+    public Transform[] allPoints; // æ‰€æœ‰å¯èƒ½çš„é»
+    [Header("éš¨æ©Ÿç§»å‹•çˆ†ç‚¸é è£½ç‰©")]
     public GameObject objectsToMovePrefeb;
-    [Header("ÀH¾÷²¾°ÊÃz¬µ­n²¾°Êªºª«Åé(µL¶·³]©w)")]
-    public List<GameObject> objectsToMove; // ­n²¾°Êªºª«Åé
-    [Header("ÀH¾÷²¾°ÊÃz¬µ­µ®Ä")]
+    [Header("éš¨æ©Ÿç§»å‹•çˆ†ç‚¸è¦ç§»å‹•çš„ç‰©é«”(ç„¡é ˆè¨­å®š)")]
+    public List<GameObject> objectsToMove; // è¦ç§»å‹•çš„ç‰©é«”
+    [Header("éš¨æ©Ÿç§»å‹•çˆ†ç‚¸éŸ³æ•ˆ")]
     public CharacterMusicEffect characterMusicEffect;
-    [Header("ÀH¾÷²¾°ÊÃz¬µ¨C¦¸°±¯dªº®É¶¡")]
-    public float waitTime = 5f; // ¨C¦¸°±¯dªº®É¶¡
-    [Header("ÀH¾÷²¾°ÊÃz¬µª«Åé¼Æ¶q")]
+    [Header("éš¨æ©Ÿç§»å‹•çˆ†ç‚¸æ¯æ¬¡åœç•™çš„æ™‚é–“")]
+    public float waitTime = 5f; // æ¯æ¬¡åœç•™çš„æ™‚é–“
+    [Header("éš¨æ©Ÿç§»å‹•çˆ†ç‚¸ç‰©é«”æ•¸é‡")]
     public float amount;
     public bool canMove = true;
 
 
-    [Header("¶Â¬}§Ş¯à")]
-    [Header("¶Â¬}¦ì¸m")]
+    [Header("é»‘æ´æŠ€èƒ½")]
+    [Header("é»‘æ´ä½ç½®")]
     public Transform blackHoleTransform;
-    [Header("¶Â¬}¹w¸mª«")]
+    [Header("é»‘æ´é ç½®ç‰©")]
     public GameObject blackHolePrefeb;
 
 
-    [Header("°{¹q§Ş¯à")]
-    [Header("°{¹q§Ş¯àÅÜÃø¾÷²v")]
+    [Header("é–ƒé›»æŠ€èƒ½")]
+    [Header("é–ƒé›»æŠ€èƒ½è®Šé›£æ©Ÿç‡")]
     public int strikeGetHarderChance;
-    [Header("°{¹q§Ş¯à¹w»sª«")]
-    public GameObject objectToGenerate; // ­n¥Í¦¨ªºª«Åé
-    [Header("°{¹q¦ì¸m(µL¶·³]©w)")]
+    [Header("é–ƒé›»æŠ€èƒ½é è£½ç‰©")]
+    public GameObject objectToGenerate; // è¦ç”Ÿæˆçš„ç‰©é«”
+    [Header("é–ƒé›»ä½ç½®(ç„¡é ˆè¨­å®š)")]
     public List<Vector3> strikesTransform;
-    [Header("°{¹q¤¤¤ß")]
+    [Header("é–ƒé›»ä¸­å¿ƒ")]
     public Vector2 centerPoint;
-    [Header("°{¹q§Ş¯à¼Æ¶q")]
-    public int numberOfStrikes = 5;     // ­n¥Í¦¨ªºª«Åé¼Æ¶q
-    [Header("°{¹q§Ş¯à½d³ò¥b®|")]
-    public float spawnRadius = 10f;     // ¥Í¦¨ªº½d³ò¥b®|
-    [Header("°{¹q§Ş¯à¤§¶¡ªº³Ì¤p¶ZÂ÷")]
-    public float minDistance = 2f;     // ª«Åé¤§¶¡ªº³Ì¤p¶ZÂ÷
-    [Header("°{¹q§Ş¯àÁ`«ùÄò®É¶¡")]
+    [Header("é–ƒé›»æŠ€èƒ½æ•¸é‡")]
+    public int numberOfStrikes = 5;     // è¦ç”Ÿæˆçš„ç‰©é«”æ•¸é‡
+    [Header("é–ƒé›»æŠ€èƒ½ç¯„åœåŠå¾‘")]
+    public float spawnRadius = 10f;     // ç”Ÿæˆçš„ç¯„åœåŠå¾‘
+    [Header("é–ƒé›»æŠ€èƒ½ä¹‹é–“çš„æœ€å°è·é›¢")]
+    public float minDistance = 2f;     // ç‰©é«”ä¹‹é–“çš„æœ€å°è·é›¢
+    [Header("é–ƒé›»æŠ€èƒ½ç¸½æŒçºŒæ™‚é–“")]
     public int strikesTime;
-    [Header("°{¹qÁ`¦¸¼Æ")]
+    [Header("é–ƒé›»ç¸½æ¬¡æ•¸")]
     public int strikesAmount = 5;
-    [Header("°{¹q¶¡¹j®É¶¡")]
+    [Header("é–ƒé›»é–“éš”æ™‚é–“")]
     public float waitStrikesTime = 4;
-    [Header("¬õ¦âÄµ§i½d³ò¹w»sª«")]
+    [Header("ç´…è‰²è­¦å‘Šç¯„åœé è£½ç‰©")]
     public GameObject warningRangeObject;
     [Header("directionalLight")]
     public Light directionalLight;
     [Header("audioSource")]
     public AudioSource audioSource;
-    [Header("¤U«B¹w»sª«")]
+    [Header("ä¸‹é›¨é è£½ç‰©")]
     public GameObject rainGameObject;
     [Header("pointLight")]
     public GameObject pointLight;
-    [Header("Ãö¿O")]
+    [Header("é—œç‡ˆ")]
     public bool start = false;
 
-    [Header("¹p®g§Ş¯à")]
-    [Header("¹p®g§Ş¯à¹w»sª«")]
+    [Header("é›·å°„æŠ€èƒ½")]
+    [Header("é›·å°„æŠ€èƒ½é è£½ç‰©")]
     public GameObject laserPrefab;
-    [Header("¹p®g¥Í¦¨ÂI")]
-    public Transform[] spawnPoints; // ¥Í¦¨ÂI
-    [Header("¹p®g³t«×")]
-    public float laserSpeed = 10f; // ¹p®g³t«×
-    [Header("§Ş¯à«ùÄò®É¶¡")]
-    public float duration = 3f; // §Ş¯à«ùÄò®É¶¡
-    [Header("¥Í¦¨½d³ò¥b®|")]
-    public float laserSpawnRadius = 5f; // ¥Í¦¨½d³ò¥b®|
+    [Header("é›·å°„ç”Ÿæˆé»")]
+    public Transform[] spawnPoints; // ç”Ÿæˆé»
+    [Header("é›·å°„é€Ÿåº¦")]
+    public float laserSpeed = 10f; // é›·å°„é€Ÿåº¦
+    [Header("æŠ€èƒ½æŒçºŒæ™‚é–“")]
+    public float duration = 3f; // æŠ€èƒ½æŒçºŒæ™‚é–“
+    [Header("ç”Ÿæˆç¯„åœåŠå¾‘")]
+    public float laserSpawnRadius = 5f; // ç”Ÿæˆç¯„åœåŠå¾‘
 
 
     public Boss boss;
@@ -95,25 +88,51 @@ public class BossSkillManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(CloneBoss());
     }
+    [Header("é–ƒç¾ç›¸é—œ")]
+    public float flashTime = 10;
+    public float flashTimer;
+    public bool canFlash = false;
 
     // Update is called once per frame
     void Update()
     {
+        flashTimer += Time.deltaTime;
+        if (flashTimer >= flashTime)
+        {
+            canFlash = true;
 
+            flashTimer = 0;
+        }
+        if (canFlash)
+        {
+            StartCoroutine(CloneBoss());
 
+            StartCoroutine(Flash());
+            flashTime = 20;
+            canFlash = false;
+        }
+        
 
         if (start)
         {
             directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 0.0f, Time.deltaTime);
-
-
         }
         else
         {
             directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 1.5f, Time.deltaTime);
         }
+
+
+
+        if (openGhoseEffect == false)
+        {
+            return;
+        }
+
+        DrawGhost();
+        Fade();
     }
     
     public void TrackBallSkill()
@@ -121,11 +140,25 @@ public class BossSkillManager : MonoBehaviour
         circleSpawner.SpawnObjects();
 
     }
-    
 
-    #region °lÂÜ¼u§Ş¯à
-    public void SpawnObjects()
+
+    #region è¿½è¹¤å½ˆæŠ€èƒ½
+
+    [Header("è¿½è¹¤å½ˆæŠ€èƒ½")]
+    [Header("è¿½è¹¤å½ˆé è£½ç‰©")]
+    public GameObject darkBallObj; // éœ€è¦ç”Ÿæˆçš„ç‰©ä»¶
+    [Header("è¿½è¹¤å½ˆé è£½ç‰©æ•¸é‡")]
+    public int numberOfObjects = 6; // ç‰©ä»¶çš„æ•¸é‡
+    [Header("è¿½è¹¤å½ˆåœ“åœˆçš„åŠå¾‘")]
+    public float radius = 5f; // åœ“åœˆçš„åŠå¾‘
+    [Header("è¿½è¹¤å½ˆåœ“åœˆä¸­å¿ƒåº§æ¨™")]
+    public Vector3 center;// åœ“åœˆçš„ä¸­å¿ƒä½ç½®åº§æ¨™
+
+    public IEnumerator ShotDarkBall()
     {
+        StartCoroutine(Flash());
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(darkBallObj, transform.position, darkBallObj.transform.rotation);
         center = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         for (int i = 0; i < numberOfObjects; i++)
         {
@@ -138,21 +171,21 @@ public class BossSkillManager : MonoBehaviour
 
 
             print(spawnPosition);
-            Instantiate(prefab, spawnPosition, spawnRotation);
+            Instantiate(darkBallObj, spawnPosition, spawnRotation);
         }
     }
     #endregion
 
-    #region ÀH¾÷²¾°ÊÃz¬µ§Ş¯à
+    #region éš¨æ©Ÿç§»å‹•çˆ†ç‚¸æŠ€èƒ½
     public IEnumerator MoveObjects()
     {
         CanMove();
         while (canMove)
         {
             canMove = false;
-            print("¥Í¦¨");
+            print("ç”Ÿæˆ");
 
-            // ¿ï¾Ü¥|­Ó¤£¦PªºÂI
+            // é¸æ“‡å››å€‹ä¸åŒçš„é»
             List<Transform> selectedPoints = new List<Transform>();
             List<int> selectedIndices = new List<int>();
 
@@ -166,7 +199,7 @@ public class BossSkillManager : MonoBehaviour
                 }
             }
 
-            // ¥Í¦¨ª«Åé
+            // ç”Ÿæˆç‰©é«”
             for (int i = 0; i < amount; i++)
             {
 
@@ -180,10 +213,10 @@ public class BossSkillManager : MonoBehaviour
 
             }
 
-            // µ¥«İ¤@¬q®É¶¡
+            // ç­‰å¾…ä¸€æ®µæ™‚é–“
             yield return new WaitForSeconds(waitTime);
 
-            // ¿ï¾Ü¥|­Ó·sªº¤£¦PªºÂI
+            // é¸æ“‡å››å€‹æ–°çš„ä¸åŒçš„é»
             selectedPoints.Clear();
             selectedIndices.Clear();
 
@@ -197,13 +230,13 @@ public class BossSkillManager : MonoBehaviour
                 }
             }
 
-            // ²¾°Ê¨ì·sªºÂI
+            // ç§»å‹•åˆ°æ–°çš„é»
             for (int i = 0; i < amount; i++)
             {
                 StartCoroutine(MoveTo(objectsToMove[i], selectedPoints[i].position));
             }
 
-            // µ¥«İ¤@¬q®É¶¡
+            // ç­‰å¾…ä¸€æ®µæ™‚é–“
             yield return new WaitForSeconds(waitTime);
             cameraShake.ShakeCamera(1.5f, 5f);
             characterMusicEffect.PlayAttackSoundEffect();
@@ -215,7 +248,7 @@ public class BossSkillManager : MonoBehaviour
     IEnumerator MoveTo(GameObject obj, Vector3 targetPosition)
     {
         float elapsedTime = 0f;
-        float moveTime = 1f; // ²¾°Ê©Ò»İªº®É¶¡
+        float moveTime = 1f; // ç§»å‹•æ‰€éœ€çš„æ™‚é–“
 
         Vector3 startingPosition = obj.transform.position;
 
@@ -226,7 +259,7 @@ public class BossSkillManager : MonoBehaviour
             yield return null;
         }
 
-        obj.transform.position = targetPosition; // ½T«Oª«Åé·Ç½T¨ì¹F¥Ø¼Ğ¦ì¸m
+        obj.transform.position = targetPosition; // ç¢ºä¿ç‰©é«”æº–ç¢ºåˆ°é”ç›®æ¨™ä½ç½®
     }
 
     public void StartMove()
@@ -241,7 +274,7 @@ public class BossSkillManager : MonoBehaviour
     }
     #endregion
 
-    #region °{¹q§Ş¯à
+    #region é–ƒé›»æŠ€èƒ½
     public IEnumerator GenerateObjects()
     {
 
@@ -258,20 +291,20 @@ public class BossSkillManager : MonoBehaviour
                 yield return new WaitForSeconds(waitStrikesTime);
                 if (GetHarder(strikeGetHarderChance))
                 {
-                    SpawnObjects();
+                    ShotDarkBall();
                 }
                 for (int i = 0; i < numberOfStrikes; i++)
                 {
                     Vector2 randomPos = centerPoint + Random.insideUnitCircle * spawnRadius;
 
-                    // ÀË¬d»P¨ä¥Lª«Åéªº¶ZÂ÷
+                    // æª¢æŸ¥èˆ‡å…¶ä»–ç‰©é«”çš„è·é›¢
                     while (IsTooCloseToOthers(randomPos))
                     {
                         randomPos = centerPoint + Random.insideUnitCircle * spawnRadius;
                     }
 
                     strikesTransform.Add(new Vector3(randomPos.x, 0f, randomPos.y));
-                    // ¹ê¨Ò¤Æª«Åé
+                    // å¯¦ä¾‹åŒ–ç‰©é«”
                     Instantiate(warningRangeObject, new Vector3(randomPos.x, 0.3f, randomPos.y), Quaternion.identity);
                 }
 
@@ -296,24 +329,24 @@ public class BossSkillManager : MonoBehaviour
 
     bool IsTooCloseToOthers(Vector2 position)
     {
-        // ¨ú±o©Ò¦³¥Í¦¨ªºª«Åé
+        // å–å¾—æ‰€æœ‰ç”Ÿæˆçš„ç‰©é«”
         GameObject[] generatedObjects = GameObject.FindGameObjectsWithTag(objectToGenerate.tag);
 
-        // ÀË¬d»P¨ä¥Lª«Åéªº¶ZÂ÷
+        // æª¢æŸ¥èˆ‡å…¶ä»–ç‰©é«”çš„è·é›¢
         foreach (var obj in generatedObjects)
         {
             float distance = Vector2.Distance(position, obj.transform.position);
             if (distance < minDistance)
             {
-                return true; // »P¨ä¥Lª«Åé¤Ó±µªñ
+                return true; // èˆ‡å…¶ä»–ç‰©é«”å¤ªæ¥è¿‘
             }
         }
 
-        return false; // »P¨ä¥Lª«Åé¨¬°÷»·
+        return false; // èˆ‡å…¶ä»–ç‰©é«”è¶³å¤ é 
     }
     #endregion
 
-    #region ¹p®g§Ş¯à
+    #region é›·å°„æŠ€èƒ½
 
     public void StartLaserSkill()
     {
@@ -326,7 +359,7 @@ public class BossSkillManager : MonoBehaviour
         {
             foreach (Transform spawnPoint in spawnPoints)
             {
-                // ¦b«ü©wªº½d³ò¤ºÀH¾÷¥Í¦¨¤@­ÓÂI
+                // åœ¨æŒ‡å®šçš„ç¯„åœå…§éš¨æ©Ÿç”Ÿæˆä¸€å€‹é»
                 Vector3 randomDirection = Random.onUnitSphere;
                 Vector3 randomPoint = new Vector3(Random.Range(-laserSpawnRadius, laserSpawnRadius) + spawnPoint.position.x, spawnPoint.position.y, Random.Range(-laserSpawnRadius, laserSpawnRadius) + spawnPoint.position.z);
 
@@ -334,10 +367,51 @@ public class BossSkillManager : MonoBehaviour
 
                 //GameObject laser = Instantiate(laserPrefab, randomPoint, new Quaternion(randomx, 0, 0, 0));
                 GameObject laser = Instantiate(laserPrefab, randomPoint, Quaternion.identity);
-                Destroy(laser, duration); // ¦b«ü©w®É¶¡«á¾P·´¹p®g
+                Destroy(laser, duration); // åœ¨æŒ‡å®šæ™‚é–“å¾ŒéŠ·æ¯€é›·å°„
             }
             yield return new WaitForSeconds(3f);
         }
+    }
+    #endregion
+
+    #region è¤‡è£½æ•™çš‡
+    [Header("è¤‡è£½æ•™çš‡æš—é»‘çƒ")]
+    public GameObject cloneBossObj;
+    [Header("è¤‡è£½æ•™çš‡æš—é»‘çƒ2")]
+    public GameObject cloneBossObj2;
+    public Transform cloneBossTransform;
+
+    
+    public IEnumerator CloneBoss()
+    {
+        int cloneBossAmout = CountObjectsWithTag();
+        
+        
+
+        if (cloneBossAmout == 0)
+        {
+            //transform.DOMove(cloneBossTransform.position, 0.8f, false);
+            //yield return new WaitForSeconds(0.8f);
+            Instantiate(cloneBossObj, transform.position, cloneBossObj.transform.rotation);
+            Instantiate(cloneBossObj2, transform.position, cloneBossObj.transform.rotation);
+
+        }
+        if (cloneBossAmout == 1)
+        {
+            Instantiate(cloneBossObj, transform.position, cloneBossObj.transform.rotation);
+            
+            
+        }
+        else if (cloneBossAmout == 2)
+        {
+            yield break;
+        }
+        
+    }
+    private int CountObjectsWithTag()
+    {
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("cloneBoss");
+        return objectsWithTag.Length;
     }
     #endregion
 
@@ -345,6 +419,148 @@ public class BossSkillManager : MonoBehaviour
     {
         int num = Random.Range(1, 100);
         return num <= chance;
+    }
+
+
+    public Transform player; // ç©å®¶è§’è‰²çš„Transform
+    public GameObject bladeStrikePrefab; // è¦æ–½æ”¾çš„ç‰©ä½“
+    public float activationDistance = 3f; // è§¦å‘æŠ€èƒ½çš„è·ç¦»é˜ˆå€¼
+    public float teleportRadius = 2f; // ç¬ç§»åˆ°ç©å®¶å‘¨å›´çš„åŠå¾„
+    public int numberOfProjectiles = 1; // è¦æ–½æ”¾çš„ç‰©ä½“æ•°é‡
+    public float WidthMax = 10f; // çŸ©å½¢èŒƒå›´çš„å®½åº¦
+    public float widthMin = 10f; // çŸ©å½¢èŒƒå›´çš„é«˜åº¦
+    public float HeightMax = 10f; // çŸ©å½¢èŒƒå›´çš„å®½åº¦
+    public float HeightMin = 10f; // çŸ©å½¢èŒƒå›´çš„é«˜åº¦
+    private Vector3 teleportDestination;
+    public IEnumerator Flash()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+
+
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            // å¦‚æœæ•Œäººä¸ç©å®¶ä¹‹é—´çš„è·ç¦»å°äºé˜ˆå€¼ï¼Œåˆ™æ‰§è¡ŒæŠ€èƒ½
+            if (distanceToPlayer < activationDistance)
+            {
+                bool pointInRectangle = false;
+
+                while (!pointInRectangle)
+                {
+                    Vector2 randomPoint = Random.insideUnitCircle.normalized * teleportRadius;
+                    Vector3 tempteleport = player.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+                    //Vector3 teleportDestination = player.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+
+                    if (tempteleport.x >= widthMin && tempteleport.x <= WidthMax &&
+                        tempteleport.z >= HeightMin && tempteleport.z <= HeightMax)
+                    {
+                        teleportDestination = tempteleport;
+                        pointInRectangle = true;
+                    }
+
+                }
+                ghostList.Clear();
+                openGhoseEffect = true;
+                transform.DOMove(teleportDestination, 0.5f, false);
+                yield return new WaitForSeconds(0.5f);
+                openGhoseEffect = false;
+            }
+            else
+            {
+                print("ç¬ç§»å¤±æ•—");
+            }
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+
+    [Header("æ˜¯å¦å¼€å¯æ®‹å½±æ•ˆæœ")]
+    public bool openGhoseEffect;
+    [Header("æ˜¯å¦å¼€å¯è¤ªè‰²æ¶ˆå¤±")]
+    public bool openFade;
+    [Header("æ˜¾ç¤ºæ®‹å½±çš„æŒç»­æ—¶é—´")]
+    public float durationTime;
+    [Header("ç”Ÿæˆæ®‹å½±ä¸æ®‹å½±ä¹‹é—´çš„æ—¶é—´é—´éš”")]
+    public float spawnTimeval;
+    private float spawnTimer;//ç”Ÿæˆæ®‹å½±çš„æ—¶é—´è®¡æ—¶å™¨
+
+    [Header("æ®‹å½±é¢œè‰²")]
+    public Color ghostColor;
+    [Header("æ®‹å½±å±‚çº§")]
+    public int ghostSortingOrder;
+
+
+    public bool isFlip;
+    public SpriteRenderer sr;//SpriteRenderer
+    public List<GameObject> ghostList = new List<GameObject>();//æ®‹å½±åˆ—è¡¨
+
+    private void DrawGhost()
+    {
+        if (spawnTimer >= spawnTimeval)
+        {
+            //audioSource.PlayOneShot(audioSource.clip);
+
+            spawnTimer = 0;
+
+            GameObject _ghost = new GameObject();
+            ghostList.Add(_ghost);
+            _ghost.name = "ghost";
+            _ghost.AddComponent<SpriteRenderer>();
+            _ghost.transform.position = transform.position;
+            _ghost.transform.localScale = transform.localScale;
+
+            if (isFlip)
+            {
+                _ghost.transform.eulerAngles = new Vector3(0, 180, 0);
+            }
+            else if (!isFlip)
+            {
+                _ghost.transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+            SpriteRenderer _sr = _ghost.GetComponent<SpriteRenderer>();
+            _sr.sprite = sr.sprite;
+            _sr.material = sr.material;
+
+            _sr.sortingOrder = ghostSortingOrder;
+            _sr.color = ghostColor;
+
+
+
+            if (openFade == false)
+            {
+                Destroy(_ghost, durationTime);
+            }
+        }
+        else
+        {
+            spawnTimer += Time.deltaTime;
+        }
+    }
+
+    private void Fade()
+    {
+        if (openFade == false)
+        {
+            return;
+        }
+
+        for (int i = 0; i < ghostList.Count; i++)
+        {
+            SpriteRenderer ghostSR = ghostList[i].GetComponent<SpriteRenderer>();
+            if (ghostSR.color.a <= 0)
+            {
+                GameObject tempGhost = ghostList[i];
+                ghostList.Remove(tempGhost);
+                Destroy(tempGhost);
+            }
+            else
+            {
+                float fadePerSecond = (ghostColor.a / durationTime);
+                Color tempColor = ghostSR.color;
+                tempColor.a -= fadePerSecond * Time.deltaTime;
+                ghostSR.color = tempColor;
+            }
+        }
     }
 
 }

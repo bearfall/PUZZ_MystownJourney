@@ -38,6 +38,7 @@ public class RPGSkode_GameManager : MonoBehaviour
     [Header("Boss相關系統")]
     public Boss boss;
     public Wizlow wizlow;
+    public Siao siao;
     public RPGCharacter rpgCharacter;
     private void Awake()
     {
@@ -66,7 +67,10 @@ public class RPGSkode_GameManager : MonoBehaviour
         flowerSys.RegisterCommand("ShakeCamera", ShakeCamera);
         flowerSys.RegisterCommand("UnlockMission", UnlockMission);
         flowerSys.RegisterCommand("StartWizlowFight", StartWizlowFight);
-        flowerSys.RegisterCommand("TurnOffCollider", TurnOffCollider);
+        flowerSys.RegisterCommand("SetNowBoss", SetNowBoss);
+        flowerSys.RegisterCommand("StartSiaoFight", StartSiaoFight);
+
+
 
 
     }
@@ -189,6 +193,10 @@ public class RPGSkode_GameManager : MonoBehaviour
     {
         wizlow.StartwizlowAction();
     }
+    public void StartSiaoFight(List<string> _params = null)
+    {
+        siao.StartSiaoAction();
+    }
 
     public void DoingDialogue(List<string> _params = null)
     {
@@ -218,5 +226,10 @@ public class RPGSkode_GameManager : MonoBehaviour
     public void TurnOffCollider(List<string> _params = null)
     {
         colliders[int.Parse(_params[0])].enabled = false;
+    }
+
+    public void SetNowBoss(List<string> _params = null)
+    {
+        rpgGameManager.SetBossNum(int.Parse(_params[0]));
     }
 }

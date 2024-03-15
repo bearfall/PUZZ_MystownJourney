@@ -39,7 +39,7 @@ public class Mission1Story : MonoBehaviour
             
             other.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 0);
             playableDirector.Play();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

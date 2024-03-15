@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -5294106888909506234}
   m_Layer: 9
   m_Name: "\u4E3B\u89D2\u666E\u529F\u7B2C\u4E00\u6BB51"
-  m_TagString: Untagged
+  m_TagString: skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

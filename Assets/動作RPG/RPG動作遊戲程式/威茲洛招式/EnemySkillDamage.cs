@@ -35,7 +35,7 @@ namespace RPGbearfall
                 print(player.name + "¨ü¨ì¶Ë®`");
 
                 damage -= player.transform.GetComponent<RPGCharacter>().def;
-                StartCoroutine(player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0f));
+                StartCoroutine(player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0.2f));
             }
         }
     }

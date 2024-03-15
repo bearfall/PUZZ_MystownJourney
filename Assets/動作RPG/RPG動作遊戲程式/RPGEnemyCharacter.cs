@@ -7,6 +7,9 @@ namespace RPGbearfall
 {
     public class RPGEnemyCharacter : MonoBehaviour
     {
+        [Header("敵人所屬劇情觸發器")]
+        public List<GameObject> storyTrigger;
+
         [Header("角色名稱")]
         public string characterName;
 
@@ -55,7 +58,7 @@ namespace RPGbearfall
         {
             
             nowHP = maxHP;
-            healthBar.SetMaxHealth(maxHP);
+            SetHealth();
         }
 
         // Update is called once per frame
@@ -143,6 +146,25 @@ namespace RPGbearfall
                 canBeAttack = true;
 
 
+            }
+        }
+
+        public void SetHealth()
+        {
+            nowHP = maxHP;
+            healthBar.SetMaxHealth(maxHP);
+        }
+
+        public void OpenStoryTrigger()
+        {
+            if (storyTrigger != null)
+            {
+
+
+                foreach (var item in storyTrigger)
+                {
+                    item.SetActive(true);
+                }
             }
         }
     }
