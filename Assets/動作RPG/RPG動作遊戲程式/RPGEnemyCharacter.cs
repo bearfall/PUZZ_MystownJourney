@@ -10,6 +10,14 @@ namespace RPGbearfall
         [Header("敵人所屬劇情觸發器")]
         public List<GameObject> storyTrigger;
 
+        [Header("敵人所屬空氣牆")]
+        public List<GameObject> airWall;
+
+        [Header("敵人所屬視野限制")]
+        public int CMConfinerNum;
+
+        public CMConfinerManager cmConfinerManager;
+
         [Header("角色名稱")]
         public string characterName;
 
@@ -44,6 +52,7 @@ namespace RPGbearfall
         public Animator anim;
         public RPGCharacter beAttackEnemy;
 
+        public CameraShake cameraShake;
         public bool canBeAttack = true;
 
         [Header("血條")]
@@ -141,7 +150,7 @@ namespace RPGbearfall
                 healthBar.SetHealth(nowHP);
 
                 anim.SetTrigger("Hurt");
-
+                cameraShake.ShakeCamera(0.6f, 0.3f);
                 yield return new WaitForSeconds(canBeAttackCoolDown);
                 canBeAttack = true;
 
@@ -159,13 +168,19 @@ namespace RPGbearfall
         {
             if (storyTrigger != null)
             {
-
-
                 foreach (var item in storyTrigger)
                 {
                     item.SetActive(true);
                 }
             }
+            if (airWall != null)
+            {
+                foreach (var item in airWall)
+                {
+                    item.SetActive(false);
+                }
+            }
+            cmConfinerManager.SwitchCMConfinerObj(CMConfinerNum);
         }
     }
 }

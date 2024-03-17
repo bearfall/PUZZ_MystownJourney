@@ -67,17 +67,7 @@ public class BossSkillManager : MonoBehaviour
     [Header("關燈")]
     public bool start = false;
 
-    [Header("雷射技能")]
-    [Header("雷射技能預製物")]
-    public GameObject laserPrefab;
-    [Header("雷射生成點")]
-    public Transform[] spawnPoints; // 生成點
-    [Header("雷射速度")]
-    public float laserSpeed = 10f; // 雷射速度
-    [Header("技能持續時間")]
-    public float duration = 3f; // 技能持續時間
-    [Header("生成範圍半徑")]
-    public float laserSpawnRadius = 5f; // 生成範圍半徑
+    
 
 
     public Boss boss;
@@ -88,7 +78,7 @@ public class BossSkillManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(CloneBoss());
+        //StartCoroutine(CloneBoss());
     }
     [Header("閃現相關")]
     public float flashTime = 10;
@@ -98,7 +88,14 @@ public class BossSkillManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        flashTimer += Time.deltaTime;
+        if (!boss.stop)
+        {
+            flashTimer += Time.deltaTime;
+        }
+        else
+        {
+            flashTimer = 0;
+        }
         if (flashTimer >= flashTime)
         {
             canFlash = true;
@@ -156,9 +153,18 @@ public class BossSkillManager : MonoBehaviour
 
     public IEnumerator ShotDarkBall()
     {
-        StartCoroutine(Flash());
+        StartCoroutine(LittleFlash());
         yield return new WaitForSeconds(0.5f);
         Instantiate(darkBallObj, transform.position, darkBallObj.transform.rotation);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(LittleFlash());
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(darkBallObj, transform.position, darkBallObj.transform.rotation);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(LittleFlash());
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(darkBallObj, transform.position, darkBallObj.transform.rotation);
+        /*
         center = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         for (int i = 0; i < numberOfObjects; i++)
         {
@@ -173,6 +179,7 @@ public class BossSkillManager : MonoBehaviour
             print(spawnPosition);
             Instantiate(darkBallObj, spawnPosition, spawnRotation);
         }
+        */
     }
     #endregion
 
@@ -348,6 +355,20 @@ public class BossSkillManager : MonoBehaviour
 
     #region 雷射技能
 
+    [Header("雷射技能")]
+    [Header("雷射技能預製物")]
+    public GameObject laserPrefab;
+    [Header("雷射生成點")]
+    public Transform[] spawnPoints; // 生成點
+    
+    [Header("雷射速度")]
+    public float laserSpeed = 10f; // 雷射速度
+    [Header("技能持續時間")]
+    public float duration = 3f; // 技能持續時間
+    [Header("生成範圍半徑")]
+    public float laserSpawnRadius = 5f; // 生成範圍半徑
+
+
     public void StartLaserSkill()
     {
         StartCoroutine(LaserSkill());
@@ -372,6 +393,7 @@ public class BossSkillManager : MonoBehaviour
             yield return new WaitForSeconds(3f);
         }
     }
+
     #endregion
 
     #region 複製教皇
@@ -436,8 +458,6 @@ public class BossSkillManager : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-
-
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
             // 如果敌人与玩家之间的距离小于阈值，则执行技能
@@ -473,6 +493,52 @@ public class BossSkillManager : MonoBehaviour
         }
     }
 
+    public IEnumerator LittleFlash()
+    {
+        for (int i = 0; i < 1; i++)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            // 如果敌人与玩家之间的距离小于阈值，则执行技能
+            if (distanceToPlayer < activationDistance)
+            {
+                bool pointInRectangle = false;
+
+                while (!pointInRectangle)
+                {
+                    Vector2 randomPoint = Random.insideUnitCircle.normalized * teleportRadius;
+                    Vector3 tempteleport = player.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+                    //Vector3 teleportDestination = player.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+
+                    if (tempteleport.x >= widthMin && tempteleport.x <= WidthMax &&
+                        tempteleport.z >= HeightMin && tempteleport.z <= HeightMax)
+                    {
+                        teleportDestination = tempteleport;
+                        pointInRectangle = true;
+                    }
+
+                }
+                ghostList.Clear();
+                openGhoseEffect = true;
+                transform.DOMove(teleportDestination, 0.5f, false);
+                yield return new WaitForSeconds(0.5f);
+                openGhoseEffect = false;
+            }
+            else
+            {
+                print("瞬移失敗");
+            }
+            yield return new WaitForSeconds(1f);
+        }
+    }
+    /*
+    [Header("黑洞欲置物")]
+    public GameObject blackHoleObj;
+    public void BlackHole()
+    {
+        Instantiate(blackHoleObj)
+    }
+    */
 
     [Header("是否开启残影效果")]
     public bool openGhoseEffect;

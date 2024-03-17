@@ -51,7 +51,7 @@ public class BossManager : MonoBehaviour
                 break;
             case Boss.BossSkill.Skill4:
                 // 處理技能2的效果
-                StartCoroutine(bossSkillManager.LaserSkill());
+                bossSkillManager.StartLaserSkill();
                 StartCoroutine(boss.SkillCanUse(4));
                 boss.skillTime = boss.skill4Interval;
                 Debug.Log("Boss 使用技能[雷射]");

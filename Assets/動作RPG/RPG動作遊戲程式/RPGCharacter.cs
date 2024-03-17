@@ -89,6 +89,9 @@ namespace RPGbearfall
 
         public int nowHP;
         public HealthBar healthBar;
+
+        [Header("所有王的血條物件")]
+        public List<GameObject> allBossHealthBar; 
         // Start is called before the first frame update
         void Start()
         {
@@ -383,6 +386,10 @@ namespace RPGbearfall
             gameObject.transform.position = rpgGameManager.nowRespawnPoint.position;
             gameObject.GetComponent<NavMeshAgent>().enabled = true;
             rpgCharacterEffect.ResetImageColor();
+            foreach (var item in allBossHealthBar)
+            {
+                item.SetActive(false);
+            }
             SetPlayer();
         }
 

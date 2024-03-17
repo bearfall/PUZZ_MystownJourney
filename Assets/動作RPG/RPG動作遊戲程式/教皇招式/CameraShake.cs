@@ -19,6 +19,7 @@ public class CameraShake : MonoBehaviour
 
     public void ShakeCamera(float strength, float duration)
     {
+        print("¾_°Ê¬Û¾÷");
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
             cinemachineVirtualCamera.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
 

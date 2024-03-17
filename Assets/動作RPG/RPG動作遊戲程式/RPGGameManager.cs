@@ -25,6 +25,8 @@ namespace RPGbearfall
 
         [Header("切換到Boss相關")]
         public GameObject player;
+        public Transform wizlowTransform;
+        public Transform siaoTransform;
         public Transform bossTransform;
 
         public RPGCharacter nowRPGCharacter;
@@ -64,6 +66,26 @@ namespace RPGbearfall
             CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = menuConfiner.GetComponent<BoxCollider>();
         }
 
+        public void StartWizloeGame()
+        {
+            player.GetComponent<NavMeshAgent>().enabled = false;
+            player.transform.position = wizlowTransform.position;
+            player.GetComponent<NavMeshAgent>().enabled = true;
+            StartCoroutine(RotateObject());
+            currentArea = AreaType.FreeExplore;
+            dof.focusDistance.value = 257f;
+            CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = bossConfiner.GetComponent<BoxCollider>();
+        }
+        public void StartSiaoGame()
+        {
+            player.GetComponent<NavMeshAgent>().enabled = false;
+            player.transform.position = siaoTransform.position;
+            player.GetComponent<NavMeshAgent>().enabled = true;
+            StartCoroutine(RotateObject());
+            currentArea = AreaType.FreeExplore;
+            dof.focusDistance.value = 257f;
+            CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = bossConfiner.GetComponent<BoxCollider>();
+        }
         public void StartBossGame()
         {
             player.GetComponent<NavMeshAgent>().enabled = false;
@@ -73,7 +95,6 @@ namespace RPGbearfall
             currentArea = AreaType.FreeExplore;
             dof.focusDistance.value = 257f;
             CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = bossConfiner.GetComponent<BoxCollider>();
-            
         }
 
         // Update is called once per frame
@@ -150,6 +171,12 @@ namespace RPGbearfall
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Siao>().stop = true;
+                    break;
+                case 8:
+                    print("打開空氣牆");
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
+                    bossList[bossNum].GetComponent<Boss>().stop = true;
                     break;
                 default:
                     break;

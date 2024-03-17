@@ -126,7 +126,14 @@ public class Wizlow : MonoBehaviour
 
     public void StartwizlowAction()
     {
-        stop = !stop;
+        stop = false;
+        IntervalTime = 0;
+        skillTime = 0;
+
+    }
+    public void StopWizlowAction()
+    {
+        stop = true;
         IntervalTime = 0;
         skillTime = 0;
 

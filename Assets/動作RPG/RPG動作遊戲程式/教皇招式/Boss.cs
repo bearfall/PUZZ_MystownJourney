@@ -146,7 +146,14 @@ public class Boss : MonoBehaviour
 
     public void StartBossAction()
     {
-        stop = !stop;
+        stop = false;
+        IntervalTime = 0;
+        skillTime = 0;
+
+    }
+    public void StopBossAction()
+    {
+        stop = true;
         IntervalTime = 0;
         skillTime = 0;
 

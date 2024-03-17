@@ -37,8 +37,11 @@ public class RPGSkode_GameManager : MonoBehaviour
 
     [Header("Boss相關系統")]
     public Boss boss;
+    public GameObject bossHealthBar;
     public Wizlow wizlow;
+    public GameObject wizlowHealthBar;
     public Siao siao;
+    public GameObject siaoHealthBar;
     public RPGCharacter rpgCharacter;
     private void Awake()
     {
@@ -61,14 +64,17 @@ public class RPGSkode_GameManager : MonoBehaviour
         flowerSys.RegisterCommand("HideImage", HideImage);
         flowerSys.RegisterCommand("HideImage2", HideImage2);
         flowerSys.RegisterCommand("StartBossFight", StartBossFight);
+        flowerSys.RegisterCommand("StopBossFight", StopBossFight);
         flowerSys.RegisterCommand("DoingDialogue", DoingDialogue);
         flowerSys.RegisterCommand("StopDialogue", StopDialogue);
         flowerSys.RegisterCommand("SwitchCMConfinerObj", SwitchCMConfinerObj);
         flowerSys.RegisterCommand("ShakeCamera", ShakeCamera);
         flowerSys.RegisterCommand("UnlockMission", UnlockMission);
         flowerSys.RegisterCommand("StartWizlowFight", StartWizlowFight);
+        flowerSys.RegisterCommand("StopWizlowFight", StopWizlowFight);
         flowerSys.RegisterCommand("SetNowBoss", SetNowBoss);
         flowerSys.RegisterCommand("StartSiaoFight", StartSiaoFight);
+        flowerSys.RegisterCommand("StopSiaoFight", StopSiaoFight);
 
 
 
@@ -187,15 +193,33 @@ public class RPGSkode_GameManager : MonoBehaviour
     public void StartBossFight(List<string> _params = null)
     {
         boss.StartBossAction();
+        bossHealthBar.SetActive(true);
+    }
+    public void StopBossFight(List<string> _params = null)
+    {
+        boss.StopBossAction();
+        bossHealthBar.SetActive(false);
     }
 
     public void StartWizlowFight(List<string> _params = null)
     {
         wizlow.StartwizlowAction();
+        wizlowHealthBar.SetActive(true);
+    }
+    public void StopWizlowFight(List<string> _params = null)
+    {
+        wizlow.StopWizlowAction();
+        wizlowHealthBar.SetActive(false);
     }
     public void StartSiaoFight(List<string> _params = null)
     {
         siao.StartSiaoAction();
+        siaoHealthBar.SetActive(true);
+    }
+    public void StopSiaoFight(List<string> _params = null)
+    {
+        siao.StopSiaoAction();
+        siaoHealthBar.SetActive(false);
     }
 
     public void DoingDialogue(List<string> _params = null)

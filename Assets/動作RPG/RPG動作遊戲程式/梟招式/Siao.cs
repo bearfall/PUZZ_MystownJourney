@@ -124,7 +124,14 @@ public class Siao : MonoBehaviour
 
     public void StartSiaoAction()
     {
-        stop = !stop;
+        stop = false;
+        IntervalTime = 0;
+        skillTime = 0;
+
+    }
+    public void StopSiaoAction()
+    {
+        stop = true;
         IntervalTime = 0;
         skillTime = 0;
 
