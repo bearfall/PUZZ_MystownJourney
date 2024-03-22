@@ -143,6 +143,7 @@ namespace RPGbearfall
 
                 //playetInfo.nowHP -= damage;
                 nowHP -= damage;
+                DamagePopUpGenerator.current.CreatePopUp(transform.position, damage.ToString(), Color.red);
                 if (nowHP <= 0)
                 {
                     nowHP = 0;

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class WizlowSkillManager : MonoBehaviour
 {
+    public GameObject playerCharacter;
+
     [Header("衝擊波技能")]
     [Header("衝擊波預製物")]
     public GameObject shockWavePrefab; // 需要生成的物件
@@ -248,40 +250,17 @@ public class WizlowSkillManager : MonoBehaviour
     #region 地板動作
     public IEnumerator GP()
     {
-        int num = Random.Range(0, 2);
-
-        switch (num)
-        {
-            case 0:
-                gameObject.transform.DOMove(wizlowGPPosition.position, 1f);
-                Instantiate(GPWorningPrefab, wizlowGPPosition2.position, Quaternion.identity);
-                yield return new WaitForSeconds(1f);
-                gameObject.transform.DOMove(wizlowGPPosition2.position, 0.3f);
-                yield return new WaitForSeconds(0.3f);
-                Instantiate(GPPrefab, wizlowGPPosition2.position, Quaternion.identity);
-                cameraShake.ShakeCamera(3, 1);
-                break;
-            case 1:
-                gameObject.transform.DOMove(wizlowGPPosition3.position, 1f);
-                Instantiate(GPWorningPrefab, wizlowGPPosition4.position, Quaternion.identity);
-                yield return new WaitForSeconds(1f);
-                gameObject.transform.DOMove(wizlowGPPosition4.position, 0.3f);
-                yield return new WaitForSeconds(0.3f);
-                Instantiate(GPPrefab, wizlowGPPosition4.position, Quaternion.identity);
-                cameraShake.ShakeCamera(3, 1);
-                break;
-            case 2:
-                gameObject.transform.DOMove(wizlowGPPosition5.position, 1f);
-                Instantiate(GPWorningPrefab, wizlowGPPosition6.position, Quaternion.identity);
-                yield return new WaitForSeconds(1f);
-                gameObject.transform.DOMove(wizlowGPPosition6.position, 0.3f);
-                yield return new WaitForSeconds(0.3f);
-                Instantiate(GPPrefab, wizlowGPPosition6.position, Quaternion.identity);
-                cameraShake.ShakeCamera(3, 1);
-                break;
-        }
-
-        
+        Vector3 tempGPPosition;
+        tempGPPosition = playerCharacter.transform.position;
+        Vector3 tempGPPositionUp = new Vector3(tempGPPosition.x, 6, tempGPPosition.z);
+        Vector3 tempGPPositionDown = new Vector3(tempGPPosition.x, 0.67f, tempGPPosition.z);
+        gameObject.transform.DOMove(tempGPPositionUp, 1f);
+        Instantiate(GPWorningPrefab, tempGPPositionDown, Quaternion.identity);
+        yield return new WaitForSeconds(1f);
+        gameObject.transform.DOMove(tempGPPositionDown, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(GPPrefab, tempGPPositionDown, Quaternion.identity);
+        cameraShake.ShakeCamera(3, 1);
 
     }
     #endregion

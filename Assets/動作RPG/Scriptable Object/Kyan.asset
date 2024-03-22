@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   image: {fileID: 21300000, guid: 7b604e9be4977574397d5b2db9e97e22, type: 3}
-  originMaxHP: 100
-  maxHP: 100
-  nowHP: 100
+  originMaxHP: 1
+  maxHP: 1
+  nowHP: -15
   originDef: 2
-  def: 2
+  def: 4
   originATK: 300
-  Attack: 300
+  Attack: 302
   normalAttack: {fileID: 7831768346548232607, guid: 507ebc7e1ba771b4d9b2be07e81d81ea,
     type: 3}
   normalAttackCD: 1

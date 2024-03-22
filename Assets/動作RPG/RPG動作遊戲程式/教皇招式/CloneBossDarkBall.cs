@@ -10,11 +10,13 @@ public class CloneBossDarkBall : MonoBehaviour
     [Header("教皇複製體")]
     public GameObject BossCloneObj;
 
+    public BossSkillManager bossSkillManager;
     
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine( MoveAndCloneBoss());
+        bossSkillManager = GameObject.Find("教皇").GetComponent<BossSkillManager>();
     }
 
     // Update is called once per frame
@@ -27,8 +29,8 @@ public class CloneBossDarkBall : MonoBehaviour
     {
         transform.DOMove(TargetTransform, 0.5f, false).SetEase(Ease.Linear);
         yield return new WaitForSeconds(1.5f);
-        Instantiate(BossCloneObj, transform.position, BossCloneObj.transform.rotation);
-        
+        GameObject obj =  Instantiate(BossCloneObj, transform.position, BossCloneObj.transform.rotation);
+        bossSkillManager.allSkillObjects.Add(obj);
     }
 
 

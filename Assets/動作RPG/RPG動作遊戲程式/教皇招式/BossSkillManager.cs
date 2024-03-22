@@ -7,7 +7,7 @@ using DG.Tweening;
 public class BossSkillManager : MonoBehaviour
 {
 
-
+    public List<GameObject> allSkillObjects = new List<GameObject>();
 
 
     [Header("隨機移動爆炸技能")]
@@ -88,6 +88,14 @@ public class BossSkillManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for (int i = allSkillObjects.Count - 1; i >= 0; i--)
+        {
+            if (allSkillObjects[i] == null)
+            {
+                allSkillObjects.RemoveAt(i);
+            }
+        }
+
         if (!boss.stop)
         {
             flashTimer += Time.deltaTime;
@@ -153,17 +161,15 @@ public class BossSkillManager : MonoBehaviour
 
     public IEnumerator ShotDarkBall()
     {
-        StartCoroutine(LittleFlash());
-        yield return new WaitForSeconds(0.5f);
-        Instantiate(darkBallObj, transform.position, darkBallObj.transform.rotation);
-        yield return new WaitForSeconds(0.5f);
-        StartCoroutine(LittleFlash());
-        yield return new WaitForSeconds(0.5f);
-        Instantiate(darkBallObj, transform.position, darkBallObj.transform.rotation);
-        yield return new WaitForSeconds(0.5f);
-        StartCoroutine(LittleFlash());
-        yield return new WaitForSeconds(0.5f);
-        Instantiate(darkBallObj, transform.position, darkBallObj.transform.rotation);
+        for (int i = 0; i < 3; i++)
+        {
+            StartCoroutine(LittleFlash());
+            yield return new WaitForSeconds(0.5f);
+            GameObject obj = Instantiate(darkBallObj, transform.position, darkBallObj.transform.rotation);
+            yield return new WaitForSeconds(0.5f);
+            allSkillObjects.Add(obj);
+        }
+        
         /*
         center = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         for (int i = 0; i < numberOfObjects; i++)
@@ -212,41 +218,46 @@ public class BossSkillManager : MonoBehaviour
 
                 var temp = Instantiate(objectsToMovePrefeb, transform.position, transform.rotation);
                 objectsToMove.Add(temp);
+                allSkillObjects.Add(temp);
                 /*
                 System.Array.Resize(ref objectsToMove, objectsToMove.Length + 1);
                 objectsToMove[objectsToMove.Length - 1] = temp;
                 */
                 objectsToMove[i].transform.position = selectedPoints[i].position;
 
+                allSkillObjects.Add(temp);
+
             }
-
-            // 等待一段時間
-            yield return new WaitForSeconds(waitTime);
-
-            // 選擇四個新的不同的點
-            selectedPoints.Clear();
-            selectedIndices.Clear();
-
-            while (selectedPoints.Count < amount)
+            if (objectsToMove != null)
             {
-                int randomIndex = Random.Range(0, allPoints.Length);
-                if (!selectedIndices.Contains(randomIndex))
+                // 等待一段時間
+                yield return new WaitForSeconds(waitTime);
+
+                // 選擇四個新的不同的點
+                selectedPoints.Clear();
+                selectedIndices.Clear();
+
+                while (selectedPoints.Count < amount)
                 {
-                    selectedIndices.Add(randomIndex);
-                    selectedPoints.Add(allPoints[randomIndex]);
+                    int randomIndex = Random.Range(0, allPoints.Length);
+                    if (!selectedIndices.Contains(randomIndex))
+                    {
+                        selectedIndices.Add(randomIndex);
+                        selectedPoints.Add(allPoints[randomIndex]);
+                    }
                 }
-            }
 
-            // 移動到新的點
-            for (int i = 0; i < amount; i++)
-            {
-                StartCoroutine(MoveTo(objectsToMove[i], selectedPoints[i].position));
-            }
+                // 移動到新的點
+                for (int i = 0; i < amount; i++)
+                {
+                    StartCoroutine(MoveTo(objectsToMove[i], selectedPoints[i].position));
+                }
 
-            // 等待一段時間
-            yield return new WaitForSeconds(waitTime);
-            cameraShake.ShakeCamera(1.5f, 5f);
-            characterMusicEffect.PlayAttackSoundEffect();
+                // 等待一段時間
+                yield return new WaitForSeconds(waitTime);
+                cameraShake.ShakeCamera(1.5f, 5f);
+                characterMusicEffect.PlayAttackSoundEffect();
+            }
             objectsToMove.Clear();
 
         }
@@ -312,14 +323,15 @@ public class BossSkillManager : MonoBehaviour
 
                     strikesTransform.Add(new Vector3(randomPos.x, 0f, randomPos.y));
                     // 實例化物體
-                    Instantiate(warningRangeObject, new Vector3(randomPos.x, 0.3f, randomPos.y), Quaternion.identity);
+                    GameObject obj =  Instantiate(warningRangeObject, new Vector3(randomPos.x, 0.3f, randomPos.y), Quaternion.identity);
+                    allSkillObjects.Add(obj);
                 }
 
                 yield return new WaitForSeconds(2f);
                 foreach (var strikeTransform in strikesTransform)
                 {
-                    Instantiate(objectToGenerate, strikeTransform, Quaternion.identity);
-
+                    GameObject obj = Instantiate(objectToGenerate, strikeTransform, Quaternion.identity);
+                    allSkillObjects.Add(obj);
                 }
                 audioSource.Play();
                 strikesTransform.Clear();
@@ -378,19 +390,22 @@ public class BossSkillManager : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            foreach (Transform spawnPoint in spawnPoints)
+            if (!boss.stop)
             {
-                // 在指定的範圍內隨機生成一個點
-                Vector3 randomDirection = Random.onUnitSphere;
-                Vector3 randomPoint = new Vector3(Random.Range(-laserSpawnRadius, laserSpawnRadius) + spawnPoint.position.x, spawnPoint.position.y, Random.Range(-laserSpawnRadius, laserSpawnRadius) + spawnPoint.position.z);
+                foreach (Transform spawnPoint in spawnPoints)
+                {
+                    // 在指定的範圍內隨機生成一個點
+                    Vector3 randomDirection = Random.onUnitSphere;
+                    Vector3 randomPoint = new Vector3(Random.Range(-laserSpawnRadius, laserSpawnRadius) + spawnPoint.position.x, spawnPoint.position.y, Random.Range(-laserSpawnRadius, laserSpawnRadius) + spawnPoint.position.z);
 
-                //float randomx = Random.Range(0.0f, 360f);
+                    //float randomx = Random.Range(0.0f, 360f);
 
-                //GameObject laser = Instantiate(laserPrefab, randomPoint, new Quaternion(randomx, 0, 0, 0));
-                GameObject laser = Instantiate(laserPrefab, randomPoint, Quaternion.identity);
-                Destroy(laser, duration); // 在指定時間後銷毀雷射
+                    //GameObject laser = Instantiate(laserPrefab, randomPoint, new Quaternion(randomx, 0, 0, 0));
+                    GameObject laser = Instantiate(laserPrefab, randomPoint, Quaternion.identity);
+                    Destroy(laser, duration); // 在指定時間後銷毀雷射
+                }
+                yield return new WaitForSeconds(3f);
             }
-            yield return new WaitForSeconds(3f);
         }
     }
 
@@ -414,15 +429,17 @@ public class BossSkillManager : MonoBehaviour
         {
             //transform.DOMove(cloneBossTransform.position, 0.8f, false);
             //yield return new WaitForSeconds(0.8f);
-            Instantiate(cloneBossObj, transform.position, cloneBossObj.transform.rotation);
-            Instantiate(cloneBossObj2, transform.position, cloneBossObj.transform.rotation);
+            GameObject obj =  Instantiate(cloneBossObj, transform.position, cloneBossObj.transform.rotation);
+            allSkillObjects.Add(obj);
+            obj = Instantiate(cloneBossObj2, transform.position, cloneBossObj.transform.rotation);
+            allSkillObjects.Add(obj);
 
         }
         if (cloneBossAmout == 1)
         {
-            Instantiate(cloneBossObj, transform.position, cloneBossObj.transform.rotation);
-            
-            
+            GameObject obj = Instantiate(cloneBossObj, transform.position, cloneBossObj.transform.rotation);
+            allSkillObjects.Add(obj);
+
         }
         else if (cloneBossAmout == 2)
         {
@@ -627,6 +644,18 @@ public class BossSkillManager : MonoBehaviour
                 ghostSR.color = tempColor;
             }
         }
+    }
+
+    public void DestroyAllObjects()
+    {
+        // 遍歷清單中的每個物體，並銷毀它們
+        foreach (GameObject obj in allSkillObjects)
+        {
+            Destroy(obj);
+        }
+
+        // 清空清單
+        allSkillObjects.Clear();
     }
 
 }

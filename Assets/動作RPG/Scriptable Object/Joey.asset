@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Joey
   image: {fileID: 21300000, guid: 2150d8a6e7c2bf140ababcf5b3e74f45, type: 3}
-  originMaxHP: 100
-  maxHP: 100
-  nowHP: 100
+  originMaxHP: 1
+  maxHP: 1
+  nowHP: -15
   originDef: 2
-  def: 2
+  def: 4
   originATK: 70
-  Attack: 70
+  Attack: 72
   normalAttack: {fileID: 0}
   normalAttackCD: 0
   heavyAttack: {fileID: 0}

@@ -177,6 +177,7 @@ namespace RPGbearfall
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Boss>().stop = true;
+                    bossList[bossNum].GetComponent<BossSkillManager>().DestroyAllObjects();
                     break;
                 default:
                     break;

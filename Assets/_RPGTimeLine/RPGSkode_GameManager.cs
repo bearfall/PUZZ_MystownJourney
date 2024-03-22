@@ -37,6 +37,7 @@ public class RPGSkode_GameManager : MonoBehaviour
 
     [Header("Boss相關系統")]
     public Boss boss;
+    public BossSkillManager bossSkillManager;
     public GameObject bossHealthBar;
     public Wizlow wizlow;
     public GameObject wizlowHealthBar;
@@ -198,6 +199,7 @@ public class RPGSkode_GameManager : MonoBehaviour
     public void StopBossFight(List<string> _params = null)
     {
         boss.StopBossAction();
+        bossSkillManager.DestroyAllObjects();
         bossHealthBar.SetActive(false);
     }
 

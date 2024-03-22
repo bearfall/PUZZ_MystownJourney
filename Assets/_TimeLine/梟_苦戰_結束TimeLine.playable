@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: RPGSkode_DialogueClip
   m_EditorClassIdentifier: 
   template:
-    dialogueLine: "\u689F_\u82E6\u6230_\u7D50\u675F"
+    dialogueLine: "\u689F_\u82E6\u6230_\u6230\u9B25\u7D50\u675F"
     hasToPause: 0
 --- !u!114 &8485628831870784095
 MonoBehaviour:
