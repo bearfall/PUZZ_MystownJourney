@@ -34,7 +34,7 @@ public class RPGSkode_GameManager : MonoBehaviour
     public CMConfinerManager cmConfinerManager;
     public CameraShake cameraShake;
     public MainMissionManager mainMissionManager;
-
+    public Canvas SettingCanva;
     [Header("Boss相關系統")]
     public Boss boss;
     public BossSkillManager bossSkillManager;
@@ -43,6 +43,10 @@ public class RPGSkode_GameManager : MonoBehaviour
     public GameObject wizlowHealthBar;
     public Siao siao;
     public GameObject siaoHealthBar;
+    public Geus geus;
+    public GameObject geusHealthBar;
+    
+    
     public RPGCharacter rpgCharacter;
     private void Awake()
     {
@@ -169,12 +173,16 @@ public class RPGSkode_GameManager : MonoBehaviour
         
         image.enabled = true;
         image.sprite = charactersImage[int.Parse(_params[0])];
+        image2.color = new Color(0.5f, 0.5f, 0.5f, 1);
+        image.color = new Color(1f, 1f, 1f, 1);
     }
 
     public void ShowImage2(List<string> _params)
     {
         image2.enabled = true;
         image2.sprite = charactersImage[int.Parse(_params[0])];
+        image.color = new Color(0.5f, 0.5f, 0.5f, 1);
+        image2.color = new Color(1f, 1f, 1f, 1);
     }
 
 
@@ -199,7 +207,8 @@ public class RPGSkode_GameManager : MonoBehaviour
     public void StopBossFight(List<string> _params = null)
     {
         boss.StopBossAction();
-        bossSkillManager.DestroyAllObjects();
+        //bossSkillManager.DestroyAllObjects();
+        RPGGameManager.instance.DestroyAllOEnemySkills();
         bossHealthBar.SetActive(false);
     }
 
@@ -227,11 +236,13 @@ public class RPGSkode_GameManager : MonoBehaviour
     public void DoingDialogue(List<string> _params = null)
     {
         rpgGameManager.currentArea = RPGGameManager.AreaType.Dialogue;
+        
     }
 
     public void StopDialogue(List<string> _params = null)
     {
         rpgGameManager.currentArea = RPGGameManager.AreaType.FreeExplore;
+        SettingCanva.enabled = true;
     }
 
     public void SwitchCMConfinerObj(List<string> _params = null)

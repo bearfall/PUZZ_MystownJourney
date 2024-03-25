@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Evana
   image: {fileID: 21300000, guid: da7a19c32ab271a40b7c52cb55d12f73, type: 3}
-  originMaxHP: 1
-  maxHP: 1
-  nowHP: -15
-  originDef: 2
-  def: 4
+  originMaxHP: 5
+  maxHP: 5
+  nowHP: 5
+  originDef: 0
+  def: 2
   originATK: 45
   Attack: 47
   normalAttack: {fileID: 3860472271084410981, guid: 03d1646daf98ecc4ebcf3691f5c4f74a,

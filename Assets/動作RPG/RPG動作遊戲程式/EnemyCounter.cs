@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 
 public class EnemyCounter : MonoBehaviour
 {
+    public Canvas SettingCanva;
     public RPGGameManager rpgGameManager;
     public RPGCharacter rPGCharacter;
     public int enemyAmount = 3;
@@ -13,7 +14,7 @@ public class EnemyCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SettingCanva = GameObject.Find("技能資訊畫布").GetComponent<Canvas>();
     }
 
     // Update is called once per frame
@@ -26,6 +27,7 @@ public class EnemyCounter : MonoBehaviour
             if (playableDirector != null)
             {
                 playableDirector.Play();
+                SettingCanva.enabled = false;
             }
             rpgGameManager.currentArea = RPGGameManager.AreaType.Dialogue;
             enemyAmount = 3;

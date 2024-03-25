@@ -9,7 +9,7 @@ namespace RPGbearfall
 {
     public class RPGGameManager : MonoBehaviour
     {
-
+        public static RPGGameManager instance;
         public UnityEngine.Rendering.Volume postProcessVolume;
         public UnityEngine.Rendering.Universal.DepthOfField dof;
 
@@ -50,7 +50,14 @@ namespace RPGbearfall
             TurnBasedCombat
         }
         public AreaType currentArea;
+
+        [Header("別的程式相關")]
+        public RPGCharacter rpgCharacter;
         // Start is called before the first frame update
+        private void Awake()
+        {
+            instance = this;
+        }
         void Start()
         {
             postProcessVolume.profile.TryGet<UnityEngine.Rendering.Universal.DepthOfField>(out dof);
@@ -166,21 +173,43 @@ namespace RPGbearfall
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Wizlow>().stop = true;
+                    DestroyAllOEnemySkills();
+                    rpgCharacter.playerAmount = 4;
                     break;
                 case 6:
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Siao>().stop = true;
+                    DestroyAllOEnemySkills();
+                    rpgCharacter.playerAmount = 4;
                     break;
                 case 8:
                     print("打開空氣牆");
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Boss>().stop = true;
-                    bossList[bossNum].GetComponent<BossSkillManager>().DestroyAllObjects();
+                    //bossList[bossNum].GetComponent<BossSkillManager>().DestroyAllObjects();
+                    DestroyAllOEnemySkills();
+                    rpgCharacter.playerAmount = 4;
                     break;
                 default:
                     break;
+            }
+        }
+        public void DestroyAllOEnemySkills()
+        {
+            // 獲取所有具有指定標籤的遊戲物件
+            GameObject[] objectsWithTag1 = GameObject.FindGameObjectsWithTag("EnemySkill");
+            GameObject[] objectsWithTag2 = GameObject.FindGameObjectsWithTag("cloneBoss");
+
+            List<GameObject> objectsWithTag = new List<GameObject>();
+            objectsWithTag.AddRange(objectsWithTag1);
+            objectsWithTag.AddRange(objectsWithTag2);
+
+            // 遍歷所有物件並銷毀它們
+            foreach (GameObject obj in objectsWithTag)
+            {
+                Destroy(obj);
             }
         }
 

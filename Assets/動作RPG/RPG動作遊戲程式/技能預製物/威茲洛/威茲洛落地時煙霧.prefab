@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 158123887502611442}
   m_Layer: 0
   m_Name: "\u5A01\u8332\u6D1B\u843D\u5730\u6642\u7159\u9727"
-  m_TagString: Untagged
+  m_TagString: EnemySkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5048,6 +5048,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u5A01\u8332\u6D1B\u843D\u5730\u6642\u50B7\u5BB3"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457862305847110858, guid: 6be76c985103ff445a74b6defeca1815,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6be76c985103ff445a74b6defeca1815, type: 3}

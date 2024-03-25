@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6158366432278958724}
   m_Layer: 0
   m_Name: "\u50B7\u5BB3\u63D0\u793A\u7D05\u8272\u8B66\u544A\u7BC4\u570D"
-  m_TagString: Untagged
+  m_TagString: EnemySkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

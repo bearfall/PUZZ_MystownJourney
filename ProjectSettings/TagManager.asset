@@ -17,6 +17,7 @@ TagManager:
   - Strike
   - cloneBoss
   - skill
+  - EnemySkill
   layers:
   - Default
   - TransparentFX

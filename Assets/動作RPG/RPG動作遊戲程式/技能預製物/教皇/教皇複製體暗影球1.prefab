@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -8900341586565577770}
   m_Layer: 0
   m_Name: "\u6559\u7687\u8907\u88FD\u9AD4\u6697\u5F71\u74031"
-  m_TagString: Untagged
+  m_TagString: EnemySkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4929,6 +4929,7 @@ MonoBehaviour:
   TargetTransform: {x: 56, y: 0.79, z: -52}
   BossCloneObj: {fileID: 9119279770277525366, guid: 1c24976de91b0304aa4e6cdd2c7b4dc3,
     type: 3}
+  bossSkillManager: {fileID: 0}
 --- !u!114 &-8008024523457742074
 MonoBehaviour:
   m_ObjectHideFlags: 0

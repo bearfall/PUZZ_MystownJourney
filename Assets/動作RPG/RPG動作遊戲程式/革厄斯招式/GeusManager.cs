@@ -42,7 +42,7 @@ public class GeusManager : MonoBehaviour
             // 添加其他技能的 case 分支
             case Geus.GeusSkill.Skill3:
                 // 處理技能2的效果
-                StartCoroutine(geusSkillManager.EarthShatter());
+                StartCoroutine(geusSkillManager.ClawAttack());
                 StartCoroutine(geus.SkillCanUse(3));
                 geus.skillTime = geus.skill3Interval;
                 Debug.Log("Boss 使用技能[裂地衝擊]");
@@ -50,7 +50,7 @@ public class GeusManager : MonoBehaviour
                 break;
             case Geus.GeusSkill.Skill4:
                 // 處理技能2的效果
-                StartCoroutine(geusSkillManager.EarthShatter());
+                StartCoroutine(geusSkillManager.ClawAttack());
                 StartCoroutine(geus.SkillCanUse(4));
                 geus.skillTime = geus.skill4Interval;
                 Debug.Log("Boss 使用技能[裂地衝擊]");

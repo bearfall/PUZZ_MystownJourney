@@ -140,7 +140,7 @@ namespace RPGbearfall
             if (playerAmount == 0)
             {
                 gameOverCanva.SetActive(true);
-                rpgGameManager.ResetBoss();
+                
                 playerAmount--;
             }
             /*
@@ -233,12 +233,10 @@ namespace RPGbearfall
 
         public IEnumerator TakeDamage(int damage, float canBeAttackCoolDown)
         {
-            if (canBeAttack)
+            if (canBeAttack && nowHP > 0)
             {
                 canBeAttack = false;
-                
-
-
+ 
                 playetInfo.nowHP -= damage;
                 anim.SetTrigger("hurt");
                 print("受到"+ damage + "傷害!");
@@ -386,6 +384,7 @@ namespace RPGbearfall
             gameObject.transform.position = rpgGameManager.nowRespawnPoint.position;
             gameObject.GetComponent<NavMeshAgent>().enabled = true;
             rpgCharacterEffect.ResetImageColor();
+            rpgGameManager.ResetBoss();
             foreach (var item in allBossHealthBar)
             {
                 item.SetActive(false);

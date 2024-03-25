@@ -32,6 +32,7 @@ public class GeusSkillManager : MonoBehaviour
 
     public IEnumerator ShotPoision()
     {
+        RotateEnemy();
         for (int i = 0; i < poisionAmount; i++)
         {
             Instantiate(poisionObj, poisionTransform.position, poisionObj.transform.rotation);
@@ -48,6 +49,7 @@ public class GeusSkillManager : MonoBehaviour
 
     public IEnumerator EarthShatter()
     {
+        RotateEnemy();
         impactPosition = new Vector3(playerTransform.position.x,transform.position.y, playerTransform.position.z);
         transform.DOMove(impactPosition, 1f, false).SetEase(Ease.InCirc).OnComplete(()=> 
         {
@@ -58,4 +60,41 @@ public class GeusSkillManager : MonoBehaviour
 
 
     #endregion
+    #region ¤ö²ª
+    [Header("¤ö²ªª«¥ó")]
+    public GameObject clawObj;
+    [Header("¤ö²ª¥Ø¼Ð¦ì¸m")]
+    public Vector3 clawPosition;
+    [Header("¤ö²ª¦ì¸m")]
+    public Transform clawTransform1;
+    [Header("¤ö²ª¦ì¸m2")]
+    public Transform clawTransform2;
+
+
+    public IEnumerator ClawAttack()
+    {
+        RotateEnemy();
+        clawPosition  = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
+        transform.DOMove(clawPosition, 1f, false).SetEase(Ease.InCirc);
+        yield return new WaitForSeconds(0.95f);
+        Instantiate(clawObj, clawTransform1.position, clawTransform1.rotation);
+        yield return new WaitForSeconds(0.1f);
+        Instantiate(clawObj, clawTransform2.position, clawTransform2.rotation);
+        
+        
+    }
+    #endregion
+
+    public void RotateEnemy()
+    {
+
+        if (playerTransform != null && playerTransform.transform.position.x > gameObject.transform.position.x)
+        {
+            gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        if (playerTransform != null && playerTransform.transform.position.x < gameObject.transform.position.x)
+        {
+            gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+    }
 }

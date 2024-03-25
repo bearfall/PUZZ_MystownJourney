@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 
 public class Mission1Story : MonoBehaviour
 {
+    public Canvas SettingCanva;
     public RPGPlayerController rPGPlayerController;
     public PlayableDirector playableDirector;
     public RPGGameManager rpgGameManager;
@@ -16,6 +17,7 @@ public class Mission1Story : MonoBehaviour
     void Start()
     {
         rPGPlayerController = GameObject.Find("RPGGameManager").GetComponent<RPGPlayerController>();
+        SettingCanva = GameObject.Find("技能資訊畫布").GetComponent<Canvas>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class Mission1Story : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             rpgGameManager.currentArea = RPGGameManager.AreaType.Dialogue;
+            SettingCanva.enabled = false;
             if (set1)
             {
                 rpgGameManager.SetResetPoint1();

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3507925739330939082}
   m_Layer: 0
   m_Name: "\u98DB\u5F48"
-  m_TagString: Untagged
+  m_TagString: EnemySkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,9 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd704e0d23012c84084ede40eb932e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flyingSpeed: 0
   target: {fileID: 0}
-  speed: 5
-  angleStandard: 90
 --- !u!114 &-3507925739330939082
 MonoBehaviour:
   m_ObjectHideFlags: 0

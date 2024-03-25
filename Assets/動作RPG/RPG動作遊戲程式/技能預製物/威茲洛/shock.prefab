@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3249031600751866023}
   m_Layer: 0
   m_Name: shock
-  m_TagString: Untagged
+  m_TagString: EnemySkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

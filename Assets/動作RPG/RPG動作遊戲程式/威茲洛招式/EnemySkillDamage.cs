@@ -9,6 +9,7 @@ namespace RPGbearfall
         public float canDoDamageTimer;
         public int damageAmount;
         public Collider skillCollider;
+        public bool isSustained;
 
         // Start is called before the first frame update
         void Start()
@@ -28,7 +29,7 @@ namespace RPGbearfall
 
         private void OnTriggerEnter(Collider player)
         {
-            if (player.CompareTag("Player"))
+            if (player.CompareTag("Player") && !isSustained)
             {
                 int damage = damageAmount;
 
@@ -36,6 +37,19 @@ namespace RPGbearfall
 
                 damage -= player.transform.GetComponent<RPGCharacter>().def;
                 StartCoroutine(player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0.2f));
+            }
+        }
+
+        private void OnTriggerStay(Collider player)
+        {
+            if (player.CompareTag("Player") && isSustained)
+            {
+                int damage = damageAmount;
+
+                print(player.name + "¨ü¨ì¶Ë®`");
+
+                damage -= player.transform.GetComponent<RPGCharacter>().def;
+                StartCoroutine(player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0.5f));
             }
         }
     }

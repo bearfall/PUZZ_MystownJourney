@@ -30,7 +30,7 @@ public class CloneBossDarkBall : MonoBehaviour
         transform.DOMove(TargetTransform, 0.5f, false).SetEase(Ease.Linear);
         yield return new WaitForSeconds(1.5f);
         GameObject obj =  Instantiate(BossCloneObj, transform.position, BossCloneObj.transform.rotation);
-        bossSkillManager.allSkillObjects.Add(obj);
+        
     }
 
 

@@ -51,7 +51,7 @@ public class Geus : MonoBehaviour
 
     private void Update()
     {
-        RotateEnemy();
+        
 
         if (!stop)
         {
@@ -165,16 +165,5 @@ public class Geus : MonoBehaviour
         }
     }
 
-    public void RotateEnemy()
-    {
-
-        if (attakTarget != null && attakTarget.transform.position.x > gameObject.transform.position.x)
-        {
-            gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        if (attakTarget != null && attakTarget.transform.position.x < gameObject.transform.position.x)
-        {
-            gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
-        }
-    }
+    
 }

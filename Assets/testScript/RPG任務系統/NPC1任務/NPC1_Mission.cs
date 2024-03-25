@@ -6,17 +6,20 @@ using UnityEngine.Playables;
 
 public class NPC1_Mission : MonoBehaviour
 {
+    public Canvas SettingCanva;
+
     public RPGGameManager rpgGameManager;
 
     public GameObject canvas;
 
-    public bool canTalk = true;
+    public bool canTalk = false;
 
     public PlayableDirector playableDirector;
     // Start is called before the first frame update
     void Start()
     {
         canvas.SetActive(false);
+        SettingCanva = GameObject.Find("技能資訊畫布").GetComponent<Canvas>();
     }
 
     // Update is called once per frame
@@ -43,6 +46,7 @@ public class NPC1_Mission : MonoBehaviour
         }
     }
     */
+    /*
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && canTalk)
@@ -51,10 +55,46 @@ public class NPC1_Mission : MonoBehaviour
             canvas.SetActive(true);
             if (Input.GetKeyDown(KeyCode.F))
             {
+                SettingCanva.SetActive(false);
                 playableDirector.Play();
                 rpgGameManager.ChangeAreaToDialogue();
                 canTalk = false;
                 canvas.SetActive(false);
+            }
+        }
+    }
+    */
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            canvas.SetActive(true);
+            canTalk = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            canvas.SetActive(false);
+            canTalk = false;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && canTalk)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                rpgGameManager.currentArea = RPGGameManager.AreaType.Dialogue;
+                SettingCanva.enabled = false;
+                canvas.SetActive(false);
+                playableDirector.Play();
+                other.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 0);
+
+                canTalk = false;
             }
         }
     }

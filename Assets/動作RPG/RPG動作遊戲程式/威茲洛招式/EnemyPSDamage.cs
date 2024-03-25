@@ -34,6 +34,7 @@ namespace RPGbearfall
                 StartCoroutine(player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0.3f));
             }
         }
+        
 
         //粒子触发的回调函数
         private void OnParticleTrigger()

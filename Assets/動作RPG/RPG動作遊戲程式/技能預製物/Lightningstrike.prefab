@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6893448835511948683}
   m_Layer: 0
   m_Name: Lightningstrike
-  m_TagString: Strike
+  m_TagString: EnemySkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

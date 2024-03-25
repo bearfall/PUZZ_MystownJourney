@@ -7,9 +7,6 @@ using DG.Tweening;
 public class BossSkillManager : MonoBehaviour
 {
 
-    public List<GameObject> allSkillObjects = new List<GameObject>();
-
-
     [Header("隨機移動爆炸技能")]
     [Header("隨機移動爆炸所有可能的點")]
     public Transform[] allPoints; // 所有可能的點
@@ -88,13 +85,7 @@ public class BossSkillManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = allSkillObjects.Count - 1; i >= 0; i--)
-        {
-            if (allSkillObjects[i] == null)
-            {
-                allSkillObjects.RemoveAt(i);
-            }
-        }
+        
 
         if (!boss.stop)
         {
@@ -126,7 +117,7 @@ public class BossSkillManager : MonoBehaviour
         }
         else
         {
-            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 1.5f, Time.deltaTime);
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, 2.5f, Time.deltaTime);
         }
 
 
@@ -167,7 +158,7 @@ public class BossSkillManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             GameObject obj = Instantiate(darkBallObj, transform.position, darkBallObj.transform.rotation);
             yield return new WaitForSeconds(0.5f);
-            allSkillObjects.Add(obj);
+            
         }
         
         /*
@@ -218,14 +209,14 @@ public class BossSkillManager : MonoBehaviour
 
                 var temp = Instantiate(objectsToMovePrefeb, transform.position, transform.rotation);
                 objectsToMove.Add(temp);
-                allSkillObjects.Add(temp);
+                
                 /*
                 System.Array.Resize(ref objectsToMove, objectsToMove.Length + 1);
                 objectsToMove[objectsToMove.Length - 1] = temp;
                 */
                 objectsToMove[i].transform.position = selectedPoints[i].position;
 
-                allSkillObjects.Add(temp);
+                
 
             }
             if (objectsToMove != null)
@@ -324,14 +315,14 @@ public class BossSkillManager : MonoBehaviour
                     strikesTransform.Add(new Vector3(randomPos.x, 0f, randomPos.y));
                     // 實例化物體
                     GameObject obj =  Instantiate(warningRangeObject, new Vector3(randomPos.x, 0.3f, randomPos.y), Quaternion.identity);
-                    allSkillObjects.Add(obj);
+                    
                 }
 
                 yield return new WaitForSeconds(2f);
                 foreach (var strikeTransform in strikesTransform)
                 {
                     GameObject obj = Instantiate(objectToGenerate, strikeTransform, Quaternion.identity);
-                    allSkillObjects.Add(obj);
+                    
                 }
                 audioSource.Play();
                 strikesTransform.Clear();
@@ -430,15 +421,15 @@ public class BossSkillManager : MonoBehaviour
             //transform.DOMove(cloneBossTransform.position, 0.8f, false);
             //yield return new WaitForSeconds(0.8f);
             GameObject obj =  Instantiate(cloneBossObj, transform.position, cloneBossObj.transform.rotation);
-            allSkillObjects.Add(obj);
+            
             obj = Instantiate(cloneBossObj2, transform.position, cloneBossObj.transform.rotation);
-            allSkillObjects.Add(obj);
+            
 
         }
         if (cloneBossAmout == 1)
         {
             GameObject obj = Instantiate(cloneBossObj, transform.position, cloneBossObj.transform.rotation);
-            allSkillObjects.Add(obj);
+            
 
         }
         else if (cloneBossAmout == 2)
@@ -646,17 +637,7 @@ public class BossSkillManager : MonoBehaviour
         }
     }
 
-    public void DestroyAllObjects()
-    {
-        // 遍歷清單中的每個物體，並銷毀它們
-        foreach (GameObject obj in allSkillObjects)
-        {
-            Destroy(obj);
-        }
-
-        // 清空清單
-        allSkillObjects.Clear();
-    }
+    
 
 }
 
