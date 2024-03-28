@@ -25,6 +25,7 @@ namespace RPGbearfall
         public float speed = 5f;//声明一个参数，没有规定
         public bool isFlip;
         public bool canFlash = true;
+        public bool unlockHeal = false;
 
         private void Awake()
         {
@@ -91,17 +92,17 @@ namespace RPGbearfall
                 this.transform.Translate(Vector3.forward * Verticalinput * Time.deltaTime * speed);
                 //控制该物体向前后移动
             }
-            if (Input.GetKeyDown(KeyCode.Mouse0) && nowRPGCharacter.canNormalAttack && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && nowRPGCharacter.canNormalAttack && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie )
             {
                 StartCoroutine(nowRPGCharacter.NormalAttack());
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1) && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie)
+            if (Input.GetKeyDown(KeyCode.Mouse1) && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie && isMovement)
             {
                 StartCoroutine(nowRPGCharacter.HeavyAttack());
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie)
+            if (Input.GetKeyDown(KeyCode.E) && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie && unlockHeal)
             {
                 nowRPGCharacter.HealPlayer(50);
             }
@@ -118,7 +119,7 @@ namespace RPGbearfall
                 GetComponent<Collider>().enabled = false;
             }
             */
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canFlash)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canFlash && isMovement)
             {
                 StartCoroutine(Flash());
             }

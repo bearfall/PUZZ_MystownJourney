@@ -38,7 +38,7 @@ public class RPGSkode_DialogueBehaviour : PlayableBehaviour
 
     public override void ProcessFrame(Playable playable, FrameData info, object playerData)
     {
-        Debug.Log("ProcessFrame");
+        
 
         //若还未播放该clip，当前clip的权重>0
         //效果是：时间轴刚进入该clip时执行一次

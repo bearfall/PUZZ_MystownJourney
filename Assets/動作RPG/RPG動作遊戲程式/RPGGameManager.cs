@@ -25,6 +25,7 @@ namespace RPGbearfall
 
         [Header("¤Á´«¨ìBoss¬ÛÃö")]
         public GameObject player;
+        public Transform geusTransform;
         public Transform wizlowTransform;
         public Transform siaoTransform;
         public Transform bossTransform;
@@ -72,7 +73,16 @@ namespace RPGbearfall
             dof.focusDistance.value = 257f;
             CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = menuConfiner.GetComponent<BoxCollider>();
         }
-
+        public void StartGeusGame()
+        {
+            player.GetComponent<NavMeshAgent>().enabled = false;
+            player.transform.position = geusTransform.position;
+            player.GetComponent<NavMeshAgent>().enabled = true;
+            StartCoroutine(RotateObject());
+            currentArea = AreaType.FreeExplore;
+            dof.focusDistance.value = 257f;
+            CMvcam1.GetComponent<CinemachineConfiner>().m_BoundingVolume = bossConfiner.GetComponent<BoxCollider>();
+        }
         public void StartWizloeGame()
         {
             player.GetComponent<NavMeshAgent>().enabled = false;
@@ -168,6 +178,20 @@ namespace RPGbearfall
             {
                 case 0:
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    break;
+                case 1:
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
+                    bossList[bossNum].GetComponent<Hector>().stop = true;
+                    DestroyAllOEnemySkills();
+                    rpgCharacter.playerAmount = 4;
+                    break;
+                case 2:
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
+                    bossList[bossNum].GetComponent<Geus>().stop = true;
+                    DestroyAllOEnemySkills();
+                    rpgCharacter.playerAmount = 4;
                     break;
                 case 3:
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();

@@ -5,20 +5,20 @@ using UnityEngine;
 public class DestoryPS : MonoBehaviour
 {
     // Start is called before the first frame update
-    
+    private ParticleSystem ps;
     void Start()
     {
-        var main = GetComponent<ParticleSystem>().main;
-        main.stopAction = ParticleSystemStopAction.Callback;
+        ps = GetComponent<ParticleSystem>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (ps.isStopped)
+        {
+            Destroy(gameObject);
+        }
     }
-    void OnParticleSystemStopped()
-    {
-        Destroy(gameObject);
-    }
+    
 }

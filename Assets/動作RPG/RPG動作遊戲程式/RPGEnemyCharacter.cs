@@ -79,12 +79,8 @@ namespace RPGbearfall
             {
                 isDead = true;
                 anim.SetBool("die", isDead);
-                /*
-                if (wizlow != null)
-                {
-                    wizlow.StartwizlowAction();
-                }
-                */
+                RPGGameManager.instance.DestroyAllOEnemySkills();
+        
                 nowHP--;
             }
 

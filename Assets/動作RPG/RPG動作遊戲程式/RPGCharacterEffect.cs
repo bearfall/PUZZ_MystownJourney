@@ -37,6 +37,12 @@ public class RPGCharacterEffect : MonoBehaviour
     [Header("擊中士兵增加能量數量")]
     public int IncreaseHeavyAttackEnergyValue;
 
+    [Header("革厄斯死亡欲置物")]
+    public List<GameObject> geusDeathEffects = new List<GameObject>();
+    [Header("革厄斯死亡音效")]
+    public List<AudioClip> geusMusicEffects = new List<AudioClip>();
+
+
     [Header("技能生成點")]
     public Transform effectSpawnPoint;
 
@@ -119,6 +125,17 @@ public class RPGCharacterEffect : MonoBehaviour
     {
         audioSource.PlayOneShot(enemyMusicEffects[musicNum]);
     }
+
+
+    public void PlayGeusDeathEffect(int effectNum)
+    {
+        Instantiate(geusDeathEffects[effectNum], effectSpawnPoint);
+    }
+    public void PlayGeusSound(int musicNum)
+    {
+        audioSource.PlayOneShot(geusMusicEffects[musicNum]);
+    }
+
     public void StartEnemyAttackWorning()
     {
         gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_isAttack", 1);
@@ -221,6 +238,7 @@ public class RPGCharacterEffect : MonoBehaviour
     {
         enemyCounter.enemyAmount--;
         print(enemyCounter.name + "減少1人");
+        Destroy(transform.parent.gameObject);
 
     }
 

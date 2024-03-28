@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WizlowSkillManager : MonoBehaviour
 {
-    public GameObject playerCharacter;
+    public Transform playerTransform;
 
     [Header("衝擊波技能")]
     [Header("衝擊波預製物")]
@@ -250,18 +250,20 @@ public class WizlowSkillManager : MonoBehaviour
     #region 地板動作
     public IEnumerator GP()
     {
-        Vector3 tempGPPosition;
-        tempGPPosition = playerCharacter.transform.position;
-        Vector3 tempGPPositionUp = new Vector3(tempGPPosition.x, 6, tempGPPosition.z);
-        Vector3 tempGPPositionDown = new Vector3(tempGPPosition.x, 0.67f, tempGPPosition.z);
-        gameObject.transform.DOMove(tempGPPositionUp, 1f);
-        Instantiate(GPWorningPrefab, tempGPPositionDown, Quaternion.identity);
-        yield return new WaitForSeconds(1f);
-        gameObject.transform.DOMove(tempGPPositionDown, 0.3f);
-        yield return new WaitForSeconds(0.3f);
-        Instantiate(GPPrefab, tempGPPositionDown, Quaternion.identity);
-        cameraShake.ShakeCamera(3, 1);
-
+        if (!wizlow.stop)
+        {
+            Vector3 tempGPPosition;
+            tempGPPosition = playerTransform.position;
+            Vector3 tempGPPositionUp = new Vector3(tempGPPosition.x, 6, tempGPPosition.z);
+            Vector3 tempGPPositionDown = new Vector3(tempGPPosition.x, 0.67f, tempGPPosition.z);
+            gameObject.transform.DOMove(tempGPPositionUp, 1f);
+            Instantiate(GPWorningPrefab, tempGPPositionDown, Quaternion.identity);
+            yield return new WaitForSeconds(1f);
+            gameObject.transform.DOMove(tempGPPositionDown, 0.3f);
+            yield return new WaitForSeconds(0.3f);
+            Instantiate(GPPrefab, tempGPPositionDown, Quaternion.identity);
+            cameraShake.ShakeCamera(3, 1);
+        }
     }
     #endregion
 
@@ -279,21 +281,23 @@ public class WizlowSkillManager : MonoBehaviour
 
     public IEnumerator Rush()
     {
-        yield return new WaitForSeconds(0f);
-        trackingTimer += Time.deltaTime;
-        if (trackingTimer >= trackingDuration)
+        if (!wizlow.stop)
         {
-            isTracking = false;
-            openGhoseEffect = false;
-            trackingTimer = 0f;
-            anim.SetBool("rush", false);
-        }
+            yield return new WaitForSeconds(0f);
+            trackingTimer += Time.deltaTime;
+            if (trackingTimer >= trackingDuration)
+            {
+                isTracking = false;
+                openGhoseEffect = false;
+                trackingTimer = 0f;
+                anim.SetBool("rush", false);
+            }
 
-        // 移動到玩家位置
-        var direction = target.position - transform.position;//目标方向
-        transform.Translate(direction.normalized * trackingSpeed * Time.deltaTime);
-        //transform.Translate(Vector3.forward * trackingSpeed * Time.deltaTime);
-        
+            // 移動到玩家位置
+            var direction = target.position - transform.position;//目标方向
+            transform.Translate(direction.normalized * trackingSpeed * Time.deltaTime);
+            //transform.Translate(Vector3.forward * trackingSpeed * Time.deltaTime);
+        }
     }
     /// <summary>
     /// 绘制残影
@@ -377,6 +381,8 @@ public class WizlowSkillManager : MonoBehaviour
     [Header("丟長槍地點")]
     public List<Transform> throwWeaponPositions;
     public GameObject weapon;
+    public Transform slashTransform;
+    public GameObject slashObj;
 
 
     public IEnumerator ThrowingWeapon()
@@ -384,12 +390,84 @@ public class WizlowSkillManager : MonoBehaviour
         int randomIndex = Random.Range(0, throwWeaponPositions.Count);
         gameObject.transform.DOMove(throwWeaponPositions[randomIndex].position, 1f, false);
         yield return new WaitForSeconds(1f);
-        
         GameObject temp =  Instantiate(weapon, gameObject.transform);
-        
+
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(RushToPlayer());
+        yield return new WaitForSeconds(0.4f);
+        RotateEnemy();
+        Instantiate(slashObj, slashTransform);
+
+
         //temp.transform.eulerAngles = new Vector3(0, temp.transform.rotation.y-90, 0);
     }
     #endregion
+
+    public float activationDistance = 3f; // 触发技能的距离阈值
+    public float teleportRadius = 2f; // 瞬移到玩家周围的半径
+    public int numberOfProjectiles = 1; // 要施放的物体数量
+    public float WidthMax = 10f; // 矩形范围的宽度
+    public float widthMin = 10f; // 矩形范围的高度
+    public float HeightMax = 10f; // 矩形范围的宽度
+    public float HeightMin = 10f; // 矩形范围的高度
+    private Vector3 teleportDestination;
+    public IEnumerator RushToPlayer()
+    {
+        // 计算敌人与玩家之间的距离
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+        // 如果敌人与玩家之间的距离小于阈值，则执行技能
+        if (distanceToPlayer < activationDistance)
+        {
+            bool pointInRectangle = false;
+            int attempts = 0;
+            int maxAttempts = 10;
+
+            while (!pointInRectangle && attempts < maxAttempts)
+            {
+                Vector2 randomPoint = Random.insideUnitCircle.normalized * teleportRadius;
+                Vector3 tempteleport = playerTransform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+                //Vector3 teleportDestination = player.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+
+                if (tempteleport.x >= widthMin && tempteleport.x <= WidthMax &&
+                    tempteleport.z >= HeightMin && tempteleport.z <= HeightMax)
+                {
+                    teleportDestination = tempteleport;
+                    pointInRectangle = true;
+                }
+
+                attempts++;
+            }
+            if (pointInRectangle)
+            {
+                teleportDestination = new Vector3(teleportDestination.x, transform.position.y, teleportDestination.z);
+                transform.DOMove(teleportDestination, 0.5f, false).SetEase(Ease.InCirc);
+                yield return new WaitForSeconds(0.5f);
+            }
+            else
+            {
+                print("瞬移失敗");
+            }
+
+        }
+        else
+        {
+            print("瞬移失敗");
+        }
+    }
+
+    public void RotateEnemy()
+    {
+
+        if (playerTransform != null && playerTransform.transform.position.x > gameObject.transform.position.x)
+        {
+            gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        if (playerTransform != null && playerTransform.transform.position.x < gameObject.transform.position.x)
+        {
+            gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+    }
 
     void DetachAndPreserveRotation(GameObject child)
     {

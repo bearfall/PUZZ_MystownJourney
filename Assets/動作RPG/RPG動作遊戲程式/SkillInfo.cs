@@ -49,7 +49,7 @@ namespace RPGbearfall
 
         private void OnTriggerStay(Collider other)
         {
-            print(other.name);
+            
             if (other.CompareTag("Enemy") && !isNormal)
             {
 

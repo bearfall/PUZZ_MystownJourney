@@ -17,6 +17,7 @@ namespace RPGbearfall
         public Transform resurrectionPoint;
         public int playerAmount = 4;
         public GameObject gameOverCanva;
+        public GameObject levelUPObj;
 
         public AudioSource audioSource;
         public AudioClip levelUPSound;
@@ -38,6 +39,7 @@ namespace RPGbearfall
         public GameObject characterHeavyAttack;
         //public float heavyAttackCollDown;
         public bool canHeavyAttack;
+        public bool isHeavyAttack;
 
         [Header("攻撃力")]
         public int playerAtk;
@@ -140,7 +142,7 @@ namespace RPGbearfall
             if (playerAmount == 0)
             {
                 gameOverCanva.SetActive(true);
-                
+                rpgGameManager.ResetBoss();
                 playerAmount--;
             }
             /*
@@ -233,7 +235,7 @@ namespace RPGbearfall
 
         public IEnumerator TakeDamage(int damage, float canBeAttackCoolDown)
         {
-            if (canBeAttack && nowHP > 0)
+            if (canBeAttack && nowHP > 0 && !isHeavyAttack)
             {
                 canBeAttack = false;
  
@@ -380,6 +382,8 @@ namespace RPGbearfall
                 playerInfo.isdie = false;
             }
             playerAmount = 4;
+            healNum = 3;
+            healText.text = healNum.ToString();
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
             gameObject.transform.position = rpgGameManager.nowRespawnPoint.position;
             gameObject.GetComponent<NavMeshAgent>().enabled = true;
@@ -404,7 +408,11 @@ namespace RPGbearfall
                 playerInfo.isdie = false;
                 playerInfo.nowHP = playerInfo.maxHP;
             }
+            Instantiate(levelUPObj, transform.position, levelUPObj.transform.rotation);
             rpgCharacterEffect.ResetImageColor();
+            healNum = 3;
+            healText.text = healNum.ToString();
+            playerAmount = 4;
             audioSource.PlayOneShot(levelUPSound);
             SetPlayer();
 

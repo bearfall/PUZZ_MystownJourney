@@ -95,8 +95,9 @@ public class SiaoSkillManager : MonoBehaviour
         if (distanceToPlayer < activationDistance)
         {
             bool pointInRectangle = false;
-            
-            while (!pointInRectangle)
+            int attempts = 0;
+            int maxAttempts = 10;
+            while (!pointInRectangle && attempts < maxAttempts)
             {
                 Vector2 randomPoint = Random.insideUnitCircle.normalized * teleportRadius;
                 Vector3 tempteleport = player.position + new Vector3(randomPoint.x, 0, randomPoint.y);
@@ -108,11 +109,21 @@ public class SiaoSkillManager : MonoBehaviour
                     teleportDestination = tempteleport;
                     pointInRectangle = true;
                 }
-                
+                attempts++;
+
             }
-            ghostList.Clear();
-            openGhoseEffect = true;
-            transform.DOMove(teleportDestination, 0.5f, false);
+
+            if (pointInRectangle)
+            {
+                ghostList.Clear();
+                openGhoseEffect = true;
+                transform.DOMove(teleportDestination, 0.5f, false);
+            }
+            else
+            {
+                print("瞬移失敗");
+            }
+            
             //transform.position = teleportDestination;
             // 面向玩家
             //transform.LookAt(player);
@@ -141,8 +152,9 @@ public class SiaoSkillManager : MonoBehaviour
         if (distanceToPlayer < activationDistance)
         {
             bool pointInRectangle = false;
-
-            while (!pointInRectangle)
+            int attempts = 0;
+            int maxAttempts = 10;
+            while (!pointInRectangle && attempts < maxAttempts)
             {
                 Vector2 randomPoint = Random.insideUnitCircle.normalized * teleportRadius;
                 Vector3 tempteleport = player.position + new Vector3(randomPoint.x, 0, randomPoint.y);
@@ -154,13 +166,22 @@ public class SiaoSkillManager : MonoBehaviour
                     teleportDestination = tempteleport;
                     pointInRectangle = true;
                 }
+                attempts++;
 
             }
-            ghostList.Clear();
-            openGhoseEffect = true;
-            transform.DOMove(teleportDestination, 0.5f, false);
-            yield return new WaitForSeconds(0.5f);
-            openGhoseEffect = false;
+            if (pointInRectangle)
+            {
+                ghostList.Clear();
+                openGhoseEffect = true;
+                transform.DOMove(teleportDestination, 0.5f, false);
+                yield return new WaitForSeconds(0.5f);
+                openGhoseEffect = false;
+            }
+            else
+            {
+                print("瞬移失敗");
+            }
+            
         }
         else
         {

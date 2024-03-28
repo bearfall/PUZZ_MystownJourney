@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sam
   image: {fileID: 21300000, guid: 122f1bff04b9d3e4199f192413d812da, type: 3}
-  originMaxHP: 5
-  maxHP: 5
-  nowHP: 5
+  originMaxHP: 100
+  maxHP: 100
+  nowHP: 100
   originDef: 0
-  def: 2
+  def: 0
   originATK: 150
-  Attack: 152
+  Attack: 150
   normalAttack: {fileID: 0}
   normalAttackCD: 1
   heavyAttack: {fileID: 0}

@@ -49,7 +49,7 @@ Material:
     - _Cull: 0
     - _DstBlend: 10
     - _Float: 0
-    - _Power: 3.93
+    - _Power: 1.56
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5

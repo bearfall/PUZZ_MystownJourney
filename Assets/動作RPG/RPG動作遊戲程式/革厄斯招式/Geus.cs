@@ -58,7 +58,7 @@ public class Geus : MonoBehaviour
 
 
             IntervalTime += Time.deltaTime;
-            if (IntervalTime > skillTime + 1)
+            if (IntervalTime > skillTime + 0.3f)
             {
                 UseRandomSkill();
                 IntervalTime = 0;
@@ -116,7 +116,7 @@ public class Geus : MonoBehaviour
         else if (!canUseSkill)
         {
             print("無法使用" + randomSkill + "技能");
-            skillTime = 1;
+            skillTime = 0.1f;
             //IntervalTime = skillTime - 1;
         }
 

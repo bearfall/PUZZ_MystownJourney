@@ -4825,7 +4825,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ead8312f3646e54f9e15cb7debfd1a6, type: 2}
+  - {fileID: 2100000, guid: 340ec25714b546448a17ef410608a9db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4953,6 +4953,7 @@ MonoBehaviour:
   canDoDamageTimer: 0
   damageAmount: 20
   skillCollider: {fileID: 4716801135854048901}
+  isSustained: 0
 --- !u!1 &8465170186862707420
 GameObject:
   m_ObjectHideFlags: 0

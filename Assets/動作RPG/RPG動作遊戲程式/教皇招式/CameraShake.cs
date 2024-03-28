@@ -6,14 +6,14 @@ using Cinemachine;
 
 public class CameraShake : MonoBehaviour
 {
-    
+    public static CameraShake instence;
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     private float shakeTimer;
     
 
     private void Awake()
     {
-        
+        instence = this;
         cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
     }
 

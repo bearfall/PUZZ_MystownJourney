@@ -4822,7 +4822,7 @@ GameObject:
   - component: {fileID: 5960130532683311682}
   m_Layer: 0
   m_Name: "\u9769\u5384\u65AF\u6BD2\u6DB2"
-  m_TagString: Untagged
+  m_TagString: EnemySkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9704,7 +9704,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3840933260184202398}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
   m_Name: 
@@ -9723,7 +9723,7 @@ GameObject:
   - component: {fileID: 7537789703500514041}
   - component: {fileID: 364514021959276815}
   - component: {fileID: 7996612184585142853}
-  - component: {fileID: 5187510767647066681}
+  - component: {fileID: 2510821801399584418}
   m_Layer: 0
   m_Name: "\u6BD2\u7BC4\u570D\u50B7\u5BB3"
   m_TagString: Untagged
@@ -14613,7 +14613,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.66
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5187510767647066681
+--- !u!114 &2510821801399584418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14622,6 +14622,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4415259142903816971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad16e704ec0369e419f40349c71961d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destiryTime: 7.5

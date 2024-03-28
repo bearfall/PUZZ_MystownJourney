@@ -18,6 +18,7 @@ namespace RPGbearfall
         public List<GameObject> characters; // 所有可用的角色
 
         public List<PlayerInfo> playerInfos;
+
         
 
         private int currentCharacterIndex = 0; // 當前控制的角色索引
@@ -33,23 +34,23 @@ namespace RPGbearfall
         void Update()
         {
             // 監聽玩家按鍵輸入，進行角色切換
-            if (Input.GetKeyDown(KeyCode.Alpha1) && !nowRPGCharacter.playetInfo.isdie)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack)
             {
                 //SwitchCharacter(0);
                 SwitchCharacterInfo(0);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie)
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack)
             {
                 //SwitchCharacter(1);
                 SwitchCharacterInfo(1);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie)
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack)
             {
                 print("第三隻腳色");
                 //SwitchCharacter(1);
                 SwitchCharacterInfo(2);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha4) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie)
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack)
             {
                 print("第四隻腳色");
                 //SwitchCharacter(1);

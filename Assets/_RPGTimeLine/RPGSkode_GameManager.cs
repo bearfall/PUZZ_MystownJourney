@@ -31,13 +31,13 @@ public class RPGSkode_GameManager : MonoBehaviour
 
     [Header("對話系統相關")]
     public RPGGameManager rpgGameManager;
+    public RPGPlayerController rpgPlayerController;
     public CMConfinerManager cmConfinerManager;
     public CameraShake cameraShake;
     public MainMissionManager mainMissionManager;
     public Canvas SettingCanva;
     [Header("Boss相關系統")]
     public Boss boss;
-    public BossSkillManager bossSkillManager;
     public GameObject bossHealthBar;
     public Wizlow wizlow;
     public GameObject wizlowHealthBar;
@@ -45,8 +45,11 @@ public class RPGSkode_GameManager : MonoBehaviour
     public GameObject siaoHealthBar;
     public Geus geus;
     public GameObject geusHealthBar;
-    
-    
+    public Hector hector;
+    public GameObject hectorHealthBar;
+
+
+
     public RPGCharacter rpgCharacter;
     private void Awake()
     {
@@ -68,6 +71,7 @@ public class RPGSkode_GameManager : MonoBehaviour
         flowerSys.RegisterCommand("ShowImage2", ShowImage2);
         flowerSys.RegisterCommand("HideImage", HideImage);
         flowerSys.RegisterCommand("HideImage2", HideImage2);
+        flowerSys.RegisterCommand("unlockHeal", unlockHeal);
         flowerSys.RegisterCommand("StartBossFight", StartBossFight);
         flowerSys.RegisterCommand("StopBossFight", StopBossFight);
         flowerSys.RegisterCommand("DoingDialogue", DoingDialogue);
@@ -75,6 +79,12 @@ public class RPGSkode_GameManager : MonoBehaviour
         flowerSys.RegisterCommand("SwitchCMConfinerObj", SwitchCMConfinerObj);
         flowerSys.RegisterCommand("ShakeCamera", ShakeCamera);
         flowerSys.RegisterCommand("UnlockMission", UnlockMission);
+
+        flowerSys.RegisterCommand("StartHectorFight", StartHectorFight);
+        flowerSys.RegisterCommand("StopHectorFight", StopHectorFight);
+
+        flowerSys.RegisterCommand("StartGeusFight", StartGeusFight);
+        flowerSys.RegisterCommand("StopGeusFight", StopGeusFight);
         flowerSys.RegisterCommand("StartWizlowFight", StartWizlowFight);
         flowerSys.RegisterCommand("StopWizlowFight", StopWizlowFight);
         flowerSys.RegisterCommand("SetNowBoss", SetNowBoss);
@@ -198,6 +208,10 @@ public class RPGSkode_GameManager : MonoBehaviour
         //image.sprite = charactersImage[int.Parse(_params[0])];
     }
 
+    public void unlockHeal(List<string> _params = null)
+    {
+        rpgPlayerController.unlockHeal = true;
+    }
 
     public void StartBossFight(List<string> _params = null)
     {
@@ -210,6 +224,30 @@ public class RPGSkode_GameManager : MonoBehaviour
         //bossSkillManager.DestroyAllObjects();
         RPGGameManager.instance.DestroyAllOEnemySkills();
         bossHealthBar.SetActive(false);
+    }
+
+
+    public void StartHectorFight(List<string> _params = null)
+    {
+        hector.StartHectorAction();
+        hectorHealthBar.SetActive(true);
+    }
+    public void StopHectorFight(List<string> _params = null)
+    {
+        hector.StopHectorAction();
+        hectorHealthBar.SetActive(false);
+    }
+
+
+    public void StartGeusFight(List<string> _params = null)
+    {
+        geus.StartGeusAction();
+        geusHealthBar.SetActive(true);
+    }
+    public void StopGeusFight(List<string> _params = null)
+    {
+        geus.StopGeusAction();
+        geusHealthBar.SetActive(false);
     }
 
     public void StartWizlowFight(List<string> _params = null)
