@@ -24343,7 +24343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a6f171ffb80d044c864fb0720223471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 50
+  damageAmount: 20
   part: {fileID: 0}
   shock: {fileID: 2776063297756634130, guid: 74775e292c6b4034f885af3cf4a61ae2, type: 3}
 --- !u!1 &5196396100693329055

@@ -28,7 +28,11 @@ namespace RPGbearfall
 
                 print(player.name + "受到傷害");
 
-                Instantiate(shock, player.transform.position, shock.transform.rotation);
+                if (shock != null)
+                {
+                    Instantiate(shock, player.transform.position, shock.transform.rotation);
+                }
+                
 
                 damage -= player.transform.GetComponent<RPGCharacter>().def;
                 StartCoroutine(player.transform.GetComponent<RPGCharacter>().TakeDamage(damage, 0.3f));

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace RPGbearfall
 {
@@ -24,7 +25,15 @@ namespace RPGbearfall
         public float Verticalinput;//垂直参数
         public float speed = 5f;//声明一个参数，没有规定
         public bool isFlip;
+        [Header("閃現相關")]
         public bool canFlash = true;
+        public bool usingFlash = false;
+        public int maxFlash;
+        public int flashAmount;
+        public float flashTime;
+        public float flashTimer;
+        public Text flashText;
+
         public bool unlockHeal = false;
 
         private void Awake()
@@ -119,10 +128,31 @@ namespace RPGbearfall
                 GetComponent<Collider>().enabled = false;
             }
             */
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canFlash && isMovement)
+            flashTimer += Time.deltaTime;
+            if (flashAmount >=1)
+            {
+                canFlash = true;
+            }
+            else
+            {
+                canFlash = false;
+            }
+            if (flashTimer >= flashTime && flashAmount < maxFlash)
+            {
+                flashAmount += 1;
+                flashTimer = 0;
+            }
+            else if (flashAmount == maxFlash)
+            {
+                flashTimer = 0;
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canFlash && isMovement && !usingFlash)
             {
                 StartCoroutine(Flash());
             }
+
+            flashText.text = flashAmount.ToString();
 
 
         }
@@ -130,7 +160,8 @@ namespace RPGbearfall
 
         public IEnumerator Flash()
         {
-            canFlash = false;
+            flashAmount -= 1;
+            usingFlash = true;
             ghostEffect.ghostList.Clear();
             ghostEffect.openGhoseEffect = true;
             speed = 10f;
@@ -139,8 +170,8 @@ namespace RPGbearfall
             ghostEffect.openGhoseEffect = false;
             speed = 5f;
             nowRPGCharacter.canBeAttack = true;
-            yield return new WaitForSeconds(2f);
-            canFlash = true;
+            yield return new WaitForSeconds(0.5f);
+            usingFlash = false;
         }
 
         private IEnumerator OnTriggerEnter(Collider other)

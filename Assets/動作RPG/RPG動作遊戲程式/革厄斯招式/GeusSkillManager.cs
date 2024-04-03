@@ -7,6 +7,7 @@ public class GeusSkillManager : MonoBehaviour
 {
     [Header("玩家位置")]
     public Transform playerTransform;
+    public Animator ani;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +29,17 @@ public class GeusSkillManager : MonoBehaviour
     public int poisionAmount;
     [Header("毒液射擊間隔")]
     public float poisionWaitTime;
+    [Header("毒液計時器")]
+    public float poisionTime;
+    public float poisionTimer;
 
 
     public IEnumerator ShotPoision()
     {
         RotateEnemy();
+
+        ani.SetTrigger("poision");
+        yield return new WaitForSeconds(1.2f);
         for (int i = 0; i < poisionAmount; i++)
         {
             Instantiate(poisionObj, poisionTransform.position, poisionObj.transform.rotation);
@@ -51,7 +58,8 @@ public class GeusSkillManager : MonoBehaviour
     {
         RotateEnemy();
         StartCoroutine(RushToPlayer());
-        yield return new WaitForSeconds(0.8f);
+        ani.SetTrigger("earthShatter");
+        yield return new WaitForSeconds(1f);
         Instantiate(crackGroundObj, transform.position, crackGroundObj.transform.rotation);
         
         yield return null;
@@ -79,11 +87,32 @@ public class GeusSkillManager : MonoBehaviour
         Instantiate(clawObj, clawTransform1.position, clawTransform1.rotation);
         yield return new WaitForSeconds(0.1f);
         Instantiate(clawObj, clawTransform2.position, clawTransform2.rotation);
-        
-        
+
+
+        RotateEnemy();
+        StartCoroutine(RushToPlayer());
+        yield return new WaitForSeconds(1f);
+        RotateEnemy();
+        Instantiate(clawObj, clawTransform1.position, clawTransform1.rotation);
+        yield return new WaitForSeconds(0.1f);
+        Instantiate(clawObj, clawTransform2.position, clawTransform2.rotation);
+
+
     }
     #endregion
+    #region 爆氣
+    [Header("爆氣物件")]
+    public GameObject madAirObj;
+    [Header("爆氣位置")]
+    public Transform madAirTransform;
 
+    public void MadAir()
+    {
+        ani.SetTrigger("madAir");
+        Instantiate(madAirObj, madAirTransform.position, madAirObj.transform.rotation);
+    }
+
+    #endregion
 
     public float activationDistance = 3f; // 触发技能的距离阈值
     public float teleportRadius = 2f; // 瞬移到玩家周围的半径

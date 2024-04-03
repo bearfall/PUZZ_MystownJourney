@@ -38,7 +38,7 @@ namespace RPGbearfall
 
                 if (trackingTimer >= attractDuration && isEnhance == false)
                 {
-                    attractionSpeed = attractionSpeed+2;
+                    attractionSpeed = attractionSpeed+0;
                     isEnhance = true;
                 }
 

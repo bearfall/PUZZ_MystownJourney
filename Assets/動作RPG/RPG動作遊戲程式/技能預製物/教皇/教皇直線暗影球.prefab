@@ -5083,6 +5083,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flyingSpeed: 8
   target: {fileID: 0}
+  startFlyTime: 0.05
+  startFlyTimer: 0
+  timing: 1
 --- !u!114 &-3342195101216193326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5206,8 +5209,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDoDamageTime: 0
   canDoDamageTimer: 0
-  damageAmount: 30
+  damageAmount: 20
   skillCollider: {fileID: 5290745074439979059}
+  isSustained: 0
 --- !u!1001 &8879332060744385417
 PrefabInstance:
   m_ObjectHideFlags: 0

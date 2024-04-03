@@ -24,7 +24,7 @@ public class WizlowManager : MonoBehaviour
         {
             case Wizlow.WizlowSkill.Skill1:
                 // 處理技能1的效果
-                StartCoroutine(wizlowSkillManager.ShockWave());
+                StartCoroutine(wizlowSkillManager.Slash());
                 StartCoroutine(wizlow.SkillCanUse(1));
                 wizlow.skillTime = wizlow.skill1Interval;
                 Debug.Log("Boss 使用技能[衝擊波]");

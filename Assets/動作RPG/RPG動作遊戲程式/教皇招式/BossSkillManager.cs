@@ -7,6 +7,8 @@ using DG.Tweening;
 public class BossSkillManager : MonoBehaviour
 {
 
+    [Header("玩家位置")]
+    public Transform targetPosition;
     [Header("隨機移動爆炸技能")]
     [Header("隨機移動爆炸所有可能的點")]
     public Transform[] allPoints; // 所有可能的點
@@ -23,16 +25,15 @@ public class BossSkillManager : MonoBehaviour
     public bool canMove = true;
 
 
-    [Header("黑洞技能")]
-    [Header("黑洞位置")]
-    public Transform blackHoleTransform;
-    [Header("黑洞預置物")]
-    public GameObject blackHolePrefeb;
+    
 
 
     [Header("閃電技能")]
     [Header("閃電技能變難機率")]
     public int strikeGetHarderChance;
+    [Header("閃電技能計時器")]
+    public float strikesTime;
+    private float strikesTimer;
     [Header("閃電技能預製物")]
     public GameObject objectToGenerate; // 要生成的物體
     [Header("閃電位置(無須設定)")]
@@ -45,8 +46,6 @@ public class BossSkillManager : MonoBehaviour
     public float spawnRadius = 10f;     // 生成的範圍半徑
     [Header("閃電技能之間的最小距離")]
     public float minDistance = 2f;     // 物體之間的最小距離
-    [Header("閃電技能總持續時間")]
-    public int strikesTime;
     [Header("閃電總次數")]
     public int strikesAmount = 5;
     [Header("閃電間隔時間")]
@@ -90,10 +89,12 @@ public class BossSkillManager : MonoBehaviour
         if (!boss.stop)
         {
             flashTimer += Time.deltaTime;
+            strikesTimer += Time.deltaTime;
         }
         else
         {
             flashTimer = 0;
+            strikesTimer = 0;
         }
         if (flashTimer >= flashTime)
         {
@@ -105,11 +106,21 @@ public class BossSkillManager : MonoBehaviour
         {
             StartCoroutine(CloneBoss());
 
+            GameObject[] cloneBosses = GameObject.FindGameObjectsWithTag("cloneBoss");
+            foreach (var item in cloneBosses)
+            {
+                StartCoroutine(item.GetComponent<CloneBoss>().Flash());
+            }
             StartCoroutine(Flash());
-            flashTime = 20;
+            flashTime = 10;
             canFlash = false;
         }
-        
+        if (strikesTimer >= strikesTime)
+        {
+            StartCoroutine(GenerateObjects());
+            strikesTimer = 0;
+            strikesTime = 55;
+        }
 
         if (start)
         {
@@ -152,6 +163,23 @@ public class BossSkillManager : MonoBehaviour
 
     public IEnumerator ShotDarkBall()
     {
+        center = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        for (int i = 0; i < numberOfObjects; i++)
+        {
+            float angle = i * Mathf.PI * 2 / numberOfObjects;
+            float x = Mathf.Cos(angle) * radius + center.x;
+            float z = Mathf.Sin(angle) * radius + center.z;
+
+            Vector3 spawnPosition = new Vector3(x, center.y, z);
+            Quaternion spawnRotation = Quaternion.Euler(0f, angle * Mathf.Rad2Deg, 0f);
+
+
+            print(spawnPosition);
+            GameObject temp =  Instantiate(darkBallObj, spawnPosition, darkBallObj.transform.rotation);
+            temp.GetComponent<DarkBall>().startFlyTime = i - 0.8f*i;
+        }
+        yield return new WaitForSeconds(0f);
+        /*
         for (int i = 0; i < 3; i++)
         {
             StartCoroutine(LittleFlash());
@@ -160,7 +188,8 @@ public class BossSkillManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             
         }
-        
+        */
+
         /*
         center = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         for (int i = 0; i < numberOfObjects; i++)
@@ -282,6 +311,29 @@ public class BossSkillManager : MonoBehaviour
         canMove = true;
     }
     #endregion
+
+    #region 隨機選擇火焰爆炸
+    [Header("火焰爆炸位置")]
+    public List<Transform> randomFirePositions; // 存儲9個目標位置的陣列
+    [Header("火焰爆炸物件")]
+    public GameObject fireBallObj; // 要移動的物體
+
+    public IEnumerator RandomFireBall()
+    {
+        // 隨機選擇一個目標位置
+        int randomIndex = Random.Range(0, randomFirePositions.Count);
+        Transform target = randomFirePositions[randomIndex];
+
+        GameObject temp = Instantiate(fireBallObj,transform.position, fireBallObj.transform.rotation);
+        // 使用 DOTween 將物體移動到所選擇的目標位置
+        temp.transform.DOMove(target.position, 1f).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(1.6f);
+        cameraShake.ShakeCamera(1.5f, 5f);
+        yield return new WaitForSeconds(0.0f);
+
+    }
+    #endregion
+
 
     #region 閃電技能
     public IEnumerator GenerateObjects()
@@ -432,11 +484,14 @@ public class BossSkillManager : MonoBehaviour
             
 
         }
-        else if (cloneBossAmout == 2)
+        if (cloneBossAmout == 2)
         {
+            
             yield break;
         }
-        
+        print("等兩秒");
+        yield return new WaitForSeconds(3f);
+
     }
     private int CountObjectsWithTag()
     {
@@ -494,7 +549,7 @@ public class BossSkillManager : MonoBehaviour
                     ghostList.Clear();
                     openGhoseEffect = true;
                     transform.DOMove(teleportDestination, 0.5f, false);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0f);
                     openGhoseEffect = false;
                 }
                 else
@@ -558,14 +613,18 @@ public class BossSkillManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-    /*
-    [Header("黑洞欲置物")]
-    public GameObject blackHoleObj;
+
+    [Header("黑洞技能")]
+    [Header("黑洞位置")]
+    public Transform blackHoleTransform;
+    [Header("黑洞預置物")]
+    public GameObject blackHolePrefeb;
+
     public void BlackHole()
     {
-        Instantiate(blackHoleObj)
+        Instantiate(blackHolePrefeb, targetPosition.position, blackHolePrefeb.transform.rotation);
     }
-    */
+    
 
     [Header("是否开启残影效果")]
     public bool openGhoseEffect;

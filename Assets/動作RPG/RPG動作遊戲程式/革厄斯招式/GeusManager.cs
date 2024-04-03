@@ -50,7 +50,7 @@ public class GeusManager : MonoBehaviour
                 break;
             case Geus.GeusSkill.Skill4:
                 // 處理技能2的效果
-                StartCoroutine(geusSkillManager.ClawAttack());
+                geusSkillManager.MadAir();
                 StartCoroutine(geus.SkillCanUse(4));
                 geus.skillTime = geus.skill4Interval;
                 Debug.Log("Boss 使用技能[裂地衝擊]");

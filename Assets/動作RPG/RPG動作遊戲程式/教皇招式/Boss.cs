@@ -55,7 +55,7 @@ public class Boss : MonoBehaviour
 
 
             IntervalTime += Time.deltaTime;
-            if (IntervalTime > skillTime+1)
+            if (IntervalTime > skillTime+0.3f)
             {
                 UseRandomSkill();
                 IntervalTime = 0;
@@ -113,7 +113,7 @@ public class Boss : MonoBehaviour
         else if(!canUseSkill)
         {
             print("無法使用" + randomSkill + "技能");
-            IntervalTime = skillTime - 1;
+            skillTime = 0.5f;
         }
         
         /*

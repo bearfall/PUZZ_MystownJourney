@@ -34,7 +34,7 @@ public class BossManager : MonoBehaviour
                 break;
             case Boss.BossSkill.Skill2:
                 // 處理技能2的效果
-                bossSkillManager.StartMove();
+                StartCoroutine( bossSkillManager.RandomFireBall());
                 StartCoroutine(boss.SkillCanUse(2));
                 boss.skillTime = boss.skill2Interval;
                 Debug.Log("Boss 使用技能[隨機位置爆炸]");
@@ -43,10 +43,10 @@ public class BossManager : MonoBehaviour
             // 添加其他技能的 case 分支
             case Boss.BossSkill.Skill3:
                 // 處理技能2的效果
-                StartCoroutine(bossSkillManager.GenerateObjects());
+                bossSkillManager.BlackHole();
                 StartCoroutine(boss.SkillCanUse(3));
                 boss.skillTime = boss.skill3Interval;
-                Debug.Log("Boss 使用技能[閃電]");
+                Debug.Log("Boss 使用技能[黑洞]");
                 // 執行相應的處理邏輯
                 break;
             case Boss.BossSkill.Skill4:

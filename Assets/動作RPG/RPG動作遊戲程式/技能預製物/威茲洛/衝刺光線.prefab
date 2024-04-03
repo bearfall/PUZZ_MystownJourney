@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4343898862952793327}
   - component: {fileID: 4343898862952793324}
   - component: {fileID: 3748495583048353584}
-  - component: {fileID: 8936726468713923635}
   - component: {fileID: -8687811766310416102}
+  - component: {fileID: 8558886339238559675}
   m_Layer: 0
   m_Name: "\u885D\u523A\u5149\u7DDA"
   m_TagString: EnemySkill
@@ -4829,19 +4829,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.13, y: 1.5724064, z: 0.96}
   m_Center: {x: 0, y: 0.7508568, z: 0}
---- !u!114 &8936726468713923635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4343898862952793322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2faf80dc81005340a1b9add37d7c7bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 25
 --- !u!114 &-8687811766310416102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4855,3 +4842,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destiryTime: 7
+--- !u!114 &8558886339238559675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343898862952793322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb68d92c3b52b034daf1644586ea99e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canDoDamageTime: 0
+  canDoDamageTimer: 0
+  damageAmount: 10
+  skillCollider: {fileID: 3748495583048353584}
+  isSustained: 1

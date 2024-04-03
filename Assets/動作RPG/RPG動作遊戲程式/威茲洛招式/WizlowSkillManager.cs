@@ -19,6 +19,9 @@ public class WizlowSkillManager : MonoBehaviour
     public int shockWaveAmount;
     [Header("衝擊波位置")]
     public Transform wizlowShockWavePosition;
+    [Header("衝擊波計時器")]
+    public float shockWaveTime;
+    public float shockWaveTimer;
 
     [Header("GP技能")]
     [Header("GP技能預製物")]
@@ -94,6 +97,16 @@ public class WizlowSkillManager : MonoBehaviour
 
     void Update()
     {
+        if (!wizlow.stop)
+        {
+            shockWaveTimer += Time.deltaTime;
+            if (shockWaveTimer >= shockWaveTime)
+            {
+                StartCoroutine(ShockWave());
+                shockWaveTimer = 0;
+                shockWaveTime = 15;
+            }
+        }
         if (isTracking)
         {
             StartCoroutine(Rush());
@@ -116,8 +129,8 @@ public class WizlowSkillManager : MonoBehaviour
             item.transform.eulerAngles = new Vector3(0, Random.Range(80f, 100f), 0);
         }
 
-        gameObject.transform.DOMove(wizlowShockWavePosition.position, 1, false);
-        yield return new WaitForSeconds(1f);
+        //gameObject.transform.DOMove(wizlowShockWavePosition.position, 1, false);
+        //yield return new WaitForSeconds(1f);
         List<Transform> selectedPoints = new List<Transform>();
         List<int> selectedIndices = new List<int>();
 
@@ -147,8 +160,8 @@ public class WizlowSkillManager : MonoBehaviour
         {
             item.transform.eulerAngles = new Vector3(0, Random.Range(-30, 30), 0);
         }
-        gameObject.transform.DOMove(wizlowShockWavePosition.position, 1, false);
-        yield return new WaitForSeconds(1f);
+        //gameObject.transform.DOMove(wizlowShockWavePosition.position, 1, false);
+        //yield return new WaitForSeconds(1f);
         selectedPoints = new List<Transform>();
         selectedIndices = new List<int>();
 
@@ -294,6 +307,14 @@ public class WizlowSkillManager : MonoBehaviour
             }
 
             // 移動到玩家位置
+            if (Vector3.Distance(transform.position, target.position) < 0.65f)
+            {
+                isTracking = false;
+                yield return new WaitForSeconds(0.5f);
+                isTracking = true;
+                print("繼續移動");
+            }
+            RotateEnemy();
             var direction = target.position - transform.position;//目标方向
             transform.Translate(direction.normalized * trackingSpeed * Time.deltaTime);
             //transform.Translate(Vector3.forward * trackingSpeed * Time.deltaTime);
@@ -403,6 +424,19 @@ public class WizlowSkillManager : MonoBehaviour
     }
     #endregion
 
+    public IEnumerator Slash()
+    {
+        StartCoroutine(RushToPlayer());
+        transform.GetChild(0).eulerAngles = new Vector3(0, 180, 0);
+        Instantiate(slashObj, slashTransform);
+        yield return new WaitForSeconds(0.3f);
+        transform.GetChild(0).eulerAngles = new Vector3(0, 0, 0);
+        Instantiate(slashObj, slashTransform);
+        
+    }
+
+
+
     public float activationDistance = 3f; // 触发技能的距离阈值
     public float teleportRadius = 2f; // 瞬移到玩家周围的半径
     public int numberOfProjectiles = 1; // 要施放的物体数量
@@ -461,11 +495,13 @@ public class WizlowSkillManager : MonoBehaviour
 
         if (playerTransform != null && playerTransform.transform.position.x > gameObject.transform.position.x)
         {
-            gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+            gameObject.transform.GetChild(0).eulerAngles = new Vector3(0, 0, 0);
+            isFlip = false;
         }
         if (playerTransform != null && playerTransform.transform.position.x < gameObject.transform.position.x)
         {
-            gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
+            gameObject.transform.GetChild(0).eulerAngles = new Vector3(0, 180, 0);
+            isFlip = true;
         }
     }
 

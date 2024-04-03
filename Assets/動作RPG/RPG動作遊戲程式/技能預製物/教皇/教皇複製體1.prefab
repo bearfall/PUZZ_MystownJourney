@@ -99,17 +99,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2a017941a27884293a36fa45321237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  darkBallObj: {fileID: 7437266658952812384, guid: ff16988537cc70a4baba65d3ee148b4a,
+    type: 3}
   flashTime: 0.5
   flashTimer: 0
   canFlash: 0
   player: {fileID: 0}
   activationDistance: 20
-  teleportRadius: 5
+  teleportRadius: 8
   numberOfProjectiles: 1
-  WidthMax: 59
-  widthMin: 42
-  HeightMax: -42
-  HeightMin: -59
+  WidthMax: 58
+  widthMin: 44
+  HeightMax: -43
+  HeightMin: -58
   openGhoseEffect: 0
   openFade: 0
   durationTime: 0.3
