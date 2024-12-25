@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 45863555777083172}
   - component: {fileID: 45863555777083173}
   - component: {fileID: -8255479857401380929}
+  - component: {fileID: 647777244401981752}
   m_Layer: 0
   m_Name: "\u6D77\u514B\u6258\u76F4\u780D\u7279\u6548"
   m_TagString: EnemySkill
@@ -4828,7 +4829,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destiryTime: 0.3
+  destiryTime: 1
+--- !u!82 &647777244401981752
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45863555777083170}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3edaf69b6eacf7845add85fec07f51dd, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.542
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1338130851554981242
 GameObject:
   m_ObjectHideFlags: 0
@@ -9721,7 +9818,7 @@ GameObject:
   - component: {fileID: 3608418300954884034}
   - component: {fileID: 7597902077694461393}
   - component: {fileID: 6709308201634292338}
-  - component: {fileID: 6947997557324096731}
+  - component: {fileID: 3205529254652450641}
   m_Layer: 0
   m_Name: Snow slash
   m_TagString: EnemySkill
@@ -14612,7 +14709,7 @@ CapsuleCollider:
   m_Height: 1.6765376
   m_Direction: 0
   m_Center: {x: 1.1266327, y: -2.9614707e-16, z: 0.097780295}
---- !u!114 &6947997557324096731
+--- !u!114 &3205529254652450641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14621,9 +14718,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5879082663649110015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad16e704ec0369e419f40349c71961d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destiryTime: 0.3
 --- !u!1 &6543565605051748810
 GameObject:
   m_ObjectHideFlags: 0

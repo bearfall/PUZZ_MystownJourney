@@ -2,6 +2,7 @@ using RPGbearfall;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 
 public class RespawnPoint : MonoBehaviour
@@ -21,6 +22,7 @@ public class RespawnPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (canPush)
         {
             if (Input.GetKeyDown(KeyCode.F))
@@ -32,8 +34,18 @@ public class RespawnPoint : MonoBehaviour
             }
             
         }
+        */
     }
-
+    public void Talk(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started && canPush)
+        {
+            rpgGameManager.currentArea = RPGGameManager.AreaType.Dialogue;
+            playableDirector.Play();
+            SetRP();
+            canPush = false;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

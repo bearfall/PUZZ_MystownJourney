@@ -43,7 +43,7 @@ public class BossManager : MonoBehaviour
             // 添加其他技能的 case 分支
             case Boss.BossSkill.Skill3:
                 // 處理技能2的效果
-                bossSkillManager.BlackHole();
+                StartCoroutine( bossSkillManager.BlackHole());
                 StartCoroutine(boss.SkillCanUse(3));
                 boss.skillTime = boss.skill3Interval;
                 Debug.Log("Boss 使用技能[黑洞]");

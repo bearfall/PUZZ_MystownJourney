@@ -46,7 +46,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394656530217414091}
   serializedVersion: 8
-  lengthInSec: 2
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -121,7 +121,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -14659,9 +14659,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb68d92c3b52b034daf1644586ea99e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canDoDamageTime: 3
+  canDoDamageTime: 1.5
   canDoDamageTimer: 0
-  damageAmount: 30
+  damageAmount: 38
   skillCollider: {fileID: 8105627163584522830}
   isSustained: 0
 --- !u!135 &8105627163584522830
@@ -14689,7 +14689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destiryTime: 3.1
+  destiryTime: 1.6
 --- !u!1 &3265588806251779304
 GameObject:
   m_ObjectHideFlags: 0
@@ -19583,7 +19583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destiryTime: 3.5
+  destiryTime: 3
 --- !u!1 &5437647786029620447
 GameObject:
   m_ObjectHideFlags: 0
@@ -24566,7 +24566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1272659124852191152}
   audioClip: {fileID: 8300000, guid: 4800e4b540afcdb419d0cc850a1919c5, type: 3}
-  canPlayTime: 3
+  canPlayTime: 1.6
   canPlayTimer: 0
   canplay: 1
 --- !u!1 &6622822285636206345
@@ -34434,7 +34434,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -39498,7 +39498,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -44452,7 +44452,7 @@ GameObject:
   - component: {fileID: 8690571596524248569}
   - component: {fileID: 8690571596524248570}
   - component: {fileID: 8690571596524248571}
-  - component: {fileID: 3916951267664955815}
+  - component: {fileID: 8449760079842641870}
   m_Layer: 0
   m_Name: "\u6559\u7687\u9ED1\u6D1E\u7206\u70B8"
   m_TagString: Untagged
@@ -44565,7 +44565,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -49261,7 +49261,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &3916951267664955815
+--- !u!114 &8449760079842641870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49270,17 +49270,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8690571596524248564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbef4846d77c4fb428e0addfc767749f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackHoleCenter: {fileID: 8690571596524248569}
-  playerRigidbody: {fileID: 0}
-  attractionSpeed: 2.7
-  rPGGameManager: {fileID: 0}
-  rpGCharacterManager: {fileID: 0}
-  attractDuration: 2
-  isTrack: 1
-  isEnhance: 0
+  destiryTime: 3
 --- !u!1 &8690571596785479288
 GameObject:
   m_ObjectHideFlags: 0
@@ -49322,7 +49315,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8690571596785479288}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -49397,7 +49390,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -54210,7 +54203,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -59023,7 +59016,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2

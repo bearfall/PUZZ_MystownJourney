@@ -139,5 +139,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTimer: 0
-  destroyTime: 1
-  damageAmount: 20
+  destroyTime: 0.75
+  damageAmount: 50

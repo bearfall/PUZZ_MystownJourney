@@ -7,10 +7,12 @@ using Flower;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using RPGbearfall;
+using DG.Tweening;
 
 public class RPGSkode_GameManager : MonoBehaviour
 {
-    FlowerSystem flowerSys;
+    public GameObject player;
+    public FlowerSystem flowerSys;
     private string myName;
     private string characterName;
     public static RPGSkode_GameManager ins;
@@ -45,16 +47,25 @@ public class RPGSkode_GameManager : MonoBehaviour
     public GameObject siaoHealthBar;
     public Geus geus;
     public GameObject geusHealthBar;
+    public GeusSmall geusSmall;
+    public GameObject geusSmallHealthBar;
     public Hector hector;
     public GameObject hectorHealthBar;
 
+    [Header("計時系統")]
+    public Timer timer;
 
+    [Header("提示系統")]
+    public List<Animator> tipsAni;
 
     public RPGCharacter rpgCharacter;
     private void Awake()
     {
-        flowerSys = FlowerManager.Instance.CreateFlowerSystem("FlowerSample", false);
+        
+        flowerSys = FlowerManager.Instance.CreateFlowerSystem("FlowerSample", true);
         ins = this;
+        print("FlowerSystem存在");
+        
     }
     public void Start()
     {
@@ -85,11 +96,26 @@ public class RPGSkode_GameManager : MonoBehaviour
 
         flowerSys.RegisterCommand("StartGeusFight", StartGeusFight);
         flowerSys.RegisterCommand("StopGeusFight", StopGeusFight);
+
+        flowerSys.RegisterCommand("StartGeusSmallFight", StartGeusSmallFight);
+        flowerSys.RegisterCommand("StopGeusSmallFight", StopGeusSmallFight);
+
         flowerSys.RegisterCommand("StartWizlowFight", StartWizlowFight);
         flowerSys.RegisterCommand("StopWizlowFight", StopWizlowFight);
         flowerSys.RegisterCommand("SetNowBoss", SetNowBoss);
         flowerSys.RegisterCommand("StartSiaoFight", StartSiaoFight);
         flowerSys.RegisterCommand("StopSiaoFight", StopSiaoFight);
+
+        flowerSys.RegisterCommand("MovePlayer", MovePlayer);
+
+        flowerSys.RegisterCommand("EndGameTimer", EndGameTimer);
+
+        flowerSys.RegisterCommand("Tipping", Tipping);
+
+        flowerSys.RegisterCommand("Walk", Walk);
+        flowerSys.RegisterCommand("StopWalk", StopWalk);
+
+
 
 
 
@@ -97,6 +123,7 @@ public class RPGSkode_GameManager : MonoBehaviour
     }
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             
@@ -105,8 +132,16 @@ public class RPGSkode_GameManager : MonoBehaviour
             
             //ResumeTimeline();
         }
+        */
+        
     }
-
+    public void Skip(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started && rpgGameManager.currentArea == RPGGameManager.AreaType.Dialogue)
+        {
+            flowerSys.Next();
+        }
+    }
     /*
     public void MissionStart()
     {
@@ -250,6 +285,17 @@ public class RPGSkode_GameManager : MonoBehaviour
         geusHealthBar.SetActive(false);
     }
 
+    public void StartGeusSmallFight(List<string> _params = null)
+    {
+        geusSmall.StartGeusSmallAction();
+        geusSmallHealthBar.SetActive(true);
+    }
+    public void StopGeusSmallFight(List<string> _params = null)
+    {
+        geusSmall.StopGeusSmallAction();
+        geusSmallHealthBar.SetActive(false);
+    }
+
     public void StartWizlowFight(List<string> _params = null)
     {
         wizlow.StartwizlowAction();
@@ -307,4 +353,28 @@ public class RPGSkode_GameManager : MonoBehaviour
     {
         rpgGameManager.SetBossNum(int.Parse(_params[0]));
     }
+    public void MovePlayer(List<string> _params = null)
+    {
+        player.transform.DOMove(new Vector3(float.Parse(_params[0]), 0.71f, float.Parse(_params[1])), 0.8f, false);
+    }
+
+    public void EndGameTimer(List<string> _params = null)
+    {
+        timer.StopTimer();
+    }
+
+    public void Tipping(List<string> _params = null)
+    {
+        tipsAni[int.Parse(_params[0])].SetTrigger("tip");
+    }
+    public void Walk(List<string> _params = null)
+    {
+        player.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 1);
+    }
+    public void StopWalk(List<string> _params = null)
+    {
+        player.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 0);
+    }
+
+
 }

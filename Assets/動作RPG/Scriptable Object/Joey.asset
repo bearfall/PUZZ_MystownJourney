@@ -20,9 +20,9 @@ MonoBehaviour:
   originDef: 0
   def: 0
   originATK: 70
-  Attack: 70
+  Attack: 94
   normalAttack: {fileID: 0}
-  normalAttackCD: 0
+  normalAttackCD: 0.4
   heavyAttack: {fileID: 0}
   heavyAttackCD: 0
   animatorController: {fileID: 9100000, guid: 3b6258bb922a8594393e8753961412c3, type: 2}

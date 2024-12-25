@@ -20,7 +20,7 @@ MonoBehaviour:
   originDef: 0
   def: 0
   originATK: 45
-  Attack: 45
+  Attack: 69
   normalAttack: {fileID: 3860472271084410981, guid: 03d1646daf98ecc4ebcf3691f5c4f74a,
     type: 3}
   normalAttackCD: 0.5

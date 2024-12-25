@@ -170,7 +170,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "Evana\u8DD1\u6B65\u52D5\u756B"
+  m_Name: "\u55AC\u4F0A\u8DD1\u6B65\u52D5\u756B"
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -281,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78f16e0b3fc3924d92382e3c9d52df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isComboPlayer: 1
   canMove: 0
 --- !u!1101 &-1574587664945670605
 AnimatorStateTransition:
@@ -604,7 +605,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "\u4F50\u4F0A\u653B\u64CA\u7B2C\u4E09\u6BB5"
+  m_Name: "\u55AC\u4F0A\u653B\u64CA\u7B2C\u4E09\u6BB5"
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -766,6 +767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78f16e0b3fc3924d92382e3c9d52df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isComboPlayer: 1
   canMove: 0
 --- !u!1107 &4472890013373189225
 AnimatorStateMachine:

@@ -2,10 +2,13 @@ using RPGbearfall;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 
 public class NPC1_Mission : MonoBehaviour
 {
+    public GameObject player;
+
     public Canvas SettingCanva;
 
     public RPGGameManager rpgGameManager;
@@ -82,6 +85,7 @@ public class NPC1_Mission : MonoBehaviour
         }
     }
 
+    /*
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && canTalk)
@@ -96,6 +100,23 @@ public class NPC1_Mission : MonoBehaviour
 
                 canTalk = false;
             }
+        }
+    }
+    */
+
+    public void Talk(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started && canTalk)
+        {
+            rpgGameManager.currentArea = RPGGameManager.AreaType.Dialogue;
+            SettingCanva.enabled = false;
+            canvas.SetActive(false);
+            playableDirector.Play();
+            if (player != null)
+            {
+                player.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 0);
+            }
+            canTalk = false;
         }
     }
 }

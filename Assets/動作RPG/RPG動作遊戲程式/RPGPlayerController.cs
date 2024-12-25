@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace RPGbearfall
@@ -10,6 +11,9 @@ namespace RPGbearfall
     {
         [Header("nowRPGCharacter")]
         public RPGCharacter nowRPGCharacter;
+
+        [Header("角色input相關")]
+        public Vector2 moveVector;
 
         [Header("殘影效果")]
         public GhostEffect ghostEffect;
@@ -65,7 +69,7 @@ namespace RPGbearfall
                 //AD方向控制
                 Verticalinput = Input.GetAxis("Vertical");
 
-
+                /*
                 if (Input.GetKey(KeyCode.A) && isMovement)
                 {
                     //print("轉身");
@@ -81,8 +85,27 @@ namespace RPGbearfall
                     isFlip = false;
                     //gameObject.transform.GetChild(0).GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
                 }
-
-
+                */
+                if (moveVector != Vector2.zero)
+                {
+                    this.transform.position += new Vector3(moveVector.x, 0, moveVector.y) *Time.deltaTime *speed *0.6f;
+                    gameObject.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 1);
+                }
+                else
+                {
+                    gameObject.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 0);
+                }
+                if (moveVector.x>0)
+                {
+                    gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 0, 0);
+                    isFlip = false;
+                }
+                else if (moveVector.x < 0)
+                {
+                    gameObject.transform.GetChild(0).transform.eulerAngles = new Vector3(0, 180, 0);
+                    isFlip = true;
+                }
+                /*
                 if (horizontalinput != 0 || Verticalinput != 0)
                 {
 
@@ -99,22 +122,27 @@ namespace RPGbearfall
                 this.transform.Translate(Vector3.right * horizontalinput * Time.deltaTime * speed);
 
                 this.transform.Translate(Vector3.forward * Verticalinput * Time.deltaTime * speed);
+                */
                 //控制该物体向前后移动
             }
+            /*
             if (Input.GetKeyDown(KeyCode.Mouse0) && nowRPGCharacter.canNormalAttack && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie )
             {
                 StartCoroutine(nowRPGCharacter.NormalAttack());
             }
-
+            */
+            /*
             if (Input.GetKeyDown(KeyCode.Mouse1) && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie && isMovement)
             {
                 StartCoroutine(nowRPGCharacter.HeavyAttack());
             }
-
+            */
+            /*
             if (Input.GetKeyDown(KeyCode.E) && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie && unlockHeal)
             {
                 nowRPGCharacter.HealPlayer(50);
             }
+            */
 
             /*
             if (agent.velocity.magnitude == 0)
@@ -146,19 +174,52 @@ namespace RPGbearfall
             {
                 flashTimer = 0;
             }
-
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canFlash && isMovement && !usingFlash)
+            /*
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canFlash && isMovement && !usingFlash && !nowRPGCharacter.isChanging)
             {
-                StartCoroutine(Flash());
+                StartCoroutine(StartFlash());
             }
-
+            */
             flashText.text = flashAmount.ToString();
 
 
         }
 
+        public void Move(InputAction.CallbackContext ctx)
+        {
+            moveVector = ctx.ReadValue<Vector2>();
+            print(moveVector);
+        }
 
-        public IEnumerator Flash()
+        public void Attack(InputAction.CallbackContext ctx)
+        {
+            if (ctx.started && nowRPGCharacter.canNormalAttack && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie)
+            {
+                StartCoroutine(nowRPGCharacter.NormalAttack());
+            }
+        }
+        public void Flash(InputAction.CallbackContext ctx)
+        {
+            if (ctx.started && canFlash && isMovement && !usingFlash && !nowRPGCharacter.isChanging)
+            {
+                StartCoroutine(StartFlash());
+            }
+        }
+        public void Heal(InputAction.CallbackContext ctx)
+        {
+            if (ctx.started && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie && unlockHeal)
+            {
+                nowRPGCharacter.HealPlayer(50);
+            }
+        }
+        public void HeavyAttack(InputAction.CallbackContext ctx)
+        {
+            if (ctx.started && rPGGameManager.currentArea == RPGGameManager.AreaType.FreeExplore && !nowRPGCharacter.playetInfo.isdie && isMovement)
+            {
+                StartCoroutine(nowRPGCharacter.HeavyAttack());
+            }
+        }
+        public IEnumerator StartFlash()
         {
             flashAmount -= 1;
             usingFlash = true;

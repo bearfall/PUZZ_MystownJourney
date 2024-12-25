@@ -101,11 +101,12 @@ namespace RPGbearfall
 
             if (rpgEnemyCharacter.nowHP == -1)
             {
-                isDead = true;
-                enemyCollider.enabled = false;
+                anim.SetTrigger("Death");
+                //enemyCollider.enabled = false;
                 slider.value -= sliderValue;
                 rpgEnemyCharacter.nowHP -= 1;
             }
+            
             SwitchState();
             SwitchAnimation();
             RotateEnemy();
@@ -118,7 +119,7 @@ namespace RPGbearfall
             anim.SetBool("Walk", isWalk);
             anim.SetBool("Chase", isChase);
             anim.SetBool("Follow", isFollow);
-            anim.SetBool("Death", isDead);
+            //anim.SetBool("Death", isDead);
         }
 
 
@@ -311,6 +312,7 @@ namespace RPGbearfall
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, sightRadius);
         }
+
 
         
     }

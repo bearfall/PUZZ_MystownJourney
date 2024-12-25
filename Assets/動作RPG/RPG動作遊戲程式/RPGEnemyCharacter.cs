@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,9 @@ namespace RPGbearfall
 
         [Header("敵人所屬空氣牆")]
         public List<GameObject> airWall;
+
+        [Header("敵人初始位置")]
+        public Vector3 originPosition;
 
         [Header("敵人所屬視野限制")]
         public int CMConfinerNum;
@@ -62,6 +66,10 @@ namespace RPGbearfall
         [Header("Boss相關")]
         public Wizlow wizlow;
         public Boss boss;
+
+
+        
+
         // Start is called before the first frame update
         void Start()
         {
@@ -75,7 +83,7 @@ namespace RPGbearfall
         {
             
 
-            if (nowHP == 0)
+            if (nowHP <= 0)
             {
                 isDead = true;
                 anim.SetBool("die", isDead);
@@ -178,6 +186,17 @@ namespace RPGbearfall
                 }
             }
             cmConfinerManager.SwitchCMConfinerObj(CMConfinerNum);
+        }
+
+        public void ResetSelf()
+        {
+            nowHP = maxHP;
+            SetHealth();
+        }
+
+        public void ResetPosition()
+        {
+            transform.DOMove(originPosition, 0.1f, false);
         }
     }
 }

@@ -4890,10 +4890,10 @@ MonoBehaviour:
   attackCharacter: {fileID: 0}
   playerInfo: {fileID: 11400000, guid: 65a2b41c62b735b43bdc326e1c834d89, type: 2}
   normalDamageAmount: 0
-  heavyDamageAmount: 50
+  heavyDamageAmount: 150
   heavyMultiple: 0
   canBenormalAttackCoolDown: 0
-  canBeHeavyAttackCoolDown: 0.2
+  canBeHeavyAttackCoolDown: 0.4
   isNormal: 0
 --- !u!65 &5019069905145424566
 BoxCollider:

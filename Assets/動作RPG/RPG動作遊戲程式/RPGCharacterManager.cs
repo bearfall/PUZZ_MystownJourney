@@ -1,8 +1,11 @@
-using Cinemachine;
+ï»¿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.InputSystem;
 
 namespace RPGbearfall
 {
@@ -10,61 +13,108 @@ namespace RPGbearfall
 
     public class RPGCharacterManager : MonoBehaviour
     {
+        public static RPGCharacterManager instance;
         public GameObject vrCamera;
 
         public RPGCharacter nowRPGCharacter;
         public RPGGameManager rPGGameManager;
 
-        public List<GameObject> characters; // ©Ò¦³¥i¥Îªº¨¤¦â
+        public List<GameObject> characters; // æ‰€æœ‰å¯ç”¨çš„è§’è‰²
 
         public List<PlayerInfo> playerInfos;
 
+        [Header("åˆ‡æ›è…³è‰²ç›¸é—œ")]
+        public List<Image> Images;
+        public bool canSwitch;
+        public float switchTime = 5f; // å¡«å……é‡å‡å°‘çš„æŒç»­æ—¶é—´
         
 
-        private int currentCharacterIndex = 0; // ·í«e±±¨îªº¨¤¦â¯Á¤Ş
+
+        public int currentCharacterIndex = 0; // ç•¶å‰æ§åˆ¶çš„è§’è‰²ç´¢å¼•
         private int lastCharacterIndex;
+        private void Awake()
+        {
+            instance = this;
+        }
 
         void Start()
         {
-            // ªì©l®É³]¸m²Ä¤@­Ó¨¤¦â¬°ª±®a±±¨îªº¨¤¦â
+            // åˆå§‹æ™‚è¨­ç½®ç¬¬ä¸€å€‹è§’è‰²ç‚ºç©å®¶æ§åˆ¶çš„è§’è‰²
             //SwitchCharacter(currentCharacterIndex);
             rPGGameManager = GetComponent<RPGGameManager>();
         }
 
         void Update()
         {
-            // ºÊÅ¥ª±®a«öÁä¿é¤J¡A¶i¦æ¨¤¦â¤Á´«
-            if (Input.GetKeyDown(KeyCode.Alpha1) && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack)
+            
+            /*
+            // ç›£è½ç©å®¶æŒ‰éµè¼¸å…¥ï¼Œé€²è¡Œè§’è‰²åˆ‡æ›
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack && canSwitch)
             {
                 //SwitchCharacter(0);
                 SwitchCharacterInfo(0);
+                
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack)
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack && canSwitch)
             {
                 //SwitchCharacter(1);
                 SwitchCharacterInfo(1);
+                
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack)
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack && canSwitch)
             {
-                print("²Ä¤T°¦¸}¦â");
+                print("ç¬¬ä¸‰éš»è…³è‰²");
                 //SwitchCharacter(1);
                 SwitchCharacterInfo(2);
+                
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha4) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack)
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && characters.Count > 0 && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack && canSwitch)
             {
-                print("²Ä¥|°¦¸}¦â");
+                print("ç¬¬å››éš»è…³è‰²");
                 //SwitchCharacter(1);
                 SwitchCharacterInfo(3);
+                
             }
-            // ¥i®Ú¾Ú»İ­n²K¥[§ó¦h«öÁä©M¬ÛÀ³ªº¤Á´«ÅŞ¿è
+            // å¯æ ¹æ“šéœ€è¦æ·»åŠ æ›´å¤šæŒ‰éµå’Œç›¸æ‡‰çš„åˆ‡æ›é‚è¼¯
+            */
+        }
+
+        public void ChangePlayer1(InputAction.CallbackContext ctx)
+        {
+            if (ctx.started && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack && canSwitch)
+            {
+                SwitchCharacterInfo(0);
+            }
+        }
+        public void ChangePlayer2(InputAction.CallbackContext ctx)
+        {
+            if (ctx.started && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack && canSwitch)
+            {
+                SwitchCharacterInfo(1);
+            }
+        }
+        public void ChangePlayer3(InputAction.CallbackContext ctx)
+        {
+            if (ctx.started && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack && canSwitch)
+            {
+                SwitchCharacterInfo(2);
+            }
+
+        }
+        public void ChangePlayer4(InputAction.CallbackContext ctx)
+        {
+            if (ctx.started && !nowRPGCharacter.playetInfo.isdie && !nowRPGCharacter.isHeavyAttack && canSwitch)
+            {
+                SwitchCharacterInfo(3);
+            }
         }
 
         void SwitchCharacter(int newIndex)
         {
-            // ÀË¬d¯Á¤Ş¬O§_¦³®Ä
+            // æª¢æŸ¥ç´¢å¼•æ˜¯å¦æœ‰æ•ˆ
             if (newIndex >= 0 && newIndex < characters.Count)
             {
-                // Ãö³¬·í«e¨¤¦âªº±±¨î
+                // é—œé–‰ç•¶å‰è§’è‰²çš„æ§åˆ¶
                 //characters[currentCharacterIndex].transform.GetChild(0).GetComponent<Animator>().SetTrigger("outSide");
                 characters[currentCharacterIndex].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                 characters[currentCharacterIndex].GetComponent<RPGPlayerController>().healthBar.SetActive(false);
@@ -77,10 +127,10 @@ namespace RPGbearfall
 
 
                 lastCharacterIndex = currentCharacterIndex;
-                // ¤Á´«¨ì·sªº¨¤¦â
+                // åˆ‡æ›åˆ°æ–°çš„è§’è‰²
                 currentCharacterIndex = newIndex;
 
-                // ¶}±Ò·s¨¤¦âªº±±¨î
+                // é–‹å•Ÿæ–°è§’è‰²çš„æ§åˆ¶
                 //nowRPGCharacter = characters[currentCharacterIndex].GetComponent<RPGCharacter>();
                 characters[currentCharacterIndex].GetComponent<Collider>().enabled = true;
                 characters[currentCharacterIndex].GetComponent<NavMeshAgent>().enabled = true;
@@ -94,27 +144,75 @@ namespace RPGbearfall
                 characters[currentCharacterIndex].transform.GetChild(2).GetComponent<SpriteRenderer>().enabled = true;
                 //characters[currentCharacterIndex].transform.GetChild(0).GetComponent<Animator>().SetTrigger("inSide");
                 rPGGameManager.nowRPGCharacter = characters[currentCharacterIndex].transform.GetChild(0).GetComponent<RPGCharacter>();
-                // ¥i®Ú¾Ú»İ­n²K¥[µøÄ±®ÄªGªºÅŞ¿è
+                // å¯æ ¹æ“šéœ€è¦æ·»åŠ è¦–è¦ºæ•ˆæœçš„é‚è¼¯
             }
         }
 
 
         void SwitchCharacterInfo(int newIndex)
         {
-            // ÀË¬d¯Á¤Ş¬O§_¦³®Ä
-            if (newIndex >= 0 && !nowRPGCharacter.playerInfos[newIndex].isdie)
+            // æª¢æŸ¥ç´¢å¼•æ˜¯å¦æœ‰æ•ˆ
+            if (newIndex >= 0 && !nowRPGCharacter.playerInfos[newIndex].isdie && newIndex != currentCharacterIndex)
             {
-                print("¤Á´«¨¤¦â");
+                print("åˆ‡æ›è§’è‰²");
 
 
                 lastCharacterIndex = currentCharacterIndex;
-                // ¤Á´«¨ì·sªº¨¤¦â
+                // åˆ‡æ›åˆ°æ–°çš„è§’è‰²
                 currentCharacterIndex = newIndex;
                 nowRPGCharacter.playetInfo = playerInfos[currentCharacterIndex];
                 nowRPGCharacter.SetPlayer();
+                StartCoroutine(DecreaseFill());
 
 
             }
         }
+
+        public IEnumerator DecreaseFill()
+        {
+            canSwitch = false;
+            // ä½¿ç”¨DOVirtual.Floatæ–¹æ³•é€æ¸å‡å°‘ fill Amount çš„å€¼
+            // å‚æ•°åˆ†åˆ«æ˜¯ï¼šèµ·å§‹å€¼ï¼Œç›®æ ‡å€¼ï¼ŒæŒç»­æ—¶é—´ï¼Œå›è°ƒå‡½æ•°
+
+            Sequence sequence = DOTween.Sequence();
+
+            // ä¸ºæ¯ä¸ª Image æ·»åŠ å¡«å……åŠ¨ç”»åˆ°åºåˆ—ä¸­
+            foreach (Image image in Images)
+            {
+                image.fillAmount = 1;
+                // åˆ›å»ºå¡«å……åŠ¨ç”»ï¼Œå°† fillAmount ä» 1 åŠ¨æ€å˜åŒ–åˆ° 0
+                Tween tween = DOTween.To(() => image.fillAmount, x => image.fillAmount = x, 0f, switchTime);
+
+                // å°†åŠ¨ç”»æ·»åŠ åˆ°åºåˆ—ä¸­ï¼Œè®©å®ƒä»¬åŒæ—¶è¿›è¡Œ
+                sequence.Join(tween);
+            }
+
+            // åœ¨æ‰€æœ‰åŠ¨ç”»å®Œæˆåæ‰§è¡ŒæŸäº›æ“ä½œï¼ˆè¿™é‡Œæ˜¯è¾“å‡ºä¸€æ®µæ–‡å­—ï¼‰
+            sequence.OnComplete(() => canSwitch = true);
+            yield return new WaitForSeconds(0.0f);
+            /*
+            foreach (var image in Images)
+            {
+                image.fillAmount = 1f;
+                yield return DOTween.To(() => image.fillAmount, x => image.fillAmount = x, 0f, switchTime).WaitForCompletion();
+
+                // åœ¨å‡å°‘ fill Amount å®Œæˆåï¼Œæ‰§è¡Œä»»ä½•å…¶ä»–æ“ä½œ
+                Debug.Log("Fill Amount decreased to 0");
+
+                // å°† canSwitch è®¾ç½®ä¸º trueï¼Œå¹¶å°† fill Amount è®¾ç½®å› 1
+                canSwitch = true;
+                //image.fillAmount = 0f;
+            }
+            */
+        }
+        public void ReLoadGame()
+        {
+            foreach (var item in playerInfos)
+            {
+                item.maxHP = item.originMaxHP;
+                item.nowHP = item.originMaxHP;
+            }
+        }
     }
+
 }

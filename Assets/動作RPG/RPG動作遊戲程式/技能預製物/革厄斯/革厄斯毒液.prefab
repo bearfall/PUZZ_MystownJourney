@@ -14597,7 +14597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDoDamageTime: 1
   canDoDamageTimer: 0
-  damageAmount: 10
+  damageAmount: 20
   skillCollider: {fileID: 7996612184585142853}
   isSustained: 1
 --- !u!135 &7996612184585142853

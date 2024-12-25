@@ -10,6 +10,7 @@ public class Mission1Story : MonoBehaviour
     public RPGPlayerController rPGPlayerController;
     public PlayableDirector playableDirector;
     public RPGGameManager rpgGameManager;
+    public bool isKeep = false;
 
     public bool set1;
     public bool set2;
@@ -42,7 +43,11 @@ public class Mission1Story : MonoBehaviour
             
             other.transform.GetChild(0).GetComponent<Animator>().SetInteger("run", 0);
             playableDirector.Play();
-            gameObject.SetActive(false);
+            if (!isKeep)
+            {
+                gameObject.SetActive(false);
+            }
+            
         }
     }
 }

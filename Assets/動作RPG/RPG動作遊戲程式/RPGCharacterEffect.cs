@@ -48,6 +48,7 @@ public class RPGCharacterEffect : MonoBehaviour
 
     [Header("頭像圖片")]
     public List<Image> playerHeadImage = new List<Image>();
+    public List<Image> playerCDImage = new List<Image>();
 
     [Header("獲取程式區域")]
     public RPGCharacter rPGCharacter;
@@ -169,6 +170,7 @@ public class RPGCharacterEffect : MonoBehaviour
     public void SetImageRed(int imageNum)
     {
         playerHeadImage[imageNum].color = Color.red;
+        playerCDImage[imageNum].color = new Color(1, 1, 1, 0);
         rPGCharacter.playerAmount--;
     }
 
@@ -177,6 +179,10 @@ public class RPGCharacterEffect : MonoBehaviour
         foreach (var image in playerHeadImage)
         {
             image.color = Color.white;
+        }
+        foreach (var image in playerCDImage)
+        {
+            image.color = new Color(0.5f, 0.5f, 0.5f, 1);
         }
     }
 
@@ -238,7 +244,7 @@ public class RPGCharacterEffect : MonoBehaviour
     {
         enemyCounter.enemyAmount--;
         print(enemyCounter.name + "減少1人");
-        Destroy(transform.parent.gameObject);
+        transform.parent.gameObject.SetActive(false);
 
     }
 

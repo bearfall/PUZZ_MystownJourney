@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7831768346548232600}
   - component: {fileID: 7388499631698631756}
   - component: {fileID: 4774982171491757278}
-  - component: {fileID: 4711039311068708785}
   - component: {fileID: -5294106888909506234}
+  - component: {fileID: 730671745141884208}
   m_Layer: 9
   m_Name: "\u4E3B\u89D2\u666E\u529F\u7B2C\u4E00\u6BB51"
   m_TagString: skill
@@ -4902,19 +4902,6 @@ MonoBehaviour:
   canBenormalAttackCoolDown: 0
   canBeHeavyAttackCoolDown: 0
   isNormal: 1
---- !u!114 &4711039311068708785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7831768346548232607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destiryTime: 1
 --- !u!54 &-5294106888909506234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4931,3 +4918,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &730671745141884208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7831768346548232607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad16e704ec0369e419f40349c71961d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

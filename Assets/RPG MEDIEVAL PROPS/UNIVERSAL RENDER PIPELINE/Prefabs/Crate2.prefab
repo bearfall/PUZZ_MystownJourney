@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3787014557411529496}
   - component: {fileID: 225732183899266237}
   - component: {fileID: 2649525537426417783}
-  - component: {fileID: 6331626210903688798}
+  - component: {fileID: 6149211886835288241}
   m_Layer: 0
   m_Name: Crate2
   m_TagString: Untagged
@@ -26,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4595357173240760738}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.87626, y: 0.87626, z: 0.87626}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,17 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6331626210903688798
-MeshCollider:
+--- !u!208 &6149211886835288241
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4595357173240760738}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7845406836554205584, guid: be9eb30cf03b2714391ffe4cbb10c8c8, type: 3}
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.354, y: 0.35000002, z: 0.354}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0.35700002, z: 0}
+  m_TimeToStationary: 0.5

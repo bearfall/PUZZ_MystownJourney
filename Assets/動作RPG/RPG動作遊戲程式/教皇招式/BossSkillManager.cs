@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class BossSkillManager : MonoBehaviour
 {
-
+    public Animator ani;
     [Header("玩家位置")]
     public Transform targetPosition;
     [Header("隨機移動爆炸技能")]
@@ -163,6 +163,8 @@ public class BossSkillManager : MonoBehaviour
 
     public IEnumerator ShotDarkBall()
     {
+        ani.SetTrigger("sixDarkBall");
+        yield return new WaitForSeconds(1);
         center = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         for (int i = 0; i < numberOfObjects; i++)
         {
@@ -617,12 +619,20 @@ public class BossSkillManager : MonoBehaviour
     [Header("黑洞技能")]
     [Header("黑洞位置")]
     public Transform blackHoleTransform;
+
+    public int blackHoleAmount;
+
     [Header("黑洞預置物")]
     public GameObject blackHolePrefeb;
 
-    public void BlackHole()
+    public IEnumerator BlackHole()
     {
-        Instantiate(blackHolePrefeb, targetPosition.position, blackHolePrefeb.transform.rotation);
+        for (int i = 0; i < blackHoleAmount; i++)
+        {
+            Instantiate(blackHolePrefeb, targetPosition.position, blackHolePrefeb.transform.rotation);
+            yield return new WaitForSeconds(0.6f);
+        }
+        
     }
     
 

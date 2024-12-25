@@ -5121,7 +5121,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.54901963, g: 0.18080485, b: 0.1607843, a: 1}
+      maxColor: {r: 0.6509434, g: 0.23642753, b: 0.61812073, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9782,7 +9782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDoDamageTime: 1
   canDoDamageTimer: 0
-  damageAmount: 30
+  damageAmount: 50
   skillCollider: {fileID: 7049712653549879365}
   isSustained: 0
 --- !u!135 &7049712653549879365
@@ -10034,7 +10034,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0.007633686, a: 0.48235294}
+      maxColor: {r: 0.5909252, g: 0, b: 1, a: 0.48235294}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19807,7 +19807,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.54901963, g: 0.18080485, b: 0.1607843, a: 1}
+      maxColor: {r: 0.30483675, g: 0.1607843, b: 0.54901963, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -24679,7 +24679,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.09803921, b: 0.09803921, a: 1}
+      maxColor: {r: 0.82183284, g: 0.09803921, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -29662,7 +29662,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.31526244, b: 0.2235294, a: 0.34901962}
+      maxColor: {r: 0.8749118, g: 0.2235294, b: 1, a: 0.34901962}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

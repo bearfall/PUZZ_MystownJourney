@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6433624947536687052}
   - component: {fileID: 6433624947536687053}
   - component: {fileID: 6433624947536687054}
-  - component: {fileID: 1286487366647169062}
   - component: {fileID: 7828355503843105692}
   - component: {fileID: 874556558989069271}
+  - component: {fileID: -6400917668344409619}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: skill
@@ -119,7 +119,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4873,19 +4873,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &1286487366647169062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6433624947536687055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2467433d40c1dab4b9971ae5e41f9309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destiryTime: 1
 --- !u!65 &7828355503843105692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4919,3 +4906,15 @@ MonoBehaviour:
   canBenormalAttackCoolDown: 0
   canBeHeavyAttackCoolDown: 0
   isNormal: 1
+--- !u!114 &-6400917668344409619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433624947536687055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad16e704ec0369e419f40349c71961d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6,11 +6,15 @@ using UnityEngine.Playables;
 
 public class EnemyCounter : MonoBehaviour
 {
+    public int lvUpAmount;
+
     public Canvas SettingCanva;
     public RPGGameManager rpgGameManager;
     public RPGCharacter rPGCharacter;
     public int enemyAmount = 3;
     public PlayableDirector playableDirector;
+
+    public List<GameObject> enemyToDestory;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,15 +26,21 @@ public class EnemyCounter : MonoBehaviour
     {
         if (enemyAmount <= 0)
         {
-            rPGCharacter.PlayerLevelUP();
+            rPGCharacter.PlayerLevelUP(lvUpAmount);
 
             if (playableDirector != null)
             {
                 playableDirector.Play();
                 SettingCanva.enabled = false;
             }
+            foreach (var item in enemyToDestory)
+            {
+                Destroy(item);
+            }
             rpgGameManager.currentArea = RPGGameManager.AreaType.Dialogue;
             enemyAmount = 3;
+
+            
 
         }
     }

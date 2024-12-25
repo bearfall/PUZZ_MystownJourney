@@ -52,6 +52,14 @@ namespace RPGbearfall
         public int healNum = 3;
         public Text healText;
 
+
+        [Header("等級資訊")]
+        public int lv;
+        public Text lvText;
+
+        [Header("狀態資訊")]
+        public bool isChanging = false;
+
         /*
         private void OnEnable()
         {
@@ -79,6 +87,7 @@ namespace RPGbearfall
         public RPGEnemyCharacter beAttackEnemy;
 
         public RPGCharacterEffect rpgCharacterEffect;
+        public RPGCharacterManager rpgCharacterManager;
 
         public bool canBeAttack = true;
         public float canBeAttackTime = 3;
@@ -142,7 +151,7 @@ namespace RPGbearfall
             if (playerAmount == 0)
             {
                 gameOverCanva.SetActive(true);
-                rpgGameManager.ResetBoss();
+                StartCoroutine( rpgGameManager.ResetBoss());
                 playerAmount--;
             }
             /*
@@ -251,7 +260,7 @@ namespace RPGbearfall
                 healthBar.SetHealth(nowHP);
 
                 //anim.SetTrigger("Hurt");
-
+                print("等待無敵當中");
                 yield return new WaitForSeconds(canBeAttackCoolDown);
                 print("能被攻擊");
                 if (nowHP > 0)
@@ -326,6 +335,7 @@ namespace RPGbearfall
 
         public IEnumerator AutoChangeCharacter()
         {
+            isChanging = true;
             canBeAttack = false;
             yield return new WaitForSeconds(3f);
 
@@ -335,13 +345,16 @@ namespace RPGbearfall
                 {
                     playetInfo = player;
                     SetPlayer();
+                    rpgCharacterManager.currentCharacterIndex = playerInfos.IndexOf(playetInfo);
                     break;
                 }
             }
             print("選完腳色，在四秒能被攻擊");
+            isChanging = false;
             yield return new WaitForSeconds(4f);
             print("換角完成，能被攻擊");
             canBeAttack = true;
+            
         }
 
         public IEnumerator SetPlayerNormalAttackCD(float CD)
@@ -388,7 +401,7 @@ namespace RPGbearfall
             gameObject.transform.position = rpgGameManager.nowRespawnPoint.position;
             gameObject.GetComponent<NavMeshAgent>().enabled = true;
             rpgCharacterEffect.ResetImageColor();
-            rpgGameManager.ResetBoss();
+            StartCoroutine( rpgGameManager.ResetBoss());
             foreach (var item in allBossHealthBar)
             {
                 item.SetActive(false);
@@ -398,19 +411,21 @@ namespace RPGbearfall
 
 
 
-        public void PlayerLevelUP()
+        public void PlayerLevelUP(int num)
         {
             foreach (var playerInfo in playerInfos)
             {
-                playerInfo.maxHP += 5;
-                playerInfo.def += 1;
-                playerInfo.Attack += 1;
+                playerInfo.maxHP += 3 * num;
+                playerInfo.def += 0 * num;
+                playerInfo.Attack += 1 * num;
                 playerInfo.isdie = false;
                 playerInfo.nowHP = playerInfo.maxHP;
             }
+            lv += num;
+            lvText.text = lv.ToString();
             Instantiate(levelUPObj, transform.position, levelUPObj.transform.rotation);
             rpgCharacterEffect.ResetImageColor();
-            healNum = 3;
+            healNum = 5;
             healText.text = healNum.ToString();
             playerAmount = 4;
             audioSource.PlayOneShot(levelUPSound);

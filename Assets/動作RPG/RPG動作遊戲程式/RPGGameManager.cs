@@ -105,6 +105,7 @@ namespace RPGbearfall
         }
         public void StartBossGame()
         {
+            print("開始遊戲");
             player.GetComponent<NavMeshAgent>().enabled = false;
             player.transform.position = bossTransform.position;
             player.GetComponent<NavMeshAgent>().enabled = true;
@@ -167,29 +168,49 @@ namespace RPGbearfall
         [Header("目前打的boss號碼")]
         public int bossNum;
 
+        [Header("海克托小怪清單")]
+        public List<GameObject> hectorMobs;
+
+        [Header("威茲洛小怪清單")]
+        public List<GameObject> wizlowMobs;
+
+        [Header("作亂盜賊清單")]
+        public List<GameObject> thiefList;
+
+
+        [Header("區域管理")]
+        public List<EnemyCounter> enemyCounters;
+
         public void SetBossNum(int num)
         {
             bossNum = num;
         }
-        public void ResetBoss()
+        public IEnumerator ResetBoss()
         {
 
             switch (bossNum)
             {
                 case 0:
-                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    //bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     break;
                 case 1:
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Hector>().stop = true;
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().ResetPosition();
                     DestroyAllOEnemySkills();
+                    foreach (var item in hectorMobs)
+                    {
+                        item.GetComponent<RPGEnemyCharacter>().ResetSelf();
+                    }
+                    enemyCounters[1].enemyAmount = 3;
                     rpgCharacter.playerAmount = 4;
                     break;
                 case 2:
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Geus>().stop = true;
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().ResetPosition();
                     DestroyAllOEnemySkills();
                     rpgCharacter.playerAmount = 4;
                     break;
@@ -197,21 +218,46 @@ namespace RPGbearfall
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Wizlow>().stop = true;
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().ResetPosition();
                     DestroyAllOEnemySkills();
+                    foreach (var item in wizlowMobs)
+                    {
+                        item.GetComponent<RPGEnemyCharacter>().ResetSelf();
+                    }
+                    enemyCounters[3].enemyAmount = 3;
                     rpgCharacter.playerAmount = 4;
+                    break;
+                case 5:
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
+                    foreach (var item in thiefList)
+                    {
+                        item.GetComponent<RPGEnemyCharacter>().ResetSelf();
+                    }
+                    enemyCounters[5].enemyAmount = 5;
                     break;
                 case 6:
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Siao>().stop = true;
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().ResetPosition();
+                    DestroyAllOEnemySkills();
+                    rpgCharacter.playerAmount = 4;
+                    break;
+                case 7:
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
+                    bossList[bossNum].GetComponent<GeusSmall>().stop = true;
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().ResetPosition();
                     DestroyAllOEnemySkills();
                     rpgCharacter.playerAmount = 4;
                     break;
                 case 8:
                     print("打開空氣牆");
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().SetHealth();
+                    yield return new WaitForSeconds(1f);
                     bossList[bossNum].GetComponent<RPGEnemyCharacter>().OpenStoryTrigger();
                     bossList[bossNum].GetComponent<Boss>().stop = true;
+                    bossList[bossNum].GetComponent<RPGEnemyCharacter>().ResetPosition();
                     //bossList[bossNum].GetComponent<BossSkillManager>().DestroyAllObjects();
                     DestroyAllOEnemySkills();
                     rpgCharacter.playerAmount = 4;

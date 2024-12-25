@@ -20,7 +20,7 @@ MonoBehaviour:
   originDef: 0
   def: 0
   originATK: 150
-  Attack: 150
+  Attack: 174
   normalAttack: {fileID: 0}
   normalAttackCD: 1
   heavyAttack: {fileID: 0}
